@@ -1,0 +1,83 @@
+//
+// Prefix header for all source files of the 'iSMPTestSuite' target in the 'iSMPTestSuite' project
+//
+
+#ifdef DEBUG
+#       define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#       define DLog(...)
+#endif
+
+/*
+ *  System Versioning Preprocessor Macros
+ */
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+#define IOS7_OR_GREATER     SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")
+#define IOS8_OR_GREATER     SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")
+
+#define originY(y)          (IOS7_OR_GREATER) ? (y + 20.0f) : y
+
+/*
+ *  Detect Retina Display
+ */
+#define IS_RETINA ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && ([UIScreen mainScreen].scale > 1.0))
+
+/*
+ *  Detect devices
+ */
+#define INTERFACE_IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+#define INTERFACE_IS_IPHONE ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+
+//color with red, green, blue
+#define RGBCOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
+
+//screen size
+#define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_SIZE     CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)
+
+/*
+ *  Show/Hide NetworkActivityIndicator
+ */
+#define ShowNetworkActivityIndicator() [UIApplication sharedApplication].networkActivityIndicatorVisible = YES
+#define HideNetworkActivityIndicator() [UIApplication sharedApplication].networkActivityIndicatorVisible = NO
+
+/*
+ *  Suppress the warning: performSelector may cause a leak because its selector is unknown
+ */
+#define SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING(code)                        \
+    _Pragma("clang diagnostic push")                                        \
+    _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"")     \
+    code;                                                                   \
+    _Pragma("clang diagnostic pop")                                         \
+
+
+/*
+ *  Suppress the deprecated warning
+ */
+#define SUPPRESS_DEPRECATED_WARNING(code)                                   \
+    _Pragma("clang diagnostic push")                                        \
+    _Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\"")       \
+    code;                                                                   \
+    _Pragma("clang diagnostic pop")                                         \
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+#endif
+
+#import <iSMP/iSMP.h>
+
+#import "SettingsManager.h"
+#import "LogReporterManager.h"
+
+//
+#import "NSString+Size.h"
+
+// AppDelegate
+#import "iSMPAppDelegate.h"
