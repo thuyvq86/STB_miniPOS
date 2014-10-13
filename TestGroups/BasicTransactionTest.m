@@ -39,6 +39,26 @@
 }
 
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Check the settings to know how to initialize the ICAdministration object
+    if ([[SettingsManager sharedSettingsManager] pclInterfaceType] == SERIAL) {
+        NSLog(@"%s Using PCL over Serial", __FUNCTION__);
+        
+        self.configurationChannel = [ICAdministration sharedChannel];
+        self.configurationChannel.delegate = self;
+        
+        [self performSelectorInBackground:@selector(_backgroundOpen) withObject:nil];
+        
+    } else if ([[SettingsManager sharedSettingsManager] pclInterfaceType] == TCP) {
+        NSLog(@"%s Using PCL over TCP/IP", __FUNCTION__);
+        
+        //Do Nothing - Wait for the PPP channel to open
+    }
+    
+}
+
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -65,6 +85,14 @@
     [super dealloc];
 }
 
+- (void)accessoryDidConnect:(ICISMPDevice *)sender {
+    DLog();
+    
+    if (sender == self.configurationChannel) {
+        [self performSelectorInBackground:@selector(_backgroundOpen) withObject:nil];
+    }
+}
+
 #pragma mark IMPDelegate
 
 -(void)newMessage:(NSString *)message {
@@ -81,5 +109,35 @@
 
 #pragma mark -
 
+- (void)transactionDidEndWithTimeoutFlag:(BOOL)replyReceived result:(ICTransactionReply)transactionReply andData:(NSData *)extendedData{
+    DLog()
+}
+
+- (void)shouldDoSignatureCapture:(ICSignatureData)signatureData{
+    DLog();
+}
+
+- (void)signatureTimeoutExceeded{
+    DLog();
+}
+
+- (void)messageReceivedWithData:(NSData *)data{
+    NSString *newStr = [NSString stringWithUTF8String:[data bytes]];
+    DLog(@"%@", newStr);
+}
+
+- (void)_backgroundOpen {
+    DLog();
+    
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    if ([(NSObject *)self.configurationChannel respondsToSelector:@selector(open)]) {
+        [self.configurationChannel open];
+    }
+    
+    [self displayDeviceState:[self.configurationChannel isAvailable]];
+    
+    [pool release];
+}
 
 @end

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "BasicTest.h"
 
-@interface BasicTransactionTest : BasicTest<ICAdministrationStandAloneDelegate> {
-
+@interface BasicTransactionTest : BasicTest<ICISMPDeviceDelegate, ICAdministrationDelegate, NSStreamDelegate, ICISMPDeviceExtensionDelegate, ICAdministrationStandAloneDelegate> {
+    ICAdministration			* _configurationChannel;
 }
+@property (nonatomic, retain) ICAdministration			* configurationChannel;
 
 @end

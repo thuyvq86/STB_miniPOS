@@ -163,17 +163,12 @@ extern const double iSMPTestSuiteVersionNumber;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//	UIViewController * viewController = [[[TestTableViewController alloc] init] autorelease];
-//	((TestTableViewController *)viewController).testGroup = [[testGroups allValues] objectAtIndex:indexPath.row];
-//	[((TestTableViewController *)viewController) setTitle:[[testGroups allKeys] objectAtIndex:indexPath.row]];
-//    [self.navigationController pushViewController:viewController animated:YES];
     if ([ICISMPDevice isAvailable]){
-        Class testClass = NSClassFromString(@"ConfigurationTest_008");
+        Class testClass = NSClassFromString(@"BasicTransactionTest");
 
         UIViewController *detailViewController = [[testClass alloc] init];
         [self.navigationController pushViewController:detailViewController animated:YES];
         [detailViewController release];
-
     }
 }
 

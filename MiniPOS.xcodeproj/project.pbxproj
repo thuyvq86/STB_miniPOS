@@ -814,7 +814,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D826AE1919EAC9F900624CB4 /* Build configuration list for PBXNativeTarget "MiniPOS" */;
 			buildPhases = (
-				D826ADAC19EAC9F900624CB4 /* Get App Version */,
 				D826ADAD19EAC9F900624CB4 /* Resources */,
 				D826ADCD19EAC9F900624CB4 /* Sources */,
 				D826AE0D19EAC9F900624CB4 /* Frameworks */,
@@ -896,23 +895,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		D826ADAC19EAC9F900624CB4 /* Get App Version */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Get App Version";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "Version=`agvtool vers -terse`\nsed -e \"s/CURRENT_VERSION/$Version/g\" Resources/App/version.h.tpl > GeneratedFiles/version.h";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D826ADCD19EAC9F900624CB4 /* Sources */ = {
@@ -1124,6 +1106,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = OtherSources/MiniPOS_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/MiniPOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				ONLY_ACTIVE_ARCH = NO;
@@ -1131,6 +1114,7 @@
 				PROVISIONING_PROFILE = "24160ac9-2ad9-418e-9fad-a1b96d1ed1c7";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "24160ac9-2ad9-418e-9fad-a1b96d1ed1c7";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -1148,12 +1132,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = OtherSources/MiniPOS_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/MiniPOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = MiniPOS;
 				PROVISIONING_PROFILE = "24160ac9-2ad9-418e-9fad-a1b96d1ed1c7";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Release;
 		};
@@ -1171,12 +1156,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = OtherSources/MiniPOS_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/MiniPOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = MiniPOS;
 				PROVISIONING_PROFILE = "24160ac9-2ad9-418e-9fad-a1b96d1ed1c7";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = "In-House";
 		};

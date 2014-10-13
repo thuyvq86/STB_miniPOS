@@ -101,27 +101,27 @@
 #pragma mark Test Properties
 
 +(NSString *)title {
-	[self doesNotRecognizeSelector:_cmd];
+//	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
 
 +(NSString *)subtitle {
-	[self doesNotRecognizeSelector:_cmd];
+//	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
 
 +(NSString *)instructions {
-	[self doesNotRecognizeSelector:_cmd];
+//	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
 
 +(NSString *)category {
-	[self doesNotRecognizeSelector:_cmd];
+//	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
 
 +(NSString *)prefixLetter {
-	[self doesNotRecognizeSelector:_cmd];
+//	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
 
