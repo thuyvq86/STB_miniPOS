@@ -59,9 +59,9 @@ static SettingsManager * g_sharedSettingsManager = nil;
     NSString *bundleId = [bundleInfo objectForKey: @"CFBundleIdentifier"];
     
     NSUserDefaults *appUserDefaults = [[NSUserDefaults alloc] init];
-    DLog(@"Start dumping userDefaults for %@", bundleId);
-    DLog(@"userDefaults dump: %@", [appUserDefaults persistentDomainForName: bundleId]);
-    DLog(@"Finished dumping userDefaults for %@", bundleId);
+    NSLog(@"Start dumping userDefaults for %@", bundleId);
+    NSLog(@"userDefaults dump: %@", [appUserDefaults persistentDomainForName: bundleId]);
+    NSLog(@"Finished dumping userDefaults for %@", bundleId);
     [appUserDefaults release];
     
     //Load the user defaults

@@ -12,7 +12,7 @@
 		D826ADB019EAC9F900624CB4 /* ConfigurationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C1B615AC376A00059E84 /* ConfigurationViewController.xib */; };
 		D826ADB119EAC9F900624CB4 /* EfficiencyTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C1B715AC376A00059E84 /* EfficiencyTest.xib */; };
 		D826ADB219EAC9F900624CB4 /* FontPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C1B815AC376A00059E84 /* FontPicker.xib */; };
-		D826ADB319EAC9F900624CB4 /* iSMPTestSuiteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C1B915AC376A00059E84 /* iSMPTestSuiteViewController.xib */; };
+		D826ADB319EAC9F900624CB4 /* iSMPSuiteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C1B915AC376A00059E84 /* iSMPSuiteViewController.xib */; };
 		D826ADB419EAC9F900624CB4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C1BA15AC376A00059E84 /* MainWindow.xib */; };
 		D826ADB519EAC9F900624CB4 /* TestTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C1BB15AC376A00059E84 /* TestTableViewController.xib */; };
 		D826ADB619EAC9F900624CB4 /* CameraOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C22A15AC4C8900059E84 /* CameraOverlayViewController.xib */; };
@@ -24,7 +24,6 @@
 		D826ADBC19EAC9F900624CB4 /* iBP_Sample_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C2EE15AC55A200059E84 /* iBP_Sample_1.jpg */; };
 		D826ADBD19EAC9F900624CB4 /* iBP_Sample_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C2EF15AC55A200059E84 /* iBP_Sample_2.png */; };
 		D826ADBE19EAC9F900624CB4 /* iBP_Sample_3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C2F015AC55A200059E84 /* iBP_Sample_3.jpeg */; };
-		D826ADBF19EAC9F900624CB4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D826ADA919EAC9DF00624CB4 /* Default-568h@2x.png */; };
 		D826ADC019EAC9F900624CB4 /* iBP_Sample_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C2F115AC55A200059E84 /* iBP_Sample_4.jpg */; };
 		D826ADC119EAC9F900624CB4 /* iBP_Sample_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C2F215AC55A200059E84 /* iBP_Sample_5.jpg */; };
 		D826ADC219EAC9F900624CB4 /* iBP_Sample_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9A17C2F315AC55A200059E84 /* iBP_Sample_6.jpg */; };
@@ -40,7 +39,7 @@
 		D826ADCC19EAC9F900624CB4 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D573F3901670DD8D00821A1E /* MainWindow-iPad.xib */; };
 		D826ADCE19EAC9F900624CB4 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A17C1A515AC375A00059E84 /* ConfigurationViewController.m */; };
 		D826ADCF19EAC9F900624CB4 /* iSMPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A17C1A715AC375A00059E84 /* iSMPAppDelegate.m */; };
-		D826ADD019EAC9F900624CB4 /* iSMPTestSuiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A17C1A915AC375A00059E84 /* iSMPTestSuiteViewController.m */; };
+		D826ADD019EAC9F900624CB4 /* iSMPSuiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A17C1A915AC375A00059E84 /* iSMPSuiteViewController.m */; };
 		D826ADD119EAC9F900624CB4 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A17C1AB15AC375A00059E84 /* SettingsManager.m */; };
 		D826ADD219EAC9F900624CB4 /* TestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A17C1AD15AC375A00059E84 /* TestTableViewController.m */; };
 		D826ADD319EAC9F900624CB4 /* BundleImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A17C1C615AC37A400059E84 /* BundleImagePicker.m */; };
@@ -115,6 +114,15 @@
 		D826AE2319EADCBA00624CB4 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D826AE2219EADCBA00624CB4 /* AppUtils.m */; };
 		D826AE2519EADED300624CB4 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D826AE2419EADED300624CB4 /* CoreBluetooth.framework */; };
 		D826AE2819EAEB9700624CB4 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D826AE2719EAEB9700624CB4 /* NSString+Size.m */; };
+		D827E1BB19ED68AE00951388 /* MessagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D827E1B919ED68AE00951388 /* MessagingViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D827E1BC19ED68AE00951388 /* MessagingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D827E1BA19ED68AE00951388 /* MessagingViewController.xib */; };
+		D827E20819ED6C1C00951388 /* NSURLConnection+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = D827E1E319ED6C1C00951388 /* NSURLConnection+Block.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D827E20C19ED6C1C00951388 /* UIAlertView+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = D827E1EF19ED6C1C00951388 /* UIAlertView+Block.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D827E20D19ED6C1C00951388 /* UINavigationController+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = D827E1F119ED6C1C00951388 /* UINavigationController+Block.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D827E21419ED6DAB00951388 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D827E21319ED6DAB00951388 /* libz.dylib */; };
+		D827E21B19ED73B100951388 /* iSMPBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D827E21A19ED73B100951388 /* iSMPBaseViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D827E21E19ED748F00951388 /* iSMPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D827E21D19ED748F00951388 /* iSMPNavigationController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D827E22219ED98CF00951388 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D827E22119ED98CF00951388 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,8 +144,8 @@
 		9A17C1A515AC375A00059E84 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationViewController.m; path = App/ConfigurationViewController.m; sourceTree = SOURCE_ROOT; };
 		9A17C1A615AC375A00059E84 /* iSMPAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iSMPAppDelegate.h; path = App/iSMPAppDelegate.h; sourceTree = SOURCE_ROOT; };
 		9A17C1A715AC375A00059E84 /* iSMPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iSMPAppDelegate.m; path = App/iSMPAppDelegate.m; sourceTree = SOURCE_ROOT; };
-		9A17C1A815AC375A00059E84 /* iSMPTestSuiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iSMPTestSuiteViewController.h; path = App/iSMPTestSuiteViewController.h; sourceTree = SOURCE_ROOT; };
-		9A17C1A915AC375A00059E84 /* iSMPTestSuiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iSMPTestSuiteViewController.m; path = App/iSMPTestSuiteViewController.m; sourceTree = SOURCE_ROOT; };
+		9A17C1A815AC375A00059E84 /* iSMPSuiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iSMPSuiteViewController.h; path = App/iSMPSuiteViewController.h; sourceTree = SOURCE_ROOT; };
+		9A17C1A915AC375A00059E84 /* iSMPSuiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iSMPSuiteViewController.m; path = App/iSMPSuiteViewController.m; sourceTree = SOURCE_ROOT; };
 		9A17C1AA15AC375A00059E84 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsManager.h; path = App/SettingsManager.h; sourceTree = SOURCE_ROOT; };
 		9A17C1AB15AC375A00059E84 /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsManager.m; path = App/SettingsManager.m; sourceTree = SOURCE_ROOT; };
 		9A17C1AC15AC375A00059E84 /* TestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestTableViewController.h; path = App/TestTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -147,7 +155,7 @@
 		9A17C1B615AC376A00059E84 /* ConfigurationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigurationViewController.xib; path = Xibs/ConfigurationViewController.xib; sourceTree = "<group>"; };
 		9A17C1B715AC376A00059E84 /* EfficiencyTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EfficiencyTest.xib; path = Xibs/EfficiencyTest.xib; sourceTree = "<group>"; };
 		9A17C1B815AC376A00059E84 /* FontPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FontPicker.xib; path = Xibs/FontPicker.xib; sourceTree = "<group>"; };
-		9A17C1B915AC376A00059E84 /* iSMPTestSuiteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = iSMPTestSuiteViewController.xib; path = Xibs/iSMPTestSuiteViewController.xib; sourceTree = "<group>"; };
+		9A17C1B915AC376A00059E84 /* iSMPSuiteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = iSMPSuiteViewController.xib; path = Xibs/iSMPSuiteViewController.xib; sourceTree = "<group>"; };
 		9A17C1BA15AC376A00059E84 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = Xibs/MainWindow.xib; sourceTree = "<group>"; };
 		9A17C1BB15AC376A00059E84 /* TestTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TestTableViewController.xib; path = Xibs/TestTableViewController.xib; sourceTree = "<group>"; };
 		9A17C1C515AC37A400059E84 /* BundleImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BundleImagePicker.h; path = Helpers/BundleImagePicker.h; sourceTree = "<group>"; };
@@ -286,7 +294,6 @@
 		D5C08C5417A92E64003BA6A8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D826AD7619E83AFC00624CB4 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		D826AD7819E842C100624CB4 /* iSMP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iSMP.framework; path = ExternalLibs/iSMP.framework; sourceTree = "<group>"; };
-		D826ADA919EAC9DF00624CB4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D826AE1D19EAC9F900624CB4 /* MiniPOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniPOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D826AE1E19EAC9F900624CB4 /* MiniPOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MiniPOS-Info.plist"; path = "/WORKING/ios-minipos/MiniPOS-Info.plist"; sourceTree = "<absolute>"; };
 		D826AE2119EADCBA00624CB4 /* AppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppUtils.h; path = App/Uitilities/AppUtils.h; sourceTree = SOURCE_ROOT; };
@@ -294,6 +301,23 @@
 		D826AE2419EADED300624CB4 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D826AE2619EAEB9700624CB4 /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Size.h"; path = "Helpers/NSString+Size.h"; sourceTree = "<group>"; };
 		D826AE2719EAEB9700624CB4 /* NSString+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Size.m"; path = "Helpers/NSString+Size.m"; sourceTree = "<group>"; };
+		D827E1B819ED68AE00951388 /* MessagingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessagingViewController.h; path = App/MessagingViewController.h; sourceTree = SOURCE_ROOT; };
+		D827E1B919ED68AE00951388 /* MessagingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessagingViewController.m; path = App/MessagingViewController.m; sourceTree = SOURCE_ROOT; };
+		D827E1BA19ED68AE00951388 /* MessagingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessagingViewController.xib; path = App/MessagingViewController.xib; sourceTree = SOURCE_ROOT; };
+		D827E1E219ED6C1C00951388 /* NSURLConnection+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLConnection+Block.h"; sourceTree = "<group>"; };
+		D827E1E319ED6C1C00951388 /* NSURLConnection+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLConnection+Block.m"; sourceTree = "<group>"; };
+		D827E1E419ED6C1C00951388 /* iOSBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSBlocks.h; path = Source/iOSBlocks.h; sourceTree = "<group>"; };
+		D827E1E519ED6C1C00951388 /* iOSBlocksProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSBlocksProtocol.h; path = Source/iOSBlocksProtocol.h; sourceTree = "<group>"; };
+		D827E1EE19ED6C1C00951388 /* UIAlertView+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Block.h"; sourceTree = "<group>"; };
+		D827E1EF19ED6C1C00951388 /* UIAlertView+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Block.m"; sourceTree = "<group>"; };
+		D827E1F019ED6C1C00951388 /* UINavigationController+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Block.h"; sourceTree = "<group>"; };
+		D827E1F119ED6C1C00951388 /* UINavigationController+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Block.m"; sourceTree = "<group>"; };
+		D827E21319ED6DAB00951388 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D827E21919ED73B100951388 /* iSMPBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iSMPBaseViewController.h; sourceTree = "<group>"; };
+		D827E21A19ED73B100951388 /* iSMPBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iSMPBaseViewController.m; sourceTree = "<group>"; };
+		D827E21C19ED748F00951388 /* iSMPNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iSMPNavigationController.h; sourceTree = "<group>"; };
+		D827E21D19ED748F00951388 /* iSMPNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iSMPNavigationController.m; sourceTree = "<group>"; };
+		D827E22119ED98CF00951388 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +325,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D827E21419ED6DAB00951388 /* libz.dylib in Frameworks */,
 				D826AE2519EADED300624CB4 /* CoreBluetooth.framework in Frameworks */,
 				D826AE0E19EAC9F900624CB4 /* ExternalAccessory.framework in Frameworks */,
 				D826AE0F19EAC9F900624CB4 /* MessageUI.framework in Frameworks */,
@@ -322,6 +347,7 @@
 		080E96DDFE201D6D7F000001 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				D827E21819ED73B100951388 /* Shared */,
 				D826AE2019EACFF900624CB4 /* Utils */,
 				D826AE1F19EACFE400624CB4 /* Controllers */,
 				9A17C1A615AC375A00059E84 /* iSMPAppDelegate.h */,
@@ -342,7 +368,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				D826ADA919EAC9DF00624CB4 /* Default-568h@2x.png */,
+				D827E22119ED98CF00951388 /* Default-568h@2x.png */,
+				D827E1BD19ED6C1C00951388 /* External */,
 				080E96DDFE201D6D7F000001 /* App */,
 				9A17C1A315AC373A00059E84 /* Xibs */,
 				9AB85C3012CB8F6D0026AB85 /* Helpers */,
@@ -380,6 +407,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D827E21319ED6DAB00951388 /* libz.dylib */,
 				D826AE2419EADED300624CB4 /* CoreBluetooth.framework */,
 				D826AD7619E83AFC00624CB4 /* ExternalAccessory.framework */,
 				D5C08C5417A92E64003BA6A8 /* MessageUI.framework */,
@@ -400,7 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				9A17C1BA15AC376A00059E84 /* MainWindow.xib */,
-				9A17C1B915AC376A00059E84 /* iSMPTestSuiteViewController.xib */,
+				9A17C1B915AC376A00059E84 /* iSMPSuiteViewController.xib */,
 				9A17C1BB15AC376A00059E84 /* TestTableViewController.xib */,
 				9A17C1B615AC376A00059E84 /* ConfigurationViewController.xib */,
 				9A17C1B415AC376A00059E84 /* BasicTest.xib */,
@@ -784,8 +812,11 @@
 		D826AE1F19EACFE400624CB4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9A17C1A815AC375A00059E84 /* iSMPTestSuiteViewController.h */,
-				9A17C1A915AC375A00059E84 /* iSMPTestSuiteViewController.m */,
+				9A17C1A815AC375A00059E84 /* iSMPSuiteViewController.h */,
+				9A17C1A915AC375A00059E84 /* iSMPSuiteViewController.m */,
+				D827E1B819ED68AE00951388 /* MessagingViewController.h */,
+				D827E1B919ED68AE00951388 /* MessagingViewController.m */,
+				D827E1BA19ED68AE00951388 /* MessagingViewController.xib */,
 				9A17C1A415AC375A00059E84 /* ConfigurationViewController.h */,
 				9A17C1A515AC375A00059E84 /* ConfigurationViewController.m */,
 				9A17C1AC15AC375A00059E84 /* TestTableViewController.h */,
@@ -806,6 +837,59 @@
 			);
 			name = Utils;
 			sourceTree = "<group>";
+		};
+		D827E1BD19ED6C1C00951388 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				D827E1BE19ED6C1C00951388 /* iOSBlocks */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		D827E1BE19ED6C1C00951388 /* iOSBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				D827E1E419ED6C1C00951388 /* iOSBlocks.h */,
+				D827E1E519ED6C1C00951388 /* iOSBlocksProtocol.h */,
+				D827E1E119ED6C1C00951388 /* Foundation */,
+				D827E1EB19ED6C1C00951388 /* UIKit */,
+			);
+			path = iOSBlocks;
+			sourceTree = "<group>";
+		};
+		D827E1E119ED6C1C00951388 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				D827E1E219ED6C1C00951388 /* NSURLConnection+Block.h */,
+				D827E1E319ED6C1C00951388 /* NSURLConnection+Block.m */,
+			);
+			name = Foundation;
+			path = Source/Foundation;
+			sourceTree = "<group>";
+		};
+		D827E1EB19ED6C1C00951388 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				D827E1EE19ED6C1C00951388 /* UIAlertView+Block.h */,
+				D827E1EF19ED6C1C00951388 /* UIAlertView+Block.m */,
+				D827E1F019ED6C1C00951388 /* UINavigationController+Block.h */,
+				D827E1F119ED6C1C00951388 /* UINavigationController+Block.m */,
+			);
+			name = UIKit;
+			path = Source/UIKit;
+			sourceTree = "<group>";
+		};
+		D827E21819ED73B100951388 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				D827E21919ED73B100951388 /* iSMPBaseViewController.h */,
+				D827E21A19ED73B100951388 /* iSMPBaseViewController.m */,
+				D827E21C19ED748F00951388 /* iSMPNavigationController.h */,
+				D827E21D19ED748F00951388 /* iSMPNavigationController.m */,
+			);
+			name = Shared;
+			path = App/Shared;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -845,6 +929,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -865,19 +950,20 @@
 				D826ADB019EAC9F900624CB4 /* ConfigurationViewController.xib in Resources */,
 				D826ADB119EAC9F900624CB4 /* EfficiencyTest.xib in Resources */,
 				D826ADB219EAC9F900624CB4 /* FontPicker.xib in Resources */,
-				D826ADB319EAC9F900624CB4 /* iSMPTestSuiteViewController.xib in Resources */,
+				D826ADB319EAC9F900624CB4 /* iSMPSuiteViewController.xib in Resources */,
 				D826ADB419EAC9F900624CB4 /* MainWindow.xib in Resources */,
 				D826ADB519EAC9F900624CB4 /* TestTableViewController.xib in Resources */,
 				D826ADB619EAC9F900624CB4 /* CameraOverlayViewController.xib in Resources */,
+				D827E1BC19ED68AE00951388 /* MessagingViewController.xib in Resources */,
 				D826ADB719EAC9F900624CB4 /* ConfigurationTest_020.xib in Resources */,
 				D826ADB819EAC9F900624CB4 /* TestGroups.plist in Resources */,
 				D826ADB919EAC9F900624CB4 /* version.h.tpl in Resources */,
+				D827E22219ED98CF00951388 /* Default-568h@2x.png in Resources */,
 				D826ADBA19EAC9F900624CB4 /* group.png in Resources */,
 				D826ADBB19EAC9F900624CB4 /* icon_128x128.png in Resources */,
 				D826ADBC19EAC9F900624CB4 /* iBP_Sample_1.jpg in Resources */,
 				D826ADBD19EAC9F900624CB4 /* iBP_Sample_2.png in Resources */,
 				D826ADBE19EAC9F900624CB4 /* iBP_Sample_3.jpeg in Resources */,
-				D826ADBF19EAC9F900624CB4 /* Default-568h@2x.png in Resources */,
 				D826ADC019EAC9F900624CB4 /* iBP_Sample_4.jpg in Resources */,
 				D826ADC119EAC9F900624CB4 /* iBP_Sample_5.jpg in Resources */,
 				D826ADC219EAC9F900624CB4 /* iBP_Sample_6.jpg in Resources */,
@@ -902,13 +988,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D826ADCE19EAC9F900624CB4 /* ConfigurationViewController.m in Sources */,
+				D827E1BB19ED68AE00951388 /* MessagingViewController.m in Sources */,
 				D826ADCF19EAC9F900624CB4 /* iSMPAppDelegate.m in Sources */,
-				D826ADD019EAC9F900624CB4 /* iSMPTestSuiteViewController.m in Sources */,
+				D826ADD019EAC9F900624CB4 /* iSMPSuiteViewController.m in Sources */,
 				D826ADD119EAC9F900624CB4 /* SettingsManager.m in Sources */,
+				D827E21E19ED748F00951388 /* iSMPNavigationController.m in Sources */,
+				D827E20819ED6C1C00951388 /* NSURLConnection+Block.m in Sources */,
 				D826ADD219EAC9F900624CB4 /* TestTableViewController.m in Sources */,
 				D826ADD319EAC9F900624CB4 /* BundleImagePicker.m in Sources */,
 				D826ADD419EAC9F900624CB4 /* FontPicker.m in Sources */,
 				D826ADD519EAC9F900624CB4 /* ICPdfReceipt.m in Sources */,
+				D827E20D19ED6C1C00951388 /* UINavigationController+Block.m in Sources */,
 				D826ADD619EAC9F900624CB4 /* ICSignatureView.m in Sources */,
 				D826ADD719EAC9F900624CB4 /* BasicSPPTest.m in Sources */,
 				D826ADD819EAC9F900624CB4 /* TestCategoryManager.m in Sources */,
@@ -921,6 +1011,7 @@
 				D826ADDE19EAC9F900624CB4 /* BasicTest.m in Sources */,
 				D826ADDF19EAC9F900624CB4 /* SPPTest_001.m in Sources */,
 				D826ADE019EAC9F900624CB4 /* BCRTest_001.m in Sources */,
+				D827E20C19ED6C1C00951388 /* UIAlertView+Block.m in Sources */,
 				D826ADE119EAC9F900624CB4 /* BCRTest_002.m in Sources */,
 				D826ADE219EAC9F900624CB4 /* BCRTest_004.m in Sources */,
 				D826ADE319EAC9F900624CB4 /* BCRTest_005.m in Sources */,
@@ -936,6 +1027,7 @@
 				D826ADEC19EAC9F900624CB4 /* NetworkTest_001.m in Sources */,
 				D826ADED19EAC9F900624CB4 /* PrinterTest_001.m in Sources */,
 				D826ADEE19EAC9F900624CB4 /* ConfigurationTest_005.m in Sources */,
+				D827E21B19ED73B100951388 /* iSMPBaseViewController.m in Sources */,
 				D826ADEF19EAC9F900624CB4 /* ConfigurationTest_023.m in Sources */,
 				D826ADF019EAC9F900624CB4 /* ConfigurationTest_024.m in Sources */,
 				D826ADF119EAC9F900624CB4 /* ConfigurationTest_026.m in Sources */,
@@ -1035,7 +1127,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lz",
@@ -1105,6 +1197,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = OtherSources/MiniPOS_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/MiniPOS-Info.plist";

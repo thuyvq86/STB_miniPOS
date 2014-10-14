@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <iSMP/revision.h>
 
-@interface iSMPTestSuiteViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface iSMPSuiteViewController : iSMPBaseViewController <UITableViewDelegate, UITableViewDataSource> {
 
 	NSDictionary		* testGroups;
 	

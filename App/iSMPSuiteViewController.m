@@ -6,21 +6,26 @@
 //  Copyright 2010 Ingenico. All rights reserved.
 //
 
-#import "iSMPTestSuiteViewController.h"
-#import "TestTableViewController.h"
+#import "iSMPSuiteViewController.h"
+//Models
 #import "../GeneratedFiles/version.h"
-#import "ConfigurationViewController.h"
+//Controllers
+//#import "ConfigurationViewController.h"
+//#import "TestTableViewController.h"
+#import "MessagingViewController.h"
 
 #define kTimerRefreshPeriod 30
+
 extern const double iSMPTestSuiteVersionNumber;
 
-@interface iSMPTestSuiteViewController()
+@interface iSMPSuiteViewController()
 
 @property (nonatomic, retain) NSArray *connectedAccessories;
 
 @end
 
-@implementation iSMPTestSuiteViewController
+@implementation iSMPSuiteViewController
+
 @synthesize testGroups, labelApiVersion, labelApplicationBuildTime, labelAppVersion;
 @synthesize batteryLogStream;
 @synthesize connectedAccessories = _connectedAccessories;
@@ -28,9 +33,9 @@ extern const double iSMPTestSuiteVersionNumber;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	self.title = @"[STB] - Mini POS";
-	
     labelApiVersion.text = [NSString stringWithFormat:@"iSMP Library Version: %@", [ICISMPVersion substringFromIndex:6]];
 	labelAppVersion.text = [NSString stringWithFormat:@"Application Version: %@", currentVersion];
+    
 	self.testGroups  = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TestGroups" ofType:@"plist"]];
 	
 	//Start Battery Monitoring
@@ -44,9 +49,10 @@ extern const double iSMPTestSuiteVersionNumber;
 	[[NSFileManager defaultManager] removeItemAtPath:logPath error:NULL];
 	self.batteryLogStream = [NSOutputStream outputStreamToFileAtPath:logPath append:YES];
 	[self.batteryLogStream open];
-	NSString * header = @"Time;iPOD Battery Level;iSMP Battery Level;ACLineStatus\r\n";
+	NSString *header = @"Time;iPOD Battery Level;iSMP Battery Level;ACLineStatus\r\n";
 	[self.batteryLogStream write:(uint8_t *)[header UTF8String] maxLength:[header length]];
-	[self monitorBattery];
+	
+    [self monitorBattery];
 	
     [super viewDidLoad];
 }
@@ -136,7 +142,7 @@ extern const double iSMPTestSuiteVersionNumber;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else{
-        cell.textLabel.text = @"No detected accessory !!";
+        cell.textLabel.text = @"No detected accessory!!";
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
@@ -163,13 +169,17 @@ extern const double iSMPTestSuiteVersionNumber;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([ICISMPDevice isAvailable]){
-        Class testClass = NSClassFromString(@"BasicTransactionTest");
+//    if ([ICISMPDevice isAvailable]){
+//        Class testClass = NSClassFromString(@"TestTableViewController");
+//        UIViewController *detailViewController = [[testClass alloc] init];
+//    [self.navigationController pushViewController:detailViewController animated:YES];
+//    [detailViewController release];
+    
+        MessagingViewController *messagingViewController = [[MessagingViewController alloc] initWithNibName:@"MessagingViewController" bundle:nil];
 
-        UIViewController *detailViewController = [[testClass alloc] init];
-        [self.navigationController pushViewController:detailViewController animated:YES];
-        [detailViewController release];
-    }
+        [self.navigationController pushViewController:messagingViewController animated:YES];
+        [messagingViewController release];
+//    }
 }
 
 #pragma mark -
@@ -202,12 +212,7 @@ extern const double iSMPTestSuiteVersionNumber;
             break;
     }
     
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Bluetooth state"
-                                                     message:message
-                                                    delegate:nil
-                                           cancelButtonTitle:@"Okay"
-                                           otherButtonTitles:nil, nil] autorelease];
-    [alert show];
+    [UIAlertView alertViewWithTitle:@"Bluetooth state" message:message cancelButtonTitle:@"Okay"];
     
     return NO;
 }
@@ -215,10 +220,11 @@ extern const double iSMPTestSuiteVersionNumber;
 - (IBAction)iSpmInformation {
     
 	if ([ICISMPDevice isAvailable] == NO) {
-		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"No detected accessory !!" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil, nil] autorelease];
-		[alert show];
+#warning close app or disable all features
+        [UIAlertView alertViewWithTitle:@"" message:@"No detected accessory !!" cancelButtonTitle:@"Close"];
 		return;
 	}
+    
 	EAAccessory * connectedAccessory = nil;
 	NSMutableArray * protocolStrings = [[NSMutableArray alloc] init];
     NSArray *connectedAccessories = [[EAAccessoryManager sharedAccessoryManager] connectedAccessories];

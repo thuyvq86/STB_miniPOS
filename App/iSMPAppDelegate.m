@@ -22,14 +22,17 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //Set app-wide shared cache
+    [self configureCacheLimits];
+
+    //check blutooth
     [self detectBluetooth];
     
     BOOL reachable = [AppUtils hasConnectivity];
     if (!reachable){
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"Device is not connected to the internet." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil, nil] autorelease];
-		[alert show];
+        [UIAlertView alertViewWithTitle:@"" message:@"Device is not connected to the internet." cancelButtonTitle:@"Close"];
         
         return NO;
     }
@@ -38,13 +41,16 @@
 
     // Add the view controller's view to the window and display.
     //[window addSubview:navigationController.view];
-    window.rootViewController = navigationController;
+    self.window.rootViewController = navigationController;
+    self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
+    [self.window setFrame:[[UIScreen mainScreen] bounds]];
 	
 	//NSString *logPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"console.log"];
 	//freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
 	
 	NSString *logFilePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"iSMPLog.txt"];
+    NSLog(@"logFilePath:\n%@", logFilePath);
 	if ([[NSFileManager defaultManager] fileExistsAtPath:logFilePath]) {
 		[[NSFileManager defaultManager] removeItemAtPath:logFilePath error:NULL];
 	}
@@ -63,49 +69,78 @@
      */
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-     If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
-     */
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    //post notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    /*
-     Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
-     */
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    //post notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
-    DLog();
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    //post notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
+    
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+#if defined(AUTO) || defined(MOTO)
+    //Integrate FB SDK to promote apps on FB
+    [FBSession.activeSession handleDidBecomeActive];
+    [FBAppEvents activateApp];
+#endif
 }
 
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    /*
-     Called when the application is about to terminate.
-     See also applicationDidEnterBackground:.
-     */
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    //post notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationWillTerminateNotification object:nil];
 }
-
 
 #pragma mark -
 #pragma mark Memory management
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
-    /*
-     Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
-     */
+    //purge the shared cache to free up memory.
+    [self freeUpMemory];
+    
+    //post notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 }
-
 
 - (void)dealloc {
     [navigationController release];
     [window release];
     [super dealloc];
+}
+
+/**
+ *  Set app-wide shared cache (first number is megabyte value)
+ *  Refs: http://twobitlabs.com/2012/01/ios-ipad-iphone-nsurlcache-uiwebview-memory-utilization/
+ *
+ */
+- (void)configureCacheLimits{
+    int cacheSizeMemory = 4*1024*1024;  // 4MB
+    int cacheSizeDisk   = 32*1024*1024; // 32MB
+    NSString *diskPath = nil; //@"nsurlcache"
+    
+    //Initializes an NSURLCache with the given capacity and path.
+    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:cacheSizeMemory diskCapacity:cacheSizeDisk diskPath:diskPath];
+    [NSURLCache setSharedURLCache:sharedCache];
+}
+
+/**
+ *  Clears the given cache
+ */
+- (void)freeUpMemory{
+    //removing all NSCachedURLResponse objects that it stores.
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
 #pragma mark - Bluetooth 
@@ -122,39 +157,6 @@
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-    /*
-    NSString *stateString = nil;
-    switch([central state])
-    {
-        case CBCentralManagerStateResetting:
-            stateString = @"The connection with the system service was momentarily lost, update imminent.";
-            break;
-        case CBCentralManagerStateUnsupported:
-            stateString = @"The platform doesn't support Bluetooth Low Energy.";
-            break;
-        case CBCentralManagerStateUnauthorized:
-            stateString = @"The app is not authorized to use Bluetooth Low Energy.";
-            break;
-        case CBCentralManagerStatePoweredOff:
-            stateString = @"Bluetooth is currently powered off.";
-            break;
-        case CBCentralManagerStatePoweredOn:
-            stateString = @"Bluetooth is currently powered on and available to use.";
-            break;
-        default:
-            stateString = @"State unknown, update imminent.";
-            break;
-    }
-    
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Bluetooth state"
-                                                     message:stateString
-                                                    delegate:nil
-                                           cancelButtonTitle:@"Okay"
-                                           otherButtonTitles:nil, nil] autorelease];
-    [alert show];
-    DLog(@"%@", stateString);
-    */
-    
     if ([central state] == CBCentralManagerStatePoweredOn) {
         self.bluetoothEnabled = YES;
     }

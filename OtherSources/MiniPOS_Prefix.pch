@@ -39,7 +39,23 @@
 //screen size
 #define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
 #define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
+
 #define SCREEN_SIZE     CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)
+
+//CGRect set positions
+#define CGRectSetPos( r, x, y )     CGRectMake( x, y, r.size.width, r.size.height )
+#define CGRectSetPosX( r, x)        CGRectMake( x, r.origin.y, r.size.width, r.size.height )
+#define CGRectSetPosY( r, y )       CGRectMake( r.origin.x, y, r.size.width, r.size.height )
+//CGRect set sizes
+#define CGRectSetSize( r, w, h )    CGRectMake( r.origin.x, r.origin.y, w, h )
+#define CGRectSetWidth( r, w)       CGRectMake( r.origin.x, r.origin.y, w, r.size.height )
+#define CGRectSetHeight( r, h )     CGRectMake( r.origin.x, r.origin.y, r.size.width, h )
+//CGSize set sizes
+#define CGSizeSetWidth( s, w )      CGSizeMake(w, s.height)
+#define CGSizeSetHeight( s, h )     CGSizeMake(s.width, h)
+
+//activity indicator
+#define kSpinnerSize    CGSizeMake(20, 20)
 
 /*
  *  Show/Hide NetworkActivityIndicator
@@ -76,8 +92,14 @@
 #import "SettingsManager.h"
 #import "LogReporterManager.h"
 
-//
+//Common
 #import "NSString+Size.h"
+#import "iOSBlocks.h"
 
 // AppDelegate
 #import "iSMPAppDelegate.h"
+
+//Controllers
+#import "iSMPBaseViewController.h"
+#import "iSMPNavigationController.h"
+

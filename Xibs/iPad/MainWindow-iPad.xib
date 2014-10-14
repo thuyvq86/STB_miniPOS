@@ -34,7 +34,7 @@
                 <autoresizingMask key="autoresizingMask"/>
             </navigationBar>
             <viewControllers>
-                <viewController nibName="iSMPTestSuiteViewController" id="21" customClass="iSMPTestSuiteViewController">
+                <viewController nibName="iSMPSuiteViewController" id="21" customClass="iSMPSuiteViewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Item" id="22"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>

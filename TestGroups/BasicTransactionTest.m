@@ -110,7 +110,7 @@
 #pragma mark -
 
 - (void)transactionDidEndWithTimeoutFlag:(BOOL)replyReceived result:(ICTransactionReply)transactionReply andData:(NSData *)extendedData{
-    DLog()
+    DLog();
 }
 
 - (void)shouldDoSignatureCapture:(ICSignatureData)signatureData{
@@ -123,7 +123,7 @@
 
 - (void)messageReceivedWithData:(NSData *)data{
     NSString *newStr = [NSString stringWithUTF8String:[data bytes]];
-    DLog(@"%@", newStr);
+    NSLog(@"%@", newStr);
 }
 
 - (void)_backgroundOpen {

@@ -116,7 +116,7 @@
 }
 
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	if ( self.navigationItem.rightBarButtonItem.tag == kListTestsByCategory) {
 		return [testCategoryManager.categories objectAtIndex:section];
 	} else {
