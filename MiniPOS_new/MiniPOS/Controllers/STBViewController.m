@@ -25,12 +25,12 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
     [self updateFrameOfView];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
     [self updateFrameOfView];
     [self addCenterView];
 }
@@ -53,17 +53,6 @@
     
     [self addChildViewController:navController];
     [self.view addSubview:navController.view];
-}
-
-#pragma mark - Setup for iOS 7 & greater
-
-- (void)updateFrameOfView{
-    CGRect frame = self.view.frame;
-    if (IOS7_OR_GREATER && frame.origin.y != kStatusBarHeight) {
-        frame.origin.y = kStatusBarHeight;
-        frame.size.height -= frame.origin.y;
-        self.view.frame = frame;
-    }
 }
 
 @end

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STBViewController : UIViewController
+@interface STBViewController : STBBaseViewController
 
 @end

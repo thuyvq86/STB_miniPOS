@@ -82,16 +82,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Setup for iOS 7 & greater
-
-- (void)updateFrameOfView{
-    CGRect frame = self.view.frame;
-    if (IOS7_OR_GREATER && frame.origin.y != kStatusBarHeight) {
-        frame.origin.y = kStatusBarHeight;
-        frame.size.height -= frame.origin.y;
-        self.view.frame = frame;
-    }
-}
+#pragma mark - UI & Theming
 
 #pragma mark - Load content
 

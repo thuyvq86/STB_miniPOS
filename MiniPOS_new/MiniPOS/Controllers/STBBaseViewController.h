@@ -10,4 +10,7 @@
 
 @interface STBBaseViewController : UIViewController
 
+//Setup for iOS 7 & newer
+- (void)updateFrameOfView;
+
 @end
