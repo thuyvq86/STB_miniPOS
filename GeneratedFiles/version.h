@@ -10,7 +10,7 @@
 #ifndef __VERSION_H_
 #define __VERSION_H_
 
-const NSString * currentVersion = @"1.02";
+const NSString * currentVersion = @"0.0.1";
 
 #endif // __VERSION_H_
 
