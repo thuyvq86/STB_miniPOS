@@ -77,7 +77,8 @@ typedef enum{
 }
 
 - (BOOL)shouldRequireSignature{
-    return (self.functionIndex == FunctionIndexSale) ? YES : NO;
+//    return (self.functionIndex == FunctionIndexSale) ? YES : NO;
+    return [self.transactionType isEqualToString:@"SALE"] ? YES : NO;
 }
 
 /**

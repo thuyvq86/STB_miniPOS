@@ -7,14 +7,29 @@
 //
 
 #import "TransactionInfoCell.h"
+#import "TransactionInfoContentView.h"
+
+@interface TransactionInfoCell()
+
+@property (nonatomic, strong) TransactionInfoContentView *transactionInfoContentView;
+
+@end
 
 @implementation TransactionInfoCell
+
+@synthesize posMessage = _posMessage;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.backgroundColor = [UIColor clearColor];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        CGRect frame = CGRectMake(0, CGRectGetMinY(self.contentView.frame), CGRectGetWidth(self.contentView.frame), CGRectGetHeight(self.contentView.frame));
+        self.transactionInfoContentView = [[TransactionInfoContentView alloc] initWithFrame:frame];
+        [self.contentView addSubview:_transactionInfoContentView];
     }
     return self;
 }
@@ -29,6 +44,17 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
++ (CGFloat)heightForPosMessage:(PosMessage*)aPosMessage parentWidth:(CGFloat)parentWidth{
+    CGFloat width = parentWidth;
+    return [TransactionInfoContentView heightForPosMessage:aPosMessage parentWidth:width];
+}
+
+- (void)setPosMessage:(PosMessage *)posMessage{
+    _posMessage = posMessage;
+    
+    [_transactionInfoContentView setPosMessage:_posMessage];
 }
 
 @end

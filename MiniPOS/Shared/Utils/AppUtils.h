@@ -12,4 +12,31 @@
 
 + (BOOL)hasConnectivity;
 
+// String
++ (BOOL)isEmptyText:(NSString *)text;
+
+// Array
++ (BOOL)isValidArray:(id)array;
+
+#pragma mark - Images
+
++ (UIImage *)imageForURLString:(NSString *)urlString;
+//to scale images with changing aspect ratio
++ (CGSize)newImageSize:(CGSize)actualSize defaultSize:(CGSize)defaultSize;
+
+//NSFileManager
++ (void)deleteFileAtPath:(NSString*)storedPath;
++ (NSString *)pathForPublicFile:(NSString *)file;
+
+//App & device infos
++ (NSString *)appName;
++ (NSString *)appVersion;
++ (NSString *)appBuildNumber;
++ (NSString *)appBundleIdentifier;
++ (NSArray *)bundleURLTypes;
++ (NSString *)appURLScheme;
++ (NSString *)deviceModel;
++ (NSString *)systemVersion;
++ (CGFloat)screenScale;
+
 @end

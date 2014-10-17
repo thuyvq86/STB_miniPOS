@@ -10,4 +10,8 @@
 
 @interface TransactionInfoCell : UITableViewCell
 
+@property (nonatomic, strong) PosMessage *posMessage;
+
++ (CGFloat)heightForPosMessage:(PosMessage*)aPosMessage parentWidth:(CGFloat)parentWidth;
+
 @end

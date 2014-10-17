@@ -7,7 +7,9 @@
 //
 
 #import "STBMessagingViewController.h"
-
+//Views
+#import "TransactionInfoCell.h"
+#import "SignatureCell.h"
 
 @interface STBMessagingViewController ()<ICISMPDeviceDelegate, ICAdministrationDelegate, ICISMPDeviceExtensionDelegate, NSStreamDelegate>{
     NSDate				*startDate;
@@ -25,12 +27,23 @@
 @property (nonatomic, strong) ICAdministration *configurationChannel;
 @property (nonatomic, strong) PosMessage *posMessage;
 
+//data for displayable cells
+@property (nonatomic, strong) NSArray *displayableArray;
+
 @end
 
 @implementation STBMessagingViewController
 
 @synthesize logStream = _logStream;
 @synthesize configurationChannel = _configurationChannel;
+
+#pragma mark - Private const
+
+static NSString *const kTransactionInfoCell = @"TransactionInfoCell";
+static NSString *const kSignatureCell       = @"SignatureCell";
+static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
+
+#pragma mark - View Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,15 +58,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _navItem.title = @"iSMP->iPhone";
     [self setupUI];
     
-#warning testing..
+    //Set texts
+    _navItem.title = @"iSMP->iPhone";
+    
+#warning Data for testing..
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"message" ofType:@"json"];
     NSString *jsonString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     NSError *error = nil;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
     self.posMessage = [[PosMessage alloc] initWithMessage:[dict objectForKey:@"SALE"]];
+    self.displayableArray = [self displayableArrayWithPosMessage:_posMessage];
     
     //Register for accessory notifications
     [[EAAccessoryManager sharedAccessoryManager] registerForLocalNotifications];
@@ -91,16 +107,41 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Load content
+
+- (NSArray *)displayableArrayWithPosMessage:(PosMessage *)aPosMessage{
+    NSMutableArray *array = [NSMutableArray array];
+    
+    if (aPosMessage) {
+        [array addObject:kTransactionInfoCell];
+        if ([aPosMessage shouldRequireSignature])
+            [array addObject:kSignatureCell];
+    }
+    else{
+        [array addObject:kMessageFromPOSCell];
+    }
+    
+    return array;
+}
+
 #pragma mark - UI
 
 - (void)setupUI{
-    UIBarButtonItem *customBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                                         style:UIBarButtonItemStylePlain
-                                                                        target:self
-                                                                        action:@selector(goBack)];
+    UIBarButtonItem *customBackButton =
+    [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                     style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(buttonBackTouch)];
     _navItem.leftBarButtonItem = customBackButton;
     
-    UIColor *barColor = [UIColor colorWithRed:161.0/255.0 green:164.0/255.0 blue:166.0/255.0 alpha:1.0];
+    UIBarButtonItem *customDoneButton =
+    [[UIBarButtonItem alloc] initWithTitle:@"Send"
+                                     style:UIBarButtonItemStyleDone
+                                    target:self
+                                    action:@selector(buttonSendTouch:)];
+    _navItem.rightBarButtonItem = customDoneButton;
+    
+    UIColor *barColor   = [UIColor colorWithRed:161.0/255.0 green:164.0/255.0 blue:166.0/255.0 alpha:1.0];
     UIColor *titleColor = [UIColor colorWithRed:55.0/255.0 green:70.0/255.0 blue:77.0/255.0 alpha:1.0];
     
     if([_navigationBar respondsToSelector:@selector(setBarTintColor:)])
@@ -114,11 +155,17 @@
                         };
     [_navigationBar setTitleTextAttributes:navBarTitleDict];
     
-    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self setupPlainTableView:_tableView showScrollIndicator:NO hasBorder:NO hasSeparator:NO];
 }
 
-- (void)goBack{
+#pragma mark - Handle user's actions
+
+- (void)buttonBackTouch:(UIBarButtonItem *)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)buttonSendTouch:(UIBarButtonItem *)sender{
+    
 }
 
 #pragma mark - iSpm Info
@@ -132,10 +179,9 @@
         _configurationChannel.delegate = self;
         
         [self performSelectorInBackground:@selector(_backgroundOpen) withObject:nil];
-        
-    } else if ([[SettingsManager sharedSettingsManager] pclInterfaceType] == TCP) {
+    }
+    else if ([[SettingsManager sharedSettingsManager] pclInterfaceType] == TCP) {
         DLog(@"Using PCL over TCP/IP");
-        
         //Do Nothing - Wait for the PPP channel to open
     }
 }
@@ -190,7 +236,7 @@
 
 - (void)applicationBecameInactive:(NSNotification *)notification {
     DLog();
-	resignActiveDate = [[NSDate alloc] init];
+	resignActiveDate = [NSDate date];
 }
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification {
@@ -244,7 +290,7 @@
 #pragma mark - Debugging
 
 - (void)beginTimeMeasure {
-	startDate = [[NSDate alloc] init];
+	startDate = [NSDate date];
 }
 
 - (NSTimeInterval)endTimeMeasure {
@@ -301,7 +347,7 @@
 }
 
 - (NSString *)iSMPResultToString:(iSMPResult)result {
-    NSString * retValue = @"";
+    NSString *retValue = @"";
     
     switch (result) {
         case ISMP_Result_SUCCESS:                         retValue = @"OK"; break;
@@ -311,8 +357,8 @@
         case ISMP_Result_ENCRYPTION_KEY_INVALID:          retValue = @"ENCRYPTION KEY INVALID"; break;
         case ISMP_Result_ENCRYPTION_KEY_NOT_FOUND:        retValue = @"ENCRYPTION KEY NOT FOUND"; break;
         case ISMP_Result_ENCRYPTION_DLL_MISSING:          retValue = @"ENCRYPTION DLL Missing"; break;
-            
-        default:                                        retValue = [NSString stringWithFormat:@"Unknown Result Code %x", result]; break;
+        default:                                          retValue = [NSString stringWithFormat:@"Unknown Result Code %x", result];
+            break;
     }
     
     return retValue;
@@ -327,8 +373,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    if (_posMessage && _posMessage.functionIndex == FunctionIndexSale)
-        return 2;
+    if (_displayableArray && [_displayableArray count] > 0)
+        return [_displayableArray count];
     
     return 1;
 }
@@ -336,42 +382,79 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = nil;
+    NSString *cellKey = [_displayableArray objectAtIndex:indexPath.row];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    if ([cellKey isEqualToString:kTransactionInfoCell]) {
+        cell = [self tableView:tableView transactionInfoCellAtIndexPath:indexPath];
     }
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.font = [UIFont systemFontOfSize:12.0f];
-    
-    if (_posMessage){
-        cell.textLabel.text = _posMessage.cardName;
+    else if ([cellKey isEqualToString:kSignatureCell]) {
+        cell = [self tableView:tableView signatureCellAtIndexPath:indexPath];
     }
     else{
+        NSString *CellIdentifier = kMessageFromPOSCell;
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.font = [UIFont systemFontOfSize:12.0f];
+        
         cell.textLabel.text = @"Please waiting for the transction...";
     }
     
     return cell;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)aTableView transactionInfoCellAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"TransactionInfoCell";
+    TransactionInfoCell *cell = (TransactionInfoCell*)[aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell)
+        cell = [[TransactionInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    
+    [cell setPosMessage:_posMessage];
+    
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)aTableView signatureCellAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"SignatureCell";
+    SignatureCell *cell = (SignatureCell*)[aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell)
+        cell = [[SignatureCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    
+    //[cell setParentView:self];
+    [cell setPosMessage:_posMessage];
+    
+    return cell;
+}
+
 #pragma mark - Table view delegate
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = [UIColor clearColor];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (_posMessage){
-//        EAAccessory *connectedAccessory = [_connectedAccessories objectAtIndex:indexPath.row];
-//        NSString *msg = [self connectedAccessoryString:connectedAccessory];
-//        
-//        float padding = 10.0f;
-//        float w = CGRectGetWidth(tableView.frame) - 2 * padding;
-//        float h = [msg heightForWidth:w andFont:[UIFont systemFontOfSize:12.0f]];
-//        
-//        return h + 2*padding;
+    CGFloat height = 0;
+    CGFloat width  = CGRectGetWidth(tableView.frame);
+    
+    NSString *cellKey = [_displayableArray objectAtIndex:indexPath.row];
+    
+    if ([cellKey isEqualToString:kTransactionInfoCell]) {
+        height = [TransactionInfoCell heightForPosMessage:_posMessage parentWidth:width];
+    }
+    else if ([cellKey isEqualToString:kSignatureCell]) {
+        height = [SignatureCell heightForPosMessage:_posMessage parentWidth:width];
+    }
+    else{
+        height = tableView.rowHeight;
     }
     
-    return tableView.rowHeight;
+    return height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

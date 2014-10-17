@@ -32,13 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
+    [self setupUI];
     
-    UIColor *barColor = [UIColor colorWithRed:161.0/255.0 green:164.0/255.0 blue:166.0/255.0 alpha:1.0];
-    UIColor *titleColor = [UIColor colorWithRed:55.0/255.0 green:70.0/255.0 blue:77.0/255.0 alpha:1.0];
-    _lblTitle.textColor = titleColor;
-    _topbarImageView.backgroundColor = barColor;
-    
+    //set Texts
     _lblTitle.text = @"[STB] - Mini POS";
     _logoImageView.image = [UIImage imageNamed:@"icon_128x128"];
     
@@ -83,6 +81,15 @@
 }
 
 #pragma mark - UI & Theming
+
+- (void)setupUI{
+    UIColor *barColor   = [UIColor colorWithRed:161.0/255.0 green:164.0/255.0 blue:166.0/255.0 alpha:1.0];
+    UIColor *titleColor = [UIColor colorWithRed:55.0/255.0 green:70.0/255.0 blue:77.0/255.0 alpha:1.0];
+    _lblTitle.textColor              = titleColor;
+    _topbarImageView.backgroundColor = barColor;
+    
+    [self setupPlainTableView:_tableView showScrollIndicator:NO hasBorder:NO hasSeparator:YES];
+}
 
 #pragma mark - Load content
 

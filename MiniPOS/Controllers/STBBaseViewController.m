@@ -46,9 +46,105 @@
     }
 }
 
+#pragma mark - Table View
+
+- (void)setupPlainTableView:(UITableView *)tableView
+        showScrollIndicator:(BOOL)showScrollIndicator
+                  hasBorder:(BOOL)hasBorder
+               hasSeparator:(BOOL)hasSeparator
+{
+    //scroll Indicator
+    [tableView setShowsHorizontalScrollIndicator:showScrollIndicator];
+    [tableView setShowsVerticalScrollIndicator:showScrollIndicator];
+    
+    //border
+    if (hasBorder) {
+        [tableView.layer setCornerRadius:TABLEVIEW_CORNER_RADIUS];
+        [tableView.layer setBorderColor:[self.view.backgroundColor CGColor]];
+        [tableView.layer setBorderWidth:1.0];
+        [tableView.layer setMasksToBounds:YES];
+    }
+    
+    //separator
+    if (hasSeparator){
+        //[tableView setSeparatorColor:[currentTheme colorForTableViewSeparator]];
+        [self setZeroSeparatorInsetForTableView:tableView];
+    }
+    else
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    //background
+    [tableView setBackgroundColor:[UIColor clearColor]];
+    [tableView setBackgroundView:nil];
+    [tableView setOpaque:NO];
+}
+
+- (void)setupGroupTableView:(UITableView *)tableView
+        showScrollIndicator:(BOOL)showScrollIndicator
+               hasSeparator:(BOOL)hasSeparator
+          shouldUpdateFrame:(BOOL)shouldUpdateFrame
+{
+    //scroll Indicator
+    [tableView setShowsHorizontalScrollIndicator:showScrollIndicator];
+    [tableView setShowsVerticalScrollIndicator:showScrollIndicator];
+    
+    //separator
+    if (hasSeparator){
+        //[tableView setSeparatorColor:[currentTheme colorForTableViewSeparator]];
+        [self setZeroSeparatorInsetForTableView:tableView];
+    }
+    else{
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    }
+    
+    //background
+    [tableView setBackgroundColor:[UIColor clearColor]];
+    [tableView setBackgroundView:nil];
+    [tableView setOpaque:NO];
+    
+    //update frame on iOS 7
+    if (shouldUpdateFrame)
+        [self updateFrameOfGroupTableView:tableView];
+}
+
+- (void)updateFrameOfGroupTableView:(UITableView *)tableView{
+    if (IOS7_OR_GREATER){
+        float padding = 9.0f;
+        
+        CGRect frame     = tableView.frame;
+        frame.origin.x   = padding;
+        frame.size.width -= 2*padding;
+        tableView.frame = frame;
+    }
+}
+
+- (void)setZeroSeparatorInsetForTableView:(UITableView *)tableView{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+    if ([tableView respondsToSelector: @selector(setSeparatorInset:)])
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+#endif
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)])
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+#endif
+}
+
+- (void)setZeroSeparatorInsetForTableViewCell:(UITableViewCell *)cell{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+    if ([cell respondsToSelector: @selector(setSeparatorInset:)])
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+#endif
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+#endif
+}
+
 #pragma mark - Support orientations
 
-// pre-iOS 6 support
+// Pre-iOS 6 support
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if(INTERFACE_IS_IPAD)
