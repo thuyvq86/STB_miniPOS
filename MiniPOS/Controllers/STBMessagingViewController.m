@@ -10,8 +10,10 @@
 //Views
 #import "TransactionInfoCell.h"
 #import "SignatureCell.h"
+//Controllers
+#import "STBSignatureViewController.h"
 
-@interface STBMessagingViewController ()<ICISMPDeviceDelegate, ICAdministrationDelegate, ICISMPDeviceExtensionDelegate, NSStreamDelegate>{
+@interface STBMessagingViewController ()<ICISMPDeviceDelegate, ICAdministrationDelegate, ICISMPDeviceExtensionDelegate, ICISMPDeviceDelegate, SignatureViewDelegate, NSStreamDelegate, UITextFieldDelegate>{
     NSDate				*startDate;
 	NSDate				*resignActiveDate;
 	
@@ -29,6 +31,9 @@
 
 //data for displayable cells
 @property (nonatomic, strong) NSArray *displayableArray;
+
+//
+@property (nonatomic) BOOL shouldCaptureSignature;
 
 @end
 
@@ -63,14 +68,6 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     //Set texts
     _navItem.title = @"iSMP->iPhone";
     
-#warning Data for testing..
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"message" ofType:@"json"];
-    NSString *jsonString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    NSError *error = nil;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
-    self.posMessage = [[PosMessage alloc] initWithMessage:[dict objectForKey:@"SALE"]];
-    self.displayableArray = [self displayableArrayWithPosMessage:_posMessage];
-    
     //Register for accessory notifications
     [[EAAccessoryManager sharedAccessoryManager] registerForLocalNotifications];
     
@@ -82,6 +79,19 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
                                              selector:@selector(applicationDidEnterBackground:)
                                                  name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
+    
+    //init data
+    _shouldCaptureSignature = YES;
+    
+    //receive message
+    [self pay];
+#warning Data for testing..
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"message" ofType:@"json"];
+    NSString *jsonString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    NSError *error = nil;
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+    self.posMessage = [[PosMessage alloc] initWithMessage:[dict objectForKey:@"SALE"]];
+    self.displayableArray = [self displayableArrayWithPosMessage:_posMessage];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -184,6 +194,16 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
         DLog(@"Using PCL over TCP/IP");
         //Do Nothing - Wait for the PPP channel to open
     }
+}
+
+#pragma mark - ICAdministrationDelegateStandAlone
+
+- (void)messageReceivedWithData:(NSData *)data {
+	NSString *msg = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+	[self logMessage:@"Just received a message from the iSMP"];
+	[self logMessage:[NSString stringWithFormat:@"Content: %@", msg]];
+    
+//    [self performSelector:@selector(send) withObject:nil afterDelay:0];
 }
 
 #pragma mark - ICDeviceDelegate
@@ -458,7 +478,71 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *cellKey = [_displayableArray objectAtIndex:indexPath.row];
+    if ([cellKey isEqualToString:kSignatureCell]) {
+        [self doSignatureCapture];
+    }
+}
+
+#pragma mark - Signature Capture
+
+- (void)pay {
+    //Prepare the transaction request
+	ICTransactionRequest request;
+	NSString * str_amount = nil;
+    str_amount = [NSString stringWithFormat:@"%08d", 5];
+	
+	strncpy(request.amount, [str_amount UTF8String], (unsigned int)sizeof(request.amount));
+	request.accountType = '0';
+	strncpy(request.currency, "978", (unsigned int)sizeof(request.currency));
+	request.specificField = '1';
+	request.transactionType = '0';
+	strncpy(request.privateData, "0000000000", (unsigned int)sizeof(request.privateData));
+	request.posNumber = 1;
+	request.delay = '1';
+	request.authorization = '0';
     
+    //Perform the transaction
+	[self.configurationChannel doTransaction:request];
+}
+
+- (void)shouldDoSignatureCapture:(ICSignatureData)signatureData {
+	DLog(@"Draw Signature Request Received");
+    
+    [self doSignatureCapture];
+    
+    DLog(@"You have %d seconds to draw your signature", signatureData.userSignTimeout);
+}
+
+- (void)signatureTimeoutExceeded {
+	DLog(@"Signature Capture Timeout");
+    [UIAlertView alertViewWithTitle:@"" message:@"Signature Capture Timeout"];
+}
+
+- (void)doSignatureCapture{
+    STBSignatureViewController *signatureViewController = [[STBSignatureViewController alloc] initWithNibName:@"STBSignatureViewController" bundle:nil];
+    signatureViewController.delegate = self;
+    [self presentPopupViewController:signatureViewController animationType:MJPopupViewAnimationSlideBottomBottom];
+    
+    _shouldCaptureSignature = YES;
+    [self beginTimeMeasure];
+}
+
+- (void)signatureWithImage:(UIImage *)signature{
+    //close view
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    
+    if (!_shouldCaptureSignature) return;
+    
+    //submit
+    [self.configurationChannel submitSignatureWithImage:signature];
+    
+    DLog(@"Signature submitted. Total Time: %f", [self endTimeMeasure]);
+    _shouldCaptureSignature = NO;
+    
+    if (signature)
+        _posMessage.signature = signature;
+    [_tableView reloadData];
 }
 
 @end

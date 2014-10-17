@@ -15,7 +15,7 @@
     
     __weak IBOutlet UILabel *_lbliSpmConnectionState;
     
-    __weak IBOutlet UITableView *_tableView;
+    __weak IBOutlet TPKeyboardAvoidingTableView *_tableView;
 }
 
 @end

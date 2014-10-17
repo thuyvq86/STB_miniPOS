@@ -12,15 +12,18 @@
 #define DEFAULT_TERMINAL_TCP_PCL_PORT       5188
 #define DEFAULT_TERMINAL_IP                 @"1.1.1.2"
 
-static SettingsManager * g_sharedSettingsManager = nil;
+static NSString *const INTERFACE_TYPE_KEY        = @"pcl_interface_type";
+static NSString *const IOS_TCP_PCL_PORT_KEY      = @"ios_tcp_pcl_port";
+static NSString *const TERMINAL_TCP_PCL_PORT_KEY = @"terminal_tcp_pcl_port";
+static NSString *const TERMINAL_IP_KEY           = @"terminal_ip";
 
+static SettingsManager * g_sharedSettingsManager = nil;
 
 @interface SettingsManager ()
 
--(void)_checkDefaults;
+- (void)_checkDefaults;
 
 @end
-
 
 @implementation SettingsManager
 
@@ -50,7 +53,7 @@ static SettingsManager * g_sharedSettingsManager = nil;
 }
 
 - (void)loadSettings {
-    DLog(@"%s", __FUNCTION__);
+    DLog();
     
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
     
@@ -65,17 +68,17 @@ static SettingsManager * g_sharedSettingsManager = nil;
     [appUserDefaults release];
     
     //Load the user defaults
-    self.pclInterfaceType       = [userDefaults integerForKey:@"pcl_interface_type"];
-    self.iOSTcpPclPort          = [userDefaults integerForKey:@"ios_tcp_pcl_port"];
-    self.terminalPclTcpPort     = [userDefaults integerForKey:@"terminal_tcp_pcl_port"];
-    self.terminalIP             = [userDefaults stringForKey:@"terminal_ip"];
+    self.pclInterfaceType       = [userDefaults integerForKey:INTERFACE_TYPE_KEY];
+    self.iOSTcpPclPort          = [userDefaults integerForKey:IOS_TCP_PCL_PORT_KEY];
+    self.terminalPclTcpPort     = [userDefaults integerForKey:TERMINAL_TCP_PCL_PORT_KEY];
+    self.terminalIP             = [userDefaults stringForKey:TERMINAL_IP_KEY];
     
     //Check Defaults
     [self _checkDefaults];
 }
 
 - (void)_checkDefaults {
-    DLog(@"%s", __FUNCTION__);
+    DLog();
     
     if (self.iOSTcpPclPort <= 0) {
         self.iOSTcpPclPort = DEFAULT_IOS_TCP_PCL_PORT;
@@ -91,15 +94,17 @@ static SettingsManager * g_sharedSettingsManager = nil;
 }
 
 - (void)saveSettings {
-    DLog(@"%s", __FUNCTION__);
+    DLog();
     
-    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     //Save the user defaults
-    [userDefaults setInteger:self.pclInterfaceType forKey:@"pcl_interface_type"];
-    [userDefaults setInteger:self.iOSTcpPclPort forKey:@"ios_tcp_pcl_port"];
-    [userDefaults setInteger:self.terminalPclTcpPort forKey:@"terminal_tcp_pcl_port"];
-    [userDefaults setObject:self.terminalIP forKey:@"terminal_ip"];
+    [userDefaults setInteger:self.pclInterfaceType forKey:INTERFACE_TYPE_KEY];
+    [userDefaults setInteger:self.iOSTcpPclPort forKey:IOS_TCP_PCL_PORT_KEY];
+    [userDefaults setInteger:self.terminalPclTcpPort forKey:TERMINAL_TCP_PCL_PORT_KEY];
+    [userDefaults setObject:self.terminalIP forKey:TERMINAL_IP_KEY];
+    
+    [userDefaults synchronize];
 }
 
 

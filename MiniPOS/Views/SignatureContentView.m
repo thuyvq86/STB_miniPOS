@@ -10,6 +10,8 @@
 
 @interface SignatureContentView()
 
+@property (nonatomic, strong) UIImageView *signatureImageView;
+
 @end
 
 @implementation SignatureContentView
@@ -37,11 +39,11 @@
         [self.layer setDrawsAsynchronously:YES];
     
     UIFont *titleFont   = [[self class] detailHeaderFont];
-    UIFont *contentFont = [[self class] detailContentFont];
+//    UIFont *contentFont = [[self class] detailContentFont];
     
     CGFloat width    = CGRectGetWidth(rect) - 2*kLeftPadding;
-    CGFloat height   = CGRectGetHeight(rect);
-    NSInteger offset = INTERFACE_IS_IPAD ? (kLinePadding + kLinePadding/2) : kTopPadding;
+//    CGFloat height   = CGRectGetHeight(rect);
+    NSInteger offset = kLinePadding;
     
     //text color
     [[currentTheme mainColor] set];
@@ -49,19 +51,45 @@
     //Title
     NSString *title = _posMessage.cardName;
     [title drawInRect:CGRectMake(kLeftPadding, offset, width, kTitleHeight) withFont:titleFont lineBreakMode:NSLineBreakByTruncatingTail];
-    offset += kTitleHeight;
+    offset += kTitleHeight + kLinePadding/2.0;
+    
+    if (!_posMessage.signature) {
+        [@"Signature: -----------" drawInRect:CGRectMake(kLeftPadding, offset, width, kTitleHeight) withFont:titleFont lineBreakMode:NSLineBreakByTruncatingTail];
+    }
+    else{
+        _signatureImageView.frame = CGRectSetPosY(_signatureImageView.frame, offset);
+    }
 }
 
+#define kSignatureSize 50.0f
+
 + (CGFloat)heightForPosMessage:(PosMessage*)aPosMessage parentWidth:(CGFloat)parentWidth{
-    CGFloat width = parentWidth - 2*kLeftPadding;
+    //CGFloat width = parentWidth - 2*kLeftPadding;
+    CGFloat height = kLinePadding;
     
-    return kTableCellHeight;
+    height += kTitleHeight + kLinePadding/2.0; //card name
+    height += kSignatureSize;
+    height += kLinePadding;
+    
+    return height;
 }
 
 - (void)setPosMessage:(PosMessage *)posMessage{
     _posMessage = posMessage;
     
+    [self renderView];
     [self setNeedsDisplay];
+}
+
+- (void)renderView{
+    CGRect frame = CGRectMake(kLeftPadding, 0, kSignatureSize, kSignatureSize);
+    if (!_signatureImageView) {
+        self.signatureImageView = [[UIImageView alloc] initWithFrame:frame];
+        [_signatureImageView setContentMode:UIViewContentModeScaleAspectFit];
+        [self addSubview:_signatureImageView];
+    }
+    _signatureImageView.image = _posMessage.signature;
+    //_signatureImageView.backgroundColor = [UIColor redColor];
 }
 
 @end

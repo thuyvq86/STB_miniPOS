@@ -13,7 +13,7 @@
 typedef enum {
     SERIAL = 0,
     TCP
-}PclInterfaceTypes;
+} PclInterfaceTypes;
 
 
 @interface SettingsManager : NSObject
@@ -26,9 +26,9 @@ typedef enum {
 @property (nonatomic, retain) NSString              * terminalIP;
 
 
-+(SettingsManager *)sharedSettingsManager;
++ (SettingsManager *)sharedSettingsManager;
 
--(void)saveSettings;
--(void)loadSettings;
+- (void)saveSettings;
+- (void)loadSettings;
 
 @end

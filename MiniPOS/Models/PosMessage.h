@@ -51,6 +51,8 @@ typedef enum{
 @property (nonatomic, strong) NSString *receiptNo;
 @property (nonatomic, strong) NSString *appCode;
 
+@property (nonatomic, strong) UIImage *signature;
+
 - (id)initWithMessage:(NSString *)aMessage;
 
 - (FunctionType)function;

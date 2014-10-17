@@ -103,6 +103,11 @@
 		D8FEB56B19F15552008BB5D5 /* TransactionInfoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB56A19F15552008BB5D5 /* TransactionInfoContentView.m */; };
 		D8FEB56E19F15565008BB5D5 /* SignatureContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB56D19F15565008BB5D5 /* SignatureContentView.m */; };
 		D8FEB57019F15985008BB5D5 /* message.json in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB56F19F15985008BB5D5 /* message.json */; };
+		D8FEB57319F16570008BB5D5 /* ICSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB57219F16570008BB5D5 /* ICSignatureView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D8FEB57719F16623008BB5D5 /* STBSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB57619F16623008BB5D5 /* STBSignatureViewController.m */; };
+		D8FEB57919F18B75008BB5D5 /* STBSignatureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB57819F18B75008BB5D5 /* STBSignatureViewController.xib */; };
+		D8FEB57F19F1969A008BB5D5 /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB57C19F1969A008BB5D5 /* MJPopupBackgroundView.m */; };
+		D8FEB58019F1969A008BB5D5 /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB57E19F1969A008BB5D5 /* UIViewController+MJPopupViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -279,6 +284,15 @@
 		D8FEB56C19F15565008BB5D5 /* SignatureContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureContentView.h; sourceTree = "<group>"; };
 		D8FEB56D19F15565008BB5D5 /* SignatureContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignatureContentView.m; sourceTree = "<group>"; };
 		D8FEB56F19F15985008BB5D5 /* message.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = message.json; sourceTree = SOURCE_ROOT; };
+		D8FEB57119F16570008BB5D5 /* ICSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSignatureView.h; sourceTree = "<group>"; };
+		D8FEB57219F16570008BB5D5 /* ICSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSignatureView.m; sourceTree = "<group>"; };
+		D8FEB57519F16623008BB5D5 /* STBSignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBSignatureViewController.h; sourceTree = "<group>"; };
+		D8FEB57619F16623008BB5D5 /* STBSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBSignatureViewController.m; sourceTree = "<group>"; };
+		D8FEB57819F18B75008BB5D5 /* STBSignatureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STBSignatureViewController.xib; sourceTree = "<group>"; };
+		D8FEB57B19F1969A008BB5D5 /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPopupBackgroundView.h; sourceTree = "<group>"; };
+		D8FEB57C19F1969A008BB5D5 /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
+		D8FEB57D19F1969A008BB5D5 /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
+		D8FEB57E19F1969A008BB5D5 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,6 +419,9 @@
 				D8FEB48F19EFFC2D008BB5D5 /* STBCenterViewController.m */,
 				D8FEB49419EFFC59008BB5D5 /* STBMessagingViewController.h */,
 				D8FEB49519EFFC59008BB5D5 /* STBMessagingViewController.m */,
+				D8FEB57519F16623008BB5D5 /* STBSignatureViewController.h */,
+				D8FEB57619F16623008BB5D5 /* STBSignatureViewController.m */,
+				D8FEB57819F18B75008BB5D5 /* STBSignatureViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -432,14 +449,9 @@
 		D8FEB44219EFF61F008BB5D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D8FEB4CE19F035D4008BB5D5 /* TransactionInfoCell.h */,
-				D8FEB4CF19F035D4008BB5D5 /* TransactionInfoCell.m */,
-				D8FEB56919F15552008BB5D5 /* TransactionInfoContentView.h */,
-				D8FEB56A19F15552008BB5D5 /* TransactionInfoContentView.m */,
-				D8FEB4D119F035E8008BB5D5 /* SignatureCell.h */,
-				D8FEB4D219F035E8008BB5D5 /* SignatureCell.m */,
-				D8FEB56C19F15565008BB5D5 /* SignatureContentView.h */,
-				D8FEB56D19F15565008BB5D5 /* SignatureContentView.m */,
+				D8FEB57419F16576008BB5D5 /* Messaging */,
+				D8FEB57119F16570008BB5D5 /* ICSignatureView.h */,
+				D8FEB57219F16570008BB5D5 /* ICSignatureView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -447,7 +459,8 @@
 		D8FEB44319EFF632008BB5D5 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				D8FEB53E19F1542B008BB5D5 /* SDWebImage */,
+				D8FEB57A19F1969A008BB5D5 /* MJPopupViewController-0.4 */,
+				D8FEB53E19F1542B008BB5D5 /* SDWebImage-3.0 */,
 				D8FEB4E719F14C59008BB5D5 /* DUTableView */,
 				D8FEB4DA19F14BD2008BB5D5 /* TPKeyboardAvoiding-1.2.4 */,
 				D8FEB49719EFFCBB008BB5D5 /* LibiSMP_v4.01 */,
@@ -540,10 +553,10 @@
 				D8FEB48419EFFA7C008BB5D5 /* AppUtils.m */,
 				D8FEB4B219F0066D008BB5D5 /* STBDataFormatter.h */,
 				D8FEB4B319F0066D008BB5D5 /* STBDataFormatter.m */,
-				D8FEB48519EFFA7C008BB5D5 /* LogReporterManager.h */,
-				D8FEB48619EFFA7C008BB5D5 /* LogReporterManager.m */,
 				D8FEB48719EFFA7C008BB5D5 /* SettingsManager.h */,
 				D8FEB48819EFFA7C008BB5D5 /* SettingsManager.m */,
+				D8FEB48519EFFA7C008BB5D5 /* LogReporterManager.h */,
+				D8FEB48619EFFA7C008BB5D5 /* LogReporterManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -727,7 +740,7 @@
 			path = LaunchImages;
 			sourceTree = "<group>";
 		};
-		D8FEB53E19F1542B008BB5D5 /* SDWebImage */ = {
+		D8FEB53E19F1542B008BB5D5 /* SDWebImage-3.0 */ = {
 			isa = PBXGroup;
 			children = (
 				D8FEB53F19F1542B008BB5D5 /* NSData+GIF.h */,
@@ -758,8 +771,34 @@
 				D8FEB55819F1542B008BB5D5 /* UIImageView+WebCache.h */,
 				D8FEB55919F1542B008BB5D5 /* UIImageView+WebCache.m */,
 			);
-			name = SDWebImage;
+			name = "SDWebImage-3.0";
 			path = SDWebImage/SDWebImage;
+			sourceTree = "<group>";
+		};
+		D8FEB57419F16576008BB5D5 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				D8FEB4CE19F035D4008BB5D5 /* TransactionInfoCell.h */,
+				D8FEB4CF19F035D4008BB5D5 /* TransactionInfoCell.m */,
+				D8FEB56919F15552008BB5D5 /* TransactionInfoContentView.h */,
+				D8FEB56A19F15552008BB5D5 /* TransactionInfoContentView.m */,
+				D8FEB4D119F035E8008BB5D5 /* SignatureCell.h */,
+				D8FEB4D219F035E8008BB5D5 /* SignatureCell.m */,
+				D8FEB56C19F15565008BB5D5 /* SignatureContentView.h */,
+				D8FEB56D19F15565008BB5D5 /* SignatureContentView.m */,
+			);
+			name = Messaging;
+			sourceTree = "<group>";
+		};
+		D8FEB57A19F1969A008BB5D5 /* MJPopupViewController-0.4 */ = {
+			isa = PBXGroup;
+			children = (
+				D8FEB57B19F1969A008BB5D5 /* MJPopupBackgroundView.h */,
+				D8FEB57C19F1969A008BB5D5 /* MJPopupBackgroundView.m */,
+				D8FEB57D19F1969A008BB5D5 /* UIViewController+MJPopupViewController.h */,
+				D8FEB57E19F1969A008BB5D5 /* UIViewController+MJPopupViewController.m */,
+			);
+			path = "MJPopupViewController-0.4";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -840,6 +879,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8FEB44B19EFF839008BB5D5 /* MessagingStoryboard.storyboard in Resources */,
+				D8FEB57919F18B75008BB5D5 /* STBSignatureViewController.xib in Resources */,
 				D8FEB41E19EFF331008BB5D5 /* Main_iPad.storyboard in Resources */,
 				D8FEB52F19F15290008BB5D5 /* MasterBackground@2x.png in Resources */,
 				D8FEB52C19F15290008BB5D5 /* handsean.ttf in Resources */,
@@ -892,6 +932,7 @@
 				D8FEB52B19F15290008BB5D5 /* UILabel+MixFont.m in Sources */,
 				D8FEB48019EFF967008BB5D5 /* STBBaseViewController.m in Sources */,
 				D8FEB52119F15290008BB5D5 /* ApplicationTheme.m in Sources */,
+				D8FEB57719F16623008BB5D5 /* STBSignatureViewController.m in Sources */,
 				D8FEB46F19EFF89E008BB5D5 /* UIActionSheet+Block.m in Sources */,
 				D8FEB4BD19F0109A008BB5D5 /* GTMNSString+HTML.m in Sources */,
 				D8FEB56019F1542B008BB5D5 /* SDWebImageDownloader.m in Sources */,
@@ -918,6 +959,7 @@
 				D8FEB48A19EFFA7C008BB5D5 /* LogReporterManager.m in Sources */,
 				D8FEB56519F1542B008BB5D5 /* UIImage+GIF.m in Sources */,
 				D8FEB55C19F1542B008BB5D5 /* NSData+GIF.m in Sources */,
+				D8FEB57F19F1969A008BB5D5 /* MJPopupBackgroundView.m in Sources */,
 				D8FEB46D19EFF89E008BB5D5 /* MFMessageComposeViewController+Block.m in Sources */,
 				D8FEB52A19F15290008BB5D5 /* NSString+Size.m in Sources */,
 				D8FEB4EA19F14C59008BB5D5 /* DUTableView.m in Sources */,
@@ -925,9 +967,11 @@
 				D8FEB52919F15290008BB5D5 /* NSString+DrawText.m in Sources */,
 				D8FEB4B419F0066D008BB5D5 /* STBDataFormatter.m in Sources */,
 				D8FEB4B019F002BA008BB5D5 /* PosMessage.m in Sources */,
+				D8FEB57319F16570008BB5D5 /* ICSignatureView.m in Sources */,
 				D8FEB52219F15290008BB5D5 /* ApplicationThemeManager.m in Sources */,
 				D8FEB52319F15290008BB5D5 /* UIButtonBase.m in Sources */,
 				D8FEB49319EFFC45008BB5D5 /* STBViewController.m in Sources */,
+				D8FEB58019F1969A008BB5D5 /* UIViewController+MJPopupViewController.m in Sources */,
 				D8FEB4E619F14BD2008BB5D5 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				D8FEB56119F1542B008BB5D5 /* SDWebImageDownloaderOperation.m in Sources */,
 				D8FEB4C319F01119008BB5D5 /* NSUserDefaults+Utils.m in Sources */,
@@ -1072,6 +1116,7 @@
 		D8FEB43A19EFF331008BB5D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1082,6 +1127,11 @@
 				GCC_PREFIX_HEADER = "MiniPOS/MiniPOS-Prefix.pch";
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "MiniPOS/MiniPOS-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+					"-lstdc++",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 				WRAPPER_EXTENSION = app;
@@ -1091,6 +1141,7 @@
 		D8FEB43B19EFF331008BB5D5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1101,6 +1152,11 @@
 				GCC_PREFIX_HEADER = "MiniPOS/MiniPOS-Prefix.pch";
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "MiniPOS/MiniPOS-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+					"-lstdc++",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 				WRAPPER_EXTENSION = app;
