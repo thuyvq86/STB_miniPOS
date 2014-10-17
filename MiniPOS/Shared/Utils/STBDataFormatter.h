@@ -91,6 +91,15 @@
 + (BOOL)isValidPhoneNumber:(NSString *)candidate;
 
 /**
+ *  Date with format dd.mm.yyyy
+ *
+ *  @param date source date
+ *
+ *  @return a string
+ */
++ (NSString *)formattedDDMMYYYForDate:(NSDate *)date;
+
+/**
  * Set the specified formatter as the default formatter for the property 'propertyName' of class 'className'
  */
 - (void)registerFormatter:(id)formatter forPropertyName:(NSString*)propertyName inClassNamed:(NSString*)className;

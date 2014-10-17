@@ -76,10 +76,6 @@
 		D8FEB52D19F15290008BB5D5 /* icon_128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51119F15290008BB5D5 /* icon_128x128.png */; };
 		D8FEB52E19F15290008BB5D5 /* MasterBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51319F15290008BB5D5 /* MasterBackground.png */; };
 		D8FEB52F19F15290008BB5D5 /* MasterBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51419F15290008BB5D5 /* MasterBackground@2x.png */; };
-		D8FEB53019F15290008BB5D5 /* MatchCellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51519F15290008BB5D5 /* MatchCellBackground.png */; };
-		D8FEB53119F15290008BB5D5 /* MatchCellBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51619F15290008BB5D5 /* MatchCellBackground@2x.png */; };
-		D8FEB53219F15290008BB5D5 /* MenuTopBar.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51719F15290008BB5D5 /* MenuTopBar.png */; };
-		D8FEB53319F15290008BB5D5 /* MenuTopBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51819F15290008BB5D5 /* MenuTopBar@2x.png */; };
 		D8FEB53419F15290008BB5D5 /* UIButtonSecondary.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51919F15290008BB5D5 /* UIButtonSecondary.png */; };
 		D8FEB53519F15290008BB5D5 /* UIButtonSecondary@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51A19F15290008BB5D5 /* UIButtonSecondary@2x.png */; };
 		D8FEB53619F15290008BB5D5 /* UIButtonSecondaryTouch.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51B19F15290008BB5D5 /* UIButtonSecondaryTouch.png */; };
@@ -108,6 +104,8 @@
 		D8FEB57919F18B75008BB5D5 /* STBSignatureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB57819F18B75008BB5D5 /* STBSignatureViewController.xib */; };
 		D8FEB57F19F1969A008BB5D5 /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB57C19F1969A008BB5D5 /* MJPopupBackgroundView.m */; };
 		D8FEB58019F1969A008BB5D5 /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB57E19F1969A008BB5D5 /* UIViewController+MJPopupViewController.m */; };
+		D8FEB58319F1A423008BB5D5 /* SeparatorLine.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB58119F1A423008BB5D5 /* SeparatorLine.png */; };
+		D8FEB58419F1A423008BB5D5 /* SeparatorLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB58219F1A423008BB5D5 /* SeparatorLine@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,10 +239,6 @@
 		D8FEB51119F15290008BB5D5 /* icon_128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_128x128.png; sourceTree = "<group>"; };
 		D8FEB51319F15290008BB5D5 /* MasterBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MasterBackground.png; sourceTree = "<group>"; };
 		D8FEB51419F15290008BB5D5 /* MasterBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MasterBackground@2x.png"; sourceTree = "<group>"; };
-		D8FEB51519F15290008BB5D5 /* MatchCellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MatchCellBackground.png; sourceTree = "<group>"; };
-		D8FEB51619F15290008BB5D5 /* MatchCellBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MatchCellBackground@2x.png"; sourceTree = "<group>"; };
-		D8FEB51719F15290008BB5D5 /* MenuTopBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuTopBar.png; sourceTree = "<group>"; };
-		D8FEB51819F15290008BB5D5 /* MenuTopBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MenuTopBar@2x.png"; sourceTree = "<group>"; };
 		D8FEB51919F15290008BB5D5 /* UIButtonSecondary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonSecondary.png; sourceTree = "<group>"; };
 		D8FEB51A19F15290008BB5D5 /* UIButtonSecondary@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonSecondary@2x.png"; sourceTree = "<group>"; };
 		D8FEB51B19F15290008BB5D5 /* UIButtonSecondaryTouch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonSecondaryTouch.png; sourceTree = "<group>"; };
@@ -293,6 +287,8 @@
 		D8FEB57C19F1969A008BB5D5 /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
 		D8FEB57D19F1969A008BB5D5 /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
 		D8FEB57E19F1969A008BB5D5 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
+		D8FEB58119F1A423008BB5D5 /* SeparatorLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SeparatorLine.png; sourceTree = "<group>"; };
+		D8FEB58219F1A423008BB5D5 /* SeparatorLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SeparatorLine@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -716,12 +712,10 @@
 		D8FEB51219F15290008BB5D5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D8FEB58119F1A423008BB5D5 /* SeparatorLine.png */,
+				D8FEB58219F1A423008BB5D5 /* SeparatorLine@2x.png */,
 				D8FEB51319F15290008BB5D5 /* MasterBackground.png */,
 				D8FEB51419F15290008BB5D5 /* MasterBackground@2x.png */,
-				D8FEB51519F15290008BB5D5 /* MatchCellBackground.png */,
-				D8FEB51619F15290008BB5D5 /* MatchCellBackground@2x.png */,
-				D8FEB51719F15290008BB5D5 /* MenuTopBar.png */,
-				D8FEB51819F15290008BB5D5 /* MenuTopBar@2x.png */,
 				D8FEB51919F15290008BB5D5 /* UIButtonSecondary.png */,
 				D8FEB51A19F15290008BB5D5 /* UIButtonSecondary@2x.png */,
 				D8FEB51B19F15290008BB5D5 /* UIButtonSecondaryTouch.png */,
@@ -879,6 +873,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8FEB44B19EFF839008BB5D5 /* MessagingStoryboard.storyboard in Resources */,
+				D8FEB58319F1A423008BB5D5 /* SeparatorLine.png in Resources */,
+				D8FEB58419F1A423008BB5D5 /* SeparatorLine@2x.png in Resources */,
 				D8FEB57919F18B75008BB5D5 /* STBSignatureViewController.xib in Resources */,
 				D8FEB41E19EFF331008BB5D5 /* Main_iPad.storyboard in Resources */,
 				D8FEB52F19F15290008BB5D5 /* MasterBackground@2x.png in Resources */,
@@ -888,7 +884,6 @@
 				D8FEB53719F15290008BB5D5 /* UIButtonSecondaryTouch@2x.png in Resources */,
 				D8FEB53619F15290008BB5D5 /* UIButtonSecondaryTouch.png in Resources */,
 				D8FEB41B19EFF331008BB5D5 /* Main_iPhone.storyboard in Resources */,
-				D8FEB53319F15290008BB5D5 /* MenuTopBar@2x.png in Resources */,
 				D8FEB57019F15985008BB5D5 /* message.json in Resources */,
 				D8FEB41219EFF331008BB5D5 /* InfoPlist.strings in Resources */,
 				D8FEB53419F15290008BB5D5 /* UIButtonSecondary.png in Resources */,
@@ -897,9 +892,6 @@
 				D8FEB53A19F15290008BB5D5 /* Default@2x.png in Resources */,
 				D8FEB52E19F15290008BB5D5 /* MasterBackground.png in Resources */,
 				D8FEB53519F15290008BB5D5 /* UIButtonSecondary@2x.png in Resources */,
-				D8FEB53119F15290008BB5D5 /* MatchCellBackground@2x.png in Resources */,
-				D8FEB53219F15290008BB5D5 /* MenuTopBar.png in Resources */,
-				D8FEB53019F15290008BB5D5 /* MatchCellBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

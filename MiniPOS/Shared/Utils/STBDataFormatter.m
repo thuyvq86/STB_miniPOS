@@ -142,6 +142,20 @@
     return YES;
 }
 
+//Date with format dd.mm.yyyy
++ (NSString *)formattedDDMMYYYForDate:(NSDate *)date{
+    unsigned theUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+	NSCalendar* theCalendar = [NSCalendar currentCalendar];
+	
+	NSDateComponents *theComps = [theCalendar components:theUnitFlags fromDate:date];
+    
+    NSString *sDay = [NSString stringWithFormat:(theComps.day < 10) ? @"0%i" : @"%i", theComps.day];
+    NSString *sMonth = [NSString stringWithFormat:(theComps.month < 10) ? @"0%i" : @"%i", theComps.month];
+    NSString *sYear = [NSString stringWithFormat:@"%i", theComps.year];
+    
+    return [NSString stringWithFormat:@"%@.%@.%@", sDay, sMonth, sYear];
+}
+
 - (id)init {
 	if(self = [super init]) {
 		// initialize formatters

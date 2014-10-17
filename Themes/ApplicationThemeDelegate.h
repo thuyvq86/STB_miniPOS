@@ -99,7 +99,6 @@ typedef enum {
 
 - (UIColor *)backgroundColorForView;
 - (UIImage *)backgroundImageForApp;
-- (UIImage *)backgroundImageForModelView;
 
 - (UIImage *)imageForCheckboxForState:(UIControlState)state;
 
@@ -113,12 +112,8 @@ typedef enum {
 
 - (UIColor *)colorForTableViewSeparator;
 
-#pragma mark - Menu panel
+#pragma mark - Lines
 
-- (UIImage *)backgroundImageForBadge;
-- (UIImage *)menuBackgroundImage;
-- (UIImage *)menuItemBackgroundForState:(UIControlState)state;
-- (UIImage *)menuItemIconForState:(UIControlState)state type:(MenuIconType)iconType;
-- (UIImage *)menuTopBar;
+- (UIImage *)separatorLine;
 
 @end

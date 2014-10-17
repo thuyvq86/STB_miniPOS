@@ -141,7 +141,7 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     [[UIBarButtonItem alloc] initWithTitle:@"Back"
                                      style:UIBarButtonItemStylePlain
                                     target:self
-                                    action:@selector(buttonBackTouch)];
+                                    action:@selector(buttonBackTouch:)];
     _navItem.leftBarButtonItem = customBackButton;
     
     UIBarButtonItem *customDoneButton =
@@ -175,7 +175,7 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
 }
 
 - (void)buttonSendTouch:(UIBarButtonItem *)sender{
-    
+    [UIAlertView alertViewWithTitle:@"" message:@"We are implementing this function. It will be come soon :-)" cancelButtonTitle:@"Okay"];
 }
 
 #pragma mark - iSpm Info

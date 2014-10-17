@@ -144,6 +144,27 @@ typedef enum{
     return nil;
 }
 
+- (NSArray *)displayableProperties {
+    if (!self.presentedProperties) {
+        NSArray *array = nil;
+        array = @[
+                  @[@(TextTypeNormal), @"DATE / TIME", self.formattedDateTime],
+                  @[@(TextTypeNormal), @"BATCH : 17", [NSString stringWithFormat:@"RECEIPT : %@", self.receiptNo]],
+                  @[@(TextTypeBold), self.cardType, @""],
+                  @[@(TextTypeNormal), self.cardNumber, @""],
+                  @[@(TextTypeNormal), self.cardName, @""],
+                  @[@(TextTypeNormal), @"", @""], //break line
+                  @[@(TextTypeNormal), @"EXPIRY DATE:", self.formattedExpiredDate],
+                  @[@(TextTypeNormal), @"REF No     :", self.receiptNo],
+                  @[@(TextTypeNormal), @"APP CODE   :", self.appCode],
+                  @[@(TextTypeNormal), @"", @"------------------"], //break line
+                  @[@(TextTypeBold), @"TOTAL (VND)", [NSString stringWithFormat:@"%f", self.total]],
+                  ];
+        self.presentedProperties = array;
+    }
+    return self.presentedProperties;
+}
+
 #pragma mark - Private Helpers
 
 - (NSDate *)dateTime:(NSString *)dateString{

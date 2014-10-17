@@ -40,49 +40,67 @@
     if ([self.layer respondsToSelector:@selector(setDrawsAsynchronously:)])
         [self.layer setDrawsAsynchronously:YES];
     
-    UIFont *titleFont   = [[self class] detailHeaderFont];
-    UIFont *contentFont = [[self class] detailContentFont];
+    id<ApplicationThemeDelegate> theme = [ApplicationThemeManager sharedTheme];
+    UIFont *boldFont   = [theme boldFontForHeader]; //bold
+    UIFont *normalFont = [theme fontForHeader]; //normal
+    UIImage *lineImage = [theme separatorLine];
     
     CGFloat width    = CGRectGetWidth(rect) - 2*kLeftPadding;
-    CGFloat height   = CGRectGetHeight(rect);
+//    CGFloat height   = CGRectGetHeight(rect);
     NSInteger offset = INTERFACE_IS_IPAD ? (kLinePadding + kLinePadding/2) : kTopPadding;
+    
+    NSString *transactionType = [_posMessage.transactionType uppercaseString];
+    NSArray *properties = _posMessage.displayableProperties;
     
     //text color
     [[currentTheme mainColor] set];
     
-    //Title
-    NSString *title = @"Sacombank";
-    [title drawInRect:CGRectMake(kLeftPadding, offset, width, kTitleHeight) withFont:titleFont lineBreakMode:NSLineBreakByTruncatingTail];
-    offset += kTitleHeight;
+    //Transaction Type
+    [transactionType drawInRect:CGRectMake(kLeftPadding, offset, width, kTitleHeight) withFont:boldFont lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
+    offset += kTitleHeight + kLinePadding;
     
-    //links
-//    float widthOfText = width - (iconPdf.size.width + kLinePadding/2);
-//    float heightOfText = 0;
-//    int index = -1;
-//    for (MediaData *obj in _pdfs) {
-//        index++;
-//        
-//        //icon
-//        [iconPdf drawInRect:CGRectMake(kLeftPadding, offset, iconPdf.size.width, iconPdf.size.height)];
-//        
-//        //text
-//        NSString *text = [[self class] textForMedia:obj];
-//        heightOfText = [[self class] heightForDetailText:text width:widthOfText font:textFont];
-//        
-//        UILabel *label = [self linkLabelWithFrame:CGRectMake(kLeftPadding + iconPdf.size.width + kLinePadding/2, offset, widthOfText, heightOfText)];
-//        [self addSubview:label];
-//        [label setText:text];
-//        [label setTag:index];
-//        
-//        //increase offset
-//        offset += MAX(iconPdf.size.height, heightOfText);
-//    }
+    //draw separator line
+    [lineImage drawInRect:CGRectMake(kLeftPadding, offset, width, lineImage.size.height)];
+    offset += lineImage.size.height + kLinePadding;
+    
+    //Draw info
+    if (properties && [properties count] > 0){
+        UIFont *textFont = nil;
+        for (NSArray *obj in properties) {
+            TextType type = [obj[0] intValue];
+            textFont = (type == TextTypeBold) ? boldFont : normalFont;
+            
+            //texts
+            [obj[1] drawInRect:CGRectMake(kLeftPadding, offset, width, kTitleHeight) withFont:textFont lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentLeft];
+            [obj[2] drawInRect:CGRectMake(kLeftPadding, offset, width, kTitleHeight) withFont:textFont lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentRight];
+            
+            //increase offset
+            offset += kTitleHeight;
+        }
+        
+        offset += kLinePadding;
+    }
 }
 
 + (CGFloat)heightForPosMessage:(PosMessage*)aPosMessage parentWidth:(CGFloat)parentWidth{
-    CGFloat width = parentWidth - 2*kLeftPadding;
+    id<ApplicationThemeDelegate> theme = [ApplicationThemeManager sharedTheme];
     
-    return kTableCellHeight;
+    NSInteger height = 0;
+    //CGFloat width = parentWidth - 2*kLeftPadding;
+    
+    UIImage *lineImage = [theme separatorLine];
+    NSArray *properties = aPosMessage.displayableProperties;
+    
+    height += INTERFACE_IS_IPAD ? (kLinePadding + kLinePadding/2) : kTopPadding;
+    height += kTitleHeight + kLinePadding;
+    height += lineImage.size.height + kLinePadding; //separator line
+    
+    if (properties && [properties count] > 0) {
+        height += kTitleHeight * [properties count];
+        height += kLinePadding;
+    }
+    
+    return height;
 }
 
 - (void)setPosMessage:(PosMessage *)posMessage{

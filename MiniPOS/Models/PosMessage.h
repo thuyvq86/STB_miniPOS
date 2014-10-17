@@ -31,6 +31,15 @@ typedef enum{
     FunctionTypeRePrint
 } FunctionType;
 
+/**
+ * Text Type
+ */
+typedef enum{
+    TextTypeNormal = 0,
+    TextTypeBold   = 1,
+    TextTypeItalic = 2
+} TextType;
+
 @interface PosMessage : NSObject
 
 @property (nonatomic) FunctionIndex functionIndex;
@@ -52,6 +61,7 @@ typedef enum{
 @property (nonatomic, strong) NSString *appCode;
 
 @property (nonatomic, strong) UIImage *signature;
+@property (nonatomic, strong) id presentedProperties;
 
 - (id)initWithMessage:(NSString *)aMessage;
 
@@ -62,5 +72,7 @@ typedef enum{
 
 - (NSString *)formattedCardNumber;
 - (NSString *)formattedDateTime;
+
+- (NSArray *)displayableProperties;
 
 @end

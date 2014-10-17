@@ -154,10 +154,6 @@
     return [[UIImage imageNamed:@"MasterBackground"] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
 }
 
-- (UIImage *)backgroundImageForModelView{
-    return [[UIImage imageNamed:@"Background"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-}
-
 - (UIImage *)imageForCheckboxForState:(UIControlState)state {
     NSString *imageName = @"UIButtonCheckbox";
     if (state == UIControlStateSelected)
@@ -207,70 +203,10 @@
     return [UIColor colorWithRed:234.0/255.0 green:234.0/255.0 blue:212.0/234.0 alpha:1.0];
 }
 
-#pragma mark - Menu
+#pragma mark - Lines
 
-- (UIImage *)backgroundImageForBadge {
-    return [[UIImage imageNamed:@"Badge"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
-}
-
-- (UIImage *)menuBackgroundImage {
-    return [[UIImage imageNamed:@"MenuBackground"] stretchableImageWithLeftCapWidth:6 topCapHeight:6];
-}
-
-- (UIImage *)menuItemBackgroundForState:(UIControlState)state {
-    if (state == UIControlStateNormal) {
-        return [UIImage imageNamed:@"MenuItemBackground"];
-    }
-    return [UIImage imageNamed:@"MenuItemBackgroundSelected"];
-}
-
-- (UIImage *)menuTopBar {
-    return [[UIImage imageNamed:@"MenuTopBar"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 44, 4)];
-}
-
-- (UIImage *)menuAutoscoutIconTopBar {
-    return [UIImage imageNamed:@"MenuAutoScoutLogo"];
-}
-
-- (UIImage *)menuCellDivider {
-    return [UIImage imageNamed:@"MenuCellDivider"];
-}
-
-- (UIImage *)menuRightSelector {
-    return [UIImage imageNamed:@"MenuCellRightArrow"];
-}
-
-- (UIImage *)menuItemIconForState:(UIControlState)state type:(MenuIconType)iconType {
-    NSString *imageName = @"Menu";
-    
-    switch (iconType) {
-        case MenuIconSearch:
-            imageName = [imageName stringByAppendingString:@"Search"];
-            break;
-        case MenuIconFavorites:
-            imageName = [imageName stringByAppendingString:@"Favorites"];
-            break;
-        case MenuIconSavedSearches:
-            imageName = [imageName stringByAppendingString:@"SavedSearches"];
-            break;
-        case MenuIconMyListings:
-            imageName = [imageName stringByAppendingString:@"MyListings"];
-            break;
-        default:
-            break;
-    }
-    
-    imageName = [imageName stringByAppendingString:@"Icon"];
-    
-    if (state == UIControlStateSelected) {
-        imageName = [imageName stringByAppendingString:@"Selected"];
-    }
-    
-    UIImage *image = [UIImage imageNamed:imageName];
-    
-    NSAssert(image, @"menuItemIconForState is nil");
-    
-    return image;
+- (UIImage *)separatorLine{
+    return [UIImage imageNamed:@"SeparatorLine"];
 }
 
 @end
