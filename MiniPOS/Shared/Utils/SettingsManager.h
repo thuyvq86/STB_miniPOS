@@ -8,23 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-
-
 typedef enum {
     SERIAL = 0,
     TCP
 } PclInterfaceTypes;
 
-
 @interface SettingsManager : NSObject
 
-
 //Exported properties
-@property (nonatomic, assign) NSInteger               pclInterfaceType;
-@property (nonatomic, assign) NSInteger               iOSTcpPclPort;
-@property (nonatomic, assign) NSInteger               terminalPclTcpPort;
-@property (nonatomic, retain) NSString              * terminalIP;
-
+@property (nonatomic) NSInteger pclInterfaceType;
+@property (nonatomic) NSInteger iOSTcpPclPort;
+@property (nonatomic) NSInteger terminalPclTcpPort;
+@property (nonatomic, strong) NSString* terminalIP;
 
 + (SettingsManager *)sharedSettingsManager;
 

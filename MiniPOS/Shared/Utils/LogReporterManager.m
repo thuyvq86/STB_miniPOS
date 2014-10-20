@@ -7,31 +7,28 @@
 //
 
 #import "LogReporterManager.h"
-
 #import <asl.h>
-
-static LogReporterManager * g_sharedCrashReporterManager = nil;
-
 
 @interface LogReporterManager ()
 
--(NSString *)getApplicationLogs;
+- (NSString *)getApplicationLogs;
 
-@property(nonatomic, assign) UIViewController * viewController;
+@property(nonatomic, assign) UIViewController *viewController;
 
 @end
-
 
 @implementation LogReporterManager
 
 @synthesize viewController;
 
-
-+ (LogReporterManager *)sharedCrashReporterManager {
-    if (g_sharedCrashReporterManager == nil) {
-        g_sharedCrashReporterManager = [[LogReporterManager alloc] init];
-    }
-    return g_sharedCrashReporterManager;
++ (LogReporterManager*)sharedCrashReporterManager {
+    static LogReporterManager *_sharedManager = nil;
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&oncePredicate, ^{
+        _sharedManager = [[self alloc] init];
+    });
+    
+    return _sharedManager;
 }
 
 - (id)init {
@@ -41,14 +38,10 @@ static LogReporterManager * g_sharedCrashReporterManager = nil;
     return self;
 }
 
-- (oneway void)release {
-    
-}
-
-#pragma mark Access Apple System Log
+#pragma mark - Access Apple System Log
 
 - (NSString *)getApplicationLogs {
-    DLog(@"%s", __FUNCTION__);
+    DLog();
     
     aslmsg q, m;
     int i;
@@ -78,8 +71,8 @@ static LogReporterManager * g_sharedCrashReporterManager = nil;
             if ([keyString isEqualToString:[NSString stringWithFormat:@"%s", ASL_KEY_TIME]]) {
                 
                 //Get the time
-                long logTimeStamp = [string longLongValue];
-                char * logTime = ctime(&logTimeStamp);
+                long logTimeStamp = [string doubleValue];
+                char *logTime = ctime(&logTimeStamp);
                 logTime[strlen(logTime) - 1] = '\0';    //Remove the trailing new line character
                 
                 timeStamp = [NSString stringWithFormat:@"%s", logTime];
@@ -93,11 +86,9 @@ static LogReporterManager * g_sharedCrashReporterManager = nil;
     }
     aslresponse_free(r);
     
-    //NSLog(@"%s %@", __FUNCTION__, appLogs);
+    //DLog(@"%s", appLogs);
     
     return appLogs;
 }
-#pragma mark -
-
 
 @end

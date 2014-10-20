@@ -35,8 +35,8 @@
 		D8FEB48019EFF967008BB5D5 /* STBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB47D19EFF967008BB5D5 /* STBBaseViewController.m */; };
 		D8FEB48119EFF967008BB5D5 /* STBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB47F19EFF967008BB5D5 /* STBNavigationController.m */; };
 		D8FEB48919EFFA7C008BB5D5 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB48419EFFA7C008BB5D5 /* AppUtils.m */; };
-		D8FEB48A19EFFA7C008BB5D5 /* LogReporterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB48619EFFA7C008BB5D5 /* LogReporterManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D8FEB48B19EFFA7C008BB5D5 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB48819EFFA7C008BB5D5 /* SettingsManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D8FEB48A19EFFA7C008BB5D5 /* LogReporterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB48619EFFA7C008BB5D5 /* LogReporterManager.m */; };
+		D8FEB48B19EFFA7C008BB5D5 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB48819EFFA7C008BB5D5 /* SettingsManager.m */; };
 		D8FEB49019EFFC2D008BB5D5 /* STBCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB48F19EFFC2D008BB5D5 /* STBCenterViewController.m */; };
 		D8FEB49319EFFC45008BB5D5 /* STBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB49219EFFC45008BB5D5 /* STBViewController.m */; };
 		D8FEB49619EFFC59008BB5D5 /* STBMessagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB49519EFFC59008BB5D5 /* STBMessagingViewController.m */; };

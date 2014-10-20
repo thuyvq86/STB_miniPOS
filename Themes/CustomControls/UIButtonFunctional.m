@@ -41,7 +41,7 @@
 
 - (void)setupBackgroundImageForType:(FunctionButtonType)buttonType
 {
-    id<ApplicationThemeDelegate> currentTheme = [ApplicationThemeManager sharedTheme];
+    //id<ApplicationThemeDelegate> currentTheme = [ApplicationThemeManager sharedTheme];
     
     UIImage *backgroundImageNormal = nil;//[currentTheme uiButtonBackgroundImageForState:UIControlStateNormal type:buttonType];
     UIImage *backgroundImageTouch  = nil;//[currentTheme uiButtonBackgroundImageForState:UIControlStateHighlighted type:buttonType];

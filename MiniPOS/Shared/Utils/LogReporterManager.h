@@ -12,6 +12,6 @@
 
 @interface LogReporterManager : NSObject <NSURLConnectionDataDelegate, MFMailComposeViewControllerDelegate>
 
-+(LogReporterManager *)sharedCrashReporterManager;
++ (LogReporterManager *)sharedCrashReporterManager;
 
 @end

@@ -17,8 +17,6 @@ static NSString *const IOS_TCP_PCL_PORT_KEY      = @"ios_tcp_pcl_port";
 static NSString *const TERMINAL_TCP_PCL_PORT_KEY = @"terminal_tcp_pcl_port";
 static NSString *const TERMINAL_IP_KEY           = @"terminal_ip";
 
-static SettingsManager * g_sharedSettingsManager = nil;
-
 @interface SettingsManager ()
 
 - (void)_checkDefaults;
@@ -34,9 +32,12 @@ static SettingsManager * g_sharedSettingsManager = nil;
 
 
 + (SettingsManager *)sharedSettingsManager {
-    if (g_sharedSettingsManager == nil) {
-        g_sharedSettingsManager = [[SettingsManager alloc] init];
-    }
+    static SettingsManager * g_sharedSettingsManager = nil;
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&oncePredicate, ^{
+        g_sharedSettingsManager = [[self alloc] init];
+    });
+
     return g_sharedSettingsManager;
 }
 
@@ -48,10 +49,6 @@ static SettingsManager * g_sharedSettingsManager = nil;
     return self;
 }
 
-- (oneway void)release {
-    
-}
-
 - (void)loadSettings {
     DLog();
     
@@ -59,13 +56,11 @@ static SettingsManager * g_sharedSettingsManager = nil;
     
     //Dump User Defaults
     NSDictionary *bundleInfo = [[NSBundle mainBundle] infoDictionary];
-    NSString *bundleId = [bundleInfo objectForKey: @"CFBundleIdentifier"];
+    NSString *bundleId       = [bundleInfo objectForKey: @"CFBundleIdentifier"];
     
-    NSUserDefaults *appUserDefaults = [[NSUserDefaults alloc] init];
-    NSLog(@"Start dumping userDefaults for %@", bundleId);
-    NSLog(@"userDefaults dump: %@", [appUserDefaults persistentDomainForName: bundleId]);
-    NSLog(@"Finished dumping userDefaults for %@", bundleId);
-    [appUserDefaults release];
+    DLog(@"Start dumping userDefaults for %@", bundleId);
+    DLog(@"userDefaults dump: %@", [userDefaults persistentDomainForName: bundleId]);
+    DLog(@"Finished dumping userDefaults for %@", bundleId);
     
     //Load the user defaults
     self.pclInterfaceType       = [userDefaults integerForKey:INTERFACE_TYPE_KEY];

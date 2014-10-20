@@ -85,6 +85,7 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     
     //receive message
     [self pay];
+    
 #warning Data for testing..
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"message" ofType:@"json"];
     NSString *jsonString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
