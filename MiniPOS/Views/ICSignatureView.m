@@ -8,13 +8,9 @@
 
 #import "ICSignatureView.h"
 
-
-
 @implementation ICSignatureView
 
-
-
--(id) initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame {
 	if ((self = [super initWithFrame:frame])) {
 		_width				= frame.size.width;
 		_height				= frame.size.height;
@@ -33,8 +29,7 @@
 	return self;
 }
 
-
--(void)dealloc {
+- (void)dealloc {
 	if (_bitmapBuffer) {
 		free(_bitmapBuffer);
 	}
@@ -43,8 +38,7 @@
 	[super dealloc];
 }
 
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	static NSInteger index = 0;
 	CGPoint point = [[touches anyObject] locationInView:self];	
 	
@@ -58,8 +52,22 @@
 	CGPathMoveToPoint(_linePath, NULL, point.x, point.y);
 }
 
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	static NSInteger index = 0;
+	static CGPoint point = {0, 0};
+	point = [[touches anyObject] locationInView:self];
+	
+	//Check if the point is inside the canvas. This avoids segmentation errors.
+	index = (NSInteger)(point.x + (_height - point.y) * _bytesPerRow);
+	if ((index < 0)||(index >= _bitmapBufferSize)) {
+		return;
+	}
+	
+	CGPathAddLineToPoint(_linePath, NULL, point.x, point.y);
+	[self setNeedsDisplay];
+}
 
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	static NSInteger index = 0;
 	static CGPoint point = {0, 0};
 	point = [[touches anyObject] locationInView:self];
@@ -75,23 +83,7 @@
 }
 
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	static NSInteger index = 0;
-	static CGPoint point = {0, 0};
-	point = [[touches anyObject] locationInView:self];
-	
-	//Check if the point is inside the canvas. This avoids segmentation errors.
-	index = (NSInteger)(point.x + (_height - point.y) * _bytesPerRow);
-	if ((index < 0)||(index >= _bitmapBufferSize)) {
-		return;
-	}
-	
-	CGPathAddLineToPoint(_linePath, NULL, point.x, point.y);
-	[self setNeedsDisplay];
-}
-
-
--(void)drawRect:(CGRect)rect {
+- (void)drawRect:(CGRect)rect {
 	
 	//Draw the image to UIView from the bitmap content
 	CGContextRef context = UIGraphicsGetCurrentContext();
@@ -107,9 +99,9 @@ static void releaseBytes(void *info, const void *data, size_t size) {
 	free((void*)data);
 }
 
--(UIImage *)getSignatureData {
+- (UIImage *)getSignatureData {
 	//Create a bitmap context to draw the signature
-	_bitmapContext = CGBitmapContextCreate(_bitmapBuffer, _width, _height, _bitsPerComponent, _bytesPerRow, _colorSpace, kCGImageAlphaNone);
+	_bitmapContext = CGBitmapContextCreate(_bitmapBuffer, _width, _height, _bitsPerComponent, _bytesPerRow, _colorSpace, (CGBitmapInfo)kCGImageAlphaOnly);
 	CGContextSetLineCap(_bitmapContext, kCGLineCapRound);
 	CGContextSetLineWidth(_bitmapContext, 3.0);
 	CGContextSetRGBStrokeColor(_bitmapContext, 1.0, 1.0, 1.0, 1.0);
@@ -134,9 +126,9 @@ static void releaseBytes(void *info, const void *data, size_t size) {
 }
 
 
--(UIImage *)getSignatureDataAtBoundingBox {
+- (UIImage *)getSignatureDataAtBoundingBox {
 	//Create a bitmap context to draw the signature
-	_bitmapContext = CGBitmapContextCreate(_bitmapBuffer, _width, _height, _bitsPerComponent, _bytesPerRow, _colorSpace, kCGImageAlphaNone);
+	_bitmapContext = CGBitmapContextCreate(_bitmapBuffer, _width, _height, _bitsPerComponent, _bytesPerRow, _colorSpace, (CGBitmapInfo)kCGImageAlphaOnly);
 	CGContextSetLineCap(_bitmapContext, kCGLineCapRound);
 	CGContextSetLineWidth(_bitmapContext, 3.0);
 	CGContextSetRGBStrokeColor(_bitmapContext, 1.0, 1.0, 1.0, 1.0);
@@ -180,7 +172,7 @@ static void releaseBytes(void *info, const void *data, size_t size) {
 }
 
 
-+(NSData *)reverseBitmapWithData:(NSData *)inData andWidth:(NSUInteger)width {
++ (NSData *)reverseBitmapWithData:(NSData *)inData andWidth:(NSUInteger)width {
 	NSUInteger i = 0;
 	char reversed[[inData length]];
 	char * bitmapBuffer = (char *)[inData bytes];
@@ -194,7 +186,7 @@ static void releaseBytes(void *info, const void *data, size_t size) {
 }
 
 
-+(NSData *)from8to1BitPerPixel:(NSData *)inData andWidth:(NSUInteger)width {
++ (NSData *)from8to1BitPerPixel:(NSData *)inData andWidth:(NSUInteger)width {
 	NSUInteger height = [inData length] / width;
 	NSUInteger size = ((width + 7) / 8) * height;
 	NSUInteger effectiveWidth = (size * 8) / height;
@@ -221,7 +213,7 @@ static void releaseBytes(void *info, const void *data, size_t size) {
 }
 
 
--(void)clear {
+- (void)clear {
 	CGPathRelease(_linePath);
 	_linePath = NULL;
 	_linePath = CGPathCreateMutable();
