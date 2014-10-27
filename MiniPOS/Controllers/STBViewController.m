@@ -25,7 +25,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self updateFrameOfView];
+//    [self updateFrameOfView];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -48,8 +48,6 @@
     
     STBNavigationController *navController = [[STBNavigationController alloc] initWithRootViewController:_centerViewController];
     navController.navigationBarHidden = YES;
-    navController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-    navController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithRed:0.86 green:0.86 blue:0.86 alpha:1]};
     
     [self addChildViewController:navController];
     [self.view addSubview:navController.view];

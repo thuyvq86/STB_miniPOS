@@ -51,7 +51,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self updateFrameOfView];
+//    [self updateFrameOfView];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -235,7 +235,6 @@
 	
 	NSString * msg = [NSString stringWithFormat:
 					  @"connected: %d\nconnectionID: %d\nname: %@\nmanufacturer: %@\nmodelNumber: %@\nserialNumber: %@\nfirmwareReveision: %@\nhardwareRevision: %@\nprotocolStrings: %@",
-					  
 					  connectedAccessory.connected,
 					  connectedAccessory.connectionID,
 					  connectedAccessory.name,

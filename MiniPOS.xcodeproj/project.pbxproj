@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D84D291F19FEACD600288FE0 /* CrashReporterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D290E19FEACD600288FE0 /* CrashReporterManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D84D292019FEACD600288FE0 /* derTlv.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291019FEACD600288FE0 /* derTlv.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D84D292119FEACD600288FE0 /* GateWayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291219FEACD600288FE0 /* GateWayManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D84D292219FEACD600288FE0 /* ICBitmapReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291419FEACD600288FE0 /* ICBitmapReceipt.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D84D292319FEACD600288FE0 /* iSMPControlManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291619FEACD600288FE0 /* iSMPControlManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D84D292419FEACD600288FE0 /* PrinterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291819FEACD600288FE0 /* PrinterManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D84D292519FEACD600288FE0 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291A19FEACD600288FE0 /* SettingsManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D84D292619FEACD600288FE0 /* StandalonePaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291C19FEACD600288FE0 /* StandalonePaymentManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D84D292719FEACD600288FE0 /* UIImage-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291E19FEACD600288FE0 /* UIImage-Extensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D84D292C19FEAFB200288FE0 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84D292B19FEAFB200288FE0 /* CrashReporter.framework */; };
 		D8FEB40819EFF331008BB5D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40719EFF331008BB5D5 /* Foundation.framework */; };
 		D8FEB40A19EFF331008BB5D5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40919EFF331008BB5D5 /* CoreGraphics.framework */; };
 		D8FEB40C19EFF331008BB5D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40B19EFF331008BB5D5 /* UIKit.framework */; };
@@ -36,7 +46,6 @@
 		D8FEB48119EFF967008BB5D5 /* STBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB47F19EFF967008BB5D5 /* STBNavigationController.m */; };
 		D8FEB48919EFFA7C008BB5D5 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB48419EFFA7C008BB5D5 /* AppUtils.m */; };
 		D8FEB48A19EFFA7C008BB5D5 /* LogReporterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB48619EFFA7C008BB5D5 /* LogReporterManager.m */; };
-		D8FEB48B19EFFA7C008BB5D5 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB48819EFFA7C008BB5D5 /* SettingsManager.m */; };
 		D8FEB49019EFFC2D008BB5D5 /* STBCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB48F19EFFC2D008BB5D5 /* STBCenterViewController.m */; };
 		D8FEB49319EFFC45008BB5D5 /* STBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB49219EFFC45008BB5D5 /* STBViewController.m */; };
 		D8FEB49619EFFC59008BB5D5 /* STBMessagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB49519EFFC59008BB5D5 /* STBMessagingViewController.m */; };
@@ -119,6 +128,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D84D290D19FEACD600288FE0 /* CrashReporterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporterManager.h; sourceTree = "<group>"; };
+		D84D290E19FEACD600288FE0 /* CrashReporterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashReporterManager.m; sourceTree = "<group>"; };
+		D84D290F19FEACD600288FE0 /* derTlv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = derTlv.h; sourceTree = "<group>"; };
+		D84D291019FEACD600288FE0 /* derTlv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = derTlv.m; sourceTree = "<group>"; };
+		D84D291119FEACD600288FE0 /* GateWayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GateWayManager.h; sourceTree = "<group>"; };
+		D84D291219FEACD600288FE0 /* GateWayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GateWayManager.m; sourceTree = "<group>"; };
+		D84D291319FEACD600288FE0 /* ICBitmapReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICBitmapReceipt.h; sourceTree = "<group>"; };
+		D84D291419FEACD600288FE0 /* ICBitmapReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICBitmapReceipt.m; sourceTree = "<group>"; };
+		D84D291519FEACD600288FE0 /* iSMPControlManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iSMPControlManager.h; sourceTree = "<group>"; };
+		D84D291619FEACD600288FE0 /* iSMPControlManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iSMPControlManager.m; sourceTree = "<group>"; };
+		D84D291719FEACD600288FE0 /* PrinterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrinterManager.h; sourceTree = "<group>"; };
+		D84D291819FEACD600288FE0 /* PrinterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrinterManager.m; sourceTree = "<group>"; };
+		D84D291919FEACD600288FE0 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
+		D84D291A19FEACD600288FE0 /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
+		D84D291B19FEACD600288FE0 /* StandalonePaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandalonePaymentManager.h; sourceTree = "<group>"; };
+		D84D291C19FEACD600288FE0 /* StandalonePaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandalonePaymentManager.m; sourceTree = "<group>"; };
+		D84D291D19FEACD600288FE0 /* UIImage-Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage-Extensions.h"; sourceTree = "<group>"; };
+		D84D291E19FEACD600288FE0 /* UIImage-Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage-Extensions.m"; sourceTree = "<group>"; };
+		D84D292B19FEAFB200288FE0 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		D8FEB40419EFF331008BB5D5 /* MiniPOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniPOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8FEB40719EFF331008BB5D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D8FEB40919EFF331008BB5D5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -167,8 +195,6 @@
 		D8FEB48419EFFA7C008BB5D5 /* AppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtils.m; sourceTree = "<group>"; };
 		D8FEB48519EFFA7C008BB5D5 /* LogReporterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogReporterManager.h; sourceTree = "<group>"; };
 		D8FEB48619EFFA7C008BB5D5 /* LogReporterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogReporterManager.m; sourceTree = "<group>"; };
-		D8FEB48719EFFA7C008BB5D5 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
-		D8FEB48819EFFA7C008BB5D5 /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
 		D8FEB48E19EFFC2D008BB5D5 /* STBCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBCenterViewController.h; sourceTree = "<group>"; };
 		D8FEB48F19EFFC2D008BB5D5 /* STBCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBCenterViewController.m; sourceTree = "<group>"; };
 		D8FEB49119EFFC45008BB5D5 /* STBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBViewController.h; sourceTree = "<group>"; };
@@ -278,8 +304,8 @@
 		D8FEB56C19F15565008BB5D5 /* SignatureContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureContentView.h; sourceTree = "<group>"; };
 		D8FEB56D19F15565008BB5D5 /* SignatureContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignatureContentView.m; sourceTree = "<group>"; };
 		D8FEB56F19F15985008BB5D5 /* message.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = message.json; sourceTree = SOURCE_ROOT; };
-		D8FEB57119F16570008BB5D5 /* ICSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSignatureView.h; sourceTree = "<group>"; };
-		D8FEB57219F16570008BB5D5 /* ICSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSignatureView.m; sourceTree = "<group>"; };
+		D8FEB57119F16570008BB5D5 /* ICSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICSignatureView.h; path = ../../Views/ICSignatureView.h; sourceTree = "<group>"; };
+		D8FEB57219F16570008BB5D5 /* ICSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ICSignatureView.m; path = ../../Views/ICSignatureView.m; sourceTree = "<group>"; };
 		D8FEB57519F16623008BB5D5 /* STBSignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBSignatureViewController.h; sourceTree = "<group>"; };
 		D8FEB57619F16623008BB5D5 /* STBSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBSignatureViewController.m; sourceTree = "<group>"; };
 		D8FEB57819F18B75008BB5D5 /* STBSignatureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STBSignatureViewController.xib; sourceTree = "<group>"; };
@@ -302,6 +328,7 @@
 				D8FEB40A19EFF331008BB5D5 /* CoreGraphics.framework in Frameworks */,
 				D8FEB49D19EFFCEE008BB5D5 /* MessageUI.framework in Frameworks */,
 				D8FEB49B19EFFCDD008BB5D5 /* ExternalAccessory.framework in Frameworks */,
+				D84D292C19FEAFB200288FE0 /* CrashReporter.framework in Frameworks */,
 				D8FEB47B19EFF959008BB5D5 /* CoreBluetooth.framework in Frameworks */,
 				D8FEB40C19EFF331008BB5D5 /* UIKit.framework in Frameworks */,
 				D8FEB49919EFFCBB008BB5D5 /* iSMP.framework in Frameworks */,
@@ -322,6 +349,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D84D290C19FEACD600288FE0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D84D292819FEACE400288FE0 /* Helper */,
+				D84D292919FEAD2D00288FE0 /* Payment */,
+				D84D292A19FEAD4400288FE0 /* iSMP */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D84D292819FEACE400288FE0 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				D84D290D19FEACD600288FE0 /* CrashReporterManager.h */,
+				D84D290E19FEACD600288FE0 /* CrashReporterManager.m */,
+				D84D291919FEACD600288FE0 /* SettingsManager.h */,
+				D84D291A19FEACD600288FE0 /* SettingsManager.m */,
+				D84D290F19FEACD600288FE0 /* derTlv.h */,
+				D84D291019FEACD600288FE0 /* derTlv.m */,
+				D84D291319FEACD600288FE0 /* ICBitmapReceipt.h */,
+				D84D291419FEACD600288FE0 /* ICBitmapReceipt.m */,
+				D8FEB57119F16570008BB5D5 /* ICSignatureView.h */,
+				D8FEB57219F16570008BB5D5 /* ICSignatureView.m */,
+				D84D291D19FEACD600288FE0 /* UIImage-Extensions.h */,
+				D84D291E19FEACD600288FE0 /* UIImage-Extensions.m */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		D84D292919FEAD2D00288FE0 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				D84D291B19FEACD600288FE0 /* StandalonePaymentManager.h */,
+				D84D291C19FEACD600288FE0 /* StandalonePaymentManager.m */,
+			);
+			name = Payment;
+			sourceTree = "<group>";
+		};
+		D84D292A19FEAD4400288FE0 /* iSMP */ = {
+			isa = PBXGroup;
+			children = (
+				D84D291119FEACD600288FE0 /* GateWayManager.h */,
+				D84D291219FEACD600288FE0 /* GateWayManager.m */,
+				D84D291519FEACD600288FE0 /* iSMPControlManager.h */,
+				D84D291619FEACD600288FE0 /* iSMPControlManager.m */,
+				D84D291719FEACD600288FE0 /* PrinterManager.h */,
+				D84D291819FEACD600288FE0 /* PrinterManager.m */,
+			);
+			name = iSMP;
+			sourceTree = "<group>";
+		};
 		D8FEB3FB19EFF331008BB5D5 = {
 			isa = PBXGroup;
 			children = (
@@ -425,6 +503,7 @@
 		D8FEB44019EFF61F008BB5D5 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				D84D290C19FEACD600288FE0 /* Models */,
 				D8FEB4CA19F01239008BB5D5 /* Views */,
 				D8FEB48219EFFA7C008BB5D5 /* Utils */,
 				D8FEB44C19EFF865008BB5D5 /* Categories */,
@@ -446,8 +525,6 @@
 			isa = PBXGroup;
 			children = (
 				D8FEB57419F16576008BB5D5 /* Messaging */,
-				D8FEB57119F16570008BB5D5 /* ICSignatureView.h */,
-				D8FEB57219F16570008BB5D5 /* ICSignatureView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -549,8 +626,6 @@
 				D8FEB48419EFFA7C008BB5D5 /* AppUtils.m */,
 				D8FEB4B219F0066D008BB5D5 /* STBDataFormatter.h */,
 				D8FEB4B319F0066D008BB5D5 /* STBDataFormatter.m */,
-				D8FEB48719EFFA7C008BB5D5 /* SettingsManager.h */,
-				D8FEB48819EFFA7C008BB5D5 /* SettingsManager.m */,
 				D8FEB48519EFFA7C008BB5D5 /* LogReporterManager.h */,
 				D8FEB48619EFFA7C008BB5D5 /* LogReporterManager.m */,
 			);
@@ -580,6 +655,7 @@
 		D8FEB49719EFFCBB008BB5D5 /* LibiSMP_v4.01 */ = {
 			isa = PBXGroup;
 			children = (
+				D84D292B19FEAFB200288FE0 /* CrashReporter.framework */,
 				D8FEB49819EFFCBB008BB5D5 /* iSMP.framework */,
 			);
 			path = LibiSMP_v4.01;
@@ -925,33 +1001,41 @@
 				D8FEB48019EFF967008BB5D5 /* STBBaseViewController.m in Sources */,
 				D8FEB52119F15290008BB5D5 /* ApplicationTheme.m in Sources */,
 				D8FEB57719F16623008BB5D5 /* STBSignatureViewController.m in Sources */,
+				D84D292619FEACD600288FE0 /* StandalonePaymentManager.m in Sources */,
 				D8FEB46F19EFF89E008BB5D5 /* UIActionSheet+Block.m in Sources */,
 				D8FEB4BD19F0109A008BB5D5 /* GTMNSString+HTML.m in Sources */,
 				D8FEB56019F1542B008BB5D5 /* SDWebImageDownloader.m in Sources */,
 				D8FEB4D819F14B46008BB5D5 /* BaseTableContentView.m in Sources */,
 				D8FEB52819F15290008BB5D5 /* AKSegmentedControl.m in Sources */,
 				D8FEB49619EFFC59008BB5D5 /* STBMessagingViewController.m in Sources */,
+				D84D292519FEACD600288FE0 /* SettingsManager.m in Sources */,
 				D8FEB4C019F0109A008BB5D5 /* NSString+Extended.m in Sources */,
 				D8FEB46B19EFF89E008BB5D5 /* NSURLConnection+Block.m in Sources */,
 				D8FEB48119EFF967008BB5D5 /* STBNavigationController.m in Sources */,
 				D8FEB48919EFFA7C008BB5D5 /* AppUtils.m in Sources */,
 				D8FEB4E319F14BD2008BB5D5 /* TPKeyboardAvoidingCollectionView.m in Sources */,
+				D84D292319FEACD600288FE0 /* iSMPControlManager.m in Sources */,
 				D8FEB56E19F15565008BB5D5 /* SignatureContentView.m in Sources */,
 				D8FEB56619F1542B008BB5D5 /* UIImage+MultiFormat.m in Sources */,
 				D8FEB56819F1542B008BB5D5 /* UIImageView+WebCache.m in Sources */,
+				D84D292419FEACD600288FE0 /* PrinterManager.m in Sources */,
+				D84D291F19FEACD600288FE0 /* CrashReporterManager.m in Sources */,
 				D8FEB47119EFF89E008BB5D5 /* UINavigationController+Block.m in Sources */,
 				D8FEB56419F1542B008BB5D5 /* UIButton+WebCache.m in Sources */,
+				D84D292719FEACD600288FE0 /* UIImage-Extensions.m in Sources */,
+				D84D292119FEACD600288FE0 /* GateWayManager.m in Sources */,
 				D8FEB46C19EFF89E008BB5D5 /* MFMailComposeViewController+Block.m in Sources */,
 				D8FEB56319F1542B008BB5D5 /* SDWebImagePrefetcher.m in Sources */,
 				D8FEB4E519F14BD2008BB5D5 /* TPKeyboardAvoidingTableView.m in Sources */,
 				D8FEB4E419F14BD2008BB5D5 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				D84D292019FEACD600288FE0 /* derTlv.m in Sources */,
 				D8FEB56B19F15552008BB5D5 /* TransactionInfoContentView.m in Sources */,
 				D8FEB55E19F1542B008BB5D5 /* SDWebImageCompat.m in Sources */,
-				D8FEB48B19EFFA7C008BB5D5 /* SettingsManager.m in Sources */,
 				D8FEB48A19EFFA7C008BB5D5 /* LogReporterManager.m in Sources */,
 				D8FEB56519F1542B008BB5D5 /* UIImage+GIF.m in Sources */,
 				D8FEB55C19F1542B008BB5D5 /* NSData+GIF.m in Sources */,
 				D8FEB57F19F1969A008BB5D5 /* MJPopupBackgroundView.m in Sources */,
+				D84D292219FEACD600288FE0 /* ICBitmapReceipt.m in Sources */,
 				D8FEB46D19EFF89E008BB5D5 /* MFMessageComposeViewController+Block.m in Sources */,
 				D8FEB52A19F15290008BB5D5 /* NSString+Size.m in Sources */,
 				D8FEB4EA19F14C59008BB5D5 /* DUTableView.m in Sources */,

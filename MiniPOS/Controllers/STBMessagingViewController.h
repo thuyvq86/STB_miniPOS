@@ -8,7 +8,7 @@
 
 #import "STBBaseViewController.h"
 
-@interface STBMessagingViewController : STBBaseViewController{
+@interface STBMessagingViewController : STBBaseViewController<ICISMPDeviceDelegate, StandAlonePaymentDelegate, ISMPControlManagerDelegate>{
     
     __weak IBOutlet UINavigationBar *_navigationBar;
     __weak IBOutlet UINavigationItem *_navItem;
@@ -17,5 +17,7 @@
     
     __weak IBOutlet TPKeyboardAvoidingTableView *_tableView;
 }
+@property (nonatomic, assign) iSMPControlManager *iSMPControl;
+@property (nonatomic, assign) StandalonePaymentManager*paymentManager;
 
 @end

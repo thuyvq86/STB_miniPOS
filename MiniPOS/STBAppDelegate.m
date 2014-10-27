@@ -35,21 +35,22 @@
     }
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+        UIView *statusBarBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, 20)];
+        statusBarBackgroundView.backgroundColor = [UIColor blackColor];
+        statusBarBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth |  UIViewAutoresizingFlexibleHeight;
+        
+        [self.window addSubview:statusBarBackgroundView];
+    }
     
-//    UIStoryboard *dashboardStoryBoard = [UIStoryboard storyboardWithName:@"MessagingStoryboard" bundle:nil];
-//    self.centerViewController = [dashboardStoryBoard instantiateViewControllerWithIdentifier:@"CenterViewController"];
-//
-//    STBNavigationController *navController = [[STBNavigationController alloc] initWithRootViewController:_centerViewController];
-//    navController.navigationBarHidden = YES;
-//    navController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-//    navController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithRed:0.86 green:0.86 blue:0.86 alpha:1]};
-//    
-//    self.window.rootViewController = navController;
-//    self.window.backgroundColor = [UIColor blackColor];
-//    [self.window makeKeyAndVisible];
-//    [self.window setFrame:[[UIScreen mainScreen] bounds]];
+    //Initialize iSMP services
+    [GateWayManager sharedGateWayManager];
+    [iSMPControlManager sharedISMPControlManager];
+    [PrinterManager sharedPrinterManager];
+    [SettingsManager sharedSettingsManager];
     
-    [[UITableViewHeaderFooterView appearance] setTintColor:[UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1]];
+    //Initialize Crash Reporter
+    [CrashReporterManager sharedCrashReporterManager];
     
     // Override point for customization after application launch.
     return YES;

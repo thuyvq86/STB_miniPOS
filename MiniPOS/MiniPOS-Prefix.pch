@@ -96,7 +96,18 @@
 #endif
 
 #import <iSMP/iSMP.h>
+#import <iSMP/ICAdministration+StandAlone.h>
+#import "GateWayManager.h"
+#import "iSMPControlManager.h"
+#import "PrinterManager.h"
+#import "StandalonePaymentManager.h"
+#import "ICSignatureView.h"
 #import "SettingsManager.h"
+#import "ICBitmapReceipt.h"
+#import "UIImage-Extensions.h"
+
+#import <CrashReporter/CrashReporter.h>
+#import "CrashReporterManager.h"
 #import "LogReporterManager.h"
 
 // Theming
@@ -132,3 +143,13 @@
 
 // AppDelegate
 #import "STBAppDelegate.h"
+
+#define DEFAULT_DO_TRANSACTION_TIMEOUT  120000
+#define DEFAULT_RECEIPT_TEXT_SIZE       20
+
+//This inteface is implemented inside the iSMP library
+@interface NSData (HexDump)
+
+-(NSString *)hexDump;
+
+@end
