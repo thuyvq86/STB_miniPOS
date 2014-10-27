@@ -1,0 +1,13 @@
+//
+// Prefix header for all source files of the 'iSMPTestSuite' target in the 'iSMPTestSuite' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+#endif
+
+#import <iSMP/iSMP.h>
+
+#import "SettingsManager.h"
+#import "LogReporterManager.h"
