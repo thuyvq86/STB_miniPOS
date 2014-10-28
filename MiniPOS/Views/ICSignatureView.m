@@ -173,6 +173,9 @@ static void releaseBytes(void *info, const void *data, size_t size) {
 
 
 + (NSData *)reverseBitmapWithData:(NSData *)inData andWidth:(NSUInteger)width {
+    if (!inData || [inData length] == 0)
+        return nil;
+    
 	NSUInteger i = 0;
 	char reversed[[inData length]];
 	char * bitmapBuffer = (char *)[inData bytes];

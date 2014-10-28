@@ -33,7 +33,7 @@
 /* Format: @"dd.MM.yyyy HH:mm:ss" */
 @property (strong, nonatomic) NSDateFormatter *shortDateAndTimeFormatter;
 
-/* Format: @"dd.MM.yy HH:mm:ss" */
+/* Format: @"dd/MM/yy HH:mm" */
 @property (strong, nonatomic) NSDateFormatter *veryShortDateAndTimeFormatter;
 
 /* Format: @"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'" */
@@ -41,6 +41,9 @@
 
 /* Format: 0 => "no", 1 => "yes" */
 @property (strong, nonatomic) id booleanFormatter;
+
+/**/
+@property (strong, nonatomic) NSNumberFormatter *priceFormatter;
 
 /**
  * Singleton

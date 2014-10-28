@@ -12,9 +12,12 @@
 #import "SignatureCell.h"
 //Controllers
 #import "STBSignatureViewController.h"
+//Utils
+#import "NSMutableArray+QueueAdditions.h"
 
 @interface STBMessagingViewController ()<SignatureViewDelegate>
 //iSMP
+@property (nonatomic, strong) NSMutableArray *posMessageQueue;
 @property (nonatomic, strong) PosMessage *posMessage;
 @property (nonatomic, strong) NSArray *displayableArray;
 //Capture Signature
@@ -55,8 +58,8 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     
     //init data
     _shouldCaptureSignature = YES;
-    self.posMessage = nil;
-    self.displayableArray = [self displayableArrayWithPosMessage:_posMessage];
+    self.posMessageQueue = [NSMutableArray array];
+    [self pop];
     
     //Get the iSMPControlManager
     self.iSMPControl = [iSMPControlManager sharedISMPControlManager];
@@ -65,6 +68,19 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     //Get the payment object
     paymentManager = [StandalonePaymentManager sharedStandAlonePaymentManager];
     paymentManager.delegate = self;
+    
+#warning test
+    [self testing];
+}
+
+- (void)testing{
+    NSString *jsonFile = [[NSBundle mainBundle] pathForResource:@"message" ofType:@"json"];
+    NSData *jsonData = [NSData dataWithContentsOfFile:jsonFile];
+    
+    NSError *error = nil;
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+    for (NSString *key in [dict allKeys])
+        [self receivedRequest:[dict objectForKey:key]];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -106,10 +122,25 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
 }
 
 - (void)receivedRequest:(NSString *)request{
-    self.posMessage = [[PosMessage alloc] initWithMessage:request];
-    self.displayableArray = [self displayableArrayWithPosMessage:_posMessage];
+    [self.posMessageQueue enqueue:request];
+    
+    //process the top object
+    if (!_posMessage)
+        [self pop];
+}
 
+- (void)pop{
+    self.posMessage = nil; //reset object
+    
+    //pop a message
+    NSString *request = [self.posMessageQueue dequeue];
+    if (request)
+        self.posMessage = [[PosMessage alloc] initWithMessage:request];
+    self.displayableArray = [self displayableArrayWithPosMessage:_posMessage];
+    
+    //update table view
     [_tableView reloadData];
+    _navItem.rightBarButtonItem.enabled = (self.posMessage) ? YES : NO;
 }
 
 #pragma mark - Load content
@@ -170,7 +201,27 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
 }
 
 - (void)buttonSendTouch:(UIBarButtonItem *)sender{
-    [UIAlertView alertViewWithTitle:@"" message:@"We are implementing this function. It will be come soon :-)" cancelButtonTitle:@"Okay"];
+    
+    //validate data
+    if (_posMessage && _posMessage.shouldRequireSignature && !_posMessage.signature) {
+        [UIAlertView alertViewWithTitle:@"" message:@"Please sign to pay the total amount according to your card issuer agreement." cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+            //
+        } onCancel:^{
+            //do next process
+            [self doSignatureCapture];
+        }];
+        return;
+    }
+    
+    //check email - do later
+    
+    //send the request, when finish, do next process
+    [UIAlertView alertViewWithTitle:@"" message:@"We are implementing this function. It will be come soon :-)" cancelButtonTitle:@"Okay" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+        //
+    } onCancel:^{
+        //do next process
+        [self pop];
+    }];
 }
 
 #pragma mark - ICDeviceDelegate
@@ -235,7 +286,8 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.font = [UIFont systemFontOfSize:12.0f];
         
-        cell.textLabel.text = @"Please waiting for the transction...";
+        BOOL available = [self.iSMPControl getISMPState];
+        cell.textLabel.text = available ? @"Waiting for the transaction..." : @"";
     }
     
     return cell;
@@ -315,19 +367,15 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     STBSignatureViewController *signatureViewController = [[STBSignatureViewController alloc] initWithNibName:@"STBSignatureViewController" bundle:nil];
     signatureViewController.delegate = self;
     [self presentPopupViewController:signatureViewController animationType:MJPopupViewAnimationSlideBottomBottom];
-    
-    _shouldCaptureSignature = YES;
 }
 
 - (void)signatureWithImage:(UIImage *)signature{
     //close view
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
-    
-    DLog(@"Signature submitted.");
-    _shouldCaptureSignature = NO;
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
     
     if (signature)
         _posMessage.signature = signature;
+    
     [_tableView reloadData];
 }
 

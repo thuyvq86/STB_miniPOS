@@ -17,6 +17,7 @@
 		D84D292619FEACD600288FE0 /* StandalonePaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291C19FEACD600288FE0 /* StandalonePaymentManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D84D292719FEACD600288FE0 /* UIImage-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291E19FEACD600288FE0 /* UIImage-Extensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D84D292C19FEAFB200288FE0 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84D292B19FEAFB200288FE0 /* CrashReporter.framework */; };
+		D8C5C83719FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */; };
 		D8FEB40819EFF331008BB5D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40719EFF331008BB5D5 /* Foundation.framework */; };
 		D8FEB40A19EFF331008BB5D5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40919EFF331008BB5D5 /* CoreGraphics.framework */; };
 		D8FEB40C19EFF331008BB5D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40B19EFF331008BB5D5 /* UIKit.framework */; };
@@ -147,6 +148,8 @@
 		D84D291D19FEACD600288FE0 /* UIImage-Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage-Extensions.h"; sourceTree = "<group>"; };
 		D84D291E19FEACD600288FE0 /* UIImage-Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage-Extensions.m"; sourceTree = "<group>"; };
 		D84D292B19FEAFB200288FE0 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		D8C5C83519FFDB750048E4F0 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
+		D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
 		D8FEB40419EFF331008BB5D5 /* MiniPOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniPOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8FEB40719EFF331008BB5D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D8FEB40919EFF331008BB5D5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -400,6 +403,25 @@
 			name = iSMP;
 			sourceTree = "<group>";
 		};
+		D8ACD25519FFCF6700754108 /* Signature */ = {
+			isa = PBXGroup;
+			children = (
+				D8FEB57519F16623008BB5D5 /* STBSignatureViewController.h */,
+				D8FEB57619F16623008BB5D5 /* STBSignatureViewController.m */,
+				D8FEB57819F18B75008BB5D5 /* STBSignatureViewController.xib */,
+			);
+			name = Signature;
+			sourceTree = "<group>";
+		};
+		D8ACD25619FFCF7600754108 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				D8FEB49419EFFC59008BB5D5 /* STBMessagingViewController.h */,
+				D8FEB49519EFFC59008BB5D5 /* STBMessagingViewController.m */,
+			);
+			name = Messaging;
+			sourceTree = "<group>";
+		};
 		D8FEB3FB19EFF331008BB5D5 = {
 			isa = PBXGroup;
 			children = (
@@ -487,15 +509,12 @@
 		D8FEB43F19EFF61F008BB5D5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D8ACD25619FFCF7600754108 /* Messaging */,
+				D8ACD25519FFCF6700754108 /* Signature */,
 				D8FEB48D19EFFBFE008BB5D5 /* Launch */,
 				D8FEB48C19EFFBF4008BB5D5 /* Base */,
 				D8FEB48E19EFFC2D008BB5D5 /* STBCenterViewController.h */,
 				D8FEB48F19EFFC2D008BB5D5 /* STBCenterViewController.m */,
-				D8FEB49419EFFC59008BB5D5 /* STBMessagingViewController.h */,
-				D8FEB49519EFFC59008BB5D5 /* STBMessagingViewController.m */,
-				D8FEB57519F16623008BB5D5 /* STBSignatureViewController.h */,
-				D8FEB57619F16623008BB5D5 /* STBSignatureViewController.m */,
-				D8FEB57819F18B75008BB5D5 /* STBSignatureViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -545,6 +564,8 @@
 		D8FEB44C19EFF865008BB5D5 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				D8C5C83519FFDB750048E4F0 /* NSMutableArray+QueueAdditions.h */,
+				D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */,
 				D8FEB4C119F01119008BB5D5 /* NSUserDefaults+Utils.h */,
 				D8FEB4C219F01119008BB5D5 /* NSUserDefaults+Utils.m */,
 				D8FEB4B719F0109A008BB5D5 /* NSDictionary+Additions.h */,
@@ -1034,6 +1055,7 @@
 				D8FEB48A19EFFA7C008BB5D5 /* LogReporterManager.m in Sources */,
 				D8FEB56519F1542B008BB5D5 /* UIImage+GIF.m in Sources */,
 				D8FEB55C19F1542B008BB5D5 /* NSData+GIF.m in Sources */,
+				D8C5C83719FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m in Sources */,
 				D8FEB57F19F1969A008BB5D5 /* MJPopupBackgroundView.m in Sources */,
 				D84D292219FEACD600288FE0 /* ICBitmapReceipt.m in Sources */,
 				D8FEB46D19EFF89E008BB5D5 /* MFMessageComposeViewController+Block.m in Sources */,

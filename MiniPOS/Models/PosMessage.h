@@ -72,6 +72,7 @@ typedef enum{
 
 - (NSString *)formattedCardNumber;
 - (NSString *)formattedDateTime;
+- (NSString *)formattedTotal;
 
 - (NSArray *)displayableProperties;
 

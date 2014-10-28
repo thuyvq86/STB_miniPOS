@@ -195,6 +195,14 @@
         self.httpHeaderDateFormatter.dateFormat = @"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
         //As the textual parts must be english (see RFC 1123 for all the wording), I add
         self.httpHeaderDateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        
+        self.priceFormatter = [[NSNumberFormatter alloc] init];
+        [self.priceFormatter setNumberStyle:NSNumberFormatterNoStyle];
+        NSString *groupingSeparator = [[NSLocale currentLocale] objectForKey:NSLocaleGroupingSeparator];
+        [self.priceFormatter setGroupingSeparator:groupingSeparator];
+        [self.priceFormatter setGroupingSize:3];
+        [self.priceFormatter setAlwaysShowsDecimalSeparator:NO];
+        [self.priceFormatter setUsesGroupingSeparator:YES];
 	}
 	return self;
 }
