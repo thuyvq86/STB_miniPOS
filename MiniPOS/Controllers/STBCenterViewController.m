@@ -9,6 +9,12 @@
 #import "STBCenterViewController.h"
 #import "STBMessagingViewController.h"
 
+//
+#import "STBAPIClient.h"
+#import "Post.h"
+#import "UIRefreshControl+AFNetworking.h"
+#import "UIAlertView+AFNetworking.h"
+
 @interface STBCenterViewController ()
 
 @property (nonatomic, strong) NSArray *connectedAccessories;
@@ -29,9 +35,18 @@
     return self;
 }
 
+- (void)test_getProfile{
+    AFHTTPRequestOperation *o = [Post getProfileWithBlock:^(NSArray *posts, NSError *error) {
+        NSLog(@"Done");
+    }];
+    [UIAlertView showAlertViewForRequestOperationWithErrorOnCompletion:o delegate:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self test_getProfile];
     
     // Do any additional setup after loading the view.
     [self setupUI];
