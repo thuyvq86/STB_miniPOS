@@ -548,10 +548,10 @@
 		D8EDD3331A24F31C008E60CB /* STBAPIClient */ = {
 			isa = PBXGroup;
 			children = (
-				D8EDD3361A24F31C008E60CB /* Post.h */,
-				D8EDD3371A24F31C008E60CB /* Post.m */,
 				D8EDD33A1A24F34E008E60CB /* STBAPIClient.h */,
 				D8EDD33B1A24F34E008E60CB /* STBAPIClient.m */,
+				D8EDD3361A24F31C008E60CB /* Post.h */,
+				D8EDD3371A24F31C008E60CB /* Post.m */,
 			);
 			path = STBAPIClient;
 			sourceTree = SOURCE_ROOT;
