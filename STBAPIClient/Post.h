@@ -17,6 +17,6 @@
 - (instancetype)initWithAttributes:(NSDictionary *)attributes;
 
 + (AFHTTPRequestOperation *)getProfileWithBlock:(void (^)(NSArray *profiles, NSError *error))block;
-+ (AFHTTPRequestOperation *)saveBillWithBlock:(void (^)(NSArray *profiles, NSError *error))block;
++ (AFHTTPRequestOperation *)sendBill:(id)bill withBlock:(void (^)(NSArray *profiles, NSError *error))block;
 
 @end

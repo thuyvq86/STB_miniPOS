@@ -18,6 +18,9 @@ static NSString * const STBAPIBaseURLString = @"https://113.164.14.65:9444/api/"
     dispatch_once(&onceToken, ^{
         _sharedClient = [[STBAPIClient alloc] initWithBaseURL:[NSURL URLWithString:STBAPIBaseURLString]];
         
+        AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted];
+        [_sharedClient setRequestSerializer:requestSerializer];
+        
         AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
         [_sharedClient setResponseSerializer:responseSerializer];
         

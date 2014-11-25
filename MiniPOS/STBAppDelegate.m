@@ -8,6 +8,7 @@
 
 #import "STBAppDelegate.h"
 #import "STBCenterViewController.h"
+#import "AFNetworkActivityLogger.h"
 
 @interface STBAppDelegate()<CBCentralManagerDelegate>
 
@@ -21,6 +22,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    
     //Set app-wide shared cache
     [self configureCacheLimits];
     

@@ -1,3 +1,6 @@
 [submodule "Submodules/AFNetworking"]
 	path = Submodules/AFNetworking
 	url = https://github.com/AFNetworking/AFNetworking.git
+[submodule "Submodules/AFNetworkActivityLogger"]
+	path = Submodules/AFNetworkActivityLogger
+	url = https://github.com/AFNetworking/AFNetworkActivityLogger.git

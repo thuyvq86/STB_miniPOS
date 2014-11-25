@@ -29,13 +29,13 @@
 + (AFHTTPRequestOperation *)getProfileWithBlock:(void (^)(NSArray *posts, NSError *error))block {
     NSDictionary *parameters = @{@"SerialID": @"01"};
     
-    return [[STBAPIClient sharedClient] POST:@"ICMPProfileGetter" parameters:parameters constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    return [[STBAPIClient sharedClient] POST:@"ICMPProfileGetter" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@", responseObject);
         if (block) {
             block([NSArray array], nil);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error);
+        NSLog(@"%@ %@", error, operation.response);
         if (block) {
             block([NSArray array], nil);
         }
@@ -44,10 +44,10 @@
 
 #pragma mark - Bill
 
-+ (AFHTTPRequestOperation *)saveBillWithBlock:(void (^)(NSArray *profiles, NSError *error))block {
++ (AFHTTPRequestOperation *)sendBill:(id)bill withBlock:(void (^)(NSArray *profiles, NSError *error))block {
     NSDictionary *parameters = @{@"SerialID": @"01"};
     
-    return [[STBAPIClient sharedClient] POST:@"ICMPProfileGetter" parameters:parameters constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    return [[STBAPIClient sharedClient] POST:@"ICMPBillReceiver" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@", responseObject);
         if (block) {
             block([NSArray array], nil);

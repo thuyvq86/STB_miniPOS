@@ -38,6 +38,7 @@
 		D8EDD3321A24F309008E60CB /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD3211A24F309008E60CB /* UIWebView+AFNetworking.m */; };
 		D8EDD3391A24F31C008E60CB /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD3371A24F31C008E60CB /* Post.m */; };
 		D8EDD33C1A24F34E008E60CB /* STBAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD33B1A24F34E008E60CB /* STBAPIClient.m */; };
+		D8EDD3401A24FD3D008E60CB /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD33F1A24FD3D008E60CB /* AFNetworkActivityLogger.m */; };
 		D8FEB40819EFF331008BB5D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40719EFF331008BB5D5 /* Foundation.framework */; };
 		D8FEB40A19EFF331008BB5D5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40919EFF331008BB5D5 /* CoreGraphics.framework */; };
 		D8FEB40C19EFF331008BB5D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40B19EFF331008BB5D5 /* UIKit.framework */; };
@@ -212,6 +213,8 @@
 		D8EDD3371A24F31C008E60CB /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		D8EDD33A1A24F34E008E60CB /* STBAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBAPIClient.h; sourceTree = "<group>"; };
 		D8EDD33B1A24F34E008E60CB /* STBAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBAPIClient.m; sourceTree = "<group>"; };
+		D8EDD33E1A24FD3D008E60CB /* AFNetworkActivityLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityLogger.h; sourceTree = "<group>"; };
+		D8EDD33F1A24FD3D008E60CB /* AFNetworkActivityLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityLogger.m; sourceTree = "<group>"; };
 		D8FEB40419EFF331008BB5D5 /* MiniPOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniPOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8FEB40719EFF331008BB5D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D8FEB40919EFF331008BB5D5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -556,6 +559,16 @@
 			path = STBAPIClient;
 			sourceTree = SOURCE_ROOT;
 		};
+		D8EDD33D1A24FD3D008E60CB /* AFNetworkActivityLogger */ = {
+			isa = PBXGroup;
+			children = (
+				D8EDD33E1A24FD3D008E60CB /* AFNetworkActivityLogger.h */,
+				D8EDD33F1A24FD3D008E60CB /* AFNetworkActivityLogger.m */,
+			);
+			name = AFNetworkActivityLogger;
+			path = Submodules/AFNetworkActivityLogger/AFNetworkActivityLogger;
+			sourceTree = SOURCE_ROOT;
+		};
 		D8FEB3FB19EFF331008BB5D5 = {
 			isa = PBXGroup;
 			children = (
@@ -687,6 +700,7 @@
 		D8FEB44319EFF632008BB5D5 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				D8EDD33D1A24FD3D008E60CB /* AFNetworkActivityLogger */,
 				D8EDD2FC1A24F309008E60CB /* AFNetworking */,
 				D8EDD3101A24F309008E60CB /* UIKit+AFNetworking */,
 				D8FEB57A19F1969A008BB5D5 /* MJPopupViewController-0.4 */,
@@ -1197,6 +1211,7 @@
 				D8FEB56319F1542B008BB5D5 /* SDWebImagePrefetcher.m in Sources */,
 				D8EDD32C1A24F309008E60CB /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				D8FEB4E519F14BD2008BB5D5 /* TPKeyboardAvoidingTableView.m in Sources */,
+				D8EDD3401A24FD3D008E60CB /* AFNetworkActivityLogger.m in Sources */,
 				D8FEB4E419F14BD2008BB5D5 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				D84D292019FEACD600288FE0 /* derTlv.m in Sources */,
 				D8FEB56B19F15552008BB5D5 /* TransactionInfoContentView.m in Sources */,
