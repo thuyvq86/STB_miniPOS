@@ -9,10 +9,28 @@
 #import <Foundation/Foundation.h>
 #import "STBAPIClient.h"
 
+#define kParameterData              @"Data"
+#define kParameterMerchantID        @"MerchantID"
+#define kParameterTerminalID        @"TerminalID"
+#define kParameterSerialID          @"SerialID"
+#define kParameterFunctionName      @"FunctionName"
+#define kParameterRefNumber         @"RefNumber"
+#define kParameterRespCode          @"RespCode"
+#define kParameterSignature         @"Signature"
+#define kParameterToken             @"Token"
+#define kParameterCustomerEmail     @"CustomerEmail"
+#define kParameterCustomerSignature @"CustomerSignature"
+#define kParameterTransactionData   @"TransactionData"
+
 @interface Post : NSObject
 
-@property (nonatomic, assign) NSUInteger postID;
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) id data;
+@property (nonatomic, strong) NSString *merchantID;
+@property (nonatomic, strong) NSString *functionName;
+@property (nonatomic, strong) NSString *refNumber;
+@property (nonatomic, strong) NSString *respCode;
+@property (nonatomic, strong) id signature;
+@property (nonatomic, strong) NSString *token;
 
 - (instancetype)initWithAttributes:(NSDictionary *)attributes;
 

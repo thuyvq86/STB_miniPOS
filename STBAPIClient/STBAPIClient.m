@@ -8,7 +8,7 @@
 
 #import "STBAPIClient.h"
 
-static NSString * const STBAPIBaseURLString = @"https://113.164.14.65:9444/api/";
+static NSString * const STBAPIBaseURLString = @"https://113.164.14.65:9444/";
 
 @implementation STBAPIClient
 

@@ -17,6 +17,8 @@
 		D84D292619FEACD600288FE0 /* StandalonePaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291C19FEACD600288FE0 /* StandalonePaymentManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D84D292719FEACD600288FE0 /* UIImage-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291E19FEACD600288FE0 /* UIImage-Extensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D84D292C19FEAFB200288FE0 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84D292B19FEAFB200288FE0 /* CrashReporter.framework */; };
+		D8573E621A272606007C4EBC /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84D292B19FEAFB200288FE0 /* CrashReporter.framework */; };
+		D8573E631A272606007C4EBC /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49819EFFCBB008BB5D5 /* iSMP.framework */; };
 		D8C5C83719FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */; };
 		D8C5C83C19FFEF460048E4F0 /* CreditCard-Validator.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C5C83B19FFEF460048E4F0 /* CreditCard-Validator.m */; };
 		D8EDD3221A24F309008E60CB /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD2FE1A24F309008E60CB /* AFHTTPRequestOperation.m */; };
@@ -408,6 +410,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8573E621A272606007C4EBC /* CrashReporter.framework in Frameworks */,
+				D8573E631A272606007C4EBC /* iSMP.framework in Frameworks */,
 				D8FEB42A19EFF331008BB5D5 /* XCTest.framework in Frameworks */,
 				D8FEB42C19EFF331008BB5D5 /* UIKit.framework in Frameworks */,
 				D8FEB42B19EFF331008BB5D5 /* Foundation.framework in Frameworks */,
@@ -1442,6 +1446,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)/External/LibiSMP_v4.01",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MiniPOS/MiniPOS-Prefix.pch";
@@ -1464,6 +1469,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)/External/LibiSMP_v4.01",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MiniPOS/MiniPOS-Prefix.pch";

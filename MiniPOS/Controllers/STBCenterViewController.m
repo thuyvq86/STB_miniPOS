@@ -36,10 +36,18 @@
 }
 
 - (void)test_getProfile{
-    AFHTTPRequestOperation *o = [Post getProfileWithBlock:^(NSArray *posts, NSError *error) {
+    AFHTTPRequestOperation *o = nil;
+    
+    o = [Post getProfileWithBlock:^(NSArray *posts, NSError *error) {
         NSLog(@"Done");
     }];
-    [UIAlertView showAlertViewForRequestOperationWithErrorOnCompletion:o delegate:nil];
+}
+
+- (void)test_sendBill{
+    AFHTTPRequestOperation *o = nil;
+    o = [Post sendBill:nil withBlock:^(NSArray *profiles, NSError *error) {
+        NSLog(@"Done");
+    }];
 }
 
 - (void)viewDidLoad
@@ -47,6 +55,7 @@
     [super viewDidLoad];
     
     [self test_getProfile];
+    [self test_sendBill];
     
     // Do any additional setup after loading the view.
     [self setupUI];
