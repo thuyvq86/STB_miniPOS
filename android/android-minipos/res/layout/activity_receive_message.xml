@@ -10,7 +10,6 @@
         style="@style/textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ff00ff"
         android:visibility="gone" />
 
     <LinearLayout
@@ -38,50 +37,126 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <LinearLayout
+    <TableLayout
         android:id="@+id/vgRequestTransaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="@dimen/margin" >
 
-        <TextView
-            android:id="@+id/txtMerchantId"
-            style="@style/textview"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pos_serial_id_title"
+                android:textColor="@color/textcolor_secondary" />
+
+            <TextView
+                android:id="@+id/txtSerialId"
+                style="@style/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_half"
+                android:textColor="@color/textcolor_secondary" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pos_merchant_id_title"
+                android:textColor="@color/textcolor_secondary" />
+
+            <TextView
+                android:id="@+id/txtMerchantId"
+                style="@style/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_half"
+                android:textColor="@color/textcolor_secondary" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pos_terminal_id_title"
+                android:textColor="@color/textcolor_secondary" />
+
+            <TextView
+                android:id="@+id/txtTerminalId"
+                style="@style/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_half"
+                android:textColor="@color/textcolor_secondary" />
+        </TableRow>
 
         <TextView
-            android:id="@+id/txtTerminalId"
             style="@style/textview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txtSerialId"
-            style="@style/textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            style="@style/textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top"
-            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin_bottom"
+            android:gravity="center"
             android:text="@string/request_transaction"
             android:textSize="@dimen/textsize_xlarge" />
-    </LinearLayout>
+    </TableLayout>
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/vgReprint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-        <include
-            android:id="@+id/vgReprint"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/item_receipt" />
+        </ScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#cc31b4e3" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/item_receipt" />
-    </ScrollView>
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btnSign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minWidth="100dp"
+                android:text="Sign" />
+
+            <Button
+                android:id="@+id/btnDone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minWidth="100dp"
+                android:text="Done" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

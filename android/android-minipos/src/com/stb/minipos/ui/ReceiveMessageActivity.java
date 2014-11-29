@@ -34,9 +34,9 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 	private TextView txtTransactionType;
 
 	private View vgRequestTransaction;
-	private TextView txtMerchantID;
-	private TextView txtTerminalID;
-	private TextView txtSerialID;
+	private TextView txtMerchantId;
+	private TextView txtTerminalId;
+	private TextView txtSerialId;
 
 	private TextView txtTime;
 	private TextView txtReceiptMid;
@@ -135,9 +135,9 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		txtTransactionType = (TextView) findViewById(R.id.txtTransactionType);
 
 		vgRequestTransaction = findViewById(R.id.vgRequestTransaction);
-		txtMerchantID = (TextView) findViewById(R.id.txtMerchantId);
-		txtTerminalID = (TextView) findViewById(R.id.txtTerminalId);
-		txtSerialID = (TextView) findViewById(R.id.txtSerialId);
+		txtMerchantId = (TextView) findViewById(R.id.txtMerchantId);
+		txtTerminalId = (TextView) findViewById(R.id.txtTerminalId);
+		txtSerialId = (TextView) findViewById(R.id.txtSerialId);
 
 		txtMerchant = (TextView) findViewById(R.id.txtMerchant);
 		txtTime = (TextView) findViewById(R.id.txtTime);
@@ -163,6 +163,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 
 		imgSign.setOnClickListener(this);
 		findViewById(R.id.btnDone).setOnClickListener(this);
+		findViewById(R.id.btnSign).setOnClickListener(this);
 		updateLayout(POSManager.instance().getCurrentTransaction());
 	}
 
@@ -317,9 +318,9 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		vgHeader.setVisibility(View.VISIBLE);
 		STBProfile activeProfile = POSManager.instance().getActivedProfile();
 		txtMerchant.setText(activeProfile.MerchantName);
-		txtMerchantID.setText(activeProfile.MerchantID);
-		txtTerminalID.setText(activeProfile.TerminalID);
-		txtSerialID.setText(activeProfile.SerialID);
+		txtMerchantId.setText(": " + activeProfile.MerchantID);
+		txtTerminalId.setText(": " + activeProfile.TerminalID);
+		txtSerialId.setText(": " + activeProfile.SerialID);
 
 		if (object == null || object.message == null
 				|| !object.message.isSuccess()) {
@@ -410,6 +411,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			commitTransaction();
 			break;
 		case R.id.imgSign:
+		case R.id.btnSign:
 			Intent intent = new Intent(ReceiveMessageActivity.this,
 					CaptureSignatureActivity.class);
 			startActivityForResult(intent, REQUEST_SIGN_CODE);

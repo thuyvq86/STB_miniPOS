@@ -28,7 +28,7 @@
     <string name="email_isnt_valid">Email is not valid. Please enter correct email.</string>
 
     <!-- transaction -->
-    <string name="request_transaction">Please do transaction on the POS</string>
+    <string name="request_transaction">Please do transaction on iCMP</string>
     <string name="pos_connect_timeout_title">Connect error</string>
     <string name="pos_connect_timeout_message">Could not connect to POS device. Please try again!</string>
     <string name="pos_nopaired_devices_message">No paired devices</string>
@@ -40,6 +40,9 @@
     <string name="transaction_signature_empty_message">Please input your signature!</string>
     <string name="transaction_success">Success!</string>
     <string name="transaction_error">Error!</string>
+    <string name="pos_merchant_id_title">Merchant Id</string>
+    <string name="pos_terminal_id_title">Terminal Id</string>
+    <string name="pos_serial_id_title">Serial Id</string>
 
     <!-- root devices checking -->
     <string name="rooted_dialog_title">Unsupported devices</string>
@@ -61,7 +64,7 @@
     <string name="receipt_sign">SIGN X </string>
 
     <!-- hud -->
-    <string name="hud_connect_bluetooth">Connecting to POS device&#8230;</string>
+    <string name="hud_connect_bluetooth">Connecting to iCMP&#8230;</string>
     <string name="hud_status_reset">Reseting&#8230;</string>
 
     <!-- menu -->

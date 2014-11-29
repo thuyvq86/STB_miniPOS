@@ -21,5 +21,7 @@
     <color name="textcolor_gray">#999999</color>
     <color name="textcolor_light_gray">#cccccc</color>
     <color name="textcolor_white">#ffffff</color>
+    <color name="textcolor_primary">#ffffff</color>
+    <color name="textcolor_secondary">#dddddd</color>
 
 </resources>

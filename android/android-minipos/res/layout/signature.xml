@@ -18,13 +18,19 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin"
         android:layout_marginTop="@dimen/margin_top"
+        android:background="#cc31b4e3"
         android:gravity="center_vertical"
-        android:orientation="vertical" />
+        android:orientation="vertical" >
+
+        <com.stb.minipos.ui.view.SignatureView
+            android:id="@+id/vSignature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/edtEmail"

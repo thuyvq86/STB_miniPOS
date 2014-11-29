@@ -239,7 +239,6 @@
             android:layout_height="wrap_content"
             android:text="@string/receipt_total"
             android:textStyle="bold" />
-        
 
         <TextView
             android:id="@+id/txtTotal"
@@ -259,46 +258,47 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_height="wrap_content" >
 
             <TextView
                 style="@style/textview_receipt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:text="@string/receipt_sign" />
 
             <ImageView
                 android:id="@+id/imgSign"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="@dimen/margin"
-                android:background="#eeeeee"
+                android:background="#cc31b4e3"
                 android:contentDescription="@null"
-                android:minHeight="32dp" />
+                android:scaleType="centerInside" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="1dp" />
+            <TextView
+                style="@style/textview_receipt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/receipt_sign"
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/txtSignatureName"
                 style="@style/textview_receipt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
                 android:textStyle="bold" />
         </TableRow>
     </TableLayout>
-
-    <Button
-        android:id="@+id/btnDone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Done" />
 
 </LinearLayout>
