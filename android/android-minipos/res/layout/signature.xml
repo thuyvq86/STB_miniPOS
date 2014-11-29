@@ -7,14 +7,14 @@
     android:orientation="vertical" >
 
     <TextView
-        style="@style/textview_large"
+        android:id="@+id/txtMerchant"
+        style="@style/textview_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin"
         android:layout_marginRight="@dimen/margin"
         android:layout_marginTop="@dimen/margin_top"
-        android:text="Test iCMP Merchant"
-        android:textSize="32sp"
+        android:gravity="center_horizontal"
         android:textStyle="bold" />
 
     <LinearLayout

@@ -20,6 +20,10 @@
         <item name="android:textSize">@dimen/textsize_large</item>
     </style>
 
+    <style name="textview_title" parent="@style/textview">
+        <item name="android:textSize">@dimen/textsize_title</item>
+    </style>
+
     <style name="textview_title_blue">
         <item name="android:textColor">@color/color_blue</item>
         <item name="android:textStyle">bold</item>

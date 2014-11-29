@@ -13,16 +13,65 @@
         android:background="#ff00ff"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/txtRequestTransaction"
-        style="@style/textview"
+    <LinearLayout
+        android:id="@+id/vgHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin"
-        android:layout_marginTop="@dimen/margin_top"
-        android:text="@string/request_transaction"
-        android:textSize="@dimen/textsize_xlarge" />
+        android:background="@drawable/ic_ab_background"
+        android:orientation="vertical"
+        android:padding="@dimen/margin" >
+
+        <TextView
+            android:id="@+id/txtMerchant"
+            style="@style/textview_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtTransactionType"
+            style="@style/textview_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/vgRequestTransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/margin" >
+
+        <TextView
+            android:id="@+id/txtMerchantId"
+            style="@style/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtTerminalId"
+            style="@style/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtSerialId"
+            style="@style/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:gravity="center_horizontal"
+            android:text="@string/request_transaction"
+            android:textSize="@dimen/textsize_xlarge" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"

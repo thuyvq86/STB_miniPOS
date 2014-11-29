@@ -29,8 +29,15 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		Observer, View.OnClickListener {
 	private static final int REQUEST_SIGN_CODE = 1010;
 
-	private View txtRequestTransaction;
+	private View vgHeader;
+	private TextView txtMerchant;
 	private TextView txtTransactionType;
+
+	private View vgRequestTransaction;
+	private TextView txtMerchantID;
+	private TextView txtTerminalID;
+	private TextView txtSerialID;
+
 	private TextView txtTime;
 	private TextView txtReceiptMid;
 	private TextView txtReceiptTid;
@@ -44,6 +51,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 	private TextView txtReceiptRefNo;
 	private TextView txtReceiptBatchNo;
 
+	private TextView txtTotalTitle;
 	private TextView txtTotal;
 	private View vgReprint;
 	private View vgSignature;
@@ -123,9 +131,15 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
 
-		txtRequestTransaction = findViewById(R.id.txtRequestTransaction);
-
+		vgHeader = findViewById(R.id.vgHeader);
 		txtTransactionType = (TextView) findViewById(R.id.txtTransactionType);
+
+		vgRequestTransaction = findViewById(R.id.vgRequestTransaction);
+		txtMerchantID = (TextView) findViewById(R.id.txtMerchantId);
+		txtTerminalID = (TextView) findViewById(R.id.txtTerminalId);
+		txtSerialID = (TextView) findViewById(R.id.txtSerialId);
+
+		txtMerchant = (TextView) findViewById(R.id.txtMerchant);
 		txtTime = (TextView) findViewById(R.id.txtTime);
 		txtReceiptMid = (TextView) findViewById(R.id.txtReceiptMid);
 		txtReceiptTid = (TextView) findViewById(R.id.txtReceiptTid);
@@ -142,6 +156,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		txtExpiredDate = (TextView) findViewById(R.id.txtExpiredDate);
 
 		vgSignature = findViewById(R.id.vgSignature);
+		txtTotalTitle = (TextView) findViewById(R.id.txtTotalTitle);
 		txtTotal = (TextView) findViewById(R.id.txtTotal);
 		imgSign = (ImageView) findViewById(R.id.imgSign);
 		txtSignatureName = (TextView) findViewById(R.id.txtSignatureName);
@@ -233,7 +248,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		POSManager.instance().addObserver(this);
 		if (getIntent() != null
 				&& getIntent().getAction() == Intent.ACTION_MAIN) {
-			findViewById(R.id.txtRequestTransaction).setOnClickListener(
+			findViewById(R.id.vgRequestTransaction).setOnClickListener(
 					new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -286,30 +301,40 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 				UIUtils.showErrorMessage(this,
 						"Cannot getprofile from server!!!");
 			}
+			updateLayout(POSManager.instance().getCurrentTransaction());
 		}
 	}
 
 	private void updateLayout(POSTransaction object) {
 		if (!isCompanionConnected()) {
+			vgHeader.setVisibility(View.GONE);
 			vgReprint.setVisibility(View.GONE);
 			txtMessage.setVisibility(View.GONE);
-			txtRequestTransaction.setVisibility(View.GONE);
+			vgRequestTransaction.setVisibility(View.GONE);
 			return;
 		}
+
+		vgHeader.setVisibility(View.VISIBLE);
+		STBProfile activeProfile = POSManager.instance().getActivedProfile();
+		txtMerchant.setText(activeProfile.MerchantName);
+		txtMerchantID.setText(activeProfile.MerchantID);
+		txtTerminalID.setText(activeProfile.TerminalID);
+		txtSerialID.setText(activeProfile.SerialID);
+
 		if (object == null || object.message == null
 				|| !object.message.isSuccess()) {
 			vgReprint.setVisibility(View.GONE);
 			txtMessage.setVisibility(View.GONE);
-			txtRequestTransaction.setVisibility(View.VISIBLE);
+			txtTransactionType.setVisibility(View.GONE);
+			vgRequestTransaction.setVisibility(View.VISIBLE);
 			return;
 		}
 		PosMessageObject message = object.message;
-		STBProfile activeProfile = POSManager.instance().getActivedProfile();
 
 		txtMessage.setText(message.getMessage());
-
+		txtTransactionType.setVisibility(View.VISIBLE);
 		vgReprint.setVisibility(View.VISIBLE);
-		txtRequestTransaction.setVisibility(View.GONE);
+		vgRequestTransaction.setVisibility(View.GONE);
 		txtMessage.setVisibility(View.GONE);
 
 		txtTransactionType.setText(message.getTransactionType());
@@ -326,6 +351,8 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		txtExpiredDate.setText(message.getExpiredDate());
 		txtReceiptBatchNo.setText(message.getReceiptBatchNo());
 		txtReceiptRefNo.setText(message.getReceiptRefNo());
+		txtTotalTitle.setText(String.format(getString(R.string.receipt_total),
+				message.getUnit()));
 		txtTotal.setText(String.valueOf(message.getTotal()));
 
 		if (message.needSignature()) {

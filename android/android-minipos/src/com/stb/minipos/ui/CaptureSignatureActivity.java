@@ -23,9 +23,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.stb.minipos.R;
 import com.stb.minipos.model.POSManager;
+import com.stb.minipos.model.STBProfile;
 import com.stb.minipos.utils.UIUtils;
 import com.stb.minipos.utils.Utils;
 
@@ -37,6 +39,7 @@ public class CaptureSignatureActivity extends BaseActivity {
 	LinearLayout mLinearLayout;
 	SignatureView mSignature;
 	Button mClear, mGetSign, mCancel;
+	private TextView txtMerchant;
 	View mView;
 	private EditText _edtEmail;
 
@@ -95,6 +98,9 @@ public class CaptureSignatureActivity extends BaseActivity {
 		mGetSign.setEnabled(mBtnSaveEnabled);
 		mCancel = (Button) findViewById(R.id.cancel);
 		mView = mLinearLayout;
+		txtMerchant = (TextView) findViewById(R.id.txtMerchant);
+		STBProfile profile = POSManager.instance().getActivedProfile();
+		txtMerchant.setText(profile.MerchantName);
 
 		if (!TextUtils
 				.isEmpty(POSManager.instance().getCurrentTransaction().email))
@@ -130,11 +136,7 @@ public class CaptureSignatureActivity extends BaseActivity {
 
 	private void saveSignature() {
 		String email = _edtEmail.getText().toString();
-		if (TextUtils.isEmpty(email)) {
-			UIUtils.showErrorMessage(this, R.string.email_isnt_valid);
-			return;
-		}
-		if (!Utils.isValidEmail(email)) {
+		if (!TextUtils.isEmpty(email) && !Utils.isValidEmail(email)) {
 			UIUtils.showErrorMessage(this, R.string.email_isnt_valid);
 			return;
 		}

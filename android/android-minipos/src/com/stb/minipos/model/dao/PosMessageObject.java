@@ -19,6 +19,7 @@ public class PosMessageObject implements Serializable {
 		TOTAL(4), // card number
 		TERMINAL_ID(41), // card number
 		APPROVE_CODE(38), // approve code
+		RECEIPT_UNIT(49), // unit
 		RECEIPT_NO(62), // card number
 		RECEIPT_REF_NO(37), // reference number
 		RECEIPT_BATCH_NO(60), // batch number
@@ -132,6 +133,10 @@ public class PosMessageObject implements Serializable {
 
 	public String getAppCode() {
 		return getValue(ValueType.APPROVE_CODE);
+	}
+	
+	public String getUnit() {
+		return getValue(ValueType.RECEIPT_UNIT);
 	}
 
 }

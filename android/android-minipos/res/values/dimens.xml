@@ -6,6 +6,7 @@
     <dimen name="textsize_small">14sp</dimen>
     <dimen name="textsize_large">18sp</dimen>
     <dimen name="textsize_xlarge">20sp</dimen>
+    <dimen name="textsize_title">24sp</dimen>
     <dimen name="textsize_edittext">18sp</dimen>
     <dimen name="textsize_button">18sp</dimen>
 

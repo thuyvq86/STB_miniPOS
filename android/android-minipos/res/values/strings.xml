@@ -55,9 +55,9 @@
     <string name="receipt_time">DATE/TIME:</string>
     <string name="receipt_batch">BATCH:</string>
     <string name="receipt_expired">EXPIRED DATE: </string>
-    <string name="receipt_base">BASE: </string>
-    <string name="receipt_tip">TIP: </string>
-    <string name="receipt_total">TOTAL: </string>
+    <string name="receipt_base">BASE</string>
+    <string name="receipt_tip">TIP</string>
+    <string name="receipt_total">TOTAL (%s)</string>
     <string name="receipt_sign">SIGN X </string>
 
     <!-- hud -->
