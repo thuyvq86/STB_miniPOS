@@ -57,6 +57,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 	private View vgReprint;
 	private View vgSignature;
 	private ImageView imgSign;
+	private View btnSign;
 	private TextView txtSignatureName;
 	private TextView txtAppCode;
 	private ProgressDialog dialog;
@@ -160,11 +161,12 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		txtTotalTitle = (TextView) findViewById(R.id.txtTotalTitle);
 		txtTotal = (TextView) findViewById(R.id.txtTotal);
 		imgSign = (ImageView) findViewById(R.id.imgSign);
+		btnSign = findViewById(R.id.btnSign);
 		txtSignatureName = (TextView) findViewById(R.id.txtSignatureName);
 
 		imgSign.setOnClickListener(this);
+		btnSign.setOnClickListener(this);
 		findViewById(R.id.btnDone).setOnClickListener(this);
-		findViewById(R.id.btnSign).setOnClickListener(this);
 		updateLayout(POSManager.instance().getCurrentTransaction());
 	}
 
@@ -366,8 +368,10 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		if (message.needSignature()) {
 			vgSignature.setVisibility(View.VISIBLE);
 			txtSignatureName.setText(message.getCardName());
+			btnSign.setEnabled(true);
 		} else {
 			vgSignature.setVisibility(View.GONE);
+			btnSign.setEnabled(false);
 		}
 	}
 
