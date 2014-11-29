@@ -27,6 +27,16 @@ public class DatabaseManager {
 		}
 	}
 
+	public boolean createOrUpdate(STBProfile data) {
+		try {
+			_dataHelper.getProfileDao().createOrUpdate(data);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	/**
 	 * singleton
 	 */

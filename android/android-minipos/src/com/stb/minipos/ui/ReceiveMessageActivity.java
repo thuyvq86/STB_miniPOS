@@ -361,7 +361,8 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			return;
 		}
 		String serialId = String.format("%08x", SN);
-		if (isForce || !TextUtils.equals(serialId, profile.SerialID)) {
+		if (isForce || !TextUtils.equals(serialId, profile.SerialID)
+				|| !profile.isValid()) {
 			if (!profile.isValid())
 				_requestDialog = ProgressDialog.show(this, null,
 						"Updating profile...");

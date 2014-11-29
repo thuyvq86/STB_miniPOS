@@ -1,10 +1,14 @@
 package com.stb.minipos.model;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -22,20 +26,28 @@ public class POSManager extends Observable {
 
 	private final Context context;
 	private final PclUtilities mPclUtil;
-	private final List<STBProfile> _pairDevices = new ArrayList<STBProfile>();
+	private final Map<String, STBProfile> _profiles = new HashMap<String, STBProfile>();
+	private final List<BluetoothDevice> _bluetoothDevices = new ArrayList<BluetoothDevice>();
 
-	private STBProfile activedDevice = null;
+	private BluetoothDevice activedDevice = null;
 
 	private POSManager(Context context) {
 		this.context = context;
 		mPclUtil = new PclUtilities(this.context,
 				this.context.getPackageName(), "pairing_addr.txt");
+
+		// load profiles
+		_profiles.clear();
+		List<STBProfile> profiles = DatabaseManager.instance().getProfiles();
+		for (STBProfile profile : profiles) {
+			_profiles.put(profile.address, profile);
+		}
 	}
 
 	public void updatePairedDevices() {
 		Set<BluetoothCompanion> btComps = mPclUtil.GetPairedCompanions();
-		if (!_pairDevices.isEmpty()) {
-			_pairDevices.clear();
+		if (!_bluetoothDevices.isEmpty()) {
+			_bluetoothDevices.clear();
 			setChanged();
 		}
 		if (btComps != null) {
@@ -44,11 +56,11 @@ public class POSManager extends Observable {
 				profile.address = btComp.getBluetoothDevice().getAddress();
 				profile.title = btComp.getBluetoothDevice().getName();
 				profile.btCompanion = btComp;
-				_pairDevices.add(profile);
+				_bluetoothDevices.add(btComp.getBluetoothDevice());
 				setChanged();
 			}
 		}
-		notifyObservers(_pairDevices);
+		notifyObservers();
 	}
 
 	private boolean isReseting = false;
@@ -61,8 +73,8 @@ public class POSManager extends Observable {
 		if (isReseting)
 			return;
 
-		for (STBProfile device : _pairDevices) {
-			device.unpairDevice();
+		for (BluetoothDevice device : _bluetoothDevices) {
+			unpairDevice(device);
 		}
 		updatePairedDevices();
 		if (getPairDevicesCount() > 0) {
@@ -103,14 +115,11 @@ public class POSManager extends Observable {
 		}
 	}
 
-	public void unPairDevice(STBProfile profile) {
+	public void unPairDevice(BluetoothDevice device) {
 		if (isReseting)
 			return;
 		final int size = getPairDevicesCount();
-
-		for (STBProfile device : _pairDevices) {
-			device.unpairDevice();
-		}
+		unpairDevice(device);
 		updatePairedDevices();
 		if (getPairDevicesCount() == size) {
 			isReseting = true;
@@ -153,21 +162,21 @@ public class POSManager extends Observable {
 		}
 	}
 
-	public void requestProfile() {
-
-	}
-
-	public STBProfile getActivedProfile() {
+	public BluetoothDevice getActivedDevice() {
 		return activedDevice;
 	}
 
-	/**
-	 * get all pair devices
-	 * 
-	 * @return all pair devices
-	 */
-	public List<STBProfile> getPairedDevices() {
-		return _pairDevices;
+	public STBProfile getActivedProfile() {
+		return getProfile(activedDevice);
+	}
+
+	public STBProfile getProfile(BluetoothDevice device) {
+		STBProfile object = _profiles.get(device.getAddress());
+		if (object == null) {
+			object = new STBProfile(device);
+			_profiles.put(device.getAddress(), object);
+		}
+		return object;
 	}
 
 	/**
@@ -176,8 +185,8 @@ public class POSManager extends Observable {
 	 * @param position
 	 * @return
 	 */
-	public STBProfile getPairedDeviceAtPosition(int position) {
-		return _pairDevices.get(position);
+	public BluetoothDevice getPairedDeviceAtPosition(int position) {
+		return _bluetoothDevices.get(position);
 	}
 
 	/**
@@ -186,20 +195,30 @@ public class POSManager extends Observable {
 	 * @return the number of pair devices
 	 */
 	public int getPairDevicesCount() {
-		return _pairDevices.size();
+		return _bluetoothDevices.size();
 	}
 
 	/**
 	 * add profile to database
 	 */
-	public void addProfile(STBProfile profile) {
-
+	public void updateProfile(STBProfile profile) {
+		_profiles.put(profile.address, profile);
+		DatabaseManager.instance().createOrUpdate(profile);
 	}
 
-	public void activeBluetoothDevice(STBProfile object) {
+	public void activeBluetoothDevice(BluetoothDevice object) {
 		this.activedDevice = object;
-		mPclUtil.ActivateCompanion(this.activedDevice.btCompanion
-				.getBluetoothDevice().getAddress());
+		mPclUtil.ActivateCompanion(object.getAddress());
+	}
+
+	private static void unpairDevice(BluetoothDevice device) {
+		try {
+			Method m = device.getClass()
+					.getMethod("removeBond", (Class[]) null);
+			m.invoke(device, (Object[]) null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	// ---------------------------------------------------------

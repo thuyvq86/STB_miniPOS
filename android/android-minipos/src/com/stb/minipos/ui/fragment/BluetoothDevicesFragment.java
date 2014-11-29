@@ -2,8 +2,10 @@ package com.stb.minipos.ui.fragment;
 
 import java.util.Observable;
 import java.util.Observer;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,10 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.stb.minipos.POSApplication;
 import com.stb.minipos.R;
 import com.stb.minipos.model.POSManager;
-import com.stb.minipos.model.STBProfile;
 import com.stb.minipos.ui.DrawerMenuItem;
 import com.stb.minipos.ui.MiniPosActivity;
 import com.stb.minipos.ui.ReceiveMessageActivity;
@@ -62,7 +64,7 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				STBProfile object = (STBProfile) parent
+				BluetoothDevice object = (BluetoothDevice) parent
 						.getItemAtPosition(position);
 				onDevicesSelected(object);
 			}
@@ -74,7 +76,7 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 					public boolean onItemLongClick(AdapterView<?> parent,
 							View view, int position, long id) {
 						if (getActivity() instanceof MiniPosActivity) {
-							STBProfile object = (STBProfile) parent
+							BluetoothDevice object = (BluetoothDevice) parent
 									.getItemAtPosition(position);
 							((MiniPosActivity) getActivity())
 									.startActionMode(object);
@@ -117,16 +119,16 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 	}
 
 	@SuppressLint("InflateParams")
-	private void onDevicesSelected(final STBProfile object) {
+	private void onDevicesSelected(final BluetoothDevice object) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(object.title);
+		builder.setTitle(object.getName());
 		View view = LayoutInflater.from(getActivity()).inflate(
 				R.layout.item_dialog_profile, null);
 		{
 			TextView txtTitle = (TextView) view.findViewById(R.id.txtTitle);
 			TextView txtAddress = (TextView) view.findViewById(R.id.txtAddress);
-			txtTitle.setText(object.title);
-			txtAddress.setText(object.address);
+			txtTitle.setText(object.getName());
+			txtAddress.setText(object.getAddress());
 		}
 		builder.setView(view);
 		builder.setPositiveButton(R.string.button_connect,
@@ -154,7 +156,7 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 		builder.create().show();
 	}
 
-	private void startMiniPOS(STBProfile object) {
+	private void startMiniPOS(BluetoothDevice object) {
 		POSManager.instance().activeBluetoothDevice(object);
 		// Intent i = new Intent(getActivity(), PclService.class);
 		// i.putExtra("PACKAGE_NAME", getActivity().getPackageName());

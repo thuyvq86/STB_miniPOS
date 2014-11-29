@@ -56,7 +56,6 @@ public class POSTransaction extends Observable implements Observer {
 	public void update(Observable observable, Object data) {
 		if (observable instanceof STBApiManager) {
 			if (((ApiResponseData) data).requestId == requestId) {
-				System.out.println("successfull ");
 				STBApiManager.instance().deleteObserver(this);
 				response = (ApiResponseData) data;
 				isCommitting = false;

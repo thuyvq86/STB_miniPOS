@@ -1,6 +1,5 @@
 package com.stb.minipos.model;
 
-import java.lang.reflect.Method;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,6 +14,27 @@ import com.stb.minipos.model.dao.STBResponseProfiles;
 
 @DatabaseTable(tableName = "Profiles")
 public class STBProfile extends Observable implements Observer {
+	public STBProfile() {
+	}
+
+	public STBProfile(BluetoothDevice device) {
+		this.address = device.getAddress();
+		this.title = device.getName();
+	}
+
+	public String getName() {
+		if (!TextUtils.isEmpty(MerchantName))
+			return MerchantName;
+		return title;
+	}
+
+	public String getDesc() {
+		if (!TextUtils.isEmpty(MerchantName)) {
+			return title;
+		}
+		return null;
+	}
+
 	@DatabaseField(id = true)
 	public String address;
 	@DatabaseField
@@ -66,26 +86,17 @@ public class STBProfile extends Observable implements Observer {
 		return false;
 	}
 
-	public void unpairDevice() {
-		try {
-			BluetoothDevice device = btCompanion.getBluetoothDevice();
-			Method m = device.getClass()
-					.getMethod("removeBond", (Class[]) null);
-			m.invoke(device, (Object[]) null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public void update(Observable observable, Object data) {
 		if (observable == STBApiManager.instance()) {
 			ApiResponseData response = (ApiResponseData) data;
 			if (requestId == response.requestId) {
 				STBApiManager.instance().deleteObserver(this);
-				if (response.isSuccess && response.stbResponse.isSuccess())
+				if (response.isSuccess && response.stbResponse.isSuccess()) {
 					setData((STBResponseProfiles) response.stbResponse
 							.getData());
+					POSManager.instance().updateProfile(this);
+				}
 				setChanged();
 				notifyObservers(data);
 				isUpdating = false;

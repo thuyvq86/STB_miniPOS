@@ -5,6 +5,7 @@ import java.util.Observer;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
@@ -12,7 +13,6 @@ import android.view.MenuItem;
 
 import com.stb.minipos.R;
 import com.stb.minipos.model.POSManager;
-import com.stb.minipos.model.STBProfile;
 import com.stb.minipos.ui.fragment.BluetoothDevicesFragment;
 import com.stb.minipos.utils.Utils;
 
@@ -26,7 +26,7 @@ public class MiniPosActivity extends BaseActivity implements Observer {
 		}
 	}
 
-	public void startActionMode(final STBProfile profile) {
+	public void startActionMode(final BluetoothDevice device) {
 		startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
@@ -41,7 +41,7 @@ public class MiniPosActivity extends BaseActivity implements Observer {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-				mode.setTitle(profile.title);
+				mode.setTitle(device.getName());
 				mode.getMenuInflater().inflate(R.menu.edit_profile_activity,
 						menu);
 				return true;
@@ -51,7 +51,7 @@ public class MiniPosActivity extends BaseActivity implements Observer {
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				switch (item.getItemId()) {
 				case R.id.mnuReset:
-					POSManager.instance().unPairDevice(profile);
+					POSManager.instance().unPairDevice(device);
 					mode.finish();
 					updateHud();
 					return true;

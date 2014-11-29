@@ -1,5 +1,6 @@
 package com.stb.minipos.ui.helper;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ public class BluetoothDevicesAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public STBProfile getItem(int position) {
+	public BluetoothDevice getItem(int position) {
 		return POSManager.instance().getPairedDeviceAtPosition(position);
 	}
 
@@ -40,8 +41,7 @@ public class BluetoothDevicesAdapter extends BaseAdapter {
 		final ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = inflater.inflate(R.layout.item_device, parent,
-					false);
+			convertView = inflater.inflate(R.layout.item_device, parent, false);
 			holder.txtTitle = (TextView) convertView
 					.findViewById(R.id.txtTitle);
 			holder.txtAddress = (TextView) convertView
@@ -52,10 +52,12 @@ public class BluetoothDevicesAdapter extends BaseAdapter {
 		}
 
 		// update layout
-		final STBProfile item = getItem(position);
+		final STBProfile item = POSManager.instance().getProfile(
+				getItem(position));
+
 		{
-			holder.txtTitle.setText(item.title);
-			holder.txtAddress.setText(item.address);
+			holder.txtTitle.setText(item.getName());
+			holder.txtAddress.setText(item.getDesc());
 
 		}
 
