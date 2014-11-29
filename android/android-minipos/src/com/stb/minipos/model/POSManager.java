@@ -79,6 +79,7 @@ public class POSManager extends Observable {
 			unpairDevice(device);
 		}
 		DatabaseManager.instance().clearProfiles();
+		_profiles.clear();
 
 		updatePairedDevices();
 		if (getPairDevicesCount() > 0) {
