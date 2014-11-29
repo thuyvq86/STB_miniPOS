@@ -10,6 +10,10 @@
     <string name="slide_menu_feedback">Feedback</string>
     <string name="slide_menu_about">About us</string>
 
+    <!-- about -->
+	<string name="about_app">This is a test version of sacombank miniPOS</string>
+	<string name="about_version">Sacombank miniPOS v%s RC</string>
+
     <!-- wireless and bluetooth checking -->
     <string name="request_wireless_and_bluetooth">Please enable wireless and bluetooth to continue</string>
     <string name="button_opensettings">Open settings</string>
@@ -70,5 +74,6 @@
     <!-- menu -->
     <string name="menu_reset">Reset profiles</string>
     <string name="menu_open_settings">Bluetooth settings</string>
+    <string name="menu_about">About Sacombank miniPOS</string>
 
 </resources>

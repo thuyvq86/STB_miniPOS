@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,8 +21,8 @@ import com.stb.minipos.R;
 import com.stb.minipos.model.POSManager;
 import com.stb.minipos.model.POSManager.DataChanged;
 import com.stb.minipos.model.POSTransaction;
-import com.stb.minipos.model.STBProfile;
 import com.stb.minipos.model.STBApiManager.ApiResponseData;
+import com.stb.minipos.model.STBProfile;
 import com.stb.minipos.model.dao.PosMessageObject;
 import com.stb.minipos.utils.UIUtils;
 
@@ -165,6 +166,12 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		findViewById(R.id.btnDone).setOnClickListener(this);
 		findViewById(R.id.btnSign).setOnClickListener(this);
 		updateLayout(POSManager.instance().getCurrentTransaction());
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.receive_message_activity, menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override

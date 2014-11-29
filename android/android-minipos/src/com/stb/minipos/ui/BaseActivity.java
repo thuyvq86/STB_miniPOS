@@ -6,7 +6,9 @@ import java.util.Observer;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -127,6 +129,22 @@ public abstract class BaseActivity extends UIDrawerActivity implements
 			_dialog = null;
 		}
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.mnuAbout:
+			openAbout();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	public void openAbout() {
+		Intent intent = new Intent(this, AboutActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
