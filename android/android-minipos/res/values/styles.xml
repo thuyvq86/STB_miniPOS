@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- textview -->
+    <style name="textview">
+        <item name="android:textSize">@dimen/textsize</item>
+    </style>
+
+    <style name="textview_receipt">
+        <item name="android:textSize">@dimen/textsize_large</item>
+    </style>
+
+    <style name="textview_small" parent="@style/textview">
+        <item name="android:textSize">@dimen/textsize_small</item>
+    </style>
+
+    <style name="textview_large" parent="@style/textview">
+        <item name="android:textSize">@dimen/textsize_large</item>
+    </style>
+
+    <style name="textview_title_blue">
+        <item name="android:textColor">@color/color_blue</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/textsize</item>
+    </style>
+
+    <style name="textview_clickable">
+        <item name="android:textSize">@dimen/textsize</item>
+        <item name="android:textColor">@color/textcolor_clickable</item>
+    </style>
+    <!-- edit text -->
+    <style name="edittext"></style>
+
+    <!-- button -->
+    <style name="button_primary"></style>
+
+    <style name="button_secondary"></style>
+
+    <style name="dialog_button"></style>
+
+    <!-- drawer menu -->
+    <style name="drawer_item" parent="@style/textview_large">
+        <item name="android:textColor">#cc333333</item>
+        <item name="android:background">@drawable/drawer_item_background</item>
+        <item name="android:padding">@dimen/margin</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="drawer_separate_line">
+        <item name="android:background">#1f000000</item>
+    </style>
+
+</resources>

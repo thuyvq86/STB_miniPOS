@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sacombank miniPOS</string>
+    <string name="openDrawerContentDescRes">opened</string>
+    <string name="closeDrawerContentDescRes">closed</string>
+
+    <!-- slide menu -->
+    <string name="slide_menu_bluetooth_devices">Select devices</string>
+    <string name="slide_menu_feedback">Feedback</string>
+    <string name="slide_menu_about">About us</string>
+
+    <!-- wireless and bluetooth checking -->
+    <string name="request_wireless_and_bluetooth">Please enable wireless and bluetooth to continue</string>
+    <string name="button_opensettings">Open settings</string>
+    <string name="button_exit">Exit app</string>
+    <string name="button_ok">OK</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="clear">Clear</string>
+    <string name="save">Save</string>
+    <string name="button_reset">Reset</string>
+    <string name="button_update">Update</string>
+    <string name="button_connect">Connect</string>
+    <string name="button_submit">Submit</string>
+    <string name="button_clear">Clear</string>
+    <string name="transaction_receipt_form_isnt_fill">Please fill out the Transaction Receipt and email</string>
+    <string name="email_isnt_valid">Email is not valid. Please enter correct email.</string>
+
+    <!-- transaction -->
+    <string name="request_transaction">Please do transaction on the POS</string>
+    <string name="pos_connect_timeout_title">Connect error</string>
+    <string name="pos_connect_timeout_message">Could not connect to POS device. Please try again!</string>
+    <string name="pos_nopaired_devices_message">No paired devices</string>
+    <string name="pos_btn_pair_device">Pair</string>
+    <string name="pos_reset_title">Reset profiles</string>
+    <string name="pos_reset_message">Do you really want to reset POS profiles?</string>
+    <string name="transaction_receipt">Transaction receipt</string>
+    <string name="email_address">Email address</string>
+    <string name="transaction_signature_empty_message">Please input your signature!</string>
+    <string name="transaction_success">Success!</string>
+    <string name="transaction_error">Error!</string>
+
+    <!-- root devices checking -->
+    <string name="rooted_dialog_title">Unsupported devices</string>
+    <string name="rooted_dialog_message">Sorry! This application doesn\'t support rooted devices</string>
+
+    <!-- receipt -->
+    <string name="receipt_separate_symbol">:</string>
+    <string name="receipt_mid">MID:</string>
+    <string name="receipt_tid">TID:</string>
+    <string name="receipt_no">RECEIPT:</string>
+    <string name="receipt_appcode">APP. CODE:</string>
+    <string name="receipt_ref_no">REF No:</string>
+    <string name="receipt_time">DATE/TIME:</string>
+    <string name="receipt_batch">BATCH:</string>
+    <string name="receipt_expired">EXPIRED DATE: </string>
+    <string name="receipt_base">BASE: </string>
+    <string name="receipt_tip">TIP: </string>
+    <string name="receipt_total">TOTAL: </string>
+    <string name="receipt_sign">SIGN X </string>
+
+    <!-- hud -->
+    <string name="hud_connect_bluetooth">Connecting to POS device&#8230;</string>
+    <string name="hud_status_reset">Reseting&#8230;</string>
+
+    <!-- menu -->
+    <string name="menu_reset">Reset</string>
+    <string name="menu_open_settings">Bluetooth settings</string>
+
+</resources>
