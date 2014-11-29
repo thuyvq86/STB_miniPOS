@@ -4,10 +4,12 @@
     <!-- textview -->
     <style name="textview">
         <item name="android:textSize">@dimen/textsize</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="textview_receipt">
         <item name="android:textSize">@dimen/textsize_large</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="textview_small" parent="@style/textview">

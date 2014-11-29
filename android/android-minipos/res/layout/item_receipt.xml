@@ -34,7 +34,7 @@
             style="@style/textview_receipt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin_half"
             android:layout_weight="1" />
 
         <TextView
@@ -48,7 +48,7 @@
             style="@style/textview_receipt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin" />
+            android:layout_marginLeft="@dimen/margin_half" />
     </LinearLayout>
 
     <LinearLayout
@@ -84,7 +84,7 @@
             android:text="@string/receipt_batch" />
 
         <TextView
-            android:id="@+id/txtReceiptBatch"
+            android:id="@+id/txtReceiptBatchNo"
             style="@style/textview_receipt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
             android:text="@string/receipt_ref_no" />
 
         <TextView
-            android:id="@+id/txtRefNo"
+            android:id="@+id/txtReceiptRefNo"
             style="@style/textview_receipt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

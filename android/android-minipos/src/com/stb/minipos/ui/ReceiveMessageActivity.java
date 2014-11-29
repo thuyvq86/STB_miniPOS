@@ -41,6 +41,8 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 	private TextView txtCardName;
 
 	private TextView txtExpiredDate;
+	private TextView txtReceiptRefNo;
+	private TextView txtReceiptBatchNo;
 
 	private TextView txtTotal;
 	private View vgReprint;
@@ -128,6 +130,8 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		txtReceiptMid = (TextView) findViewById(R.id.txtReceiptMid);
 		txtReceiptTid = (TextView) findViewById(R.id.txtReceiptTid);
 		txtReceiptNo = (TextView) findViewById(R.id.txtReceiptNo);
+		txtReceiptRefNo = (TextView) findViewById(R.id.txtReceiptRefNo);
+		txtReceiptBatchNo = (TextView) findViewById(R.id.txtReceiptBatchNo);
 		txtAppCode = (TextView) findViewById(R.id.txtAppCode);
 		txtMessage = (TextView) findViewById(R.id.txtMessage);
 		vgReprint = findViewById(R.id.vgReprint);
@@ -300,18 +304,19 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			return;
 		}
 		PosMessageObject message = object.message;
+		STBProfile activeProfile = POSManager.instance().getActivedProfile();
 
 		txtMessage.setText(message.getMessage());
 
 		vgReprint.setVisibility(View.VISIBLE);
 		txtRequestTransaction.setVisibility(View.GONE);
-		txtMessage.setVisibility(View.VISIBLE);
+		txtMessage.setVisibility(View.GONE);
 
 		txtTransactionType.setText(message.getTransactionType());
 		txtTime.setText(message.getFormattedTime());
 		txtReceiptNo.setText(message.getReceiptNo());
-		txtReceiptMid.setText(message.getReceiptMid());
-		txtReceiptTid.setText(message.getReceiptTid());
+		txtReceiptMid.setText(activeProfile.MerchantID);
+		txtReceiptTid.setText(activeProfile.TerminalID);
 
 		txtAppCode.setText(message.getAppCode());
 		txtCardType.setText(message.getCardType());
@@ -319,6 +324,8 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		txtCardNumber.setText(message.getCardNumber());
 
 		txtExpiredDate.setText(message.getExpiredDate());
+		txtReceiptBatchNo.setText(message.getReceiptBatchNo());
+		txtReceiptRefNo.setText(message.getReceiptRefNo());
 		txtTotal.setText(String.valueOf(message.getTotal()));
 
 		if (message.needSignature()) {

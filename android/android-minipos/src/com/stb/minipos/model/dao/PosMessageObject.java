@@ -18,11 +18,10 @@ public class PosMessageObject implements Serializable {
 		CARD_TYPE(65), // card type
 		TOTAL(4), // card number
 		TERMINAL_ID(41), // card number
-		APP_CODE(38), // app code
+		APPROVE_CODE(38), // approve code
 		RECEIPT_NO(62), // card number
-		// TODO: correct field id
-		RECEIPT_MID(62), // card number
-		RECEIPT_TID(62), // card number
+		RECEIPT_REF_NO(37), // reference number
+		RECEIPT_BATCH_NO(60), // batch number
 		TIME(12), // card number
 		EXPIRED_DATE(14), // expired date
 		;
@@ -118,21 +117,21 @@ public class PosMessageObject implements Serializable {
 		return getValue(ValueType.RECEIPT_NO);
 	}
 
-	public String getReceiptMid() {
-		return getValue(ValueType.RECEIPT_MID);
+	public String getReceiptRefNo() {
+		return getValue(ValueType.RECEIPT_REF_NO);
 	}
 
-	public String getReceiptTid() {
-		return getValue(ValueType.RECEIPT_TID);
+	public String getReceiptBatchNo() {
+		return getValue(ValueType.RECEIPT_BATCH_NO);
 	}
 
 	public String getExpiredDate() {
 		String expireDay = getValue(ValueType.EXPIRED_DATE);
-		return expireDay.substring(0, 2) + "/" + expireDay.substring(2);
+		return expireDay.substring(2) + "/" + expireDay.substring(0, 2);
 	}
 
 	public String getAppCode() {
-		return getValue(ValueType.APP_CODE);
+		return getValue(ValueType.APPROVE_CODE);
 	}
 
 }
