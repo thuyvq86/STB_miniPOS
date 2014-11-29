@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -69,6 +70,7 @@ public class POSManager extends Observable {
 		return isReseting;
 	}
 
+	@SuppressLint("NewApi")
 	public void resetProfile() {
 		if (isReseting)
 			return;
@@ -76,10 +78,12 @@ public class POSManager extends Observable {
 		for (BluetoothDevice device : _bluetoothDevices) {
 			unpairDevice(device);
 		}
+		DatabaseManager.instance().clearProfiles();
+
 		updatePairedDevices();
 		if (getPairDevicesCount() > 0) {
 			isReseting = true;
-			new AsyncTask<Void, Integer, Boolean>() {
+			AsyncTask<Void, Integer, Boolean> task = new AsyncTask<Void, Integer, Boolean>() {
 
 				@Override
 				protected Boolean doInBackground(Void... params) {
@@ -98,18 +102,21 @@ public class POSManager extends Observable {
 
 				protected void onPostExecute(Boolean result) {
 					isReseting = false;
-					if (result) {
-						updatePairedDevices();
-					}
+					updatePairedDevices();
 					setChanged();
 					notifyObservers();
-				};
+				}
 
 				protected void onCancelled() {
 					super.onCancelled();
 					isReseting = false;
-				};
-			}.execute();
+				}
+			};
+			if (android.os.Build.VERSION.SDK_INT >= 11) {
+				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			} else {
+				task.execute();
+			}
 		} else {
 			isReseting = false;
 		}

@@ -8,6 +8,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.j256.ormlite.dao.LruObjectCache;
+import com.j256.ormlite.table.TableUtils;
 
 public class DatabaseManager {
 	private final LruObjectCache _cache;
@@ -35,6 +36,17 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public boolean clearProfiles() {
+		try {
+			TableUtils.clearTable(_dataHelper.getConnectionSource(),
+					STBProfile.class);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	/**
