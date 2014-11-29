@@ -35,7 +35,7 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    id<ApplicationThemeDelegate> currentTheme = [ApplicationThemeManager sharedTheme];
+    //id<ApplicationThemeDelegate> currentTheme = [ApplicationThemeManager sharedTheme];
     
     if ([self.layer respondsToSelector:@selector(setDrawsAsynchronously:)])
         [self.layer setDrawsAsynchronously:YES];

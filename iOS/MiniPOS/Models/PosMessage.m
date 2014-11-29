@@ -12,6 +12,32 @@
  *  List of value types
  *  Ex. F1^2|F2^4364450099631797|F4^000000001001|F12^20141008235225|F14^1804|F37^428116455333|F38^798910|F39^00|F41^60012086|F42^000000060108354|F49^704|F60^1|F62^7|F65^VISA|F66^ALL FOR YOU               |F67^M|F72^20138884|F79^SALE"
  */
+/*
+ F1: index cho loại giao dịch
+ F2: số thẻ chiều dài biến động
+ F4: tổng số tiền chiều dài 12 con số
+ F12: thời gian giao dịch 06 con số
+ F13: ngày tháng năm giao dịch (DD/MM/YYYY)
+ F14: ngày hết hạn của thẻ 04 con số
+ F37: số ref 12 con số
+ F38: số approve code 06 con số
+ F39: mã trả về 02 con số
+ F41: Terminal ID 08 con số
+ F42: Merchant ID 15 con số
+ F49: loại tiền tệ chiều dài 3 con số
+ F54: số tiền TIP 12 con số
+ F60: Batch number 06 con số
+ F62: mã số hóa đơn 06 con số
+ F65: tên loại thẻ chiều dài biến động
+ F66: card holder name chiều dài biến động
+ F67: kiểu input thẻ (C: chip, S: quẹt thẻ, M: Manual key, F: Fallback) 1 ký tự
+ F68: BASE AMOUNT 12 con số
+ F69: application name chiều dài biến động
+ F70: application ID chiều dài biến động
+ F71: TC chiều dài biến động
+ F72: serial number POS chiều dài biến động
+ F82: diễn giải mã trả về
+*/
 typedef enum{
     FUNCTION_INDEX     = 1, // function index
     
