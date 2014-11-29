@@ -1,10 +1,10 @@
-package com.stb.minipos.model;
+package com.stb.minipos.model.dao;
 
 import com.stb.minipos.utils.Utils;
 
 import android.graphics.Bitmap;
 
-public class STBBill {
+public class STBRequestBill {
 	public String MerchantID;
 	public String TerminalID;
 	public String SerialID;

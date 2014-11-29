@@ -20,7 +20,7 @@ public class PosMessageObject implements Serializable {
 		TERMINAL_ID(41), // card number
 		APP_CODE(38), // app code
 		RECEIPT_NO(62), // card number
-		//TODO: correct field id
+		// TODO: correct field id
 		RECEIPT_MID(62), // card number
 		RECEIPT_TID(62), // card number
 		TIME(12), // card number
@@ -44,7 +44,7 @@ public class PosMessageObject implements Serializable {
 	}
 
 	private final String message;
-	
+
 	public String getMessage() {
 		return message;
 	}
@@ -117,9 +117,11 @@ public class PosMessageObject implements Serializable {
 	public String getReceiptNo() {
 		return getValue(ValueType.RECEIPT_NO);
 	}
+
 	public String getReceiptMid() {
 		return getValue(ValueType.RECEIPT_MID);
 	}
+
 	public String getReceiptTid() {
 		return getValue(ValueType.RECEIPT_TID);
 	}

@@ -1,4 +1,4 @@
-package com.stb.minipos.model;
+package com.stb.minipos.model.dao;
 
 public class STBResponseProfiles {
 	public String MerchantID;

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.stb.minipos.POSApplication;
 import com.stb.minipos.R;
 import com.stb.minipos.model.POSManager;
-import com.stb.minipos.model.dao.ProfileDao;
+import com.stb.minipos.model.STBProfile;
 import com.stb.minipos.ui.DrawerMenuItem;
 import com.stb.minipos.ui.MiniPosActivity;
 import com.stb.minipos.ui.ReceiveMessageActivity;
@@ -62,7 +62,7 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				ProfileDao object = (ProfileDao) parent
+				STBProfile object = (STBProfile) parent
 						.getItemAtPosition(position);
 				onDevicesSelected(object);
 			}
@@ -74,7 +74,7 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 					public boolean onItemLongClick(AdapterView<?> parent,
 							View view, int position, long id) {
 						if (getActivity() instanceof MiniPosActivity) {
-							ProfileDao object = (ProfileDao) parent
+							STBProfile object = (STBProfile) parent
 									.getItemAtPosition(position);
 							((MiniPosActivity) getActivity())
 									.startActionMode(object);
@@ -117,7 +117,7 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 	}
 
 	@SuppressLint("InflateParams")
-	private void onDevicesSelected(final ProfileDao object) {
+	private void onDevicesSelected(final STBProfile object) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(object.title);
 		View view = LayoutInflater.from(getActivity()).inflate(
@@ -154,7 +154,7 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 		builder.create().show();
 	}
 
-	private void startMiniPOS(ProfileDao object) {
+	private void startMiniPOS(STBProfile object) {
 		POSManager.instance().activeBluetoothDevice(object);
 		// Intent i = new Intent(getActivity(), PclService.class);
 		// i.putExtra("PACKAGE_NAME", getActivity().getPackageName());

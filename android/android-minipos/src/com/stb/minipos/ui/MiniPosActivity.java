@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 import com.stb.minipos.R;
 import com.stb.minipos.model.POSManager;
-import com.stb.minipos.model.dao.ProfileDao;
+import com.stb.minipos.model.STBProfile;
 import com.stb.minipos.ui.fragment.BluetoothDevicesFragment;
 import com.stb.minipos.utils.Utils;
 
@@ -26,7 +26,7 @@ public class MiniPosActivity extends BaseActivity implements Observer {
 		}
 	}
 
-	public void startActionMode(final ProfileDao profile) {
+	public void startActionMode(final STBProfile profile) {
 		startSupportActionMode(new ActionMode.Callback() {
 
 			@Override

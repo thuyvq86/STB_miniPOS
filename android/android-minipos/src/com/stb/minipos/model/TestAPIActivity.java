@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.stb.minipos.R;
+import com.stb.minipos.model.dao.STBRequestBill;
+import com.stb.minipos.model.dao.STBResponse;
 
 public class TestAPIActivity extends Activity implements OnClickListener,
 		Observer {
@@ -28,10 +30,10 @@ public class TestAPIActivity extends Activity implements OnClickListener,
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnGetProfiles:
-			STBApiManager.instance().getProfile("01");
+			STBApiManager.instance().getProfile("20170481");
 			break;
 		case R.id.btnSaveBill:
-			STBBill data = new STBBill();
+			STBRequestBill data = new STBRequestBill();
 			data.MerchantID = "000000080100308";
 			data.TerminalID = "60002647";
 			data.SerialID = "01";

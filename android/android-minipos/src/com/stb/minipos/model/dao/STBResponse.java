@@ -1,4 +1,4 @@
-package com.stb.minipos.model;
+package com.stb.minipos.model.dao;
 
 import android.text.TextUtils;
 
@@ -21,7 +21,6 @@ public class STBResponse {
 		return TextUtils.equals("00", RespCode);
 	}
 	
-	public boolean is
 
 	public Object getData() {
 		if (STBRequest.BILL.functionName.equalsIgnoreCase(FunctionName)) {

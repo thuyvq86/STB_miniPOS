@@ -11,7 +11,6 @@ import android.os.AsyncTask;
 import com.ingenico.pclutilities.PclUtilities;
 import com.ingenico.pclutilities.PclUtilities.BluetoothCompanion;
 import com.stb.minipos.model.dao.PosMessageObject;
-import com.stb.minipos.model.dao.ProfileDao;
 
 public class POSManager extends Observable {
 	public enum DataChanged {
@@ -23,9 +22,9 @@ public class POSManager extends Observable {
 
 	private final Context context;
 	private final PclUtilities mPclUtil;
-	private final List<ProfileDao> _pairDevices = new ArrayList<ProfileDao>();
+	private final List<STBProfile> _pairDevices = new ArrayList<STBProfile>();
 
-	private ProfileDao activedDevice = null;
+	private STBProfile activedDevice = null;
 
 	private POSManager(Context context) {
 		this.context = context;
@@ -41,7 +40,7 @@ public class POSManager extends Observable {
 		}
 		if (btComps != null) {
 			for (BluetoothCompanion btComp : btComps) {
-				ProfileDao profile = new ProfileDao();
+				STBProfile profile = new STBProfile();
 				profile.address = btComp.getBluetoothDevice().getAddress();
 				profile.title = btComp.getBluetoothDevice().getName();
 				profile.btCompanion = btComp;
@@ -62,7 +61,7 @@ public class POSManager extends Observable {
 		if (isReseting)
 			return;
 
-		for (ProfileDao device : _pairDevices) {
+		for (STBProfile device : _pairDevices) {
 			device.unpairDevice();
 		}
 		updatePairedDevices();
@@ -104,12 +103,12 @@ public class POSManager extends Observable {
 		}
 	}
 
-	public void unPairDevice(ProfileDao profile) {
+	public void unPairDevice(STBProfile profile) {
 		if (isReseting)
 			return;
 		final int size = getPairDevicesCount();
 
-		for (ProfileDao device : _pairDevices) {
+		for (STBProfile device : _pairDevices) {
 			device.unpairDevice();
 		}
 		updatePairedDevices();
@@ -158,7 +157,7 @@ public class POSManager extends Observable {
 
 	}
 
-	public ProfileDao getActivedDevice() {
+	public STBProfile getActivedProfile() {
 		return activedDevice;
 	}
 
@@ -167,7 +166,7 @@ public class POSManager extends Observable {
 	 * 
 	 * @return all pair devices
 	 */
-	public List<ProfileDao> getPairedDevices() {
+	public List<STBProfile> getPairedDevices() {
 		return _pairDevices;
 	}
 
@@ -177,7 +176,7 @@ public class POSManager extends Observable {
 	 * @param position
 	 * @return
 	 */
-	public ProfileDao getPairedDeviceAtPosition(int position) {
+	public STBProfile getPairedDeviceAtPosition(int position) {
 		return _pairDevices.get(position);
 	}
 
@@ -193,11 +192,11 @@ public class POSManager extends Observable {
 	/**
 	 * add profile to database
 	 */
-	public void addProfile(ProfileDao profile) {
+	public void addProfile(STBProfile profile) {
 
 	}
 
-	public void activeBluetoothDevice(ProfileDao object) {
+	public void activeBluetoothDevice(STBProfile object) {
 		this.activedDevice = object;
 		mPclUtil.ActivateCompanion(this.activedDevice.btCompanion
 				.getBluetoothDevice().getAddress());

@@ -11,6 +11,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import com.stb.minipos.R;
 import com.stb.minipos.model.POSManager;
 import com.stb.minipos.model.POSManager.DataChanged;
 import com.stb.minipos.model.POSTransaction;
+import com.stb.minipos.model.STBProfile;
+import com.stb.minipos.model.STBApiManager.ApiResponseData;
 import com.stb.minipos.model.dao.PosMessageObject;
 import com.stb.minipos.utils.UIUtils;
 
@@ -168,6 +171,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 						}
 						if (isCompanionConnected() && isProgressDialogShowing()) {
 							dismissProgressDialog();
+							updateProfile(false);
 						} else if (!isCompanionConnected()
 								&& !isProgressDialogShowing()) {
 							showProgressDialog();
@@ -179,6 +183,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 
 			}
 		}, 0, 1000);
+
 	}
 
 	@Override
@@ -203,8 +208,6 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 				PosMessageObject object = new PosMessageObject(new String(data));
 				POSManager.instance().addTransactionToQueue(object);
 			}
-			if (SN <= 0)
-				getTermInfo();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -219,7 +222,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		setTitle(POSManager.instance().getActivedDevice().title);
+		setTitle(POSManager.instance().getActivedProfile().title);
 		POSManager.instance().addObserver(this);
 		if (getIntent() != null
 				&& getIntent().getAction() == Intent.ACTION_MAIN) {
@@ -257,8 +260,8 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			POSTransaction transaction = POSManager.instance()
 					.getCurrentTransaction();
 			transaction.deleteObserver(this);
-			if (_committingDialog != null && _committingDialog.isShowing()) {
-				_committingDialog.dismiss();
+			if (_requestDialog != null && _requestDialog.isShowing()) {
+				_requestDialog.dismiss();
 			}
 			if (transaction.isCommitted()) {
 				UIUtils.showSuccessMessage(this, R.string.transaction_success);
@@ -270,6 +273,15 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			} else {
 				UIUtils.showErrorMessage(this,
 						"ERROR: " + transaction.getResponse().RespCode);
+			}
+		} else if (observable == POSManager.instance().getActivedProfile()) {
+			ApiResponseData response = (ApiResponseData) data;
+			if (_requestDialog != null && _requestDialog.isShowing()) {
+				_requestDialog.dismiss();
+			}
+			if (!response.isSuccess && !response.stbResponse.isSuccess()) {
+				UIUtils.showErrorMessage(this,
+						"Cannot getprofile from server!!!");
 			}
 		}
 	}
@@ -318,7 +330,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		}
 	}
 
-	private ProgressDialog _committingDialog;
+	private ProgressDialog _requestDialog;
 
 	private void commitTransaction() {
 		POSTransaction transaction = POSManager.instance()
@@ -329,17 +341,34 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			return;
 		}
 		if (!transaction.isCommitted()) {
-			if (PN > 0 || getTermInfo()) {
+			if (SN > 0 || getTermInfo()) {
 				transaction.addObserver(this);
 				transaction.commit();
-				_committingDialog = ProgressDialog.show(this, null,
+				_requestDialog = ProgressDialog.show(this, null,
 						getString(R.string.save));
 			} else {
 				UIUtils.showErrorMessage(this,
 						R.string.pos_connect_timeout_message);
 			}
 		}
+	}
 
+	private void updateProfile(boolean isForce) {
+		STBProfile profile = POSManager.instance().getActivedProfile();
+
+		if (SN <= 0 && !getTermInfo()) {
+			UIUtils.showErrorMessage(this, R.string.pos_connect_timeout_message);
+			return;
+		}
+		String serialId = String.format("%08x", SN);
+		if (isForce || !TextUtils.equals(serialId, profile.SerialID)) {
+			if (!profile.isValid())
+				_requestDialog = ProgressDialog.show(this, null,
+						"Updating profile...");
+			profile.SerialID = String.format("%08x", SN);
+			profile.addObserver(this);
+			profile.updateProfile();
+		}
 	}
 
 	@Override

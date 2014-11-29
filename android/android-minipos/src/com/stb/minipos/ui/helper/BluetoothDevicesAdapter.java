@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.stb.minipos.R;
 import com.stb.minipos.model.POSManager;
-import com.stb.minipos.model.dao.ProfileDao;
+import com.stb.minipos.model.STBProfile;
 
 public class BluetoothDevicesAdapter extends BaseAdapter {
 	private final Context context;
@@ -26,7 +26,7 @@ public class BluetoothDevicesAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public ProfileDao getItem(int position) {
+	public STBProfile getItem(int position) {
 		return POSManager.instance().getPairedDeviceAtPosition(position);
 	}
 
@@ -52,7 +52,7 @@ public class BluetoothDevicesAdapter extends BaseAdapter {
 		}
 
 		// update layout
-		final ProfileDao item = getItem(position);
+		final STBProfile item = getItem(position);
 		{
 			holder.txtTitle.setText(item.title);
 			holder.txtAddress.setText(item.address);

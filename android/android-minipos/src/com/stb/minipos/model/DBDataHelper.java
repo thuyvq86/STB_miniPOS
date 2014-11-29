@@ -10,7 +10,6 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.LruObjectCache;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.stb.minipos.model.dao.ProfileDao;
 import com.stb.minipos.utils.JMDBUtils;
 
 public class DBDataHelper extends OrmLiteSqliteOpenHelper {
@@ -23,7 +22,7 @@ public class DBDataHelper extends OrmLiteSqliteOpenHelper {
 	private final Context context;
 
 	// dao
-	private Dao<ProfileDao, String> _profileDao;
+	private Dao<STBProfile, String> _profileDao;
 
 	public DBDataHelper(Context context, LruObjectCache cache) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -61,7 +60,7 @@ public class DBDataHelper extends OrmLiteSqliteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase arg0, ConnectionSource arg1) {
 		try {
-			TableUtils.createTable(getConnectionSource(), ProfileDao.class);
+			TableUtils.createTable(getConnectionSource(), STBProfile.class);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -74,10 +73,10 @@ public class DBDataHelper extends OrmLiteSqliteOpenHelper {
 
 	}
 
-	public Dao<ProfileDao, String> getProfileDao() {
+	public Dao<STBProfile, String> getProfileDao() {
 		if (_profileDao == null) {
 			try {
-				_profileDao = getDao(ProfileDao.class);
+				_profileDao = getDao(STBProfile.class);
 				if (_cache != null)
 					_profileDao.setObjectCache(_cache);
 			} catch (SQLException e) {

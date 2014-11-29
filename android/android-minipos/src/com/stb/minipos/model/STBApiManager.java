@@ -18,6 +18,8 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import com.stb.minipos.Config;
 import com.stb.minipos.Constant.STBRequest;
 import com.stb.minipos.Constant.STBServer;
+import com.stb.minipos.model.dao.STBRequestBill;
+import com.stb.minipos.model.dao.STBResponse;
 
 public class STBApiManager extends Observable implements Config {
 	private final Context context;
@@ -40,20 +42,18 @@ public class STBApiManager extends Observable implements Config {
 		public boolean isSuccess;
 	}
 
-	public void getProfile(String serialID) {
+	public int getProfile(String serialID) {
 		JSONObject jsonData = new JSONObject();
 		try {
 			jsonData.put("SerialID", serialID);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		System.out.println("GET PROFILES");
-		executeRequest(_id++, STBServer.PRIMARY, STBRequest.PROFILE,
+		return executeRequest(_id++, STBServer.PRIMARY, STBRequest.PROFILE,
 				jsonData.toString());
 	}
 
-	public int saveBill(STBBill data) {
-		System.out.println("SAVE BILL");
+	public int saveBill(STBRequestBill data) {
 		return executeRequest(_id++, STBServer.PRIMARY, STBRequest.BILL,
 				new Gson().toJson(data));
 	}
@@ -79,7 +79,7 @@ public class STBApiManager extends Observable implements Config {
 		// init parameters
 		StringEntity httpEntity = null;
 		try {
-			System.out.println("jsonData " + jsonData);
+
 			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("Data", jsonData);
 			jsonObj.put("MerchantID", "MiniPOS");
@@ -87,6 +87,7 @@ public class STBApiManager extends Observable implements Config {
 			jsonObj.put("RefNumber", "");
 			jsonObj.put("Signature", "");
 			jsonObj.put("Token", "");
+			System.out.println("jsonData " + jsonObj);
 			httpEntity = new StringEntity(jsonObj.toString(), "UTF-8");
 			httpEntity.setContentEncoding("UTF-8");
 			httpEntity.setContentType(API_CONTENT_TYPE);
@@ -107,26 +108,22 @@ public class STBApiManager extends Observable implements Config {
 						responseData.stbResponse = object;
 						setChanged();
 						notifyObservers(responseData);
-						System.out.println("Success " + response);
 					}
-					
+
 					@Override
 					public void onFailure(int arg0, Header[] arg1, String arg2,
 							Throwable arg3) {
 						if (server == STBServer.PRIMARY) {
-							executeRequest(requestId, STBServer.SECONDARY, request,
-									jsonData);
+							executeRequest(requestId, STBServer.SECONDARY,
+									request, jsonData);
 						} else {
 							responseData.isSuccess = false;
 							setChanged();
 							notifyObservers(responseData);
 						}
-
-						System.out.println("error " + arg2);
-
 					}
 				});
-		
+
 		return requestId;
 	}
 

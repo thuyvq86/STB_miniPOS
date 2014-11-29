@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 
 import com.stb.minipos.model.STBApiManager.ApiResponseData;
 import com.stb.minipos.model.dao.PosMessageObject;
+import com.stb.minipos.model.dao.STBRequestBill;
+import com.stb.minipos.model.dao.STBResponse;
 
 public class POSTransaction extends Observable implements Observer {
 	public POSTransaction(PosMessageObject object) {
@@ -18,20 +20,21 @@ public class POSTransaction extends Observable implements Observer {
 
 	public void commit() {
 		STBApiManager.instance().addObserver(this);
+		STBProfile profile = POSManager.instance().getActivedProfile();
 		isCommitting = true;
-		STBBill data = new STBBill();
+		STBRequestBill data = new STBRequestBill();
 		data.setCustomerSignature(signature);
 		data.CustomerEmail = email;
-		data.SerialID = "01";
-		data.MerchantID = "000000080100308";
-		data.TerminalID = "60002647";
+		data.SerialID = profile.SerialID;
+		data.MerchantID = profile.MerchantID;
+		data.TerminalID = profile.TerminalID;
 		data.TransactionData = this.message.getMessage();
 		requestId = STBApiManager.instance().saveBill(data);
 	}
 
 	public boolean isCommitted() {
 		return response != null && response.isSuccess
-				&& "00".equalsIgnoreCase(response.stbResponse.RespCode);
+				&& response.stbResponse.isSuccess();
 	}
 
 	public boolean isCommitting() {
@@ -48,11 +51,6 @@ public class POSTransaction extends Observable implements Observer {
 	public Bitmap signature;
 	public String email;
 	private ApiResponseData response;
-	private int terminalId;
-
-	public void setTerminalId(int terminalId) {
-		this.terminalId = terminalId;
-	}
 
 	@Override
 	public void update(Observable observable, Object data) {

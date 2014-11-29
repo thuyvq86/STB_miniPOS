@@ -8,7 +8,6 @@ import android.app.Application;
 import android.content.Context;
 
 import com.j256.ormlite.dao.LruObjectCache;
-import com.stb.minipos.model.dao.ProfileDao;
 
 public class DatabaseManager {
 	private final LruObjectCache _cache;
@@ -19,12 +18,12 @@ public class DatabaseManager {
 		_dataHelper = new DBDataHelper(context, _cache);
 	}
 
-	public List<ProfileDao> getProfiles() {
+	public List<STBProfile> getProfiles() {
 		try {
 			return _dataHelper.getProfileDao().queryForAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new ArrayList<ProfileDao>();
+			return new ArrayList<STBProfile>();
 		}
 	}
 
