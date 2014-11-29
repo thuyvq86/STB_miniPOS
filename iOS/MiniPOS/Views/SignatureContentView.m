@@ -35,7 +35,7 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    id<ApplicationThemeDelegate> currentTheme = [ApplicationThemeManager sharedTheme];
+    //id<ApplicationThemeDelegate> currentTheme = [ApplicationThemeManager sharedTheme];
     
     if ([self.layer respondsToSelector:@selector(setDrawsAsynchronously:)])
         [self.layer setDrawsAsynchronously:YES];
@@ -48,7 +48,7 @@
     NSInteger offset = kTopPadding;
     
     //text color
-    [[currentTheme mainColor] set];
+    [[UIColor whiteColor] set];
     
     [@"SIGN X ------------------" drawInRect:CGRectMake(kLeftPadding, offset, width, kTitleHeight) withFont:textFont lineBreakMode:NSLineBreakByTruncatingTail];
     offset += kTitleHeight;

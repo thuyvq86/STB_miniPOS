@@ -25,6 +25,9 @@ static CGFloat const kTableCellHeight     = 44.0f;
 static CGFloat const kButtonHeight        = 30.0f;
 static CGFloat const kButtonWidth         = 100.0f;
 
+#define PRIMARY_BACKGROUND_COLOR RGBCOLOR(12, 101, 162, 1.0f)
+
+
 /**
  * Enums
  */

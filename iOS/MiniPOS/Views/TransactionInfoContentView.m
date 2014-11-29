@@ -53,7 +53,7 @@
     NSArray *properties = _posMessage.displayableProperties;
     
     //text color
-    [[currentTheme mainColor] set];
+    [[UIColor whiteColor] set];
     
     //Transaction Type
     [transactionType drawInRect:CGRectMake(kLeftPadding, offset, width, kTitleHeight) withFont:boldFont lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];

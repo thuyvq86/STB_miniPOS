@@ -27,6 +27,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = PRIMARY_BACKGROUND_COLOR;
 }
 
 - (void)didReceiveMemoryWarning

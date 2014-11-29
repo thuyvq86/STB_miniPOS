@@ -180,6 +180,7 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
                                      style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(buttonBackTouch:)];
+    [customBackButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor redColor],  UITextAttributeTextColor,nil] forState:UIControlStateNormal];
     _navItem.leftBarButtonItem = customBackButton;
     
     UIBarButtonItem *customDoneButton =
@@ -189,8 +190,8 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
                                     action:@selector(buttonSendTouch:)];
     _navItem.rightBarButtonItem = customDoneButton;
     
-    UIColor *barColor   = [UIColor colorWithRed:161.0/255.0 green:164.0/255.0 blue:166.0/255.0 alpha:1.0];
-    UIColor *titleColor = [UIColor colorWithRed:55.0/255.0 green:70.0/255.0 blue:77.0/255.0 alpha:1.0];
+    UIColor *barColor   = PRIMARY_BACKGROUND_COLOR;//[UIColor colorWithRed:161.0/255.0 green:164.0/255.0 blue:166.0/255.0 alpha:1.0];
+    UIColor *titleColor = [UIColor whiteColor];//[UIColor colorWithRed:55.0/255.0 green:70.0/255.0 blue:77.0/255.0 alpha:1.0];
     
     if([_navigationBar respondsToSelector:@selector(setBarTintColor:)])
         [_navigationBar setBarTintColor:barColor];
@@ -324,6 +325,7 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.font = [UIFont systemFontOfSize:12.0f];
+        cell.textLabel.textColor = [UIColor whiteColor];
         
         BOOL available = [self.iSMPControl getISMPState];
         cell.textLabel.text = available ? @"Waiting for the transaction..." : @"";

@@ -103,7 +103,7 @@
     _lblTitle.textColor              = titleColor;
     _topbarImageView.backgroundColor = barColor;
     
-    [self setupPlainTableView:_tableView showScrollIndicator:NO hasBorder:NO hasSeparator:YES];
+    [self setupPlainTableView:_tableView showScrollIndicator:NO hasBorder:NO hasSeparator:NO];
 }
 
 #pragma mark - Load content
@@ -185,6 +185,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.font = [UIFont systemFontOfSize:12.0f];
+    cell.textLabel.textColor = [UIColor whiteColor];
     
     if (_connectedAccessories && [_connectedAccessories count] > 0){
         ICMPProfile *profile = [_connectedAccessories objectAtIndex:indexPath.row];
@@ -204,6 +205,11 @@
 }
 
 #pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundView.backgroundColor = [UIColor clearColor];
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_connectedAccessories && [_connectedAccessories count] > 0){
