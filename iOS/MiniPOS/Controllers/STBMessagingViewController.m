@@ -148,6 +148,8 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     NSString *request = [self.posMessageQueue dequeue];
     if (request)
         self.posMessage = [[PosMessage alloc] initWithMessage:request];
+    self.posMessage.merchantId = self.profile.merchantId;
+    
     self.displayableArray = [self displayableArrayWithPosMessage:_posMessage];
     
     //update table view
@@ -180,7 +182,7 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
                                      style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(buttonBackTouch:)];
-    [customBackButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor redColor],  UITextAttributeTextColor,nil] forState:UIControlStateNormal];
+    [customBackButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
     _navItem.leftBarButtonItem = customBackButton;
     
     UIBarButtonItem *customDoneButton =
@@ -188,18 +190,16 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
                                      style:UIBarButtonItemStyleDone
                                     target:self
                                     action:@selector(buttonSendTouch:)];
+    [customDoneButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
     _navItem.rightBarButtonItem = customDoneButton;
     
-    UIColor *barColor   = PRIMARY_BACKGROUND_COLOR;//[UIColor colorWithRed:161.0/255.0 green:164.0/255.0 blue:166.0/255.0 alpha:1.0];
-    UIColor *titleColor = [UIColor whiteColor];//[UIColor colorWithRed:55.0/255.0 green:70.0/255.0 blue:77.0/255.0 alpha:1.0];
-    
     if([_navigationBar respondsToSelector:@selector(setBarTintColor:)])
-        [_navigationBar setBarTintColor:barColor];
+        [_navigationBar setBarTintColor:PRIMARY_BACKGROUND_COLOR];
     else
-        [_navigationBar setTintColor:barColor];
+        [_navigationBar setTintColor:PRIMARY_BACKGROUND_COLOR];
     
     NSDictionary *navBarTitleDict;
-    navBarTitleDict = @{NSForegroundColorAttributeName:titleColor,
+    navBarTitleDict = @{NSForegroundColorAttributeName:[UIColor whiteColor],
                         NSFontAttributeName:[UIFont systemFontOfSize:21.0f]
                         };
     [_navigationBar setTitleTextAttributes:navBarTitleDict];

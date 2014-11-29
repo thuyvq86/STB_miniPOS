@@ -20,7 +20,6 @@
 		D8573E621A272606007C4EBC /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84D292B19FEAFB200288FE0 /* CrashReporter.framework */; };
 		D8573E631A272606007C4EBC /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49819EFFCBB008BB5D5 /* iSMP.framework */; };
 		D8C5C83719FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */; };
-		D8C5C83C19FFEF460048E4F0 /* CreditCard-Validator.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C5C83B19FFEF460048E4F0 /* CreditCard-Validator.m */; };
 		D8EDD3221A24F309008E60CB /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD2FE1A24F309008E60CB /* AFHTTPRequestOperation.m */; };
 		D8EDD3231A24F309008E60CB /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD3001A24F309008E60CB /* AFHTTPRequestOperationManager.m */; };
 		D8EDD3241A24F309008E60CB /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD3021A24F309008E60CB /* AFHTTPSessionManager.m */; };
@@ -179,8 +178,6 @@
 		D84D292B19FEAFB200288FE0 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		D8C5C83519FFDB750048E4F0 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
 		D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
-		D8C5C83A19FFEF460048E4F0 /* CreditCard-Validator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CreditCard-Validator.h"; sourceTree = "<group>"; };
-		D8C5C83B19FFEF460048E4F0 /* CreditCard-Validator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CreditCard-Validator.m"; sourceTree = "<group>"; };
 		D8EDD2FD1A24F309008E60CB /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		D8EDD2FE1A24F309008E60CB /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		D8EDD2FF1A24F309008E60CB /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -505,15 +502,6 @@
 			name = Messaging;
 			sourceTree = "<group>";
 		};
-		D8C5C83919FFEF460048E4F0 /* CreditCard-Validator */ = {
-			isa = PBXGroup;
-			children = (
-				D8C5C83A19FFEF460048E4F0 /* CreditCard-Validator.h */,
-				D8C5C83B19FFEF460048E4F0 /* CreditCard-Validator.m */,
-			);
-			path = "CreditCard-Validator";
-			sourceTree = "<group>";
-		};
 		D8EDD2FC1A24F309008E60CB /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,7 +674,6 @@
 		D8FEB44019EFF61F008BB5D5 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				D8C5C83919FFEF460048E4F0 /* CreditCard-Validator */,
 				D84D290C19FEACD600288FE0 /* Models */,
 				D8FEB4CA19F01239008BB5D5 /* Views */,
 				D8FEB48219EFFA7C008BB5D5 /* Utils */,
@@ -1284,7 +1271,6 @@
 				D8EDD3221A24F309008E60CB /* AFHTTPRequestOperation.m in Sources */,
 				D8FEB41419EFF331008BB5D5 /* main.m in Sources */,
 				D8EDD3231A24F309008E60CB /* AFHTTPRequestOperationManager.m in Sources */,
-				D8C5C83C19FFEF460048E4F0 /* CreditCard-Validator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1429,6 +1415,7 @@
 				GCC_PREFIX_HEADER = "MiniPOS/MiniPOS-Prefix.pch";
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "MiniPOS/MiniPOS-Info.plist";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lz",
@@ -1437,6 +1424,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "24160ac9-2ad9-418e-9fad-a1b96d1ed1c7";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1455,6 +1443,7 @@
 				GCC_PREFIX_HEADER = "MiniPOS/MiniPOS-Prefix.pch";
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "MiniPOS/MiniPOS-Info.plist";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lz",
@@ -1463,6 +1452,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "24160ac9-2ad9-418e-9fad-a1b96d1ed1c7";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 				WRAPPER_EXTENSION = app;
 			};

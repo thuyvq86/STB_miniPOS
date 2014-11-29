@@ -49,36 +49,41 @@ typedef enum{
 @property (nonatomic, strong) NSString *transactionStatus;
 @property (nonatomic, strong) NSString *transactionType;
 
+@property (nonatomic, strong) NSString *receiptNo;
+@property (nonatomic, strong) NSString *batchNumber;
+
 @property (nonatomic, strong) NSString *cardType;
 @property (nonatomic, strong) NSString *cardName;
 @property (nonatomic, strong) NSString *cardNumber;
-@property (nonatomic, strong) NSString *expiredDate; // format: MM/YY
+@property (nonatomic, strong) NSString *inputCardType;
+@property (nonatomic, strong) NSString *cardExpiredDate; // format: MM/YY
 
-@property (nonatomic) CGFloat total;
+@property (nonatomic) CGFloat moneyTotal;
+@property (nonatomic, strong) NSString *moneyUnit;
+@property (nonatomic) CGFloat moneyBaseAmount;
+@property (nonatomic) CGFloat moneyTip;
 
 @property (nonatomic, strong) NSDate *dateTime;
 
 @property (nonatomic, strong) NSString *terminalId;
-@property (nonatomic, strong) NSString *receiptNo;
 @property (nonatomic, strong) NSString *appCode;
 
 @property (nonatomic, strong) UIImage *signature;
 @property (nonatomic, strong) NSString *email;
+
+@property (nonatomic, strong) NSString *merchantId;
+
 @property (nonatomic, strong) id presentedProperties;
 
 - (id)initWithMessage:(NSString *)aMessage;
 
 - (FunctionType)function;
-
 - (BOOL)isSuccess;
 - (BOOL)shouldRequireSignature;
 
-- (NSString *)formattedCardNumber;
-- (NSString *)formattedDateTime;
-- (NSString *)formattedTotal;
+#pragma mark - Helpers
 
 - (NSArray *)displayableProperties;
-
 - (NSString *)base64EncodedSignature;
 
 @end
