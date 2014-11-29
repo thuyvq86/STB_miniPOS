@@ -32,7 +32,7 @@
     <string name="pos_connect_timeout_title">Connect error</string>
     <string name="pos_connect_timeout_message">Could not connect to POS device. Please try again!</string>
     <string name="pos_nopaired_devices_message">No paired devices</string>
-    <string name="pos_btn_pair_device">Pair</string>
+    <string name="pos_btn_pair_device">Pair devices</string>
     <string name="pos_reset_title">Reset profiles</string>
     <string name="pos_reset_message">Do you really want to reset POS profiles?</string>
     <string name="transaction_receipt">Transaction receipt</string>
@@ -68,7 +68,7 @@
     <string name="hud_status_reset">Reseting&#8230;</string>
 
     <!-- menu -->
-    <string name="menu_reset">Reset</string>
+    <string name="menu_reset">Reset profiles</string>
     <string name="menu_open_settings">Bluetooth settings</string>
 
 </resources>

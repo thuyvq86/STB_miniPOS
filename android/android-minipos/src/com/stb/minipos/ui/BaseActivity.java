@@ -28,7 +28,7 @@ public abstract class BaseActivity extends UIDrawerActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
+		// getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setBackgroundDrawable(
 				getResources().getDrawable(R.drawable.ic_ab_background));
 	}

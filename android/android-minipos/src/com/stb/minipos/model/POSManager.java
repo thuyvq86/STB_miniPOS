@@ -137,6 +137,7 @@ public class POSManager extends Observable {
 				protected Boolean doInBackground(Void... params) {
 					final long time = System.currentTimeMillis();
 					try {
+						Thread.sleep(200);
 						while (System.currentTimeMillis() - time < 10 * 1000
 								&& mPclUtil.GetPairedCompanions().size() == size) {
 							Thread.sleep(200);

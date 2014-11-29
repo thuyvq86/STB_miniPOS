@@ -6,7 +6,7 @@
         android:id="@+id/mnuReset"
         android:icon="@drawable/ic_action_action_delete"
         android:title="@string/menu_reset"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/mnuOpenSettings"
         android:icon="@drawable/ic_action_action_settings"
