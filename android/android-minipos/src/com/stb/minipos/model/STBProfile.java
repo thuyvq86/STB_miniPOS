@@ -51,7 +51,7 @@ public class STBProfile extends Observable implements Observer {
 	@DatabaseField
 	public String PhoneSerialID;
 
-	public boolean isValid() {
+	public boolean isFullyFetched() {
 		return !TextUtils.isEmpty(TerminalID) && !TextUtils.isEmpty(MerchantID)
 				&& !TextUtils.isEmpty(SerialID);
 	}

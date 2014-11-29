@@ -57,7 +57,7 @@ public abstract class BasePOSActivity extends BaseActivity {
 		}
 	};
 
-	int SN, PN;
+	int SN = 0, PN = 0;
 
 	public class _SYSTEMTIME {
 		// WORD = UInt16

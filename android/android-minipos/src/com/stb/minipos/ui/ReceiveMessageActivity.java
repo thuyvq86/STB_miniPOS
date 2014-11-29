@@ -79,31 +79,34 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		if (System.currentTimeMillis() - dialogShowingTime > POS_CONNECT_TIMEOUT) {
 			cancelTimer();
 			dismissProgressDialog();
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.pos_connect_timeout_title);
-			builder.setMessage(R.string.pos_connect_timeout_message);
-			builder.setPositiveButton(R.string.button_ok,
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							finish();
-						}
-					});
-			builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					finish();
-				}
-			});
-			builder.create().show();
+			cannotConnectToPOSDevice();
 		}
 
 	}
 
+	private void cannotConnectToPOSDevice() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.pos_connect_timeout_title);
+		builder.setMessage(R.string.pos_connect_timeout_message);
+		builder.setPositiveButton(R.string.button_ok,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+					}
+				});
+		builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				finish();
+			}
+		});
+		builder.create().show();
+	}
+
 	public void dismissProgressDialog() {
 		try {
-			if (dialog != null)
-				dialog.dismiss();
+			UIUtils.safetyDismissDialog(dialog);
 			dialogShowingTime = 0;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -171,7 +174,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 						}
 						if (isCompanionConnected() && isProgressDialogShowing()) {
 							dismissProgressDialog();
-							updateProfile(false);
+							updateProfile();
 						} else if (!isCompanionConnected()
 								&& !isProgressDialogShowing()) {
 							showProgressDialog();
@@ -260,9 +263,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			POSTransaction transaction = POSManager.instance()
 					.getCurrentTransaction();
 			transaction.deleteObserver(this);
-			if (_requestDialog != null && _requestDialog.isShowing()) {
-				_requestDialog.dismiss();
-			}
+			UIUtils.safetyDismissDialog(_requestDialog);
 			if (transaction.isCommitted()) {
 				UIUtils.showSuccessMessage(this, R.string.transaction_success);
 				if (isFree()) {
@@ -276,9 +277,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			}
 		} else if (observable == POSManager.instance().getActivedProfile()) {
 			ApiResponseData response = (ApiResponseData) data;
-			if (_requestDialog != null && _requestDialog.isShowing()) {
-				_requestDialog.dismiss();
-			}
+			UIUtils.safetyDismissDialog(_requestDialog);
 			if (!response.isSuccess && !response.stbResponse.isSuccess()) {
 				UIUtils.showErrorMessage(this,
 						"Cannot getprofile from server!!!");
@@ -347,29 +346,27 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 				_requestDialog = ProgressDialog.show(this, null,
 						getString(R.string.save));
 			} else {
-				UIUtils.showErrorMessage(this,
-						R.string.pos_connect_timeout_message);
+				cannotConnectToPOSDevice();
 			}
 		}
 	}
 
-	private void updateProfile(boolean isForce) {
+	private void updateProfile() {
 		STBProfile profile = POSManager.instance().getActivedProfile();
-
-		if (SN <= 0 && !getTermInfo()) {
-			UIUtils.showErrorMessage(this, R.string.pos_connect_timeout_message);
+		if (SN == 0 && !getTermInfo()) {
+			cannotConnectToPOSDevice();
 			return;
 		}
 		String serialId = String.format("%08x", SN);
-		if (isForce || !TextUtils.equals(serialId, profile.SerialID)
-				|| !profile.isValid()) {
-			if (!profile.isValid())
-				_requestDialog = ProgressDialog.show(this, null,
-						"Updating profile...");
-			profile.SerialID = String.format("%08x", SN);
-			profile.addObserver(this);
-			profile.updateProfile();
-		}
+		if (TextUtils.isEmpty(profile.SerialID)
+				|| !TextUtils.equals(serialId, profile.SerialID.trim())
+				|| !profile.isFullyFetched())
+			_requestDialog = ProgressDialog.show(this, null,
+					"Updating profile...");
+
+		profile.SerialID = serialId;
+		profile.addObserver(this);
+		profile.updateProfile();
 	}
 
 	@Override

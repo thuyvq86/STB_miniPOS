@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import com.stb.minipos.R;
 import com.stb.minipos.model.POSManager;
 import com.stb.minipos.ui.fragment.BluetoothDevicesFragment;
+import com.stb.minipos.utils.UIUtils;
 import com.stb.minipos.utils.Utils;
 
 public class MiniPosActivity extends BaseActivity implements Observer {
@@ -96,8 +97,8 @@ public class MiniPosActivity extends BaseActivity implements Observer {
 				_progressDialog = ProgressDialog.show(this, "",
 						getString(R.string.hud_status_reset));
 			}
-		} else if (_progressDialog != null && _progressDialog.isShowing()) {
-			_progressDialog.dismiss();
+		} else if (_progressDialog != null) {
+			UIUtils.safetyDismissDialog(_progressDialog);
 			_progressDialog = null;
 		}
 	}

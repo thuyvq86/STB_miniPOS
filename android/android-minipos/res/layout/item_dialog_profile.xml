@@ -22,4 +22,12 @@
         android:layout_marginLeft="@dimen/margin"
         android:layout_marginRight="@dimen/margin" />
 
+    <TextView
+        android:id="@+id/txtMerchant"
+        style="@style/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin" />
+
 </LinearLayout>

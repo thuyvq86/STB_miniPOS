@@ -17,8 +17,8 @@ import android.widget.TextView;
 import com.stb.minipos.POSApplication;
 import com.stb.minipos.R;
 import com.stb.minipos.model.POSManager;
+import com.stb.minipos.model.STBProfile;
 import com.stb.minipos.ui.DrawerMenuItem;
-import com.stb.minipos.ui.MiniPosActivity;
 import com.stb.minipos.ui.ReceiveMessageActivity;
 import com.stb.minipos.ui.helper.BluetoothDevicesAdapter;
 import com.stb.minipos.utils.Utils;
@@ -69,22 +69,23 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 				onDevicesSelected(object);
 			}
 		});
-		_listView
-				.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-					@Override
-					public boolean onItemLongClick(AdapterView<?> parent,
-							View view, int position, long id) {
-						if (getActivity() instanceof MiniPosActivity) {
-							BluetoothDevice object = (BluetoothDevice) parent
-									.getItemAtPosition(position);
-							((MiniPosActivity) getActivity())
-									.startActionMode(object);
-							return true;
-						}
-						return false;
-					}
-				});
+		// _listView
+		// .setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+		// {
+		//
+		// @Override
+		// public boolean onItemLongClick(AdapterView<?> parent,
+		// View view, int position, long id) {
+		// if (getActivity() instanceof MiniPosActivity) {
+		// BluetoothDevice object = (BluetoothDevice) parent
+		// .getItemAtPosition(position);
+		// ((MiniPosActivity) getActivity())
+		// .startActionMode(object);
+		// return true;
+		// }
+		// return false;
+		// }
+		// });
 
 		_btnPairDevice.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -113,44 +114,25 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 		update();
 	}
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-	}
-
 	@SuppressLint("InflateParams")
-	private void onDevicesSelected(final BluetoothDevice object) {
+	private void onDevicesSelected(final BluetoothDevice device) {
+		final STBProfile object = POSManager.instance().getProfile(device);
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(object.getName());
+		builder.setTitle(object.title);
 		View view = LayoutInflater.from(getActivity()).inflate(
 				R.layout.item_dialog_profile, null);
 		{
 			TextView txtTitle = (TextView) view.findViewById(R.id.txtTitle);
 			TextView txtAddress = (TextView) view.findViewById(R.id.txtAddress);
 			txtTitle.setText(object.getName());
-			txtAddress.setText(object.getAddress());
+			txtAddress.setText(object.getDesc());
 		}
 		builder.setView(view);
-		builder.setPositiveButton(R.string.button_connect,
+		builder.setPositiveButton(R.string.button_active,
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						startMiniPOS(object);
-					}
-				});
-		builder.setNegativeButton(R.string.button_reset,
-				new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-
-					}
-				});
-		builder.setNeutralButton(R.string.button_update,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-
+						startMiniPOS(device);
 					}
 				});
 		builder.create().show();
@@ -158,11 +140,6 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 
 	private void startMiniPOS(BluetoothDevice object) {
 		POSManager.instance().activeBluetoothDevice(object);
-		// Intent i = new Intent(getActivity(), PclService.class);
-		// i.putExtra("PACKAGE_NAME", getActivity().getPackageName());
-		// i.putExtra("FILE_NAME", "pairing_addr.txt");
-		// getActivity().startService(i);
-
 		Intent intent = new Intent(getActivity(), ReceiveMessageActivity.class);
 		getActivity().startActivity(intent);
 	}

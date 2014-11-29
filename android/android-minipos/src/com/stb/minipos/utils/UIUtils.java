@@ -1,5 +1,6 @@
 package com.stb.minipos.utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -10,7 +11,7 @@ public class UIUtils {
 	public static void showErrorMessage(Context context, int messageId) {
 		showErrorMessage(context, messageId, Toast.LENGTH_SHORT);
 	}
-	
+
 	public static void showErrorMessage(Context context, String message) {
 		showErrorMessage(context, message, Toast.LENGTH_SHORT);
 	}
@@ -31,7 +32,17 @@ public class UIUtils {
 
 	public static void showErrorMessage(Context context, String message,
 			int length) {
-		Toast.makeText(context, message, length).show(); 
+		Toast.makeText(context, message, length).show();
+	}
+
+	public static void safetyDismissDialog(Dialog dialog) {
+		try {
+			if (dialog != null) {
+				dialog.dismiss();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

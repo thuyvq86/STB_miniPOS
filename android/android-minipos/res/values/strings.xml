@@ -21,6 +21,7 @@
     <string name="button_reset">Reset</string>
     <string name="button_update">Update</string>
     <string name="button_connect">Connect</string>
+    <string name="button_active">Active</string>
     <string name="button_submit">Submit</string>
     <string name="button_clear">Clear</string>
     <string name="transaction_receipt_form_isnt_fill">Please fill out the Transaction Receipt and email</string>
