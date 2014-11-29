@@ -47,6 +47,16 @@
 		D8EDD3511A2A007D008E60CB /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD34D1A2A007D008E60CB /* Icon-114.png */; };
 		D8EDD3521A2A007D008E60CB /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD34E1A2A007D008E60CB /* Icon-120.png */; };
 		D8EDD3531A2A007D008E60CB /* Icon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD34F1A2A007D008E60CB /* Icon-180.png */; };
+		D8EDD3571A2A27AA008E60CB /* AppInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD3551A2A27AA008E60CB /* AppInfoController.m */; };
+		D8EDD3581A2A27AA008E60CB /* AppInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD3561A2A27AA008E60CB /* AppInfoController.xib */; };
+		D8EDD35C1A2A29AB008E60CB /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD35A1A2A29AB008E60CB /* logo.png */; };
+		D8EDD35D1A2A29AB008E60CB /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD35B1A2A29AB008E60CB /* logo@2x.png */; };
+		D8EDD3601A2A2C69008E60CB /* UIButtonSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD35E1A2A2C69008E60CB /* UIButtonSettings.png */; };
+		D8EDD3611A2A2C69008E60CB /* UIButtonSettings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD35F1A2A2C69008E60CB /* UIButtonSettings@2x.png */; };
+		D8EDD3671A2A2F4A008E60CB /* DeviceProfileInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD3661A2A2F4A008E60CB /* DeviceProfileInfoCell.m */; };
+		D8EDD36A1A2A2F73008E60CB /* DeviceProfileInfoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD3691A2A2F73008E60CB /* DeviceProfileInfoContentView.m */; };
+		D8EDD3701A2A3A15008E60CB /* UIViewController+PresentViewAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD36D1A2A3A15008E60CB /* UIViewController+PresentViewAnimation.m */; };
+		D8EDD3711A2A3A15008E60CB /* UIViewController+TopMostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD36F1A2A3A15008E60CB /* UIViewController+TopMostViewController.m */; };
 		D8FEB40819EFF331008BB5D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40719EFF331008BB5D5 /* Foundation.framework */; };
 		D8FEB40A19EFF331008BB5D5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40919EFF331008BB5D5 /* CoreGraphics.framework */; };
 		D8FEB40C19EFF331008BB5D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB40B19EFF331008BB5D5 /* UIKit.framework */; };
@@ -229,6 +239,21 @@
 		D8EDD34D1A2A007D008E60CB /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-114.png"; sourceTree = "<group>"; };
 		D8EDD34E1A2A007D008E60CB /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = "<group>"; };
 		D8EDD34F1A2A007D008E60CB /* Icon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-180.png"; sourceTree = "<group>"; };
+		D8EDD3541A2A27AA008E60CB /* AppInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfoController.h; sourceTree = "<group>"; };
+		D8EDD3551A2A27AA008E60CB /* AppInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppInfoController.m; sourceTree = "<group>"; };
+		D8EDD3561A2A27AA008E60CB /* AppInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppInfoController.xib; sourceTree = "<group>"; };
+		D8EDD35A1A2A29AB008E60CB /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		D8EDD35B1A2A29AB008E60CB /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		D8EDD35E1A2A2C69008E60CB /* UIButtonSettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonSettings.png; sourceTree = "<group>"; };
+		D8EDD35F1A2A2C69008E60CB /* UIButtonSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonSettings@2x.png"; sourceTree = "<group>"; };
+		D8EDD3651A2A2F4A008E60CB /* DeviceProfileInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceProfileInfoCell.h; sourceTree = "<group>"; };
+		D8EDD3661A2A2F4A008E60CB /* DeviceProfileInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceProfileInfoCell.m; sourceTree = "<group>"; };
+		D8EDD3681A2A2F73008E60CB /* DeviceProfileInfoContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceProfileInfoContentView.h; sourceTree = "<group>"; };
+		D8EDD3691A2A2F73008E60CB /* DeviceProfileInfoContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceProfileInfoContentView.m; sourceTree = "<group>"; };
+		D8EDD36C1A2A3A15008E60CB /* UIViewController+PresentViewAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PresentViewAnimation.h"; sourceTree = "<group>"; };
+		D8EDD36D1A2A3A15008E60CB /* UIViewController+PresentViewAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PresentViewAnimation.m"; sourceTree = "<group>"; };
+		D8EDD36E1A2A3A15008E60CB /* UIViewController+TopMostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TopMostViewController.h"; sourceTree = "<group>"; };
+		D8EDD36F1A2A3A15008E60CB /* UIViewController+TopMostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TopMostViewController.m"; sourceTree = "<group>"; };
 		D8FEB40419EFF331008BB5D5 /* MiniPOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniPOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8FEB40719EFF331008BB5D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D8FEB40919EFF331008BB5D5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -573,6 +598,47 @@
 			path = Submodules/AFNetworkActivityLogger/AFNetworkActivityLogger;
 			sourceTree = SOURCE_ROOT;
 		};
+		D8EDD3591A2A27AF008E60CB /* About */ = {
+			isa = PBXGroup;
+			children = (
+				D8EDD3541A2A27AA008E60CB /* AppInfoController.h */,
+				D8EDD3551A2A27AA008E60CB /* AppInfoController.m */,
+				D8EDD3561A2A27AA008E60CB /* AppInfoController.xib */,
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
+		D8EDD3631A2A2D3A008E60CB /* Center */ = {
+			isa = PBXGroup;
+			children = (
+				D8FEB48E19EFFC2D008BB5D5 /* STBCenterViewController.h */,
+				D8FEB48F19EFFC2D008BB5D5 /* STBCenterViewController.m */,
+			);
+			name = Center;
+			sourceTree = "<group>";
+		};
+		D8EDD3641A2A2F07008E60CB /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D8EDD3651A2A2F4A008E60CB /* DeviceProfileInfoCell.h */,
+				D8EDD3661A2A2F4A008E60CB /* DeviceProfileInfoCell.m */,
+				D8EDD3681A2A2F73008E60CB /* DeviceProfileInfoContentView.h */,
+				D8EDD3691A2A2F73008E60CB /* DeviceProfileInfoContentView.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		D8EDD36B1A2A3A15008E60CB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D8EDD36C1A2A3A15008E60CB /* UIViewController+PresentViewAnimation.h */,
+				D8EDD36D1A2A3A15008E60CB /* UIViewController+PresentViewAnimation.m */,
+				D8EDD36E1A2A3A15008E60CB /* UIViewController+TopMostViewController.h */,
+				D8EDD36F1A2A3A15008E60CB /* UIViewController+TopMostViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		D8FEB3FB19EFF331008BB5D5 = {
 			isa = PBXGroup;
 			children = (
@@ -661,12 +727,12 @@
 		D8FEB43F19EFF61F008BB5D5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D8EDD3631A2A2D3A008E60CB /* Center */,
+				D8EDD3591A2A27AF008E60CB /* About */,
 				D8ACD25619FFCF7600754108 /* Messaging */,
 				D8ACD25519FFCF6700754108 /* Signature */,
 				D8FEB48D19EFFBFE008BB5D5 /* Launch */,
 				D8FEB48C19EFFBF4008BB5D5 /* Base */,
-				D8FEB48E19EFFC2D008BB5D5 /* STBCenterViewController.h */,
-				D8FEB48F19EFFC2D008BB5D5 /* STBCenterViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -674,6 +740,7 @@
 		D8FEB44019EFF61F008BB5D5 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				D8EDD36B1A2A3A15008E60CB /* Controllers */,
 				D84D290C19FEACD600288FE0 /* Models */,
 				D8FEB4CA19F01239008BB5D5 /* Views */,
 				D8FEB48219EFFA7C008BB5D5 /* Utils */,
@@ -695,6 +762,7 @@
 		D8FEB44219EFF61F008BB5D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D8EDD3641A2A2F07008E60CB /* Profile */,
 				D8FEB57419F16576008BB5D5 /* Messaging */,
 			);
 			path = Views;
@@ -973,6 +1041,10 @@
 		D8FEB51219F15290008BB5D5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D8EDD35E1A2A2C69008E60CB /* UIButtonSettings.png */,
+				D8EDD35F1A2A2C69008E60CB /* UIButtonSettings@2x.png */,
+				D8EDD35A1A2A29AB008E60CB /* logo.png */,
+				D8EDD35B1A2A29AB008E60CB /* logo@2x.png */,
 				D8FEB58119F1A423008BB5D5 /* SeparatorLine.png */,
 				D8FEB58219F1A423008BB5D5 /* SeparatorLine@2x.png */,
 				D8FEB51319F15290008BB5D5 /* MasterBackground.png */,
@@ -1134,6 +1206,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8EDD3611A2A2C69008E60CB /* UIButtonSettings@2x.png in Resources */,
+				D8EDD35C1A2A29AB008E60CB /* logo.png in Resources */,
 				D8FEB44B19EFF839008BB5D5 /* MessagingStoryboard.storyboard in Resources */,
 				D8FEB58319F1A423008BB5D5 /* SeparatorLine.png in Resources */,
 				D8FEB58419F1A423008BB5D5 /* SeparatorLine@2x.png in Resources */,
@@ -1147,8 +1221,10 @@
 				D8FEB53619F15290008BB5D5 /* UIButtonSecondaryTouch.png in Resources */,
 				D8FEB41B19EFF331008BB5D5 /* Main_iPhone.storyboard in Resources */,
 				D8FEB57019F15985008BB5D5 /* message.json in Resources */,
+				D8EDD3601A2A2C69008E60CB /* UIButtonSettings.png in Resources */,
 				D8FEB41219EFF331008BB5D5 /* InfoPlist.strings in Resources */,
 				D8FEB53419F15290008BB5D5 /* UIButtonSecondary.png in Resources */,
+				D8EDD35D1A2A29AB008E60CB /* logo@2x.png in Resources */,
 				D8FEB53819F15290008BB5D5 /* Default-568h@2x.png in Resources */,
 				D8EDD3521A2A007D008E60CB /* Icon-120.png in Resources */,
 				D8FEB53A19F15290008BB5D5 /* Default@2x.png in Resources */,
@@ -1157,6 +1233,7 @@
 				D8EDD3501A2A007D008E60CB /* Icon-57.png in Resources */,
 				D8EDD34B1A29FE18008E60CB /* Default-736h@3x.png in Resources */,
 				D8EDD3531A2A007D008E60CB /* Icon-180.png in Resources */,
+				D8EDD3581A2A27AA008E60CB /* AppInfoController.xib in Resources */,
 				D8EDD3511A2A007D008E60CB /* Icon-114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1182,6 +1259,7 @@
 				D8FEB52419F15290008BB5D5 /* UIButtonFunctional.m in Sources */,
 				D8FEB4D319F035E8008BB5D5 /* SignatureCell.m in Sources */,
 				D8FEB47919EFF8F1008BB5D5 /* UIPopoverController+Block.m in Sources */,
+				D8EDD36A1A2A2F73008E60CB /* DeviceProfileInfoContentView.m in Sources */,
 				D8EDD3241A24F309008E60CB /* AFHTTPSessionManager.m in Sources */,
 				D8FEB56219F1542B008BB5D5 /* SDWebImageManager.m in Sources */,
 				D8FEB4BE19F0109A008BB5D5 /* NSDictionary+Additions.m in Sources */,
@@ -1202,6 +1280,8 @@
 				D8FEB4D819F14B46008BB5D5 /* BaseTableContentView.m in Sources */,
 				D8FEB52819F15290008BB5D5 /* AKSegmentedControl.m in Sources */,
 				D8FEB49619EFFC59008BB5D5 /* STBMessagingViewController.m in Sources */,
+				D8EDD3671A2A2F4A008E60CB /* DeviceProfileInfoCell.m in Sources */,
+				D8EDD3711A2A3A15008E60CB /* UIViewController+TopMostViewController.m in Sources */,
 				D84D292519FEACD600288FE0 /* SettingsManager.m in Sources */,
 				D8FEB4C019F0109A008BB5D5 /* NSString+Extended.m in Sources */,
 				D8EDD3461A29A1CA008E60CB /* ICMPProfile+Operations.m in Sources */,
@@ -1239,6 +1319,7 @@
 				D8FEB48A19EFFA7C008BB5D5 /* LogReporterManager.m in Sources */,
 				D8FEB56519F1542B008BB5D5 /* UIImage+GIF.m in Sources */,
 				D8FEB55C19F1542B008BB5D5 /* NSData+GIF.m in Sources */,
+				D8EDD3571A2A27AA008E60CB /* AppInfoController.m in Sources */,
 				D8C5C83719FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m in Sources */,
 				D8FEB57F19F1969A008BB5D5 /* MJPopupBackgroundView.m in Sources */,
 				D84D292219FEACD600288FE0 /* ICBitmapReceipt.m in Sources */,
@@ -1265,6 +1346,7 @@
 				D8FEB47819EFF8F1008BB5D5 /* UIPickerView+Block.m in Sources */,
 				D8FEB4D019F035D4008BB5D5 /* TransactionInfoCell.m in Sources */,
 				D8EDD32D1A24F309008E60CB /* UIAlertView+AFNetworking.m in Sources */,
+				D8EDD3701A2A3A15008E60CB /* UIViewController+PresentViewAnimation.m in Sources */,
 				D8FEB47019EFF89E008BB5D5 /* UIAlertView+Block.m in Sources */,
 				D8FEB46A19EFF89E008BB5D5 /* CLLocationManager+Block.m in Sources */,
 				D8FEB55D19F1542B008BB5D5 /* SDImageCache.m in Sources */,

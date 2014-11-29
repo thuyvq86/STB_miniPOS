@@ -12,11 +12,9 @@
 @interface STBCenterViewController : STBBaseViewController{
     
     __weak IBOutlet UIImageView *_topbarImageView;
-    __weak IBOutlet UIImageView *_logoImageView;
-    
-    __weak IBOutlet UILabel *_lblTitle;
     
     __weak IBOutlet UITableView *_tableView;
+    __weak IBOutlet UIButton *_btnSettings;
 }
 
 @end

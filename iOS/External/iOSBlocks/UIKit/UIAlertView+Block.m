@@ -21,6 +21,9 @@ static VoidBlock _cancelBlock;
                  onDismiss:(DismissBlock)dismissed
                   onCancel:(VoidBlock)cancelled
 {
+    if ([self visibleAlertView])
+        return nil;
+    
     _dismissBlock  = [dismissed copy];
     _cancelBlock  = [cancelled copy];
     
@@ -53,6 +56,9 @@ static VoidBlock _cancelBlock;
                             message:(NSString *)message
                   cancelButtonTitle:(NSString *)cancelButtonTitle
 {
+    if ([self visibleAlertView])
+        return nil;
+    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
                                                    delegate:nil
@@ -78,6 +84,20 @@ static VoidBlock _cancelBlock;
             _dismissBlock(buttonIndex,[alertView buttonTitleAtIndex:buttonIndex]);
         }
     }
+}
+
+#pragma mark - Private Helpers
+
++ (BOOL)visibleAlertView{
+    for (UIWindow *window in [UIApplication sharedApplication].windows){
+        for (UIView *subView in [window subviews]){
+            if ([subView isKindOfClass:[UIAlertView class]]) {
+                return YES;
+            }
+        }
+    }
+    
+    return NO;
 }
 
 @end

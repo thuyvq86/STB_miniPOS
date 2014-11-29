@@ -128,7 +128,8 @@
 #import "STBDataFormatter.h"
 
 //Models
-#import "PosMessage.h"
+#import "PosMessage+Operations.h"
+#import "ICMPProfile+Operations.h"
 
 //Views
 #import "DUTableView.h"

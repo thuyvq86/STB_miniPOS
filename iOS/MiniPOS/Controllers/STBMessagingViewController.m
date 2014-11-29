@@ -177,34 +177,27 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
 #pragma mark - UI
 
 - (void)setupUI{
-    UIBarButtonItem *customBackButton =
-    [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                     style:UIBarButtonItemStylePlain
-                                    target:self
-                                    action:@selector(buttonBackTouch:)];
-    [customBackButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
-    _navItem.leftBarButtonItem = customBackButton;
-    
-    UIBarButtonItem *customDoneButton =
-    [[UIBarButtonItem alloc] initWithTitle:@"Send"
-                                     style:UIBarButtonItemStyleDone
-                                    target:self
-                                    action:@selector(buttonSendTouch:)];
-    [customDoneButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
-    _navItem.rightBarButtonItem = customDoneButton;
+    _navItem.leftBarButtonItem = [self barButtonItemWithTitle:@"Back" style:UIBarButtonItemStylePlain action:@selector(buttonBackTouch:)];
+    _navItem.rightBarButtonItem = [self barButtonItemWithTitle:@"Send" style:UIBarButtonItemStyleDone action:@selector(buttonSendTouch:)];;
     
     if([_navigationBar respondsToSelector:@selector(setBarTintColor:)])
         [_navigationBar setBarTintColor:PRIMARY_BACKGROUND_COLOR];
     else
         [_navigationBar setTintColor:PRIMARY_BACKGROUND_COLOR];
-    
-    NSDictionary *navBarTitleDict;
-    navBarTitleDict = @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                        NSFontAttributeName:[UIFont systemFontOfSize:21.0f]
-                        };
-    [_navigationBar setTitleTextAttributes:navBarTitleDict];
+    [_navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
+                                             NSFontAttributeName:[UIFont systemFontOfSize:21.0f]
+                                             }];
     
     [self setupPlainTableView:_tableView showScrollIndicator:NO hasBorder:NO hasSeparator:NO];
+}
+
+- (UIBarButtonItem *)barButtonItemWithTitle:(NSString *)title style:(NSInteger)style action:(SEL)action{
+    UIBarButtonItem *button = nil;
+    
+    button = [[UIBarButtonItem alloc] initWithTitle:title style:style target:self action:action];
+    [button setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor whiteColor]} forState:UIControlStateNormal];
+    
+    return button;
 }
 
 #pragma mark - Handle user's actions

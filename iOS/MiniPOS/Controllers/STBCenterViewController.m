@@ -7,16 +7,21 @@
 //
 
 #import "STBCenterViewController.h"
+//Controllers
 #import "STBMessagingViewController.h"
+#import "AppInfoController.h"
+//Views
+#import "DeviceProfileInfoCell.h"
 //Models
 #import "ICMPProfile+Operations.h"
 
-@interface STBCenterViewController ()<ICISMPDeviceDelegate>
+@interface STBCenterViewController ()<ICISMPDeviceDelegate, AppInfoDelegate>
 
 @property (nonatomic, assign) iSMPControlManager *iSMPControl;
 @property (nonatomic, strong) NSMutableArray *connectedAccessories;
 @property (nonatomic, strong) NSOutputStream *batteryLogStream;
 
+@property (nonatomic) BOOL firstLoad;
 @property (nonatomic) NSInteger requestSendCount;
 
 @end
@@ -43,9 +48,7 @@
     // Do any additional setup after loading the view.
     [self setupUI];
     
-    //set Texts
-    _lblTitle.text = @"[STB] - Mini POS";
-    _logoImageView.image = [UIImage imageNamed:@"icon_128x128"];
+    _firstLoad = YES;
     
     //Get the iSMPControlManager
     self.iSMPControl = [iSMPControlManager sharedISMPControlManager];
@@ -57,7 +60,6 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    [self updateFrameOfView];
-    [self isBluetoothPoweredOn];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -65,8 +67,13 @@
     
     if (UIAppDelegate.bluetoothEnabled)
         [self loadContent];
-    else
+    else{
+        if (_firstLoad)
+            [self performSelector:@selector(isBluetoothPoweredOn) withObject:nil afterDelay:.1];
+        
         [self performSelector:@selector(loadContent) withObject:nil afterDelay:.1];
+    }
+    _firstLoad = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -86,23 +93,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)failure:(NSError *)error{
-    NSString *msg = [NSString stringWithFormat:@"Error %i", [error code]];
-    [UIAlertView alertViewWithTitle:@"" message:msg cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
-    } onCancel:^{
-        //do next process
-        
-    }];
-}
-
 #pragma mark - UI & Theming
 
 - (void)setupUI{
-    UIColor *barColor   = [UIColor colorWithRed:161.0/255.0 green:164.0/255.0 blue:166.0/255.0 alpha:1.0];
-    UIColor *titleColor = [UIColor colorWithRed:55.0/255.0 green:70.0/255.0 blue:77.0/255.0 alpha:1.0];
-    _lblTitle.textColor              = titleColor;
-    _topbarImageView.backgroundColor = barColor;
-    
+    _topbarImageView.backgroundColor = [UIColor clearColor];
     [self setupPlainTableView:_tableView showScrollIndicator:NO hasBorder:NO hasSeparator:NO];
 }
 
@@ -158,6 +152,14 @@
     }];
 }
 
+- (void)failure:(NSError *)error{
+    NSString *msg = [NSString stringWithFormat:@"Error %i", [error code]];
+    [UIAlertView alertViewWithTitle:@"" message:msg cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+    } onCancel:^{
+        //do nothing
+    }];
+}
+
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -167,7 +169,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    //	return [testGroups count];
     if (_connectedAccessories && [_connectedAccessories count] > 0)
         return [_connectedAccessories count];
     return 1;
@@ -175,31 +176,40 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = nil;
     
-    static NSString *CellIdentifier = @"Cell";
+    if (_connectedAccessories && [_connectedAccessories count] > 0)
+        cell = [self tableView:tableView profileInfoCellAtIndexPath:indexPath];
+    else
+        cell = [self tableView:tableView messageCellAtIndexPath:indexPath];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.numberOfLines = 0;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)aTableView profileInfoCellAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"DeviceProfileInfoCell";
+    DeviceProfileInfoCell *cell = (DeviceProfileInfoCell*)[aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell)
+        cell = [[DeviceProfileInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    
+    ICMPProfile *profile = [_connectedAccessories objectAtIndex:indexPath.row];
+    [cell setProfile:profile];
+    
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)aTableView messageCellAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"MessageCell";
+    UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     cell.textLabel.font = [UIFont systemFontOfSize:12.0f];
     cell.textLabel.textColor = [UIColor whiteColor];
-    
-    if (_connectedAccessories && [_connectedAccessories count] > 0){
-        ICMPProfile *profile = [_connectedAccessories objectAtIndex:indexPath.row];
-        NSString *text = [self connectedAccessoryString:profile.accessory];
-#if TARGET_IPHONE_SIMULATOR
-        text = [NSString stringWithFormat:@"iCMP - %@", profile.serialId];
-#endif
-        cell.textLabel.text = text;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    else{
-        cell.textLabel.text = @"No detected accessory!!";
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.text = @"No detected accessory!!";
     
     return cell;
 }
@@ -212,17 +222,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat width = CGRectGetWidth(tableView.frame);
     if (_connectedAccessories && [_connectedAccessories count] > 0){
         ICMPProfile *profile = [_connectedAccessories objectAtIndex:indexPath.row];
-        NSString *msg = [self connectedAccessoryString:profile.accessory];
-#if TARGET_IPHONE_SIMULATOR
-        msg = [NSString stringWithFormat:@"iCMP - %@", profile.serialId];
-#endif
-        float padding = 10.0f;
-        float w = CGRectGetWidth(tableView.frame) - 2 * padding;
-        float h = [msg heightForWidth:w andFont:[UIFont systemFontOfSize:12.0f]];
-        
-        return h + 2*padding;
+        return [DeviceProfileInfoCell heightForProfile:profile parentWidth:width];
     }
     
     return tableView.rowHeight;
@@ -285,49 +288,6 @@
     return NO;
 }
 
-#pragma mark - iSpm Info
-
-- (IBAction)iSpmInformation:(id)sender{
-    
-	if ([ICISMPDevice isAvailable] == NO) {
-        [UIAlertView alertViewWithTitle:@"" message:@"No detected accessory !!" cancelButtonTitle:@"Close"];
-		return;
-	}
-    
-	EAAccessory *connectedAccessory = nil;
-    NSArray *connectedAccessories = [[EAAccessoryManager sharedAccessoryManager] connectedAccessories];
-	for (EAAccessory *obj in connectedAccessories) {
-		connectedAccessory = obj;
-		break;
-	}
-    
-	NSString *msg = [self connectedAccessoryString:connectedAccessory];
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Companion Information" message:msg delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
-	[alert show];
-}
-
-- (NSString *)connectedAccessoryString:(EAAccessory *)connectedAccessory{
-    if (!connectedAccessory)
-        return nil;
-    
-    NSArray *protocolStrings = [connectedAccessory protocolStrings];
-    NSString *msg = [NSString stringWithFormat:
-                     @"connected: %d\nconnectionID: %d\nname: %@\nmanufacturer: %@\nmodelNumber: %@\nserialId: %@\nfirmwareReveision: %@\nhardwareRevision: %@\nprotocolStrings: %@",
-                     
-                     connectedAccessory.connected,
-                     connectedAccessory.connectionID,
-                     connectedAccessory.name,
-                     connectedAccessory.manufacturer,
-                     connectedAccessory.modelNumber,
-                     connectedAccessory.serialNumber,
-                     connectedAccessory.firmwareRevision,
-                     connectedAccessory.hardwareRevision,
-                     [protocolStrings componentsJoinedByString:@"\n"]
-                     ];
-    
-    return msg;
-}
-
 #pragma mark - ICDeviceDelegate
 
 - (void)accessoryDidConnect:(ICISMPDevice *)sender {
@@ -339,30 +299,18 @@
     [self loadContent];
 }
 
-#pragma mark - Monitor Battery
+#pragma mark - User actions
 
-- (void)monitorBatteryHelper {
-//	@autoreleasepool {
-        float iPhoneBatteryLevel = [[UIDevice currentDevice] batteryLevel] * 100;
-        NSInteger acLine = -1;
-        if ([[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateUnplugged) {
-            acLine = 0;
-        } else if ([[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateUnknown) {
-            acLine = -1;
-        } else {
-            acLine = 1;
-        }
-        ICAdministration *control = [ICAdministration sharedChannel];
-        NSInteger iSpmBatteryLevel = control.batteryLevel;
-        
-        NSString * time = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle];
-        NSString * str = [NSString stringWithFormat:@"%@;%f;%d;%d\r\n", time, iPhoneBatteryLevel, iSpmBatteryLevel, acLine];
-        [self.batteryLogStream write:(uint8_t *)[str UTF8String] maxLength:[str length]];
-//    }
+- (IBAction)buttonSettingsTouch:(id)sender {
+    AppInfoController *appInfoController = [[AppInfoController alloc] initWithNibName:@"AppInfoController" bundle:nil];
+    appInfoController.delegate = self;
+    
+//    [self presentViewController:appInfoController animated:YES completion:nil];
+    [self parentView:self presentViewController:appInfoController animated:YES completion:nil];
 }
 
-- (void)monitorBattery {
-    //	[self performSelectorInBackground:@selector(monitorBatteryHelper) withObject:nil];
+- (void)didFinishAppInfoController:(id)appInfoController{
+    [self parentView:self dismissViewController:appInfoController animated:YES completion:nil];
 }
 
 @end

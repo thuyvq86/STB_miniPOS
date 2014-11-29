@@ -31,6 +31,16 @@
     self.view.backgroundColor = PRIMARY_BACKGROUND_COLOR;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    //[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    //[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -167,6 +177,38 @@
         return UIInterfaceOrientationMaskAll;
     
     return UIInterfaceOrientationMaskPortrait;
+}
+
+#pragma mark - Present Modal views
+
+- (void)parentView:(id)parent presentViewController:(id)controller animated:(BOOL)animated completion:(void (^)(void))completion{
+    if (IOS7_OR_GREATER){
+        [parent presentViewControllerWithModalAnimation:controller completion:^{
+            if (completion)
+                completion();
+        }];
+    }
+    else{
+        [parent presentViewController:controller animated:animated completion:^{
+            if (completion)
+                completion();
+        }];
+    }
+}
+
+- (void)parentView:(id)parent dismissViewController:(id)controller animated:(BOOL)animated completion:(void (^)(void))completion{
+    if (IOS7_OR_GREATER){
+        [self dismissViewControllerWithModalAnimation:controller completion:^{
+            if (completion)
+                completion();
+        }];
+    }
+    else{
+        [parent dismissViewControllerAnimated:animated completion:^{
+            if (completion)
+                completion();
+        }];
+    }
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+PresentViewAnimation.h"
 
 @interface STBBaseViewController : UIViewController
 
@@ -30,5 +31,10 @@
 
 - (void)setZeroSeparatorInsetForTableView:(UITableView *)tableView;
 - (void)setZeroSeparatorInsetForTableViewCell:(UITableViewCell *)cell;
+
+#pragma mark - Present Modal views
+
+- (void)parentView:(id)parent presentViewController:(id)controller animated:(BOOL)animated completion:(void (^)(void))completion;
+- (void)parentView:(id)parent dismissViewController:(id)controller animated:(BOOL)animated completion:(void (^)(void))completion;
 
 @end
