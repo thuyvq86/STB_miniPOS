@@ -1,0 +1,48 @@
+//
+// Prefix header for all source files of the 'InteractivePayment' target in the 'InteractivePayment' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+
+#import <iSMP/iSMP.h>
+#import <iSMP/ICAdministration+StandAlone.h>
+#import "GateWayManager.h"
+#import "iSMPControlManager.h"
+#import "PrinterManager.h"
+#import "InputAmount.h"
+#import "StandalonePaymentManager.h"
+#import "ICSignatureView.h"
+#import "AppInfoController.h"
+#import "SettingsManager.h"
+#import "ICBitmapReceipt.h"
+#import "ConfigurationController.h"
+#import "SignatureViewController.h"
+#import "VerifySignatureViewController.h"
+#import "FirstViewController.h"
+#import "UIImage-Extensions.h"
+#import "AppDelegate.h"
+
+#import <CrashReporter/CrashReporter.h>
+#import "CrashReporterManager.h"
+
+
+#define DEFAULT_DO_TRANSACTION_TIMEOUT  120000
+#define DEFAULT_RECEIPT_TEXT_SIZE       20
+
+
+//This inteface is implemented inside the iSMP library
+@interface NSData (HexDump)
+
+-(NSString *)hexDump;
+    
+@end
