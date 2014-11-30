@@ -15,6 +15,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) STBBaseViewController *centerViewController;
+//the api client
+@property (strong, nonatomic, readonly) STBAPIClient *apiClient;
 //bluetooth
 @property (nonatomic, retain) CBCentralManager *bluetoothManager;
 @property (nonatomic) BOOL bluetoothEnabled;

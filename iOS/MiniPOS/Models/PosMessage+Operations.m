@@ -10,7 +10,15 @@
 
 @implementation PosMessage (Operations)
 
-- (AFHTTPRequestOperation *)sendBillWithProfile:(ICMPProfile *)profile completionBlock:(void (^)(id responseObject, NSError *error))block {
+- (AFHTTPRequestOperation *)sendBillWithProfile:(ICMPProfile *)profile completionBlock:(void (^)(id responseObject, NSError *error))completionBlock noInternet:(void (^)(void))noInternet{
+    
+    STBAPIClient *apiClient = [STBAPIClient sharedClient];
+    if (![apiClient isInternetReachable]){
+        if (noInternet)
+            noInternet();
+        return nil;
+    }
+    
     //data
     NSString *base64EncodedSignature = [self base64EncodedSignature];
     NSDictionary *dataDict = @{
@@ -36,23 +44,23 @@
     NSString *path = kApiPath;
     
     //send request
-    return [[STBAPIClient sharedClient] POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    return [apiClient POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //NSLog(@"%@", responseObject);
         NSString *responseCode = [responseObject objectForKey:kParameterRespCode];
         if ([responseCode isEqualToString:@"00"]){
             //success
-            if (block) {
-                block(responseObject, nil);
+            if (completionBlock) {
+                completionBlock(responseObject, nil);
             }
         }
         else{
-            if (block) {
-                block(nil, [NSError errorWithDomain:responseCode code:[responseCode integerValue] userInfo:nil]);
+            if (completionBlock) {
+                completionBlock(nil, [NSError errorWithDomain:responseCode code:[responseCode integerValue] userInfo:nil]);
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (block) {
-            block(nil, error);
+        if (completionBlock) {
+            completionBlock(nil, error);
         }
     }];
 }

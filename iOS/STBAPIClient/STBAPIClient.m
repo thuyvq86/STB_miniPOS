@@ -7,6 +7,7 @@
 //
 
 #import "STBAPIClient.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 @implementation STBAPIClient
 
@@ -25,9 +26,19 @@
         AFSecurityPolicy *securityPolicy = [[AFSecurityPolicy alloc] init];
         [securityPolicy setAllowInvalidCertificates:YES];
         _sharedClient.securityPolicy = securityPolicy;
+        
+        //show network activity indicator
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+        
     });
     
     return _sharedClient;
+}
+
+#pragma mark - Reachability
+
+- (bool)isInternetReachable {
+    return [AFNetworkReachabilityManager sharedManager].isReachable;
 }
 
 #pragma mark - Helpers

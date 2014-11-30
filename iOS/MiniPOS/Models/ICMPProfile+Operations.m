@@ -10,8 +10,15 @@
 
 @implementation ICMPProfile (Operations)
 
-- (AFHTTPRequestOperation *)getProfileWithCompletionBlock:(void (^)(id responseObject, NSError *error))block
+- (AFHTTPRequestOperation *)getProfileWithCompletionBlock:(void (^)(id responseObject, NSError *error))completionBlock noInternet:(void (^)(void))noInternet
 {
+    STBAPIClient *apiClient = [STBAPIClient sharedClient];
+    if (![apiClient isInternetReachable]){
+        if (noInternet)
+            noInternet();
+        return nil;
+    }
+    
     NSDictionary *dataDict = @{kParameterSerialID: self.serialId};
     NSString *jsonDataString = [STBAPIClient jsonStringFromDictionary:dataDict];
     
@@ -24,8 +31,8 @@
                                  };
     NSString *path = kApiPath;
     
-    return [[STBAPIClient sharedClient] POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
+    return [apiClient POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@", responseObject);
         NSString *responseCode = [responseObject objectForKey:kParameterRespCode];
         if ([responseCode isEqualToString:@"00"]){
             NSString *base64Encoded = [responseObject objectForKey:@"Data"];
@@ -34,19 +41,19 @@
                 [self updateFromDictionary:JSON];
 
             //success
-            if (block) {
-                block(responseObject, nil);
+            if (completionBlock) {
+                completionBlock(responseObject, nil);
             }
         }
         else{
-            if (block) {
-                block(nil, [NSError errorWithDomain:responseCode code:[responseCode integerValue] userInfo:nil]);
+            if (completionBlock) {
+                completionBlock(nil, [NSError errorWithDomain:responseCode code:[responseCode integerValue] userInfo:nil]);
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@ %@", error, operation.response);
-        if (block) {
-            block(nil, error);
+        DLog(@"%@ %@", error, operation.response);
+        if (completionBlock) {
+            completionBlock(nil, error);
         }
     }];
 }

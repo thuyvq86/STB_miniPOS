@@ -93,6 +93,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <SystemConfiguration/SystemConfiguration.h>
 #endif
 
 #import <iSMP/iSMP.h>
@@ -128,6 +129,7 @@
 #import "STBDataFormatter.h"
 
 //Models
+#import "STBAPIClient.h"
 #import "PosMessage+Operations.h"
 #import "ICMPProfile+Operations.h"
 
@@ -136,6 +138,7 @@
 #import "TPKeyboardAvoidingTableView.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "TPKeyboardAvoidingCollectionView.h"
+#import "SVProgressHUD.h"
 
 //Controllers
 #import "STBBaseViewController.h"

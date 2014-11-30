@@ -55,6 +55,7 @@ typedef enum{
     MONEY_BASE_AMOUNT = 68, // Tip
     
     TERMINAL_ID        = 41, // Terminal Id
+    MERCHAINT_ID        = 42, // Merchant ID
     APPROVE_CODE = 38, // App code
     
     BATCH_NUMBER       = 60, // Batch number
@@ -103,6 +104,7 @@ typedef enum{
         self.dateTime = [self dateTime:dateString];
         
         self.terminalId = [STBDataFormatter toNilIfNull:dict propertyName:Field(TERMINAL_ID)];
+        self.merchantId = [STBDataFormatter toNilIfNull:dict propertyName:Field(MERCHAINT_ID)];
         self.appCode = [STBDataFormatter toNilIfNull:dict propertyName:Field(APPROVE_CODE)];
     }
     

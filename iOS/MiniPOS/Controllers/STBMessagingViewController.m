@@ -101,17 +101,6 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     //Refresh the ISMP State
     [self updateISMPState:[self.iSMPControl getISMPState]];
     
-    /*
-     //Update the Debit/Credit Segment Control
-     BOOL creditEnabled = [SettingsManager sharedSettingsManager].creditEnabled;
-     self.segmentCreditDebit.hidden = !creditEnabled;
-     
-     //Show the extended data text field when required
-     BOOL useExtendedTransaction = [SettingsManager sharedSettingsManager].useExtendedTransaction;
-     self.labelExtendedData.hidden  = !useExtendedTransaction;
-     self.textExtendedData.hidden   = !useExtendedTransaction;
-     */
-    
     [_tableView reloadData];
 }
 
@@ -148,8 +137,6 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     NSString *request = [self.posMessageQueue dequeue];
     if (request)
         self.posMessage = [[PosMessage alloc] initWithMessage:request];
-    self.posMessage.merchantId = self.profile.merchantId;
-    
     self.displayableArray = [self displayableArrayWithPosMessage:_posMessage];
     
     //update table view
@@ -230,9 +217,17 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
 
 - (void)sendBill{
     _requestSendCount++;
+    
+    //show hud
+    [SVProgressHUD showWithStatus:@"Saving bill..." maskType:SVProgressHUDMaskTypeBlack];
+
     [_posMessage sendBillWithProfile:_profile completionBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             DLog(@"success:\n%@", responseObject);
+            
+            //dismiss hud
+            [SVProgressHUD dismiss];
+            
             //continue with the next request
             _requestSendCount = 0;
             [self pop];
@@ -245,11 +240,18 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
             else
                 [self failure:error];
         }
+    } noInternet:^{
+        _requestSendCount = 3;
+        [SVProgressHUD showErrorWithStatus:@"Device is not connected to the internet!"];
     }];
 }
 
 - (void)failure:(NSError *)error{
-    NSString *msg = [NSString stringWithFormat:@"Error %i", [error code]];
+    //dismiss hud
+    [SVProgressHUD dismiss];
+    
+    NSString *msg = [NSString stringWithFormat:@"%@", error];
+    //[SVProgressHUD showErrorWithStatus:msg];
     [UIAlertView alertViewWithTitle:@"" message:msg cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
     } onCancel:^{
         //do next process

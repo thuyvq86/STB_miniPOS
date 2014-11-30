@@ -12,6 +12,6 @@
 
 @interface ICMPProfile (Operations)
 
-- (AFHTTPRequestOperation *)getProfileWithCompletionBlock:(void (^)(id responseObject, NSError *error))block;
+- (AFHTTPRequestOperation *)getProfileWithCompletionBlock:(void (^)(id responseObject, NSError *error))completionBlock noInternet:(void (^)(void))noInternet;
 
 @end

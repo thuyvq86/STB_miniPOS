@@ -17,12 +17,21 @@
 @implementation STBAppDelegate
 
 @synthesize centerViewController = _centerViewController;
+@synthesize apiClient = _apiClient;
 
 #pragma mark - App lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //log request/response
     [[AFNetworkActivityLogger sharedLogger] startLogging];
+    
+    // Start monitoring the internet connection
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    //Setup the ApiClient and the Core Data Stack
+    id apiClient = nil;
+    apiClient = self.apiClient;
     
     //Set app-wide shared cache
     [self configureCacheLimits];
@@ -99,6 +108,16 @@
     
     //post notification
     [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+}
+
+#pragma mark - Setup API client
+
+- (STBAPIClient*)apiClient {
+    if(!_apiClient) {
+        _apiClient = [STBAPIClient sharedClient];
+    }
+    
+    return _apiClient;
 }
 
 #pragma mark - Memory management

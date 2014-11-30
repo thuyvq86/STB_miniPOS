@@ -34,6 +34,10 @@
 
 + (instancetype)sharedClient;
 
+#pragma mark - Reachability
+
+- (bool)isInternetReachable;
+
 #pragma mark - Helpers
 
 + (NSString *)jsonStringFromDictionary:(NSDictionary *)dataDict;

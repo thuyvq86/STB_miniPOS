@@ -131,6 +131,8 @@
 - (void)getProfile:(ICMPProfile *)profile{
     _requestSendCount++;
     
+    [SVProgressHUD showWithStatus:@"Getting profile..." maskType:SVProgressHUDMaskTypeBlack];
+    
     [profile getProfileWithCompletionBlock:^(id responseObject, NSError *error) {
         if (responseObject) {
             DLog(@"success:\n%@", responseObject);
@@ -140,6 +142,9 @@
             
             //go to messaging view
             [self showMessagingView:profile];
+            
+            //dismiss hud
+            [SVProgressHUD dismiss];
         }
         else{
             DLog(@"failure:\n%@", error);
@@ -147,16 +152,11 @@
             if (_requestSendCount < 3)
                 [self getProfile:profile];
             else
-                [self failure:error];
+                [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@", error]];
         }
-    }];
-}
-
-- (void)failure:(NSError *)error{
-    NSString *msg = [NSString stringWithFormat:@"Error %i", [error code]];
-    [UIAlertView alertViewWithTitle:@"" message:msg cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
-    } onCancel:^{
-        //do nothing
+    } noInternet:^{
+        _requestSendCount = 3;
+        [SVProgressHUD showErrorWithStatus:@"Device is not connected to the internet!"];
     }];
 }
 
