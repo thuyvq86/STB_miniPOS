@@ -1,6 +1,7 @@
 package com.stb.minipos.model.dao;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,21 +11,24 @@ import java.util.regex.Pattern;
 
 import android.text.TextUtils;
 
-public class PosMessageObject implements Serializable {
+public class POSMessage implements Serializable {
 	enum ValueType {
-		TRANSACTION_TYPE(79), // sell, void
 		CARD_NUMBER(2), // card number
-		CARD_NAME(66), // card name
-		CARD_TYPE(65), // card type
-		TOTAL(4), // card number
-		TERMINAL_ID(41), // card number
-		APPROVE_CODE(38), // approve code
-		RECEIPT_UNIT(49), // unit
-		RECEIPT_NO(62), // card number
-		RECEIPT_REF_NO(37), // reference number
-		RECEIPT_BATCH_NO(60), // batch number
+		TOTAL_AMOUNT(4), // card number
+		TIP_AMOUNT(12), // card number
+		BASE_AMOUNT(68), // card number
 		TIME(12), // card number
 		EXPIRED_DATE(14), // expired date
+		RECEIPT_REF_NO(37), // reference number
+		APPROVE_CODE(38), // approve code
+		TERMINAL_ID(41), // terminal number
+		MERCHANT_ID(41), // merchant number
+		RECEIPT_UNIT(49), // unit
+		CARD_NAME(66), // card name
+		CARD_TYPE(65), // card type
+		RECEIPT_NO(62), // card number
+		RECEIPT_BATCH_NO(60), // batch number
+		TRANSACTION_TYPE(79), // sell, void
 		;
 		private ValueType(int id) {
 			this.id = id;
@@ -35,7 +39,7 @@ public class PosMessageObject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public PosMessageObject(String message) {
+	public POSMessage(String message) {
 		this.message = message;
 	}
 
@@ -60,6 +64,12 @@ public class PosMessageObject implements Serializable {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public boolean hasValue(int field) {
+		String re = "(\\|)?(F" + field + ")\\^.*";
+		Pattern pattern = Pattern.compile(re);
+		return pattern.matcher(message).find();
 	}
 
 	private String getValue(ValueType field) {
@@ -88,8 +98,10 @@ public class PosMessageObject implements Serializable {
 				number.substring(4, 6), number.substring(number.length() - 4));
 	}
 
-	public int getTotal() {
-		return Integer.parseInt(getValue(ValueType.TOTAL));
+	public String getTotal() {
+		Float amount = Float.parseFloat(getValue(ValueType.TOTAL_AMOUNT));
+		NumberFormat formatter = NumberFormat.getInstance();
+		return formatter.format(amount);
 	}
 
 	public Date getTime() {
@@ -134,9 +146,25 @@ public class PosMessageObject implements Serializable {
 	public String getAppCode() {
 		return getValue(ValueType.APPROVE_CODE);
 	}
-	
+
 	public String getUnit() {
 		return getValue(ValueType.RECEIPT_UNIT);
 	}
 
+	public boolean hasTip() {
+		return hasValue(ValueType.TIP_AMOUNT.id)
+				&& hasValue(ValueType.BASE_AMOUNT.id);
+	}
+
+	public String getTipAmount() {
+		Float amount = Float.parseFloat(getValue(ValueType.TIP_AMOUNT));
+		NumberFormat formatter = NumberFormat.getInstance();
+		return formatter.format(amount);
+	}
+
+	public String getBaseAmount() {
+		Float amount = Float.parseFloat(getValue(ValueType.BASE_AMOUNT));
+		NumberFormat formatter = NumberFormat.getInstance();
+		return formatter.format(amount);
+	}
 }

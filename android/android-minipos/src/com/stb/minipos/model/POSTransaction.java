@@ -6,12 +6,12 @@ import java.util.Observer;
 import android.graphics.Bitmap;
 
 import com.stb.minipos.model.STBApiManager.ApiResponseData;
-import com.stb.minipos.model.dao.PosMessageObject;
+import com.stb.minipos.model.dao.POSMessage;
 import com.stb.minipos.model.dao.STBRequestBill;
 import com.stb.minipos.model.dao.STBResponse;
 
 public class POSTransaction extends Observable implements Observer {
-	public POSTransaction(PosMessageObject object) {
+	public POSTransaction(POSMessage object) {
 		this.message = object;
 	}
 
@@ -47,7 +47,7 @@ public class POSTransaction extends Observable implements Observer {
 		return response.stbResponse;
 	}
 
-	public final PosMessageObject message;
+	public final POSMessage message;
 	public Bitmap signature;
 	public String email;
 	private ApiResponseData response;

@@ -15,7 +15,7 @@ import android.os.AsyncTask;
 
 import com.ingenico.pclutilities.PclUtilities;
 import com.ingenico.pclutilities.PclUtilities.BluetoothCompanion;
-import com.stb.minipos.model.dao.PosMessageObject;
+import com.stb.minipos.model.dao.POSMessage;
 
 public class POSManager extends Observable {
 	public enum DataChanged {
@@ -236,7 +236,7 @@ public class POSManager extends Observable {
 	private ArrayList<POSTransaction> transactions = new ArrayList<POSTransaction>();
 	private POSTransaction currentTransaction;
 
-	public void addTransactionToQueue(PosMessageObject object) {
+	public void addTransactionToQueue(POSMessage object) {
 		POSTransaction trans = new POSTransaction(object);
 		transactions.add(trans);
 		setChanged();

@@ -23,7 +23,7 @@ import com.stb.minipos.model.POSManager.DataChanged;
 import com.stb.minipos.model.POSTransaction;
 import com.stb.minipos.model.STBApiManager.ApiResponseData;
 import com.stb.minipos.model.STBProfile;
-import com.stb.minipos.model.dao.PosMessageObject;
+import com.stb.minipos.model.dao.POSMessage;
 import com.stb.minipos.utils.UIUtils;
 
 public class ReceiveMessageActivity extends BasePOSActivity implements
@@ -54,6 +54,8 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 
 	private TextView txtTotalTitle;
 	private TextView txtTotal;
+	private TextView txtTipAmount;
+	private TextView txtBaseAmount;
 	private View vgReprint;
 	private View vgSignature;
 	private ImageView imgSign;
@@ -157,9 +159,12 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 
 		txtExpiredDate = (TextView) findViewById(R.id.txtExpiredDate);
 
-		vgSignature = findViewById(R.id.vgSignature);
 		txtTotalTitle = (TextView) findViewById(R.id.txtTotalTitle);
 		txtTotal = (TextView) findViewById(R.id.txtTotal);
+		txtTipAmount = (TextView) findViewById(R.id.txtTipAmount);
+		txtBaseAmount = (TextView) findViewById(R.id.txtBaseAmount);
+
+		vgSignature = findViewById(R.id.vgSignature);
 		imgSign = (ImageView) findViewById(R.id.imgSign);
 		btnSign = findViewById(R.id.btnSign);
 		txtSignatureName = (TextView) findViewById(R.id.txtSignatureName);
@@ -237,7 +242,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			int[] byteReceived = new int[1];
 			if (recvMsg(msg, byteReceived) && byteReceived[0] > 0) {
 				byte[] data = Arrays.copyOf(msg, byteReceived[0]);
-				PosMessageObject object = new PosMessageObject(new String(data));
+				POSMessage object = new POSMessage(new String(data));
 				POSManager.instance().addTransactionToQueue(object);
 			}
 		} catch (Exception e) {
@@ -247,8 +252,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 
 	private void testTransaction() {
 		String message = "F1^2|F2^4364450099631797|F4^000000001001|F12^20141008235225|F14^1804|F37^428116455333|F38^798910|F39^00|F41^60012086|F42^000000060108354|F49^704|F60^1|F62^7|F65^VISA|F66^ALL FOR YOU               |F67^M|F72^20138884|F79^SALE";
-		POSManager.instance().addTransactionToQueue(
-				new PosMessageObject(message));
+		POSManager.instance().addTransactionToQueue(new POSMessage(message));
 	}
 
 	@Override
@@ -339,7 +343,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			vgRequestTransaction.setVisibility(View.VISIBLE);
 			return;
 		}
-		PosMessageObject message = object.message;
+		POSMessage message = object.message;
 
 		txtMessage.setText(message.getMessage());
 		txtTransactionType.setVisibility(View.VISIBLE);
@@ -363,7 +367,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		txtReceiptRefNo.setText(message.getReceiptRefNo());
 		txtTotalTitle.setText(String.format(getString(R.string.receipt_total),
 				message.getUnit()));
-		txtTotal.setText(String.valueOf(message.getTotal()));
+		txtTotal.setText(message.getTotal());
 
 		if (message.needSignature()) {
 			vgSignature.setVisibility(View.VISIBLE);
@@ -373,6 +377,13 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			vgSignature.setVisibility(View.GONE);
 			btnSign.setEnabled(false);
 		}
+		if (message.hasTip()) {
+			txtTipAmount.setText(message.getTipAmount());
+			txtBaseAmount.setText(message.getBaseAmount());
+		} else {
+			txtTipAmount.setText("");
+			txtBaseAmount.setText(message.getTotal());
+		}
 	}
 
 	private ProgressDialog _requestDialog;
@@ -380,7 +391,8 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 	private void commitTransaction() {
 		POSTransaction transaction = POSManager.instance()
 				.getCurrentTransaction();
-		if (transaction.signature == null) {
+		if (transaction.signature == null
+				&& transaction.message.needSignature()) {
 			UIUtils.showErrorMessage(this,
 					R.string.transaction_signature_empty_message);
 			return;
