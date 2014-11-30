@@ -2,6 +2,7 @@ package com.stb.minipos.ui.helper;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,10 +55,14 @@ public class BluetoothDevicesAdapter extends BaseAdapter {
 		// update layout
 		final STBProfile item = POSManager.instance().getProfile(
 				getItem(position));
-
 		{
 			holder.txtTitle.setText(item.getName());
-			holder.txtAddress.setText(item.getDesc());
+			if (TextUtils.isEmpty(item.getDesc())) {
+				holder.txtAddress.setVisibility(View.GONE);
+			} else {
+				holder.txtAddress.setVisibility(View.VISIBLE);
+				holder.txtAddress.setText(item.getDesc());
+			}
 
 		}
 
