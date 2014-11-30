@@ -131,6 +131,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		POSManager.instance().addObserver(this);
 		setContentView(R.layout.activity_receive_message);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
@@ -227,6 +228,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 	protected void onDestroy() {
 		super.onDestroy();
 		cancelTimer();
+		POSManager.instance().deleteObserver(this);
 	}
 
 	private void cancelTimer() {
@@ -259,7 +261,6 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 	protected void onResume() {
 		super.onResume();
 		setTitle(POSManager.instance().getActivedProfile().title);
-		POSManager.instance().addObserver(this);
 		if (getIntent() != null
 				&& getIntent().getAction() == Intent.ACTION_MAIN) {
 			findViewById(R.id.vgRequestTransaction).setOnClickListener(
@@ -270,12 +271,6 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 						}
 					});
 		}
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		POSManager.instance().deleteObserver(this);
 	}
 
 	private boolean isFree() {
