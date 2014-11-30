@@ -13,6 +13,9 @@ public class STBRequestBill {
 	public String TransactionData;
 
 	public void setCustomerSignature(Bitmap data) {
-		CustomerSignature = Utils.encodeTobase64(data);
+		if (data == null)
+			CustomerSignature = "";
+		else
+			CustomerSignature = Utils.encodeTobase64(data);
 	}
 }
