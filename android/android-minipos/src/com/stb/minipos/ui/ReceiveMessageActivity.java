@@ -211,7 +211,8 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 							dismissProgressDialog();
 							updateProfile();
 						} else if (!isCompanionConnected()
-								&& !isProgressDialogShowing()) {
+								&& !isProgressDialogShowing()
+								&& isActivityInForeground()) {
 							showProgressDialog();
 						} else if (isProgressDialogShowing()) {
 							checkConnectTimeout();
@@ -306,9 +307,11 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		} else if (observable == POSManager.instance().getActivedProfile()) {
 			ApiResponseData response = (ApiResponseData) data;
 			UIUtils.safetyDismissDialog(_requestDialog);
-			if (!response.isSuccess && !response.stbResponse.isSuccess()) {
+			if ((!response.isSuccess || !response.stbResponse.isSuccess())
+					&& !POSManager.instance().getActivedProfile()
+							.isFullyFetched()) {
 				UIUtils.showErrorMessage(this,
-						"Cannot getprofile from server!!!");
+						"Cannot get profile from server!!!");
 			}
 			updateLayout(POSManager.instance().getCurrentTransaction());
 		}

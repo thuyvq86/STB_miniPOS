@@ -21,7 +21,7 @@ public class SettingManager extends Observable {
 	 * @return true if the application is accept, otherwise return false
 	 */
 	public boolean isAcceptRootedDevice() {
-		return false;
+		return true;
 	}
 
 	/**

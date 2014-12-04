@@ -27,6 +27,12 @@ import com.stb.minipos.utils.Utils;
 public abstract class BaseActivity extends UIDrawerActivity implements
 		Constant, Observer, Config {
 
+	private boolean isActivityInForeground = false;
+
+	public boolean isActivityInForeground() {
+		return isActivityInForeground;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -119,7 +125,7 @@ public abstract class BaseActivity extends UIDrawerActivity implements
 	public boolean checkNetworkSettings() {
 		// checking if wireless and bluetooth available
 		if (!Utils.isWirelessAndBluetoothEnable(this)) {
-			if (_dialog == null) {
+			if (_dialog == null && isActivityInForeground()) {
 				_dialog = new WirelessAndBluetoothCheckingDialog();
 				showDialog(_dialog);
 			}
@@ -130,7 +136,7 @@ public abstract class BaseActivity extends UIDrawerActivity implements
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -141,7 +147,7 @@ public abstract class BaseActivity extends UIDrawerActivity implements
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 	public void openAbout() {
 		Intent intent = new Intent(this, AboutActivity.class);
 		startActivity(intent);
@@ -150,14 +156,17 @@ public abstract class BaseActivity extends UIDrawerActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
+		isActivityInForeground = true;
 		SettingManager.instance().addObserver(this);
 		checkNetworkSettings();
 		checkForRootedDevice();
+		
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+		isActivityInForeground = false;
 		SettingManager.instance().deleteObserver(this);
 	}
 
