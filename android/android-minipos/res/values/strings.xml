@@ -11,8 +11,8 @@
     <string name="slide_menu_about">About us</string>
 
     <!-- about -->
-	<string name="about_app">This is a test version of sacombank miniPOS</string>
-	<string name="about_version">Sacombank miniPOS v%s RC</string>
+    <string name="about_app">This is a test version of sacombank miniPOS</string>
+    <string name="about_version">Sacombank miniPOS v%s RC</string>
 
     <!-- wireless and bluetooth checking -->
     <string name="request_wireless_and_bluetooth">Please enable wireless and bluetooth to continue</string>
@@ -75,5 +75,10 @@
     <string name="menu_reset">Reset profiles</string>
     <string name="menu_open_settings">Bluetooth settings</string>
     <string name="menu_about">About Sacombank miniPOS</string>
+
+    <!-- profiles -->
+    <string name="profile_get_profiles_error_title">Cannot get profiles</string>
+    <string name="profile_get_profiles_error_message">Error: </string>
+    <string name="profile_get_profiles_network_error_message">Cannot connect to the server. Please check your internet connection and try again!</string>
 
 </resources>

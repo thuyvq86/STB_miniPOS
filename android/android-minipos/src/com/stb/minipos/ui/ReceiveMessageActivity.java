@@ -280,6 +280,30 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		return transaction == null || transaction.isCommitted();
 	}
 
+	/**
+	 * @param response
+	 */
+	public void handleGetingProfilesErrors(ApiResponseData response) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.profile_get_profiles_error_title);
+		final String message;
+		if (!response.isSuccess) {
+			message = getString(R.string.profile_get_profiles_network_error_message);
+		} else {
+			message = "ERROR: " + response.stbResponse.RespCode;
+		}
+		builder.setMessage(message);
+		builder.setPositiveButton(R.string.button_ok,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+					}
+				});
+		builder.setCancelable(false);
+		builder.create().show();
+	}
+
 	@Override
 	public void update(Observable observable, Object data) {
 		if (observable == POSManager.instance()
@@ -310,8 +334,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			if ((!response.isSuccess || !response.stbResponse.isSuccess())
 					&& !POSManager.instance().getActivedProfile()
 							.isFullyFetched()) {
-				UIUtils.showErrorMessage(this,
-						"Cannot get profile from server!!!");
+				handleGetingProfilesErrors(response);
 			}
 			updateLayout(POSManager.instance().getCurrentTransaction());
 		}
