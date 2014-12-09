@@ -191,7 +191,7 @@ public class Utils {
 	public static String encodeTobase64(Bitmap image) {
 		Bitmap immagex = Bitmap.createScaledBitmap(image, 250, 150, true);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+		immagex.compress(Bitmap.CompressFormat.PNG, 100, baos);
 		byte[] b = baos.toByteArray();
 		String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
 		return imageEncoded;
