@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
-import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -45,6 +44,10 @@ public class POSManager extends Observable {
 		}
 	}
 
+	public boolean hasActiveProfiles() {
+		return _profiles != null && !_profiles.isEmpty();
+	}
+
 	public void updatePairedDevices() {
 		Set<BluetoothCompanion> btComps = mPclUtil.GetPairedCompanions();
 		if (!_bluetoothDevices.isEmpty()) {
@@ -53,12 +56,11 @@ public class POSManager extends Observable {
 		}
 		if (btComps != null) {
 			for (BluetoothCompanion btComp : btComps) {
-				STBProfile profile = new STBProfile();
-				profile.address = btComp.getBluetoothDevice().getAddress();
-				profile.title = btComp.getBluetoothDevice().getName();
-				profile.btCompanion = btComp;
-				_bluetoothDevices.add(btComp.getBluetoothDevice());
-				setChanged();
+				if (!hasActiveProfiles()
+						|| hasProfile(btComp.getBluetoothDevice())) {
+					_bluetoothDevices.add(btComp.getBluetoothDevice());
+					setChanged();
+				}
 			}
 		}
 		notifyObservers();
@@ -70,7 +72,6 @@ public class POSManager extends Observable {
 		return isReseting;
 	}
 
-	@SuppressLint("NewApi")
 	public void resetProfile() {
 		DatabaseManager.instance().clearProfiles();
 		_profiles.clear();
@@ -131,6 +132,10 @@ public class POSManager extends Observable {
 
 	public STBProfile getActivedProfile() {
 		return getProfile(activedDevice);
+	}
+
+	public boolean hasProfile(BluetoothDevice device) {
+		return _profiles.containsKey(device.getAddress());
 	}
 
 	public STBProfile getProfile(BluetoothDevice device) {
