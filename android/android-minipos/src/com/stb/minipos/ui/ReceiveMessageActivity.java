@@ -8,6 +8,7 @@ import java.util.TimerTask;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -309,6 +310,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		if (observable == POSManager.instance()
 				&& data == DataChanged.TRANSACTION_ADD && isFree()) {
 			POSTransaction trans = POSManager.instance().popTransaction();
+			commitTimes = 0;
 			if (trans != null) {
 				updateLayout(trans);
 			}
@@ -322,8 +324,28 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 				if (isFree()) {
 					POSTransaction trans = POSManager.instance()
 							.popTransaction();
+					commitTimes = 0;
 					updateLayout(trans);
 				}
+			} else if (commitTimes > 3) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				String message = "Cannot save the transaction!";
+				if (transaction.getResponse() != null) {
+					message += "\nError: " + transaction.getResponse().RespCode;
+				}
+				builder.setMessage(message);
+				builder.setPositiveButton(R.string.button_ok,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								POSTransaction trans = POSManager.instance()
+										.popTransaction();
+								commitTimes = 0;
+								updateLayout(trans);
+							}
+						});
+				builder.create().show();
 			} else if (transaction.getResponse() != null) {
 				UIUtils.showErrorMessage(this,
 						"ERROR: " + transaction.getResponse().RespCode);
@@ -410,6 +432,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 	}
 
 	private ProgressDialog _requestDialog;
+	private int commitTimes = 0;
 
 	private void commitTransaction() {
 		POSTransaction transaction = POSManager.instance()
@@ -422,6 +445,7 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 		}
 		if (!transaction.isCommitted()) {
 			if (SN > 0 || getTermInfo()) {
+				commitTimes++;
 				transaction.addObserver(this);
 				transaction.commit();
 				_requestDialog = ProgressDialog.show(this, null,
