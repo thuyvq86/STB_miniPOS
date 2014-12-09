@@ -72,55 +72,9 @@ public class POSManager extends Observable {
 
 	@SuppressLint("NewApi")
 	public void resetProfile() {
-		if (isReseting)
-			return;
-
-		for (BluetoothDevice device : _bluetoothDevices) {
-			unpairDevice(device);
-		}
 		DatabaseManager.instance().clearProfiles();
 		_profiles.clear();
-
 		updatePairedDevices();
-		if (getPairDevicesCount() > 0) {
-			isReseting = true;
-			AsyncTask<Void, Integer, Boolean> task = new AsyncTask<Void, Integer, Boolean>() {
-
-				@Override
-				protected Boolean doInBackground(Void... params) {
-					final long time = System.currentTimeMillis();
-					try {
-						while (System.currentTimeMillis() - time < 10 * 1000
-								&& mPclUtil.GetPairedCompanions().size() > 0) {
-							Thread.sleep(200);
-						}
-						return mPclUtil.GetPairedCompanions().size() == 0;
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					return false;
-				}
-
-				protected void onPostExecute(Boolean result) {
-					isReseting = false;
-					updatePairedDevices();
-					setChanged();
-					notifyObservers();
-				}
-
-				protected void onCancelled() {
-					super.onCancelled();
-					isReseting = false;
-				}
-			};
-			if (android.os.Build.VERSION.SDK_INT >= 11) {
-				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-			} else {
-				task.execute();
-			}
-		} else {
-			isReseting = false;
-		}
 	}
 
 	public void unPairDevice(BluetoothDevice device) {

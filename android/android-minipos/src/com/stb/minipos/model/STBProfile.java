@@ -37,6 +37,7 @@ public class STBProfile extends Observable implements Observer {
 
 	@DatabaseField(id = true)
 	public String address;
+	
 	@DatabaseField
 	public String title;
 
