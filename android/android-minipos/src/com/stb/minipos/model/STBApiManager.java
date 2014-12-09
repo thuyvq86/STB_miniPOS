@@ -87,7 +87,6 @@ public class STBApiManager extends Observable implements Config {
 			jsonObj.put("RefNumber", "");
 			jsonObj.put("Signature", "");
 			jsonObj.put("Token", "");
-			System.out.println("jsonData " + jsonObj);
 			httpEntity = new StringEntity(jsonObj.toString(), "UTF-8");
 			httpEntity.setContentEncoding("UTF-8");
 			httpEntity.setContentType(API_CONTENT_TYPE);

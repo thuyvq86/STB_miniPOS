@@ -11,6 +11,7 @@ import java.util.Set;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 
 import com.ingenico.pclutilities.PclUtilities;
 import com.ingenico.pclutilities.PclUtilities.BluetoothCompanion;
@@ -174,9 +175,18 @@ public class POSManager extends Observable {
 		DatabaseManager.instance().createOrUpdate(profile);
 	}
 
-	public void activeBluetoothDevice(BluetoothDevice object) {
-		this.activedDevice = object;
-		mPclUtil.ActivateCompanion(object.getAddress());
+	public boolean activeBluetoothDevice(BluetoothDevice object) {
+		if (object == null || TextUtils.isEmpty(object.getAddress())) {
+			return false;
+		}
+		try {
+			this.activedDevice = object;
+			mPclUtil.ActivateCompanion(object.getAddress());
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	private static void unpairDevice(BluetoothDevice device) {

@@ -70,7 +70,9 @@
     <!-- hud -->
     <string name="hud_connect_bluetooth">Connecting to iCMP&#8230;</string>
     <string name="hud_status_reset">Reseting&#8230;</string>
-
+    <string name="network_error">Cannot connect to the server. Please check your internet connection!</string>
+    <string name="active_devices_error">Cannot active this device!</string>
+    
     <!-- menu -->
     <string name="menu_reset">Reset profiles</string>
     <string name="menu_open_settings">Bluetooth settings</string>

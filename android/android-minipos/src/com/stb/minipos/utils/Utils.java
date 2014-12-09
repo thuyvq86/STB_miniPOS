@@ -84,9 +84,14 @@ public class Utils {
 	 *            the application context
 	 */
 	public static void openBluetoothSettings(Context context) {
-		Intent settingsIntent = new Intent(
-				android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
-		context.startActivity(settingsIntent);
+		try {
+			Intent settingsIntent = new Intent(
+					android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
+			context.startActivity(settingsIntent);
+		} catch (Exception e) {
+			UIUtils.showErrorMessage(context,
+					"Couldnot found any activity to handle this action");
+		}
 	}
 
 	/**
@@ -96,9 +101,14 @@ public class Utils {
 	 *            the application context
 	 */
 	public static void openNetworkSettings(Context context) {
-		Intent settingsIntent = new Intent(
-				android.provider.Settings.ACTION_NETWORK_OPERATOR_SETTINGS);
-		context.startActivity(settingsIntent);
+		try {
+			Intent settingsIntent = new Intent(
+					android.provider.Settings.ACTION_NETWORK_OPERATOR_SETTINGS);
+			context.startActivity(settingsIntent);
+		} catch (Exception e) {
+			UIUtils.showErrorMessage(context,
+					"Couldnot found any activity to handle this action");
+		}
 	}
 
 	/**
@@ -108,9 +118,14 @@ public class Utils {
 	 *            the application context
 	 */
 	public static void openSettings(Context context) {
-		Intent settingsIntent = new Intent(
-				android.provider.Settings.ACTION_SETTINGS);
-		context.startActivity(settingsIntent);
+		try {
+			Intent settingsIntent = new Intent(
+					android.provider.Settings.ACTION_SETTINGS);
+			context.startActivity(settingsIntent);
+		} catch (Exception e) {
+			UIUtils.showErrorMessage(context,
+					"Couldnot found any activity to handle this action");
+		}
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package com.stb.minipos.utils;
 
+import com.stb.minipos.ui.base.UIDialogFragment;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
@@ -36,6 +38,16 @@ public class UIUtils {
 	}
 
 	public static void safetyDismissDialog(Dialog dialog) {
+		try {
+			if (dialog != null) {
+				dialog.dismiss();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void safetyDismissDialog(UIDialogFragment dialog) {
 		try {
 			if (dialog != null) {
 				dialog.dismiss();

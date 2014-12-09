@@ -22,6 +22,7 @@ import com.stb.minipos.model.SettingManager;
 import com.stb.minipos.ui.base.UIDialogFragment;
 import com.stb.minipos.ui.base.UIDrawerActivity;
 import com.stb.minipos.ui.fragment.WirelessAndBluetoothCheckingDialog;
+import com.stb.minipos.utils.UIUtils;
 import com.stb.minipos.utils.Utils;
 
 public abstract class BaseActivity extends UIDrawerActivity implements
@@ -131,7 +132,7 @@ public abstract class BaseActivity extends UIDrawerActivity implements
 			}
 			return false;
 		} else if (_dialog != null) {
-			_dialog.dismiss();
+			UIUtils.safetyDismissDialog(_dialog);
 			_dialog = null;
 		}
 		return true;
@@ -160,7 +161,7 @@ public abstract class BaseActivity extends UIDrawerActivity implements
 		SettingManager.instance().addObserver(this);
 		checkNetworkSettings();
 		checkForRootedDevice();
-		
+
 	}
 
 	@Override

@@ -21,6 +21,7 @@ import com.stb.minipos.model.STBProfile;
 import com.stb.minipos.ui.DrawerMenuItem;
 import com.stb.minipos.ui.ReceiveMessageActivity;
 import com.stb.minipos.ui.helper.BluetoothDevicesAdapter;
+import com.stb.minipos.utils.UIUtils;
 import com.stb.minipos.utils.Utils;
 
 public class BluetoothDevicesFragment extends BaseDialogFragment implements
@@ -139,9 +140,13 @@ public class BluetoothDevicesFragment extends BaseDialogFragment implements
 	}
 
 	private void startMiniPOS(BluetoothDevice object) {
-		POSManager.instance().activeBluetoothDevice(object);
-		Intent intent = new Intent(getActivity(), ReceiveMessageActivity.class);
-		getActivity().startActivity(intent);
+		if (POSManager.instance().activeBluetoothDevice(object)) {
+			Intent intent = new Intent(getActivity(),
+					ReceiveMessageActivity.class);
+			getActivity().startActivity(intent);
+		} else {
+			UIUtils.showErrorMessage(getActivity(), R.string.active_devices_error);
+		}
 	}
 
 }

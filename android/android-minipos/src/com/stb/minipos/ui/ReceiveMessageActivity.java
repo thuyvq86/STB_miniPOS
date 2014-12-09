@@ -324,9 +324,11 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 							.popTransaction();
 					updateLayout(trans);
 				}
-			} else {
+			} else if (transaction.getResponse() != null) {
 				UIUtils.showErrorMessage(this,
 						"ERROR: " + transaction.getResponse().RespCode);
+			} else {
+				UIUtils.showErrorMessage(this, R.string.network_error);
 			}
 		} else if (observable == POSManager.instance().getActivedProfile()) {
 			ApiResponseData response = (ApiResponseData) data;
