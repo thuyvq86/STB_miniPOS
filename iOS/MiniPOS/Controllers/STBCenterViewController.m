@@ -9,13 +9,13 @@
 #import "STBCenterViewController.h"
 //Controllers
 #import "STBMessagingViewController.h"
-#import "AppInfoController.h"
+#import "STBSettingsViewController.h"
 //Views
 #import "DeviceProfileInfoCell.h"
 //Models
 #import "ICMPProfile+Operations.h"
 
-@interface STBCenterViewController ()<ICISMPDeviceDelegate, AppInfoDelegate>
+@interface STBCenterViewController ()<ICISMPDeviceDelegate>
 
 @property (nonatomic, assign) iSMPControlManager *iSMPControl;
 @property (nonatomic, strong) NSMutableArray *connectedAccessories;
@@ -302,15 +302,20 @@
 #pragma mark - User actions
 
 - (IBAction)buttonSettingsTouch:(id)sender {
-    AppInfoController *appInfoController = [[AppInfoController alloc] initWithNibName:@"AppInfoController" bundle:nil];
-    appInfoController.delegate = self;
+    ICMPProfile *profile = nil;
+    if (_connectedAccessories && [_connectedAccessories count] > 0)
+        profile = [_connectedAccessories objectAtIndex:0];
     
-//    [self presentViewController:appInfoController animated:YES completion:nil];
-    [self parentView:self presentViewController:appInfoController animated:YES completion:nil];
+    [self showSettingsView:profile.accessory];
 }
 
-- (void)didFinishAppInfoController:(id)appInfoController{
-    [self parentView:self dismissViewController:appInfoController animated:YES completion:nil];
+- (void)showSettingsView:(EAAccessory *)pairedDevice{
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MessagingStoryboard" bundle:nil];
+    STBSettingsViewController *settingsViewController = [storyBoard instantiateViewControllerWithIdentifier:@"settingsViewController"];
+    settingsViewController.pairedDevice = pairedDevice;
+    
+    [self.navigationController pushViewController:settingsViewController animated:YES];
 }
 
 @end

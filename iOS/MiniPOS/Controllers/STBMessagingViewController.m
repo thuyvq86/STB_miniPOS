@@ -142,6 +142,11 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     //update table view
     [_tableView reloadData];
     _navItem.rightBarButtonItem.enabled = (self.posMessage) ? YES : NO;
+    
+    //show sign view automatically
+//    if (self.posMessage && [self.posMessage shouldRequireSignature]){
+//        [self performSelector:@selector(doSignatureCapture) withObject:nil afterDelay:.2];
+//    }
 }
 
 #pragma mark - Load content

@@ -20,6 +20,8 @@
 		D8573E621A272606007C4EBC /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84D292B19FEAFB200288FE0 /* CrashReporter.framework */; };
 		D8573E631A272606007C4EBC /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49819EFFCBB008BB5D5 /* iSMP.framework */; };
 		D8C5C83719FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */; };
+		D8E1460D1A38A3430067F875 /* STBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1460C1A38A3430067F875 /* STBSettingsViewController.m */; };
+		D8E146101A38A3730067F875 /* SettingsInfoCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1460F1A38A3730067F875 /* SettingsInfoCellTableViewCell.m */; };
 		D8EDD3221A24F309008E60CB /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD2FE1A24F309008E60CB /* AFHTTPRequestOperation.m */; };
 		D8EDD3231A24F309008E60CB /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD3001A24F309008E60CB /* AFHTTPRequestOperationManager.m */; };
 		D8EDD3241A24F309008E60CB /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD3021A24F309008E60CB /* AFHTTPSessionManager.m */; };
@@ -190,6 +192,10 @@
 		D84D292B19FEAFB200288FE0 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		D8C5C83519FFDB750048E4F0 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
 		D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
+		D8E1460B1A38A3430067F875 /* STBSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBSettingsViewController.h; sourceTree = "<group>"; };
+		D8E1460C1A38A3430067F875 /* STBSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBSettingsViewController.m; sourceTree = "<group>"; };
+		D8E1460E1A38A3730067F875 /* SettingsInfoCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsInfoCellTableViewCell.h; sourceTree = "<group>"; };
+		D8E1460F1A38A3730067F875 /* SettingsInfoCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsInfoCellTableViewCell.m; sourceTree = "<group>"; };
 		D8EDD2FD1A24F309008E60CB /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		D8EDD2FE1A24F309008E60CB /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		D8EDD2FF1A24F309008E60CB /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -742,6 +748,8 @@
 		D8FEB43F19EFF61F008BB5D5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D8E1460B1A38A3430067F875 /* STBSettingsViewController.h */,
+				D8E1460C1A38A3430067F875 /* STBSettingsViewController.m */,
 				D8EDD3631A2A2D3A008E60CB /* Center */,
 				D8EDD3591A2A27AF008E60CB /* About */,
 				D8ACD25619FFCF7600754108 /* Messaging */,
@@ -779,6 +787,8 @@
 			children = (
 				D8EDD3641A2A2F07008E60CB /* Profile */,
 				D8FEB57419F16576008BB5D5 /* Messaging */,
+				D8E1460E1A38A3730067F875 /* SettingsInfoCellTableViewCell.h */,
+				D8E1460F1A38A3730067F875 /* SettingsInfoCellTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1345,6 +1355,7 @@
 				D8FEB46D19EFF89E008BB5D5 /* MFMessageComposeViewController+Block.m in Sources */,
 				D8FEB52A19F15290008BB5D5 /* NSString+Size.m in Sources */,
 				D8FEB4EA19F14C59008BB5D5 /* DUTableView.m in Sources */,
+				D8E146101A38A3730067F875 /* SettingsInfoCellTableViewCell.m in Sources */,
 				D8FEB52719F15290008BB5D5 /* FontManager.m in Sources */,
 				D8FEB52919F15290008BB5D5 /* NSString+DrawText.m in Sources */,
 				D8FEB4B419F0066D008BB5D5 /* STBDataFormatter.m in Sources */,
@@ -1370,6 +1381,7 @@
 				D8FEB46A19EFF89E008BB5D5 /* CLLocationManager+Block.m in Sources */,
 				D8FEB55D19F1542B008BB5D5 /* SDImageCache.m in Sources */,
 				D8EDD3221A24F309008E60CB /* AFHTTPRequestOperation.m in Sources */,
+				D8E1460D1A38A3430067F875 /* STBSettingsViewController.m in Sources */,
 				D8FEB41419EFF331008BB5D5 /* main.m in Sources */,
 				D8EDD3231A24F309008E60CB /* AFHTTPRequestOperationManager.m in Sources */,
 			);

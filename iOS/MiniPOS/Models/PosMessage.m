@@ -208,9 +208,12 @@ typedef enum{
 - (NSArray *)displayableProperties {
     if (!self.presentedProperties) {
         NSMutableArray *properties = [NSMutableArray array];
+        
+        NSString *_merchant = [NSString stringWithFormat:@"MID : %@", self.merchantId];
+        NSString *_terminal = [NSString stringWithFormat:@"TID : %@", self.terminalId];
 
-        [properties addObject:@[@(TextTypeNormal), @"MID", self.merchantId]];
-        [properties addObject:@[@(TextTypeNormal), @"TID", self.terminalId]];
+        [properties addObject:@[@(TextTypeNormal), _merchant, _terminal]];
+//        [properties addObject:@[@(TextTypeNormal), @"TID", self.terminalId]];
         [properties addObject:@[@(TextTypeNormal), @"DATE / TIME", self.formattedDateTime]];
         [properties addObject:@[@(TextTypeNormal), @"", @""]]; //break line
         

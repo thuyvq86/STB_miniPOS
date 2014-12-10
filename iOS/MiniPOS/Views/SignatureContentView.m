@@ -35,8 +35,6 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    //id<ApplicationThemeDelegate> currentTheme = [ApplicationThemeManager sharedTheme];
-    
     if ([self.layer respondsToSelector:@selector(setDrawsAsynchronously:)])
         [self.layer setDrawsAsynchronously:YES];
     
@@ -44,7 +42,6 @@
     UIFont *textFont = [theme fontForHeader]; //normal
     
     CGFloat width    = CGRectGetWidth(rect) - 2*kLeftPadding;
-//    CGFloat height   = CGRectGetHeight(rect);
     NSInteger offset = kTopPadding;
     
     //text color

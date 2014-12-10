@@ -35,19 +35,16 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    //id<ApplicationThemeDelegate> currentTheme = [ApplicationThemeManager sharedTheme];
-    
     if ([self.layer respondsToSelector:@selector(setDrawsAsynchronously:)])
         [self.layer setDrawsAsynchronously:YES];
     
     id<ApplicationThemeDelegate> theme = [ApplicationThemeManager sharedTheme];
-    UIFont *boldFont   = [theme boldFontForHeader]; //bold
-    UIFont *normalFont = [theme fontForHeader]; //normal
+    UIFont *boldFont   = [theme mediumBoldFontForHeader]; //bold
+    UIFont *normalFont = [theme mediumFontForContent]; //normal
     UIImage *lineImage = [theme separatorLine];
     
     CGFloat width    = CGRectGetWidth(rect) - 2*kLeftPadding;
-//    CGFloat height   = CGRectGetHeight(rect);
-    NSInteger offset = INTERFACE_IS_IPAD ? (kLinePadding + kLinePadding/2) : kTopPadding;
+    NSInteger offset = kTopPadding;
     
     NSString *transactionType = [_posMessage.transactionType uppercaseString];
     NSArray *properties = _posMessage.displayableProperties;
@@ -86,12 +83,11 @@
     id<ApplicationThemeDelegate> theme = [ApplicationThemeManager sharedTheme];
     
     NSInteger height = 0;
-    //CGFloat width = parentWidth - 2*kLeftPadding;
     
     UIImage *lineImage = [theme separatorLine];
     NSArray *properties = aPosMessage.displayableProperties;
     
-    height += INTERFACE_IS_IPAD ? (kLinePadding + kLinePadding/2) : kTopPadding;
+    height += kTopPadding;
     height += kTitleHeight + kLinePadding;
     height += lineImage.size.height + kLinePadding; //separator line
     
