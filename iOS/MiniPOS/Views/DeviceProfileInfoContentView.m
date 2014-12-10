@@ -84,10 +84,9 @@
         return nil;
     
     NSArray *protocolStrings = [connectedAccessory protocolStrings];
-    NSString *msg = [NSString stringWithFormat:
-                     @"connected: %d\nconnectionID: %d\nname: %@\nmanufacturer: %@\nmodelNumber: %@\nserialId: %@\nfirmwareReveision: %@\nhardwareRevision: %@\nprotocolStrings: %@",
-                     
-                     connectedAccessory.connected,
+    NSString *info = [NSString stringWithFormat:
+                     @"Connected: %@\nConnection ID: %d\nName: %@\nManufacturer: %@\nModel Number: %@\nSerial: %@\nFirmware Reveision: %@\nHardware Revision: %@\nProtocols:\n%@",
+                     connectedAccessory.connected ? @"Yes" : @"No",
                      connectedAccessory.connectionID,
                      connectedAccessory.name,
                      connectedAccessory.manufacturer,
@@ -95,10 +94,13 @@
                      connectedAccessory.serialNumber,
                      connectedAccessory.firmwareRevision,
                      connectedAccessory.hardwareRevision,
-                     [protocolStrings componentsJoinedByString:@"\n"]
+                      [protocolStrings componentsJoinedByString:@"\n"]
                      ];
+    DLog(@"%@", info);
     
-    return msg;
+    NSString *name = [NSString stringWithFormat:@"%@-%@", connectedAccessory.name, connectedAccessory.serialNumber];
+    
+    return name;
 }
 
 - (void)setProfile:(ICMPProfile *)profile{

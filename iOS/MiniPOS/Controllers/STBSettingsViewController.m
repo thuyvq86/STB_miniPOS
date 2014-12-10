@@ -95,7 +95,7 @@
         
         NSString *text = @"No Paired device.";
         if (self.pairedDevice)
-            text = [NSString stringWithFormat:@"Paired device: %@", self.pairedDevice.name];
+            text = [NSString stringWithFormat:@"Paired device: %@-%@", self.pairedDevice.name, self.pairedDevice.serialNumber];
         
         cell.textLabel.text = text;
     }
@@ -131,19 +131,26 @@
 #pragma mark - Device Info
 
 - (void)showPairedDeviceInfoAlert{
-    NSString *title = self.pairedDevice.name;
+
+    NSString *title = [NSString stringWithFormat:@"%@-%@", self.pairedDevice.name, self.pairedDevice.serialNumber];
     NSString *msg = [NSString stringWithFormat:
-                     @"connected: %d\nconnectionID: %d\nname: %@\nmanufacturer: %@\nmodelNumber: %@\nserialId: %@\nfirmwareReveision: %@\nhardwareRevision: %@",
-                     
-                     self.pairedDevice.connected,
-                     self.pairedDevice.connectionID,
-                     self.pairedDevice.name,
+                     @"Manufacturer: %@\nModel Number: %@\nSerial Id: %@\nFirmware Reveision: %@\nHardware Revision: %@",
                      self.pairedDevice.manufacturer,
                      self.pairedDevice.modelNumber,
                      self.pairedDevice.serialNumber,
                      self.pairedDevice.firmwareRevision,
                      self.pairedDevice.hardwareRevision
                      ];
+    
+    NSString *msg2 = [NSString stringWithFormat:
+                     @"Name: %@\nModel Number: %@\nSerial Id: %@\nFirmware Reveision: %@\nHardware Revision: %@",
+                     [ICISMPDevice name],
+                     [ICISMPDevice modelNumber],
+                     [ICISMPDevice serialNumber],
+                     [ICISMPDevice firmwareRevision],
+                     [ICISMPDevice hardwareRevision]
+                     ];
+    DLog(@"%@", msg2);
     
     [UIAlertView alertViewWithTitle:title message:msg cancelButtonTitle:@"OK"];
 }
