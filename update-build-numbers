@@ -37,7 +37,7 @@ buildNumber=$(($baseNumber + $nCommits))
 ##########################################################################################
 
 # the path of the <application>-Info.plist file, relative to the repository root directory
-relativePlistFilePathFromRepoRoot="iOS/MiniPOS-Info.plist"
+relativePlistFilePathFromRepoRoot="iOS/MiniPOS/MiniPOS-Info.plist"
 
 # combine absoulte path to <application>Info.plist
 infoPlistFile="$hooksDir/../../$relativePlistFilePathFromRepoRoot"
