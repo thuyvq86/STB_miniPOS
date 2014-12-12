@@ -1,0 +1,52 @@
+#!/bin/bash
+#
+# Author: Nam Nguyen, STB, December 2014
+#
+
+# Description
+#
+# This is a custom pre-commmit hook, eg. this script is called
+# by git before each commit.
+#
+# Each time you commit changes to the git repository,
+# before commiting, this scripts sets either...
+#
+#   - CFBundleVersion or
+#   - CFBundleShortVersionString 
+#
+# ...to the current number of git commits + an base value,
+# ex: base + nCommits = 1000 + 234 = 1234.
+# 
+
+# the base number. 
+# default is 0, but you can change it as you wish
+# the final buildNumber will be nCommits + base
+baseNumber=0 
+
+# the full path to the hooks directory
+hooksDir=$(dirname $0)
+
+# get the number of commits
+nCommits=`git rev-list HEAD --count`
+
+# calculated build number: add base number and commit
+buildNumber=$(($baseNumber + $nCommits))
+
+##########################################################################################
+###  iOS MINIPOS LIVE
+##########################################################################################
+
+# the path of the <application>-Info.plist file, relative to the repository root directory
+relativePlistFilePathFromRepoRoot="iOS/MiniPOS-Info.plist"
+
+# combine absoulte path to <application>Info.plist
+infoPlistFile="$hooksDir/../../$relativePlistFilePathFromRepoRoot"
+
+# update the CFBundleVersion
+/usr/libexec/PlistBuddy -c "Set :CFBundleVersion $buildNumber" "$infoPlistFile"
+#echo "Updated CFBundleVersion in " $infoPlistFile " to " $buildNumber
+
+# stage change file
+git add $infoPlistFile
+
+echo "Updated CFBundleVersion in all plist files to " $buildNumber
