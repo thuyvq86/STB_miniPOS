@@ -89,8 +89,7 @@ public class Utils {
 					android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
 			context.startActivity(settingsIntent);
 		} catch (Exception e) {
-			UIUtils.showErrorMessage(context,
-					"Couldnot found any activity to handle this action");
+			openSettings(context);
 		}
 	}
 
@@ -106,8 +105,7 @@ public class Utils {
 					android.provider.Settings.ACTION_NETWORK_OPERATOR_SETTINGS);
 			context.startActivity(settingsIntent);
 		} catch (Exception e) {
-			UIUtils.showErrorMessage(context,
-					"Couldnot found any activity to handle this action");
+			openSettings(context);
 		}
 	}
 

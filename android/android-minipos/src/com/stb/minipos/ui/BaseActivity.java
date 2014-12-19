@@ -127,8 +127,14 @@ public abstract class BaseActivity extends UIDrawerActivity implements
 		// checking if wireless and bluetooth available
 		if (!Utils.isWirelessAndBluetoothEnable(this)) {
 			if (_dialog == null && isActivityInForeground()) {
-				_dialog = new WirelessAndBluetoothCheckingDialog();
-				showDialog(_dialog);
+				try {
+					_dialog = new WirelessAndBluetoothCheckingDialog();
+					_dialog.setCancelable(false);
+					showDialog(_dialog);
+				} catch (Exception e) {
+					e.printStackTrace();
+					_dialog = null;
+				}
 			}
 			return false;
 		} else if (_dialog != null) {
