@@ -175,6 +175,16 @@ public class POSManager extends Observable {
 		DatabaseManager.instance().createOrUpdate(profile);
 	}
 
+	public void onActiveSuccess() {
+		for (int i = 0; i < _bluetoothDevices.size(); i++) {
+			if (_bluetoothDevices.get(i) != getActivedDevice()) {
+				_bluetoothDevices.remove(i);
+				i--;
+			}
+		}
+
+	}
+
 	public boolean activeBluetoothDevice(BluetoothDevice object) {
 		if (object == null || TextUtils.isEmpty(object.getAddress())) {
 			return false;

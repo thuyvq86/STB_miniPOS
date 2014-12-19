@@ -37,7 +37,7 @@ public class STBProfile extends Observable implements Observer {
 
 	@DatabaseField(id = true)
 	public String address;
-	
+
 	@DatabaseField
 	public String title;
 
@@ -97,6 +97,8 @@ public class STBProfile extends Observable implements Observer {
 					setData((STBResponseProfiles) response.stbResponse
 							.getData());
 					POSManager.instance().updateProfile(this);
+					// active success, remove another account
+					POSManager.instance().onActiveSuccess();
 				}
 				setChanged();
 				notifyObservers(data);
