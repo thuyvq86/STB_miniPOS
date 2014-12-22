@@ -91,8 +91,8 @@
     NSCache *aCache = [entityClass sharedCache];
     __block PairedDevice *instance = [[PairedDevice sharedCache] objectForKey:serialNumber];
     if(!instance) {
-        NSString *queryString = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE serialNumber = %%@", [entityClass tableName]];
-        FMResultSet *results = [db executeQueryWithFormat:queryString, serialNumber];
+        NSString *queryString = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE serialNumber = '%@'", [entityClass tableName], serialNumber];
+        FMResultSet *results = [db executeQuery:queryString];
         while([results next]) {
             instance = [entityClass instanceFromResultSet:results];
             [instance setIsFromDb:YES];
@@ -103,6 +103,40 @@
     }
     
     return instance;
+}
+
+//override
+- (bool)insertOrUpdateInDb:(FMDatabase*)db {
+    __block bool isSuccess = NO;
+    id <XMBaseEntityProtocol> entityClass = (id <XMBaseEntityProtocol>) [self class];
+    if([self isNew]) {
+        NSString *queryString = [NSString stringWithFormat:@"INSERT INTO %@ %@", [entityClass tableName], [entityClass sqlFormatStringForInsert]];
+        NSDictionary *parameters = [self parametersForInsertOrUpdate];
+        isSuccess =[db executeUpdate:queryString withParameterDictionary:parameters];
+        if(isSuccess && [self isNew]) {
+            self.isFromDb = YES;
+            long long lastId = [db lastInsertRowId];
+            self.id = (int)lastId;
+            
+            NSCache *aCache = [entityClass sharedCache];
+            [aCache setObject:self forKey:self.serialNumber];
+        }
+        else {
+            NSError *error = [db lastError];
+            NSLog(@"Last error: %@", error);
+        }
+    }
+    else {
+        NSString *queryString = [NSString stringWithFormat:@"UPDATE %@ SET %@", [entityClass tableName], [entityClass sqlFormatStringForUpdate]];
+        NSArray *arguments = [self argumentsForUpdate];
+        
+        isSuccess = [db executeUpdate:queryString withArgumentsInArray:arguments];
+        if(!isSuccess) {
+            NSError *error = [db lastError];
+            NSLog(@"Last error: %@", error);
+        }
+    }
+    return isSuccess;
 }
 
 #pragma mark - Count

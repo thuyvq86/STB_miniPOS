@@ -101,8 +101,8 @@
         isSuccess =[db executeUpdate:queryString withParameterDictionary:parameters];
         if(isSuccess && [self isNew]) {
             self.isFromDb = YES;
-            NSInteger lastId = [db lastInsertRowId];
-            self.id = lastId;
+            long long lastId = [db lastInsertRowId];
+            self.id = (int)lastId;
             NSCache *aCache = [entityClass sharedCache];
             [aCache setObject:self forKey:[NSNumber numberWithInteger:self.id]];
         }

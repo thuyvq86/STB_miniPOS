@@ -16,7 +16,7 @@
 #import "ICMPProfile+Operations.h"
 #import "PairedDevice.h"
 
-@interface STBCenterViewController ()<ICISMPDeviceDelegate>
+@interface STBCenterViewController ()<ICISMPDeviceDelegate, SettingsViewDelegate>
 
 @property (nonatomic, assign) iSMPControlManager *iSMPControl;
 @property (nonatomic, strong) NSMutableArray *connectedAccessories;
@@ -60,11 +60,12 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //[self updateFrameOfView];
+//    [self updateFrameOfView];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+//    [self updateFrameOfView];
     
     if (UIAppDelegate.bluetoothEnabled)
         [self loadContent];
@@ -318,9 +319,16 @@
     
     UINavigationController *settingsNavigationController = [storyBoard instantiateViewControllerWithIdentifier:@"settingsNavigationController"];
     STBSettingsViewController *settingsViewController = settingsNavigationController.viewControllers[0];
+    settingsViewController.delegate = self;
     settingsViewController.pairedDevice = pairedDevice;
     
-    [self presentViewController:settingsNavigationController animated:YES completion:NO];
+    //[self presentViewController:settingsNavigationController animated:YES completion:nil];
+    [self parentView:self presentViewController:settingsNavigationController animated:YES completion:nil];
+}
+
+// Sent to the delegate when the screen is dismissed.
+- (void)settingsViewControllerDidFinish:(STBSettingsViewController *)settingsViewController{
+    [self parentView:self dismissViewController:settingsViewController.navigationController animated:YES completion:nil];
 }
 
 @end

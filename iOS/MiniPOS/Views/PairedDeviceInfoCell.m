@@ -13,6 +13,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
+    
     [self theming];
 }
 
@@ -49,6 +51,8 @@
     
     self.textLabel.textColor = [UIColor whiteColor];
     self.textLabel.font = [theme fontForHeader];
+    
+    self.detailTextLabel.backgroundColor = [UIColor greenColor];
 }
 
 // Only override drawRect: if you perform custom drawing.

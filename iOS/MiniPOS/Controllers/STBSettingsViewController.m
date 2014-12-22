@@ -23,6 +23,7 @@
 
 @implementation STBSettingsViewController
 
+@synthesize delegate;
 @synthesize pairedDevice = _pairedDevice;
 
 - (void)viewDidLoad {
@@ -66,8 +67,11 @@
 #pragma mark - User actions
 
 - (void)buttonBackTouch:(id)sender{
-    //[self.navigationController popViewControllerAnimated:YES];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (delegate && [delegate respondsToSelector:@selector(settingsViewControllerDidFinish:)]){
+        [delegate settingsViewControllerDidFinish:self];
+    }
+    else
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark Table view data source

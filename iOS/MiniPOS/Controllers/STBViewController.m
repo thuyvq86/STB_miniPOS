@@ -21,18 +21,19 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self addCenterView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self updateFrameOfView];
+    [self updateFrameOfView];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    [self updateFrameOfView];
-    [self addCenterView];
+//    [self updateFrameOfView];
+//    [self addCenterView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,9 +43,11 @@
 }
 
 - (void)addCenterView{
+    CGRect frame = [UIScreen mainScreen].bounds;
+    
     UIStoryboard *dashboardStoryBoard = [UIStoryboard storyboardWithName:@"MessagingStoryboard" bundle:nil];
     self.centerViewController = [dashboardStoryBoard instantiateViewControllerWithIdentifier:@"CenterViewController"];
-    _centerViewController.view.frame = [UIScreen mainScreen].bounds;
+    _centerViewController.view.frame = frame;
     
     STBNavigationController *navController = [[STBNavigationController alloc] initWithRootViewController:_centerViewController];
     navController.navigationBarHidden = YES;
