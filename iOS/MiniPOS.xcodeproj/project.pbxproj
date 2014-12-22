@@ -1645,7 +1645,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nam Nguyen Thi (5H9M5739AH)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: SAIGON THUONG TIN COMMERCIAL JOINT STOCK BANK (K69PP2SZ53)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/LibiSMP_v4.01",
@@ -1663,7 +1663,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "24160ac9-2ad9-418e-9fad-a1b96d1ed1c7";
+				PROVISIONING_PROFILE = "c10cd5ba-1473-4dee-a940-ff5397daaa0f";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
@@ -1675,7 +1675,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nam Nguyen Thi (5H9M5739AH)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: SAIGON THUONG TIN COMMERCIAL JOINT STOCK BANK (K69PP2SZ53)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/LibiSMP_v4.01",
@@ -1693,7 +1693,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "24160ac9-2ad9-418e-9fad-a1b96d1ed1c7";
+				PROVISIONING_PROFILE = "c10cd5ba-1473-4dee-a940-ff5397daaa0f";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
