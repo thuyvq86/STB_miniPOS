@@ -1,15 +1,20 @@
 //
-//  SettingsInfoCellTableViewCell.m
+//  PairedDeviceInfoCell.m
 //  MiniPOS
 //
 //  Created by Nam Nguyen on 12/10/14.
 //  Copyright (c) 2014 STB. All rights reserved.
 //
 
-#import "SettingsInfoCellTableViewCell.h"
+#import "PairedDeviceInfoCell.h"
 #import "BaseTableContentView.h"
 
-@implementation SettingsInfoCellTableViewCell
+@implementation PairedDeviceInfoCell
+
+- (void)awakeFromNib {
+    // Initialization code
+    [self theming];
+}
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
@@ -20,9 +25,14 @@
     return self;
 }
 
-- (void)awakeFromNib {
-    // Initialization code
-    [self theming];
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self theming];
+    }
+    
+    return self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -33,6 +43,9 @@
 
 - (void)theming{
     id<ApplicationThemeDelegate> theme = [ApplicationThemeManager sharedTheme];
+    
+    self.accessoryType = UITableViewCellAccessoryNone;
+    self.selectionStyle = UITableViewCellSelectionStyleGray;
     
     self.textLabel.textColor = [UIColor whiteColor];
     self.textLabel.font = [theme fontForHeader];
@@ -53,6 +66,22 @@
     
     //draw bottom line
     [lineImage drawInRect:CGRectMake(kLeftPadding, offset , width, 1.0f)];
+}
+
+- (void)setPairedDevice:(PairedDevice *)pairedDevice{
+    _pairedDevice = pairedDevice;
+    
+    self.textLabel.text = [NSString stringWithFormat:@"%@-%@", _pairedDevice.name, _pairedDevice.serialNumber];
+    
+    //Active
+    if ([_pairedDevice.serialNumber isEqualToString:[ICISMPDevice serialNumber]]){
+        self.detailTextLabel.text = @"Active";
+    }
+    else{
+        self.detailTextLabel.text = @" ";
+    }
+    
+    [self setNeedsDisplay];
 }
 
 @end

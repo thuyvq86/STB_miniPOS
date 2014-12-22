@@ -8,6 +8,9 @@
 
 #import "STBAPIClient.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "XMDatabaseManager.h"
+
+#define kUserDataDatabaseName      @"userdata"
 
 @implementation STBAPIClient
 
@@ -30,6 +33,8 @@
         //show network activity indicator
         [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
         
+        //DB
+        [[XMDatabaseManager sharedDatabaseManager] setupWithMasterDatabaseName:nil userDatabaseName:kUserDataDatabaseName textResourcesDatabaseName:nil];
     });
     
     return _sharedClient;

@@ -8,11 +8,16 @@
 
 #import "STBSettingsViewController.h"
 //Views
-#import "SettingsInfoCellTableViewCell.h"
+#import "SettingsInfoCell.h"
 //Controllers
 #import "AppInfoController.h"
+#import "STBPairedDeviceListViewController.h"
+//Models
+#import "PairedDevice.h"
 
-@interface STBSettingsViewController ()<AppInfoDelegate>
+@interface STBSettingsViewController ()
+
+@property (nonatomic) NSInteger countPaireDevices;
 
 @end
 
@@ -24,6 +29,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupUI];
+    
+    self.countPaireDevices = [PairedDevice getCount];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,13 +41,13 @@
 #pragma mark - UI
 
 - (void)setupUI{
-    _navItem.leftBarButtonItem = [self barButtonItemWithTitle:@"Back" style:UIBarButtonItemStylePlain action:@selector(buttonBackTouch:)];
+    self.navigationItem.leftBarButtonItem = [self barButtonItemWithTitle:@"Done" style:UIBarButtonItemStyleDone action:@selector(buttonBackTouch:)];
     
-    if([_navigationBar respondsToSelector:@selector(setBarTintColor:)])
-        [_navigationBar setBarTintColor:PRIMARY_BACKGROUND_COLOR];
+    if([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)])
+        [self.navigationController.navigationBar setBarTintColor:PRIMARY_BACKGROUND_COLOR];
     else
-        [_navigationBar setTintColor:PRIMARY_BACKGROUND_COLOR];
-    [_navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
+        [self.navigationController.navigationBar setTintColor:PRIMARY_BACKGROUND_COLOR];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
                                              NSFontAttributeName:[UIFont systemFontOfSize:21.0f]
                                              }];
     
@@ -50,7 +57,7 @@
 - (UIBarButtonItem *)barButtonItemWithTitle:(NSString *)title style:(NSInteger)style action:(SEL)action{
     UIBarButtonItem *button = nil;
     
-    button = [[UIBarButtonItem alloc] initWithTitle:title style:style target:self action:action];
+    button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(buttonBackTouch:)];
     [button setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor whiteColor]} forState:UIControlStateNormal];
     
     return button;
@@ -59,7 +66,8 @@
 #pragma mark - User actions
 
 - (void)buttonBackTouch:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark Table view data source
@@ -85,22 +93,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView profileInfoCellAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"SettingsInfoCellTableViewCell";
-    SettingsInfoCellTableViewCell *cell = (SettingsInfoCellTableViewCell*)[aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SettingsInfoCell *cell = (SettingsInfoCell*)[aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell)
-        cell = [[SettingsInfoCellTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[SettingsInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     if (indexPath.row == 0){
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        
-        NSString *text = @"No Paired device.";
-        if (self.pairedDevice)
-            text = [NSString stringWithFormat:@"Paired device: %@-%@", self.pairedDevice.name, self.pairedDevice.serialNumber];
-        
-        cell.textLabel.text = text;
+        if (_countPaireDevices > 0){
+            cell.textLabel.text = @"Paired devices";
+        }
+        else{
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textLabel.text = @"No Paired devices.";
+        }
     }
     else{
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = @"About";
     }
     
@@ -119,53 +127,29 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
     if (indexPath.row == 0){
-        if (self.pairedDevice)
-            [self showPairedDeviceInfoAlert];
+        if (_countPaireDevices > 0)
+            [self showPairedDevicesView];
     }
     else if (indexPath.row == 1){
         [self showAppInfoView];
     }
 }
 
-#pragma mark - Device Info
-
-- (void)showPairedDeviceInfoAlert{
-
-    NSString *title = [NSString stringWithFormat:@"%@-%@", self.pairedDevice.name, self.pairedDevice.serialNumber];
-    NSString *msg = [NSString stringWithFormat:
-                     @"Manufacturer: %@\nModel Number: %@\nSerial Id: %@\nFirmware Reveision: %@\nHardware Revision: %@",
-                     self.pairedDevice.manufacturer,
-                     self.pairedDevice.modelNumber,
-                     self.pairedDevice.serialNumber,
-                     self.pairedDevice.firmwareRevision,
-                     self.pairedDevice.hardwareRevision
-                     ];
-    
-    NSString *msg2 = [NSString stringWithFormat:
-                     @"Name: %@\nModel Number: %@\nSerial Id: %@\nFirmware Reveision: %@\nHardware Revision: %@",
-                     [ICISMPDevice name],
-                     [ICISMPDevice modelNumber],
-                     [ICISMPDevice serialNumber],
-                     [ICISMPDevice firmwareRevision],
-                     [ICISMPDevice hardwareRevision]
-                     ];
-    DLog(@"%@", msg2);
-    
-    [UIAlertView alertViewWithTitle:title message:msg cancelButtonTitle:@"OK"];
-}
-
 #pragma mark - About
 
 - (void)showAppInfoView{
-    AppInfoController *appInfoController = [[AppInfoController alloc] initWithNibName:@"AppInfoController" bundle:nil];
-    appInfoController.delegate = self;
+    AppInfoController *appInfoController = [self.storyboard instantiateViewControllerWithIdentifier:@"appInfoController"];
     
-    [self parentView:self presentViewController:appInfoController animated:YES completion:nil];
+    [self.navigationController pushViewController:appInfoController animated:YES];
 }
 
-- (void)didFinishAppInfoController:(id)appInfoController{
-    [self parentView:self dismissViewController:appInfoController animated:YES completion:nil];
+- (void)showPairedDevicesView{
+    STBPairedDeviceListViewController *appInfoController = [self.storyboard instantiateViewControllerWithIdentifier:@"pairedDeviceListViewController"];
+    
+    [self.navigationController pushViewController:appInfoController animated:YES];
 }
 
 @end

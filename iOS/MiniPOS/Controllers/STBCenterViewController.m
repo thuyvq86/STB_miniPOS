@@ -14,6 +14,7 @@
 #import "DeviceProfileInfoCell.h"
 //Models
 #import "ICMPProfile+Operations.h"
+#import "PairedDevice.h"
 
 @interface STBCenterViewController ()<ICISMPDeviceDelegate>
 
@@ -59,7 +60,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self updateFrameOfView];
+    //[self updateFrameOfView];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -118,10 +119,13 @@
     profile = [[ICMPProfile alloc] initWithAccessory:nil];
     profile.serialId = @"20138884";
     [_connectedAccessories addObject:profile];
+    
+    [UIAppDelegate insertOrUpdateTestDevice:@"iCMP" serialNumber:profile.serialId];
 #endif
     
-    //load profile aumatically
-//    [self getProfile:profile];
+    //save paired device
+    if ([ICISMPDevice isAvailable])
+        [UIAppDelegate insertOrUpdatePairedDevice];
     
     [_tableView reloadData];
 }
@@ -310,12 +314,13 @@
 }
 
 - (void)showSettingsView:(EAAccessory *)pairedDevice{
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SettingsStoryboard" bundle:nil];
     
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MessagingStoryboard" bundle:nil];
-    STBSettingsViewController *settingsViewController = [storyBoard instantiateViewControllerWithIdentifier:@"settingsViewController"];
+    UINavigationController *settingsNavigationController = [storyBoard instantiateViewControllerWithIdentifier:@"settingsNavigationController"];
+    STBSettingsViewController *settingsViewController = settingsNavigationController.viewControllers[0];
     settingsViewController.pairedDevice = pairedDevice;
     
-    [self.navigationController pushViewController:settingsViewController animated:YES];
+    [self presentViewController:settingsNavigationController animated:YES completion:NO];
 }
 
 @end

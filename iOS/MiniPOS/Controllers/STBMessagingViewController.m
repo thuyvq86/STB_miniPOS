@@ -329,6 +329,9 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
         
         BOOL available = [self.iSMPControl getISMPState];
         cell.textLabel.text = available ? @"Waiting for the transaction..." : @"";
+#if TARGET_IPHONE_SIMULATOR
+        cell.textLabel.text = @"Waiting for the transaction...";
+#endif
     }
     
     return cell;

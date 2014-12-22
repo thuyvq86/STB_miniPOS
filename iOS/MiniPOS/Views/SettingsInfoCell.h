@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsInfoCellTableViewCell : UITableViewCell
+@interface SettingsInfoCell : UITableViewCell
 
 @end

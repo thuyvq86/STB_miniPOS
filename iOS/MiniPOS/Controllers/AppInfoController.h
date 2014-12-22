@@ -8,23 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol AppInfoDelegate <NSObject>
-@optional
-- (void)didFinishAppInfoController:(id)appInfoController;
-
-@end
-
 @interface AppInfoController : STBBaseViewController{
-    __weak IBOutlet UINavigationBar *_navBar;
-    __weak IBOutlet UIBarButtonItem *_barButtonItemDone;
-    
 }
-
-@property (nonatomic, retain) IBOutlet UILabel          * appVersion;
-@property (nonatomic, retain) IBOutlet UILabel          * libiSMPVersion;
-
-@property (nonatomic, unsafe_unretained) id<AppInfoDelegate> delegate;
-
-- (IBAction)done:(id)sender;
+@property (nonatomic, retain) IBOutlet UILabel *appVersion;
+@property (nonatomic, retain) IBOutlet UILabel *libiSMPVersion;
 
 @end

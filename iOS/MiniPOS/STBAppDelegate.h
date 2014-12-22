@@ -21,4 +21,9 @@
 @property (nonatomic, retain) CBCentralManager *bluetoothManager;
 @property (nonatomic) BOOL bluetoothEnabled;
 
+#pragma mark - Save paired device
+
+- (void)insertOrUpdatePairedDevice;
+- (void)insertOrUpdateTestDevice:(NSString *)name serialNumber:(NSString *)serialNumber;
+
 @end
