@@ -143,7 +143,6 @@ public class POSManager extends Observable {
 		STBProfile object = _profiles.get(device.getAddress());
 		if (object == null) {
 			object = new STBProfile(device);
-			_profiles.put(device.getAddress(), object);
 		}
 		return object;
 	}
@@ -173,16 +172,11 @@ public class POSManager extends Observable {
 	public void updateProfile(STBProfile profile) {
 		_profiles.put(profile.address, profile);
 		DatabaseManager.instance().createOrUpdate(profile);
+		updatePairedDevices();
 	}
 
 	public void onActiveSuccess() {
-		for (int i = 0; i < _bluetoothDevices.size(); i++) {
-			if (_bluetoothDevices.get(i) != getActivedDevice()) {
-				_bluetoothDevices.remove(i);
-				i--;
-			}
-		}
-
+		updatePairedDevices();
 	}
 
 	public boolean activeBluetoothDevice(BluetoothDevice object) {
