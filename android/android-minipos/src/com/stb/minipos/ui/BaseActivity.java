@@ -38,8 +38,12 @@ public abstract class BaseActivity extends UIDrawerActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setBackgroundDrawable(
-				getResources().getDrawable(R.drawable.ic_ab_background));
+		try {
+			getSupportActionBar().setBackgroundDrawable(
+					getResources().getDrawable(R.drawable.ic_ab_background));
+		} catch (Exception e) {
+
+		}
 	}
 
 	private ListView _lvDrawerMenus;

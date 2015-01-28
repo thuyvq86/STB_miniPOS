@@ -58,6 +58,10 @@ public class STBApiManager extends Observable implements Config {
 				new Gson().toJson(data));
 	}
 
+	public int getVersion() {
+		return executeRequest(_id++, STBServer.PRIMARY, STBRequest.VERSION, "");
+	}
+
 	private int _id = 0;
 
 	private int executeRequest(final int requestId, final STBServer server,
@@ -168,7 +172,7 @@ public class STBApiManager extends Observable implements Config {
 	 *         throw <br/>
 	 *         {@link RuntimeException} if the instance hasn't been initialized
 	 */
-	protected static STBApiManager instance() {
+	public static STBApiManager instance() {
 		if (_instance == null) {
 			throw new RuntimeException(STBApiManager.class.getName()
 					+ " hasn't been initialized!!!");

@@ -5,12 +5,14 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 
 import android.bluetooth.BluetoothAdapter;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Base64;
 
@@ -26,6 +28,33 @@ public class Utils {
 	}
 
 	public static final boolean DEBUG_MODE = false;
+
+	public static boolean openGoolgePlayApps(Context context, String packageName) {
+		try {
+			Intent intent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse(getMarketUrl(context, packageName)));
+			context.startActivity(intent);
+			return true;
+		} catch (ActivityNotFoundException e) {
+			try {
+				Intent intent = new Intent(Intent.ACTION_VIEW,
+						Uri.parse(getGoogleStoreUrl(context, packageName)));
+				context.startActivity(intent);
+				return true;
+			} catch (Exception e2) {
+				return false;
+			}
+		}
+	}
+
+	public static String getMarketUrl(Context context, String packagename) {
+		return String.format("market://details?id=%s", packagename);
+	}
+
+	public static String getGoogleStoreUrl(Context context, String packagename) {
+		return String.format("http://play.google.com/store/apps/details?id=%s",
+				packagename);
+	}
 
 	/**
 	 * check if Wifi or 3G network available

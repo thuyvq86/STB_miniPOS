@@ -17,6 +17,7 @@ public interface Constant {
 	public enum STBRequest {
 		PROFILE("ICMPProfileGetter"), //
 		BILL("ICMPBillReceiver"), //
+		VERSION("ICMPVersionGetter"), //
 		;
 		STBRequest(String name) {
 			this.functionName = name;

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;STBResponseBill.java&apos; to &apos;android-minipos/src/com.stb.minipos.model.dao&apos;&#x0D;&#x0A;- Original project: &apos;android-minipos&apos;&#x0D;&#x0A;- Destination element: &apos;android-minipos/src/com.stb.minipos.model.dao&apos;&#x0D;&#x0A;- Original element: &apos;com.stb.minipos.model.dao.STBResponseBill.java&apos;" description="Copy compilation unit" destination="/src&lt;com.stb.minipos.model.dao" element1="/src&lt;com.stb.minipos.model.dao{STBResponseBill.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1422463549960" units="1" version="1.0"/>
+</session>
