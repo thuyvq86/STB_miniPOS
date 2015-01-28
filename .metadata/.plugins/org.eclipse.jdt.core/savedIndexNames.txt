@@ -1,7 +1,0 @@
-INDEX VERSION 1.126+E:\AndroidProjects\Freelance\STB_miniPOS\.metadata\.plugins\org.eclipse.jdt.core
-2261824575.index
-2244413087.index
-3515282563.index
-4248853531.index
-4225531090.index
-1853123647.index

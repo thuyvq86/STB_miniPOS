@@ -160,3 +160,4 @@ proguard/
 # crashlytics file
 /android/android-minipos/assets/crashlytics-build.properties
 /android/android-minipos/res/values/com_crashlytics_export_strings.xml
+/.metadata
