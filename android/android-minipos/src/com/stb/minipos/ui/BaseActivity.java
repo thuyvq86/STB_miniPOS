@@ -144,8 +144,13 @@ public abstract class BaseActivity extends UIDrawerActivity implements
 		} else if (_dialog != null) {
 			UIUtils.safetyDismissDialog(_dialog);
 			_dialog = null;
+			onNetworkAvailable();
 		}
 		return true;
+	}
+
+	public void onNetworkAvailable() {
+
 	}
 
 	@Override

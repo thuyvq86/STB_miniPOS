@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -45,6 +46,20 @@ public class Utils {
 				return false;
 			}
 		}
+	}
+	
+	public static String getVersionName(Context context) {
+		PackageInfo pInfo;
+		String version = null;
+		try {
+			pInfo = context.getPackageManager().getPackageInfo(
+					context.getPackageName(), 0);
+			version = pInfo.versionName;
+		} catch (Exception e) {
+			e.printStackTrace();
+			version = "1.0";
+		}
+		return version;
 	}
 
 	public static String getMarketUrl(Context context, String packagename) {
