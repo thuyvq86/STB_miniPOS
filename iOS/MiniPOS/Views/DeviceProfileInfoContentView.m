@@ -85,9 +85,9 @@
     
     NSArray *protocolStrings = [connectedAccessory protocolStrings];
     NSString *info = [NSString stringWithFormat:
-                     @"Connected: %@\nConnection ID: %d\nName: %@\nManufacturer: %@\nModel Number: %@\nSerial: %@\nFirmware Reveision: %@\nHardware Revision: %@\nProtocols:\n%@",
+                     @"Connected: %@\nConnection ID: %lu\nName: %@\nManufacturer: %@\nModel Number: %@\nSerial: %@\nFirmware Reveision: %@\nHardware Revision: %@\nProtocols:\n%@",
                      connectedAccessory.connected ? @"Yes" : @"No",
-                     connectedAccessory.connectionID,
+                     (unsigned long)connectedAccessory.connectionID,
                      connectedAccessory.name,
                      connectedAccessory.manufacturer,
                      connectedAccessory.modelNumber,

@@ -97,20 +97,20 @@
     NSString *title = [NSString stringWithFormat:@"%@-%@", pairedDevice.name, pairedDevice.serialNumber];
     NSString *msg = pairedDevice.desc;
     
-    if ([pairedDevice.serialNumber isEqualToString:[ICISMPDevice serialNumber]]){
-        [UIAlertView alertViewWithTitle:title message:msg cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Reset"] onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
-            if (buttonIndex == 1){
-                [self resetTerminal];
-            }
-        } onCancel:nil];
-    }
-    else
-        [UIAlertView alertViewWithTitle:title message:msg cancelButtonTitle:@"OK"];
+    [UIAlertView alertViewWithTitle:title message:msg cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Reset"] onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+        if (buttonIndex == 1){
+            [self resetProfile:pairedDevice];
+        }
+    } onCancel:nil];
 }
 
-- (void)resetTerminal {
+- (void)resetProfile:(PairedDevice *)pairedDevice {
     DLog();
-    [[iSMPControlManager sharedISMPControlManager].control reset:0];
+    
+    //delete from database
+    
+    //update UI
+    [_tableView reloadData];
 }
 
 @end

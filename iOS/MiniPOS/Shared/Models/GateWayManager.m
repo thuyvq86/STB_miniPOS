@@ -100,27 +100,27 @@ static GateWayManager * g_sharedGateWayManager = nil;
 #pragma mark ICNetworkDelegate
 
 -(void)networkData:(NSData *)data incoming:(BOOL)isIncoming {
-    NSLog(@"%s [%@][Length: %d] %@", __FUNCTION__, ((isIncoming ? @"Network->iPhone" : @"iPhone->Network")), [data length], [data hexDump]);
+    NSLog(@"%s [%@][Length: %lu] %@", __FUNCTION__, ((isIncoming ? @"Network->iPhone" : @"iPhone->Network")), (unsigned long)[data length], [data hexDump]);
 }
 
 -(void)networkWillConnectToHost:(NSString *)host onPort:(NSUInteger)port {
-    NSLog(@"%s [Host: %@, Port: %d]", __FUNCTION__, host, port);
+    NSLog(@"%s [Host: %@, Port: %lu]", __FUNCTION__, host, (unsigned long)port);
 }
 
 -(void)networkDidConnectToHost:(NSString *)host onPort:(NSUInteger)port {
-    NSLog(@"%s [Host: %@, Port: %d]", __FUNCTION__, host, port);
+    NSLog(@"%s [Host: %@, Port: %lu]", __FUNCTION__, host, (unsigned long)port);
 }
 
 -(void)networkFailedToConnectToHost:(NSString *)host onPort:(NSUInteger)port {
-    NSLog(@"%s [Host: %@, Port: %d]", __FUNCTION__, host, port);
+    NSLog(@"%s [Host: %@, Port: %lu]", __FUNCTION__, host, (unsigned long)port);
 }
 
 -(void)networkDidDisconnectFromHost:(NSString *)host onPort:(NSUInteger)port {
-    NSLog(@"%s [Host: %@, Port: %d]", __FUNCTION__, host, port);
+    NSLog(@"%s [Host: %@, Port: %lu]", __FUNCTION__, host, (unsigned long)port);
 }
 
 -(void)networkDidReceiveErrorWithHost:(NSString *)host andPort:(NSUInteger)port {
-    NSLog(@"%s [Host: %@, Port: %d]", __FUNCTION__, host, port);
+    NSLog(@"%s [Host: %@, Port: %lu]", __FUNCTION__, host, (unsigned long)port);
 }
 
 #pragma mark -

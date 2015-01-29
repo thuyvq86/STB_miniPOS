@@ -241,7 +241,7 @@
         [self didSelectRow:indexPath.row];
 }
 
-- (void)didSelectRow:(int)row{
+- (void)didSelectRow:(NSInteger)row{
     ICMPProfile *profile = [_connectedAccessories objectAtIndex:row];
     if (!profile.merchantId)
         [self getProfile:profile];
