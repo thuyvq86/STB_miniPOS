@@ -12,22 +12,24 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.stb.minipos.R;
+import com.stb.minipos.model.ApiResponseData;
 import com.stb.minipos.model.POSManager;
 import com.stb.minipos.model.POSManager.DataChanged;
 import com.stb.minipos.model.POSTransaction;
-import com.stb.minipos.model.STBApiManager.ApiResponseData;
 import com.stb.minipos.model.STBProfile;
 import com.stb.minipos.model.dao.POSMessage;
 import com.stb.minipos.utils.UIUtils;
 
 public class ReceiveMessageActivity extends BasePOSActivity implements
 		Observer, View.OnClickListener {
+	private static final String TAG = "STB";
 	private static final int REQUEST_SIGN_CODE = 1010;
 
 	private View vgHeader;
@@ -306,6 +308,8 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 
 	@Override
 	public void update(Observable observable, Object data) {
+		Log.i(TAG, "---------UpdateObservable "
+				+ observable.getClass().getSimpleName());
 		if (observable == POSManager.instance()
 				&& data == DataChanged.TRANSACTION_ADD && isFree()) {
 			POSTransaction trans = POSManager.instance().popTransaction();
@@ -351,9 +355,11 @@ public class ReceiveMessageActivity extends BasePOSActivity implements
 			} else {
 				UIUtils.showErrorMessage(this, R.string.network_error);
 			}
-		} else if (observable == POSManager.instance().getActivedProfile()) {
+		} else if (observable instanceof STBProfile) {
+			observable.deleteObserver(this);
 			ApiResponseData response = (ApiResponseData) data;
 			UIUtils.safetyDismissDialog(_requestDialog);
+			_requestDialog = null;
 			if ((!response.isSuccess || !response.stbResponse.isSuccess())
 					&& !POSManager.instance().getActivedProfile()
 							.isFullyFetched()) {

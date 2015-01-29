@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -22,7 +23,14 @@ import com.stb.minipos.model.dao.STBRequestBill;
 import com.stb.minipos.model.dao.STBResponse;
 
 public class STBApiManager extends Observable implements Config {
+	private static final String TAG = "STB-Request";
 	private final Context context;
+
+	public static interface RequestHandler {
+		public void onSuccess(ApiResponseData data);
+
+		public void onFailure(ApiResponseData data);
+	}
 
 	private STBApiManager(Context context) {
 		this.context = context;
@@ -30,19 +38,7 @@ public class STBApiManager extends Observable implements Config {
 
 	private AsyncHttpClient _httpClient;
 
-	public class ApiResponseData {
-		public ApiResponseData(int id) {
-			this.requestId = id;
-		}
-
-		public final int requestId;
-		public STBServer stbServer;
-		public STBRequest stbRequest;
-		public STBResponse stbResponse;
-		public boolean isSuccess;
-	}
-
-	public int getProfile(String serialID) {
+	public int getProfile(String serialID, RequestHandler handler) {
 		JSONObject jsonData = new JSONObject();
 		try {
 			jsonData.put("SerialID", serialID);
@@ -50,25 +46,26 @@ public class STBApiManager extends Observable implements Config {
 			e.printStackTrace();
 		}
 		return executeRequest(_id++, STBServer.PRIMARY, STBRequest.PROFILE,
-				jsonData.toString());
+				jsonData.toString(), handler);
 	}
 
 	public int saveBill(STBRequestBill data) {
 		return executeRequest(_id++, STBServer.PRIMARY, STBRequest.BILL,
-				new Gson().toJson(data));
+				new Gson().toJson(data), null);
 	}
 
 	public int getVersion() {
-		return executeRequest(_id++, STBServer.PRIMARY, STBRequest.VERSION, "");
+		return executeRequest(_id++, STBServer.PRIMARY, STBRequest.VERSION, "",
+				null);
 	}
 
 	private int _id = 0;
 
 	private int executeRequest(final int requestId, final STBServer server,
-			final STBRequest request, final String jsonData) {
-
-		final ApiResponseData responseData = new ApiResponseData(requestId);
-		responseData.stbServer = server;
+			final STBRequest request, final String jsonData,
+			final RequestHandler handler) {
+		Log.i(TAG, "Execute request: " + requestId + " - "
+				+ request.functionName);
 
 		_httpClient = new AsyncHttpClient();
 		_httpClient.setTimeout(API_REQUEST_TIMEOUT);
@@ -105,24 +102,48 @@ public class STBApiManager extends Observable implements Config {
 					@Override
 					public void onSuccess(int statusCode, Header[] headers,
 							String response) {
+
+						ApiResponseData responseData = new ApiResponseData(
+								requestId);
 						STBResponse object = new Gson().fromJson(response,
 								STBResponse.class);
+						responseData.stbServer = server;
+						responseData.stbRequest = request;
 						responseData.isSuccess = true;
 						responseData.stbResponse = object;
-						setChanged();
-						notifyObservers(responseData);
+						Log.i(TAG, "OnSuccess: id=" + requestId
+								+ "\n\t FunctionName=" + request.functionName
+								+ "\n\t Response=" + response);
+						if (handler != null) {
+							handler.onSuccess(responseData);
+						} else {
+							setChanged();
+							notifyObservers(responseData);
+						}
 					}
 
 					@Override
 					public void onFailure(int arg0, Header[] arg1, String arg2,
 							Throwable arg3) {
 						if (server == STBServer.PRIMARY) {
+							Log.i(TAG, "OnFailure: Retry id=" + requestId
+									+ "; FunctionName=" + request.functionName);
 							executeRequest(requestId, STBServer.SECONDARY,
-									request, jsonData);
+									request, jsonData, handler);
 						} else {
+							ApiResponseData responseData = new ApiResponseData(
+									requestId);
+							responseData.stbServer = server;
+							responseData.stbRequest = request;
+							Log.i(TAG, "OnFailure: id=" + requestId
+									+ "; FunctionName " + request.functionName);
 							responseData.isSuccess = false;
-							setChanged();
-							notifyObservers(responseData);
+							if (handler != null) {
+								handler.onFailure(responseData);
+							} else {
+								setChanged();
+								notifyObservers(responseData);
+							}
 						}
 					}
 				});

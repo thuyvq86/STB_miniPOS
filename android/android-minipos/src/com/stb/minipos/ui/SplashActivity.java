@@ -17,10 +17,9 @@ import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 import com.stb.minipos.R;
+import com.stb.minipos.model.ApiResponseData;
 import com.stb.minipos.model.STBApiManager;
-import com.stb.minipos.model.STBApiManager.ApiResponseData;
 import com.stb.minipos.model.dao.STBResponseVersion;
-import com.stb.minipos.ui.BasePOSActivity._SYSTEMTIME;
 import com.stb.minipos.utils.Utils;
 
 public class SplashActivity extends BaseActivity implements Observer {
@@ -31,7 +30,7 @@ public class SplashActivity extends BaseActivity implements Observer {
 	private ProgressBar loadingBar;
 
 	private boolean needCheckVersion = false;
-	private boolean isCheckingVersion = false;
+	private int requestVersionId = -1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +66,12 @@ public class SplashActivity extends BaseActivity implements Observer {
 	}
 
 	public void checkVersion() {
-		if (isCheckingVersion) {
+		if (requestVersionId >= 0) {
 			return;
 		}
-		isCheckingVersion = true;
 		txtStatus.setText("Check for updates...");
 		loadingBar.setVisibility(View.VISIBLE);
-		STBApiManager.instance().getVersion();
+		requestVersionId = STBApiManager.instance().getVersion();
 	}
 
 	public void handleCheckVersionResponse(ApiResponseData response) {
@@ -81,8 +79,7 @@ public class SplashActivity extends BaseActivity implements Observer {
 		loadingBar.setVisibility(View.INVISIBLE);
 		if (response != null && response.isSuccess
 				&& response.stbResponse.isSuccess()) {
-			STBResponseVersion data = (STBResponseVersion) response.stbResponse
-					.getData();
+			STBResponseVersion data = response.stbResponse.getDataAsVersion();
 			if (!TextUtils.equals(data.Version, Utils.getVersionName(this))) {
 				alertUserToUpdateApp(data.IsForcedUpdate);
 			} else {
@@ -91,7 +88,7 @@ public class SplashActivity extends BaseActivity implements Observer {
 				startActivity(intent);
 				finish();
 				needCheckVersion = false;
-				isCheckingVersion = false;
+				requestVersionId = -1;
 			}
 		} else {
 			alertUserRequestFailure();
@@ -123,7 +120,7 @@ public class SplashActivity extends BaseActivity implements Observer {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						isCheckingVersion = false;
+						requestVersionId = -1;
 						checkVersion();
 					}
 				});
@@ -133,7 +130,7 @@ public class SplashActivity extends BaseActivity implements Observer {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						finish();
-						isCheckingVersion = false;
+						requestVersionId = -1;
 					}
 				});
 		builder.setCancelable(false);
@@ -150,7 +147,7 @@ public class SplashActivity extends BaseActivity implements Observer {
 			public void onClick(DialogInterface dialog, int which) {
 				Utils.openGoolgePlayApps(SplashActivity.this,
 						SplashActivity.this.getPackageName());
-				isCheckingVersion = false;
+				requestVersionId = -1;
 				needCheckVersion = true;
 			}
 		});
@@ -162,7 +159,7 @@ public class SplashActivity extends BaseActivity implements Observer {
 						if (isForceUpdate) {
 							finish();
 						}
-						isCheckingVersion = false;
+						requestVersionId = -1;
 					}
 				});
 		builder.setCancelable(false);
@@ -196,8 +193,10 @@ public class SplashActivity extends BaseActivity implements Observer {
 	@Override
 	public void update(Observable observable, Object data) {
 		super.update(observable, data);
-		if (observable == STBApiManager.instance()) {
-			handleCheckVersionResponse((ApiResponseData) data);
+		if (observable instanceof STBApiManager
+				&& data instanceof ApiResponseData) {
+			if (((ApiResponseData) data).requestId == requestVersionId)
+				handleCheckVersionResponse((ApiResponseData) data);
 		}
 	}
 

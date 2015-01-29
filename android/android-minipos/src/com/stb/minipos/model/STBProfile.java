@@ -1,7 +1,6 @@
 package com.stb.minipos.model;
 
 import java.util.Observable;
-import java.util.Observer;
 
 import android.bluetooth.BluetoothDevice;
 import android.text.TextUtils;
@@ -9,11 +8,10 @@ import android.text.TextUtils;
 import com.ingenico.pclutilities.PclUtilities.BluetoothCompanion;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import com.stb.minipos.model.STBApiManager.ApiResponseData;
 import com.stb.minipos.model.dao.STBResponseProfiles;
 
 @DatabaseTable(tableName = "Profiles")
-public class STBProfile extends Observable implements Observer {
+public class STBProfile extends Observable {
 	public STBProfile() {
 	}
 
@@ -73,9 +71,26 @@ public class STBProfile extends Observable implements Observer {
 	}
 
 	public int updateProfile() {
-		STBApiManager.instance().addObserver(this);
 		isUpdating = true;
-		requestId = STBApiManager.instance().getProfile(SerialID);
+		requestId = STBApiManager.instance().getProfile(SerialID,
+				new STBApiManager.RequestHandler() {
+					public void onSuccess(ApiResponseData data) {
+						if (data.stbResponse.isSuccess()) {
+							setData(data.stbResponse.getDataAsProfile());
+							POSManager.instance()
+									.updateProfile(STBProfile.this);
+						}
+						setChanged();
+						notifyObservers(data);
+						isUpdating = false;
+					}
+
+					public void onFailure(ApiResponseData res) {
+						setChanged();
+						notifyObservers(res);
+						isUpdating = false;
+					}
+				});
 		return requestId;
 	}
 
@@ -85,26 +100,6 @@ public class STBProfile extends Observable implements Observer {
 		if (btCompanion != null)
 			return btCompanion.isActivated();
 		return false;
-	}
-
-	@Override
-	public void update(Observable observable, Object data) {
-		if (observable == STBApiManager.instance()) {
-			ApiResponseData response = (ApiResponseData) data;
-			if (requestId == response.requestId) {
-				STBApiManager.instance().deleteObserver(this);
-				if (response.isSuccess && response.stbResponse.isSuccess()) {
-					setData((STBResponseProfiles) response.stbResponse
-							.getData());
-					POSManager.instance().updateProfile(this);
-					// active success, remove another account
-					POSManager.instance().onActiveSuccess();
-				}
-				setChanged();
-				notifyObservers(data);
-				isUpdating = false;
-			}
-		}
 	}
 
 }

@@ -5,7 +5,6 @@ import java.util.Observer;
 
 import android.graphics.Bitmap;
 
-import com.stb.minipos.model.STBApiManager.ApiResponseData;
 import com.stb.minipos.model.dao.POSMessage;
 import com.stb.minipos.model.dao.STBRequestBill;
 import com.stb.minipos.model.dao.STBResponse;
