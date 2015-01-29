@@ -37,15 +37,15 @@
     //Set app-wide shared cache
     [self configureCacheLimits];
     
-    //check blutooth
-    [self detectBluetooth];
-    
-    BOOL reachable = [AppUtils hasConnectivity];
-    if (!reachable){
-        [UIAlertView alertViewWithTitle:@"" message:@"Device is not connected to the internet." cancelButtonTitle:@"Close"];
-        
-        return NO;
-    }
+//    //check blutooth
+//    [self detectBluetooth];
+//    
+//    BOOL reachable = [AppUtils hasConnectivity];
+//    if (!reachable){
+//        [UIAlertView alertViewWithTitle:@"" message:@"Device is not connected to the internet." cancelButtonTitle:@"Close"];
+//        
+//        return NO;
+//    }
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {

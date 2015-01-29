@@ -13,8 +13,9 @@
 #define kApiPath @"api"
 
 /** Functions **/
-#define kFunctionNameBillReceiver @"ICMPBillReceiver"
+#define kFunctionNameBillReceiver  @"ICMPBillReceiver"
 #define kFunctionNameProfileGetter @"ICMPProfileGetter"
+#define kFunctionNameVersionGetter @"ICMPVersionGetter"
 
 /** Parameters **/
 #define kParameterData              @"Data"
@@ -42,5 +43,7 @@
 
 + (NSString *)jsonStringFromDictionary:(NSDictionary *)dataDict;
 + (NSDictionary *)JSONDictionaryFromBase64EncodedString:(NSString *)base64Encoded;
+
+- (AFHTTPRequestOperation *)getAppVersionWithCompletionBlock:(void (^)(id responseObject, NSError *error))completionBlock;
 
 @end

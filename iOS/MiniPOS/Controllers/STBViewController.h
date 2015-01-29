@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STBViewController : STBBaseViewController
+@interface STBViewController : STBBaseViewController{
+    
+    __weak IBOutlet UIActivityIndicatorView *_activityIndicatorView;
+    __weak IBOutlet UILabel *_lblLoadingMessage;
+}
 
 @end

@@ -83,4 +83,41 @@
     return JSON;
 }
 
+#pragma mark - Check update app
+
+- (AFHTTPRequestOperation *)getAppVersionWithCompletionBlock:(void (^)(id responseObject, NSError *error))completionBlock{
+    
+    //request body
+    NSDictionary *parameters = @{
+                                 kParameterData: @"",
+                                 kParameterMerchantID: @"MiniPOS",
+                                 kParameterFunctionName: kFunctionNameVersionGetter,
+                                 kParameterRefNumber: @"",
+                                 kParameterSignature: @"",
+                                 kParameterToken: @""
+                                 };
+    NSString *path = kApiPath;
+    
+    //send request
+    return [self POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
+        NSString *responseCode = [responseObject objectForKey:kParameterRespCode];
+        if ([responseCode isEqualToString:@"00"]){
+            //success
+            if (completionBlock) {
+                completionBlock(responseObject, nil);
+            }
+        }
+        else{
+            if (completionBlock) {
+                completionBlock(nil, [NSError errorWithDomain:responseCode code:[responseCode integerValue] userInfo:nil]);
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (completionBlock) {
+            completionBlock(nil, error);
+        }
+    }];
+}
+
 @end

@@ -142,7 +142,7 @@ static iSMPControlManager * g_sharedISMPControlManager = nil;
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
-    if ([_control respondsToSelector:@selector(open)]) {
+    if (_control && [_control respondsToSelector:@selector(open)]) {
         [_control open];
     }
     
