@@ -85,7 +85,7 @@
 
 #pragma mark - Check update app
 
-- (AFHTTPRequestOperation *)getAppVersionWithCompletionBlock:(void (^)(id responseObject, NSError *error))completionBlock{
+- (AFHTTPRequestOperation *)getAppVersionWithCompletionBlock:(void (^)(id JSON, NSError *error))completionBlock{
     
     //request body
     NSDictionary *parameters = @{
@@ -103,9 +103,12 @@
         NSLog(@"%@", responseObject);
         NSString *responseCode = [responseObject objectForKey:kParameterRespCode];
         if ([responseCode isEqualToString:@"00"]){
+            NSString *base64Encoded = [responseObject objectForKey:@"Data"];
+            NSDictionary *JSON = [STBAPIClient JSONDictionaryFromBase64EncodedString:base64Encoded];
+            
             //success
             if (completionBlock) {
-                completionBlock(responseObject, nil);
+                completionBlock(JSON, nil);
             }
         }
         else{

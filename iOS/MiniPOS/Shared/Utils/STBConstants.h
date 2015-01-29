@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 STB. All rights reserved.
 //
 
+#define iTunesDownloadURL @"itms-apps://itunes.apple.com/app/idAPP_ID"
+
 /**
  * Components
  */

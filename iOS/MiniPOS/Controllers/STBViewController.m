@@ -15,6 +15,9 @@
 @property (nonatomic, retain) CBCentralManager *bluetoothManager;
 @property (nonatomic) BOOL bluetoothEnabled;
 
+//
+@property (nonatomic) BOOL appFromBackground;
+
 //main view
 @property (strong, nonatomic) STBCenterViewController *centerViewController;
 
@@ -44,12 +47,8 @@
     }
 }
 
-#pragma mark - Bluetooth check
-
 - (BOOL)isBluetoothPoweredOn{
     CBCentralManagerState state = [_bluetoothManager state];
-//    if (state == CBCentralManagerStatePoweredOn)
-//        return YES;
     
     NSString *message = nil;
     switch(state)
@@ -70,14 +69,11 @@
             message = @"Bluetooth is currently powered on and available to use.";
             break;
         default:
-            //            message = @"State unknown, update imminent.";
+            message = @"State unknown, update imminent.";
             break;
     }
     
     DLog(@"Bluetooth state: %@", message);
-    
-//    if (message)
-//        [UIAlertView alertViewWithTitle:@"Bluetooth state" message:message cancelButtonTitle:@"OK"];
     
     if (state == CBCentralManagerStatePoweredOn)
         return YES;
@@ -108,31 +104,58 @@
         [UIAlertView alertViewWithTitle:@"System Message" message:message cancelButtonTitle:@"OK"];
 }
 
+#pragma mark - App Update
+
 - (void)checkAppUpdate{
     [_lblLoadingMessage setText:@"Checking application version..."];
     STBAPIClient *apiClient = [STBAPIClient sharedClient];
     
-    [apiClient getAppVersionWithCompletionBlock:^(id responseObject, NSError *error) {
+    [apiClient getAppVersionWithCompletionBlock:^(id JSON, NSError *error) {
         if (error) {
             DLog(@"%@", error);
         }
         else{
-            DLog(@"responseObject: %@", responseObject);
-            
-            [_lblLoadingMessage setText:@"Done!"];
-            [self addCenterView];
+            DLog(@"responseObject: %@", JSON);
+            NSString *version = [JSON objectForKey:@"Version"];
+            BOOL isForcedUpdate = [[JSON objectForKey:@"IsForcedUpdate"] boolValue];
+            NSString *appVer = [AppUtils appVersion];
+            if (![appVer isEqualToString:version] && isForcedUpdate) {
+                [UIAlertView alertViewWithTitle:@"System Message" message:@"A new version of Mini-Pos is available. Please update to new version." cancelButtonTitle:@"Update" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+                    
+                    NSString *iTunesLink = iTunesDownloadURL;
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+                    
+                } onCancel:nil];
+            }
+            else{
+                [_activityIndicatorView stopAnimating];
+                [_lblLoadingMessage setText:@"Done!"];
+                [self addCenterView];
+            }
         }
     }];
 }
 
-- (void)appActive:(NSNotification *)notification{
-    [self checkBluetoothAndNetWork];
+- (void)appWillEnterForegroundNotification:(NSNotification *)notification{
+    // Only called when app is returning from background
+    _appFromBackground = YES;
 }
+
+- (void)appActive:(NSNotification *)notification{
+    if (_appFromBackground)
+        [self checkBluetoothAndNetWork];
+}
+
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _appFromBackground = NO;
+    
 	// Do any additional setup after loading the view, typically from a nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForegroundNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     //check blutooth

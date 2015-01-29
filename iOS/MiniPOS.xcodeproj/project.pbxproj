@@ -362,7 +362,7 @@
 		D8FEB49E19EFFD09008BB5D5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D8FEB4A019EFFD0E008BB5D5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D8FEB4A219EFFD14008BB5D5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		D8FEB4B119F0032A008BB5D5 /* STBConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STBConstants.h; sourceTree = "<group>"; };
+		D8FEB4B119F0032A008BB5D5 /* STBConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = STBConstants.h; path = Utils/STBConstants.h; sourceTree = "<group>"; };
 		D8FEB4B219F0066D008BB5D5 /* STBDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBDataFormatter.h; sourceTree = "<group>"; };
 		D8FEB4B319F0066D008BB5D5 /* STBDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBDataFormatter.m; sourceTree = "<group>"; };
 		D8FEB4B519F0109A008BB5D5 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
@@ -892,6 +892,7 @@
 		D8FEB44019EFF61F008BB5D5 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				D8FEB4B119F0032A008BB5D5 /* STBConstants.h */,
 				D8EDD36B1A2A3A15008E60CB /* Controllers */,
 				D84D290C19FEACD600288FE0 /* Models */,
 				D8FEB4CA19F01239008BB5D5 /* Views */,
@@ -1022,7 +1023,6 @@
 		D8FEB48219EFFA7C008BB5D5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				D8FEB4B119F0032A008BB5D5 /* STBConstants.h */,
 				D8FEB48319EFFA7C008BB5D5 /* AppUtils.h */,
 				D8FEB48419EFFA7C008BB5D5 /* AppUtils.m */,
 				D8FEB4B219F0066D008BB5D5 /* STBDataFormatter.h */,

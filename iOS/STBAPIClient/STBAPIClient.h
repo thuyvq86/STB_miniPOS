@@ -44,6 +44,6 @@
 + (NSString *)jsonStringFromDictionary:(NSDictionary *)dataDict;
 + (NSDictionary *)JSONDictionaryFromBase64EncodedString:(NSString *)base64Encoded;
 
-- (AFHTTPRequestOperation *)getAppVersionWithCompletionBlock:(void (^)(id responseObject, NSError *error))completionBlock;
+- (AFHTTPRequestOperation *)getAppVersionWithCompletionBlock:(void (^)(id JSON, NSError *error))completionBlock;
 
 @end
