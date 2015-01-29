@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
+"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+     <key>CFBundleName</key>
+     <string>PCL Library</string>
+     <key>CFBundleIdentifier</key>
+     <string>com.ingenico.PCL</string>
+     <key>CFBundleVersion</key>
+     <string>version 5.11</string>
+     <key>DocSetFeedName</key>
+     <string>PCL</string>
+     <key>DocSetPublisherIdentifier</key>
+     <string>com.ingenico.Application</string>
+     <key>DocSetPublisherName</key>
+     <string>Ingenico</string>
+     <key>DashDocSetFamily</key>
+     <string>doxy</string>
+     <key>DocSetPlatformFamily</key>
+     <string>doxygen</string>
+</dict>
+</plist>

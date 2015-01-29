@@ -1,0 +1,32 @@
+//
+//  iSMPTestSuiteViewController.h
+//  iSMPTestSuite
+//
+//  Created by Hichem Boussetta on 17/12/10.
+//  Copyright 2010 Ingenico. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import <iSMP/revision.h>
+
+@interface iSMPTestSuiteViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+
+	NSDictionary		* testGroups;
+	
+	UILabel				* labelApiVersion;
+	UILabel				* labelApplicationBuildTime;
+	UILabel				* labelAppVersion;
+    UILabel             * labelCompanionUsed;
+}
+
+@property (nonatomic, retain) NSDictionary * testGroups;
+@property (nonatomic, retain) IBOutlet UILabel * labelApiVersion;
+@property (nonatomic, retain) IBOutlet UILabel * labelApplicationBuildTime;
+@property (nonatomic, retain) IBOutlet UILabel * labelAppVersion;
+@property (nonatomic, retain) NSOutputStream * batteryLogStream;
+@property (retain, nonatomic) IBOutlet UILabel *labelCompanionUsed;
+
+-(IBAction)iSpmInformation;
+
+@end
+
