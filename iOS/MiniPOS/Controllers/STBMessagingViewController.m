@@ -169,7 +169,7 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
 #pragma mark - UI
 
 - (void)setupUI{
-    _navItem.leftBarButtonItem = [self barButtonItemWithTitle:@"Back" style:UIBarButtonItemStylePlain action:@selector(buttonBackTouch:)];
+    _navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UIButtonBack"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonBackTouch:)];//[self barButtonItemWithTitle:@"Back" style:UIBarButtonItemStylePlain action:@selector(buttonBackTouch:)];
     _navItem.rightBarButtonItem = [self barButtonItemWithTitle:@"Send" style:UIBarButtonItemStyleDone action:@selector(buttonSendTouch:)];;
     
     if([_navigationBar respondsToSelector:@selector(setBarTintColor:)])

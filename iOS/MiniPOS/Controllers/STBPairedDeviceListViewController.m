@@ -99,18 +99,11 @@
     
     [UIAlertView alertViewWithTitle:title message:desc cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Reset"] onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
         if (buttonIndex == 1){
-            [self resetProfile:pairedDevice];
+            [pairedDevice resetProfile];
+            //update UI
+            [_tableView reloadData];
         }
     } onCancel:nil];
-}
-
-- (void)resetProfile:(ICMPProfile *)pairedDevice {
-    DLog();
-    
-    //delete from database
-    
-    //update UI
-    [_tableView reloadData];
 }
 
 @end

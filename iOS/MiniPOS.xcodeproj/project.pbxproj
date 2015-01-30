@@ -34,6 +34,15 @@
 		D8573E621A272606007C4EBC /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84D292B19FEAFB200288FE0 /* CrashReporter.framework */; };
 		D8B33FAF1A7BF01300480E47 /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49819EFFCBB008BB5D5 /* iSMP.framework */; };
 		D8B33FB01A7BF04400480E47 /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49819EFFCBB008BB5D5 /* iSMP.framework */; };
+		D8B33FB51A7C057F00480E47 /* UIButtonBack.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B33FB11A7C057F00480E47 /* UIButtonBack.png */; };
+		D8B33FB61A7C057F00480E47 /* UIButtonBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B33FB21A7C057F00480E47 /* UIButtonBack@2x.png */; };
+		D8B33FB71A7C057F00480E47 /* UIButtonBackTouch.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B33FB31A7C057F00480E47 /* UIButtonBackTouch.png */; };
+		D8B33FB81A7C057F00480E47 /* UIButtonBackTouch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B33FB41A7C057F00480E47 /* UIButtonBackTouch@2x.png */; };
+		D8B33FBE1A7C064600480E47 /* UIButtonSettings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B33FB91A7C064600480E47 /* UIButtonSettings@3x.png */; };
+		D8B33FBF1A7C064600480E47 /* UIButtonModalClose.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B33FBA1A7C064600480E47 /* UIButtonModalClose.png */; };
+		D8B33FC01A7C064600480E47 /* UIButtonModalClose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B33FBB1A7C064600480E47 /* UIButtonModalClose@2x.png */; };
+		D8B33FC11A7C064600480E47 /* UIButtonModalCloseTouch.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B33FBC1A7C064600480E47 /* UIButtonModalCloseTouch.png */; };
+		D8B33FC21A7C064600480E47 /* UIButtonModalCloseTouch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B33FBD1A7C064600480E47 /* UIButtonModalCloseTouch@2x.png */; };
 		D8C5C83719FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */; };
 		D8D5951D1A48583500D1047A /* userdata.db in Resources */ = {isa = PBXBuildFile; fileRef = D8D5951C1A48583500D1047A /* userdata.db */; };
 		D8D595211A48629F00D1047A /* PairedDeviceInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D595201A48629F00D1047A /* PairedDeviceInfoCell.m */; };
@@ -228,6 +237,15 @@
 		D84D291D19FEACD600288FE0 /* UIImage-Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage-Extensions.h"; sourceTree = "<group>"; };
 		D84D291E19FEACD600288FE0 /* UIImage-Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage-Extensions.m"; sourceTree = "<group>"; };
 		D84D292B19FEAFB200288FE0 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		D8B33FB11A7C057F00480E47 /* UIButtonBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBack.png; sourceTree = "<group>"; };
+		D8B33FB21A7C057F00480E47 /* UIButtonBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBack@2x.png"; sourceTree = "<group>"; };
+		D8B33FB31A7C057F00480E47 /* UIButtonBackTouch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBackTouch.png; sourceTree = "<group>"; };
+		D8B33FB41A7C057F00480E47 /* UIButtonBackTouch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBackTouch@2x.png"; sourceTree = "<group>"; };
+		D8B33FB91A7C064600480E47 /* UIButtonSettings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonSettings@3x.png"; sourceTree = "<group>"; };
+		D8B33FBA1A7C064600480E47 /* UIButtonModalClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonModalClose.png; sourceTree = "<group>"; };
+		D8B33FBB1A7C064600480E47 /* UIButtonModalClose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonModalClose@2x.png"; sourceTree = "<group>"; };
+		D8B33FBC1A7C064600480E47 /* UIButtonModalCloseTouch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonModalCloseTouch.png; sourceTree = "<group>"; };
+		D8B33FBD1A7C064600480E47 /* UIButtonModalCloseTouch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonModalCloseTouch@2x.png"; sourceTree = "<group>"; };
 		D8C5C83519FFDB750048E4F0 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
 		D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
 		D8D5951C1A48583500D1047A /* userdata.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = userdata.db; sourceTree = "<group>"; };
@@ -1178,8 +1196,17 @@
 		D8FEB51219F15290008BB5D5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D8B33FBA1A7C064600480E47 /* UIButtonModalClose.png */,
+				D8B33FBB1A7C064600480E47 /* UIButtonModalClose@2x.png */,
+				D8B33FBC1A7C064600480E47 /* UIButtonModalCloseTouch.png */,
+				D8B33FBD1A7C064600480E47 /* UIButtonModalCloseTouch@2x.png */,
+				D8B33FB11A7C057F00480E47 /* UIButtonBack.png */,
+				D8B33FB21A7C057F00480E47 /* UIButtonBack@2x.png */,
+				D8B33FB31A7C057F00480E47 /* UIButtonBackTouch.png */,
+				D8B33FB41A7C057F00480E47 /* UIButtonBackTouch@2x.png */,
 				D8EDD35E1A2A2C69008E60CB /* UIButtonSettings.png */,
 				D8EDD35F1A2A2C69008E60CB /* UIButtonSettings@2x.png */,
+				D8B33FB91A7C064600480E47 /* UIButtonSettings@3x.png */,
 				D8EDD35A1A2A29AB008E60CB /* logo.png */,
 				D8EDD35B1A2A29AB008E60CB /* logo@2x.png */,
 				D8FEB58119F1A423008BB5D5 /* SeparatorLine.png */,
@@ -1343,8 +1370,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8B33FBE1A7C064600480E47 /* UIButtonSettings@3x.png in Resources */,
 				D8EDD3611A2A2C69008E60CB /* UIButtonSettings@2x.png in Resources */,
+				D8B33FC11A7C064600480E47 /* UIButtonModalCloseTouch.png in Resources */,
 				D8EDD35C1A2A29AB008E60CB /* logo.png in Resources */,
+				D8B33FC01A7C064600480E47 /* UIButtonModalClose@2x.png in Resources */,
 				D8FEB44B19EFF839008BB5D5 /* MessagingStoryboard.storyboard in Resources */,
 				D8FEB58319F1A423008BB5D5 /* SeparatorLine.png in Resources */,
 				D8FEB58419F1A423008BB5D5 /* SeparatorLine@2x.png in Resources */,
@@ -1356,21 +1386,27 @@
 				D8FEB42319EFF331008BB5D5 /* Images.xcassets in Resources */,
 				D8FEB53719F15290008BB5D5 /* UIButtonSecondaryTouch@2x.png in Resources */,
 				D8FEB53619F15290008BB5D5 /* UIButtonSecondaryTouch.png in Resources */,
+				D8B33FBF1A7C064600480E47 /* UIButtonModalClose.png in Resources */,
 				D8FEB41B19EFF331008BB5D5 /* Main_iPhone.storyboard in Resources */,
+				D8B33FB51A7C057F00480E47 /* UIButtonBack.png in Resources */,
 				D8FEB57019F15985008BB5D5 /* message.json in Resources */,
 				D8EDD3601A2A2C69008E60CB /* UIButtonSettings.png in Resources */,
 				D8FEB41219EFF331008BB5D5 /* InfoPlist.strings in Resources */,
 				D8FEB53419F15290008BB5D5 /* UIButtonSecondary.png in Resources */,
 				D8EDD35D1A2A29AB008E60CB /* logo@2x.png in Resources */,
 				D8FEB53819F15290008BB5D5 /* Default-568h@2x.png in Resources */,
+				D8B33FB61A7C057F00480E47 /* UIButtonBack@2x.png in Resources */,
 				D8EDD3521A2A007D008E60CB /* Icon-120.png in Resources */,
+				D8B33FC21A7C064600480E47 /* UIButtonModalCloseTouch@2x.png in Resources */,
 				D8FEB53A19F15290008BB5D5 /* Default@2x.png in Resources */,
 				D829DCB01A484B8E00E6174B /* SettingsStoryboard.storyboard in Resources */,
 				D8D5951D1A48583500D1047A /* userdata.db in Resources */,
 				D8FEB52E19F15290008BB5D5 /* MasterBackground.png in Resources */,
 				D8FEB53519F15290008BB5D5 /* UIButtonSecondary@2x.png in Resources */,
 				D8EDD3501A2A007D008E60CB /* Icon-57.png in Resources */,
+				D8B33FB81A7C057F00480E47 /* UIButtonBackTouch@2x.png in Resources */,
 				D8EDD3781A2B56B8008E60CB /* SVProgressHUD.bundle in Resources */,
+				D8B33FB71A7C057F00480E47 /* UIButtonBackTouch.png in Resources */,
 				D8EDD34B1A29FE18008E60CB /* Default-736h@3x.png in Resources */,
 				D8EDD3531A2A007D008E60CB /* Icon-180.png in Resources */,
 				D8EDD3511A2A007D008E60CB /* Icon-114.png in Resources */,

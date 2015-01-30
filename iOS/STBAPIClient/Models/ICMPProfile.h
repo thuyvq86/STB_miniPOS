@@ -23,6 +23,7 @@
 
 - (id)initWithICISMPDevice;
 - (BOOL)updateFromDictionary:(NSDictionary *)dict;
+- (BOOL)resetProfile;
 
 + (id)getBySerialNumber:(NSString *)serialNumber;
 + (NSInteger)getCount;

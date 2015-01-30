@@ -42,14 +42,19 @@
     CGFloat width    = CGRectGetWidth(rect) - 2*kLeftPadding;
     NSInteger offset = kTopPadding;
     
-    NSString *text = [_profile displayableName];
+    //Active | Not active
+    UIColor *textColor = [UIColor whiteColor];
+    if ([_profile.serialId isEqualToString:[ICISMPDevice serialNumber]])
+        textColor = [UIColor greenColor];
     
     //set text color
-    [[UIColor whiteColor] set];
+    [textColor set];
     
     //draw text
-    CGFloat height = [text heightForWidth:width andFont:normalFont];
-    [text drawInRect:CGRectMake(kLeftPadding, offset, width, height) withFont:normalFont lineBreakMode:NSLineBreakByWordWrapping];
+    NSString *displayableName = [_profile displayableName];
+    CGFloat height = [displayableName heightForWidth:width andFont:normalFont];
+    
+    [displayableName drawInRect:CGRectMake(kLeftPadding, offset, width, height) withFont:normalFont lineBreakMode:NSLineBreakByWordWrapping];
     offset += height + kTopPadding;
     
     //draw bottom line

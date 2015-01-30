@@ -262,7 +262,6 @@
             _requestSendCount = 0;
             
             [self loadContent];
-            [_tableView reloadData];
             
             //dismiss hud
             [SVProgressHUD dismiss];
@@ -290,11 +289,15 @@
     
     NSString *title = [pairedDevice displayableName];
     NSString *desc = [pairedDevice descriptionOfProfile];
+    NSString *buttonTittle = @"Do transaction";
+    if (![pairedDevice.serialId isEqualToString:[ICISMPDevice serialNumber]])
+        buttonTittle = @"OK";
     
-    [UIAlertView alertViewWithTitle:title message:desc cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+    [UIAlertView alertViewWithTitle:title message:desc cancelButtonTitle:buttonTittle otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
     } onCancel:^{
         //go to messaging view
-        [self showMessagingView:pairedDevice];
+        if ([pairedDevice.serialId isEqualToString:[ICISMPDevice serialNumber]])
+            [self showMessagingView:pairedDevice];
     }];
 }
 
@@ -371,6 +374,8 @@
 // Sent to the delegate when the screen is dismissed.
 - (void)settingsViewControllerDidFinish:(STBSettingsViewController *)settingsViewController{
     [self parentView:self dismissViewController:settingsViewController.navigationController animated:YES completion:nil];
+    
+    [self loadContent];
 }
 
 @end

@@ -53,6 +53,7 @@
     self.textLabel.font = [theme fontForHeader];
     
     self.detailTextLabel.backgroundColor = [UIColor greenColor];
+    self.detailTextLabel.text = @" ";
 }
 
 // Only override drawRect: if you perform custom drawing.
@@ -77,13 +78,11 @@
     
     self.textLabel.text = [_pairedDevice displayableName];
     
-    //Active
-    if ([_pairedDevice.serialId isEqualToString:[ICISMPDevice serialNumber]]){
-        self.detailTextLabel.text = @"Active";
-    }
-    else{
-        self.detailTextLabel.text = @" ";
-    }
+    //Active | Not active
+    UIColor *textColor = [UIColor whiteColor];
+    if ([_pairedDevice.serialId isEqualToString:[ICISMPDevice serialNumber]])
+        textColor = [UIColor greenColor];
+    self.textLabel.textColor = textColor;
     
     [self setNeedsDisplay];
 }

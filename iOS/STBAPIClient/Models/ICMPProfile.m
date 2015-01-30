@@ -41,7 +41,7 @@
     self = [super init];
     if (self) {
         self.serialId = [ICISMPDevice serialNumber];
-        self.merchantName = [ICISMPDevice name];
+        self.merchantName = @"Unknown merchant";
     }
     
     return self;
@@ -55,6 +55,24 @@
     instance.merchantName = [[dict objectForKey:@"MerchantName"] stringByRemovingNewLinesAndWhitespace];
     instance.phoneSerialId = [[dict objectForKey:@"PhoneSerialID"] stringByRemovingNewLinesAndWhitespace];
     instance.terminalId = [[dict objectForKey:@"TerminalID"] stringByRemovingNewLinesAndWhitespace];
+    
+    [[ICMPProfile dbQueue] inDatabase:^(FMDatabase *db) {
+        success = [instance insertOrUpdateInDb:db];
+        if (success)
+            [[ICMPProfile sharedCache] setObject:self forKey:instance.serialId];
+    }];
+    
+    return success;
+}
+
+- (BOOL)resetProfile{
+    __block BOOL success = NO;
+    __block ICMPProfile *instance = self;
+    
+    instance.merchantId = nil;
+    instance.merchantName = @"Unknown merchant";
+    instance.phoneSerialId = nil;
+    instance.terminalId = nil;
     
     [[ICMPProfile dbQueue] inDatabase:^(FMDatabase *db) {
         success = [instance insertOrUpdateInDb:db];
@@ -103,10 +121,10 @@
 
 - (NSArray*)argumentsForUpdate {
     return [NSArray arrayWithObjects:
-            self.merchantId,
-            self.merchantName,
-            self.phoneSerialId,
-            self.terminalId,
+            self.merchantId ? self.merchantId : @"",
+            self.merchantName ? self.merchantName : @"",
+            self.phoneSerialId ? self.phoneSerialId : @"",
+            self.terminalId ? self.terminalId : @"",
             self.lastModifiedDate ? self.lastModifiedDate : [NSNull null],
             self.serialId,
             nil];
