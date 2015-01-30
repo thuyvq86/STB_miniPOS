@@ -16,12 +16,11 @@
 		D829DCAE1A484B3A00E6174B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D829DCAD1A484B3A00E6174B /* libsqlite3.dylib */; };
 		D829DCB01A484B8E00E6174B /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D829DCAF1A484B8E00E6174B /* SettingsStoryboard.storyboard */; };
 		D829DCBE1A48528500E6174B /* ICMPProfile+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DCB31A48528500E6174B /* ICMPProfile+Operations.m */; };
-		D829DCBF1A48528500E6174B /* ICMPProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DCB51A48528500E6174B /* ICMPProfile.m */; };
 		D829DCC01A48528500E6174B /* PosMessage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DCB71A48528500E6174B /* PosMessage+Operations.m */; };
 		D829DCC11A48528500E6174B /* PosMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DCB91A48528500E6174B /* PosMessage.m */; };
 		D829DCC21A48528500E6174B /* XMBaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DCBB1A48528500E6174B /* XMBaseEntity.m */; };
 		D829DCC31A48528500E6174B /* XMDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DCBD1A48528500E6174B /* XMDatabaseManager.m */; };
-		D829DCC71A4852EB00E6174B /* PairedDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DCC61A4852EB00E6174B /* PairedDevice.m */; };
+		D829DCC71A4852EB00E6174B /* ICMPProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DCC61A4852EB00E6174B /* ICMPProfile.m */; };
 		D84D291F19FEACD600288FE0 /* CrashReporterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D290E19FEACD600288FE0 /* CrashReporterManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D84D292019FEACD600288FE0 /* derTlv.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291019FEACD600288FE0 /* derTlv.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D84D292119FEACD600288FE0 /* GateWayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291219FEACD600288FE0 /* GateWayManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -33,7 +32,8 @@
 		D84D292719FEACD600288FE0 /* UIImage-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D84D291E19FEACD600288FE0 /* UIImage-Extensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D84D292C19FEAFB200288FE0 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84D292B19FEAFB200288FE0 /* CrashReporter.framework */; };
 		D8573E621A272606007C4EBC /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84D292B19FEAFB200288FE0 /* CrashReporter.framework */; };
-		D8573E631A272606007C4EBC /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49819EFFCBB008BB5D5 /* iSMP.framework */; };
+		D8B33FAF1A7BF01300480E47 /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49819EFFCBB008BB5D5 /* iSMP.framework */; };
+		D8B33FB01A7BF04400480E47 /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49819EFFCBB008BB5D5 /* iSMP.framework */; };
 		D8C5C83719FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */; };
 		D8D5951D1A48583500D1047A /* userdata.db in Resources */ = {isa = PBXBuildFile; fileRef = D8D5951C1A48583500D1047A /* userdata.db */; };
 		D8D595211A48629F00D1047A /* PairedDeviceInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D595201A48629F00D1047A /* PairedDeviceInfoCell.m */; };
@@ -106,7 +106,6 @@
 		D8FEB49019EFFC2D008BB5D5 /* STBCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB48F19EFFC2D008BB5D5 /* STBCenterViewController.m */; };
 		D8FEB49319EFFC45008BB5D5 /* STBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB49219EFFC45008BB5D5 /* STBViewController.m */; };
 		D8FEB49619EFFC59008BB5D5 /* STBMessagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB49519EFFC59008BB5D5 /* STBMessagingViewController.m */; };
-		D8FEB49919EFFCBB008BB5D5 /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49819EFFCBB008BB5D5 /* iSMP.framework */; };
 		D8FEB49B19EFFCDD008BB5D5 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49A19EFFCDD008BB5D5 /* ExternalAccessory.framework */; };
 		D8FEB49D19EFFCEE008BB5D5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49C19EFFCEE008BB5D5 /* MessageUI.framework */; };
 		D8FEB49F19EFFD09008BB5D5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8FEB49E19EFFD09008BB5D5 /* SystemConfiguration.framework */; };
@@ -200,8 +199,6 @@
 		D829DCAF1A484B8E00E6174B /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsStoryboard.storyboard; sourceTree = "<group>"; };
 		D829DCB21A48528500E6174B /* ICMPProfile+Operations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ICMPProfile+Operations.h"; sourceTree = "<group>"; };
 		D829DCB31A48528500E6174B /* ICMPProfile+Operations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ICMPProfile+Operations.m"; sourceTree = "<group>"; };
-		D829DCB41A48528500E6174B /* ICMPProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPProfile.h; sourceTree = "<group>"; };
-		D829DCB51A48528500E6174B /* ICMPProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICMPProfile.m; sourceTree = "<group>"; };
 		D829DCB61A48528500E6174B /* PosMessage+Operations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PosMessage+Operations.h"; sourceTree = "<group>"; };
 		D829DCB71A48528500E6174B /* PosMessage+Operations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PosMessage+Operations.m"; sourceTree = "<group>"; };
 		D829DCB81A48528500E6174B /* PosMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PosMessage.h; sourceTree = "<group>"; };
@@ -210,8 +207,8 @@
 		D829DCBB1A48528500E6174B /* XMBaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMBaseEntity.m; sourceTree = "<group>"; };
 		D829DCBC1A48528500E6174B /* XMDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMDatabaseManager.h; sourceTree = "<group>"; };
 		D829DCBD1A48528500E6174B /* XMDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMDatabaseManager.m; sourceTree = "<group>"; };
-		D829DCC51A4852EB00E6174B /* PairedDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PairedDevice.h; sourceTree = "<group>"; };
-		D829DCC61A4852EB00E6174B /* PairedDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PairedDevice.m; sourceTree = "<group>"; };
+		D829DCC51A4852EB00E6174B /* ICMPProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPProfile.h; sourceTree = "<group>"; };
+		D829DCC61A4852EB00E6174B /* ICMPProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICMPProfile.m; sourceTree = "<group>"; };
 		D84D290D19FEACD600288FE0 /* CrashReporterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporterManager.h; sourceTree = "<group>"; };
 		D84D290E19FEACD600288FE0 /* CrashReporterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashReporterManager.m; sourceTree = "<group>"; };
 		D84D290F19FEACD600288FE0 /* derTlv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = derTlv.h; sourceTree = "<group>"; };
@@ -474,6 +471,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8B33FB01A7BF04400480E47 /* iSMP.framework in Frameworks */,
 				D829DCAE1A484B3A00E6174B /* libsqlite3.dylib in Frameworks */,
 				D8FEB4A319EFFD14008BB5D5 /* CFNetwork.framework in Frameworks */,
 				D8FEB4A119EFFD0E008BB5D5 /* Security.framework in Frameworks */,
@@ -484,7 +482,6 @@
 				D84D292C19FEAFB200288FE0 /* CrashReporter.framework in Frameworks */,
 				D8FEB47B19EFF959008BB5D5 /* CoreBluetooth.framework in Frameworks */,
 				D8FEB40C19EFF331008BB5D5 /* UIKit.framework in Frameworks */,
-				D8FEB49919EFFCBB008BB5D5 /* iSMP.framework in Frameworks */,
 				D8FEB40819EFF331008BB5D5 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,9 +491,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8573E621A272606007C4EBC /* CrashReporter.framework in Frameworks */,
-				D8573E631A272606007C4EBC /* iSMP.framework in Frameworks */,
 				D8FEB42A19EFF331008BB5D5 /* XCTest.framework in Frameworks */,
 				D8FEB42C19EFF331008BB5D5 /* UIKit.framework in Frameworks */,
+				D8B33FAF1A7BF01300480E47 /* iSMP.framework in Frameworks */,
 				D8FEB42B19EFF331008BB5D5 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,16 +522,14 @@
 		D829DCB11A48528500E6174B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D829DCC51A4852EB00E6174B /* ICMPProfile.h */,
+				D829DCC61A4852EB00E6174B /* ICMPProfile.m */,
 				D829DCB21A48528500E6174B /* ICMPProfile+Operations.h */,
 				D829DCB31A48528500E6174B /* ICMPProfile+Operations.m */,
-				D829DCB41A48528500E6174B /* ICMPProfile.h */,
-				D829DCB51A48528500E6174B /* ICMPProfile.m */,
 				D829DCB61A48528500E6174B /* PosMessage+Operations.h */,
 				D829DCB71A48528500E6174B /* PosMessage+Operations.m */,
 				D829DCB81A48528500E6174B /* PosMessage.h */,
 				D829DCB91A48528500E6174B /* PosMessage.m */,
-				D829DCC51A4852EB00E6174B /* PairedDevice.h */,
-				D829DCC61A4852EB00E6174B /* PairedDevice.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -571,8 +566,6 @@
 				D84D291019FEACD600288FE0 /* derTlv.m */,
 				D84D291319FEACD600288FE0 /* ICBitmapReceipt.h */,
 				D84D291419FEACD600288FE0 /* ICBitmapReceipt.m */,
-				D8FEB57119F16570008BB5D5 /* ICSignatureView.h */,
-				D8FEB57219F16570008BB5D5 /* ICSignatureView.m */,
 				D84D291D19FEACD600288FE0 /* UIImage-Extensions.h */,
 				D84D291E19FEACD600288FE0 /* UIImage-Extensions.m */,
 			);
@@ -1065,6 +1058,8 @@
 		D8FEB4CA19F01239008BB5D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D8FEB57119F16570008BB5D5 /* ICSignatureView.h */,
+				D8FEB57219F16570008BB5D5 /* ICSignatureView.m */,
 				D8FEB4D419F14B46008BB5D5 /* BaseTableContentView.h */,
 				D8FEB4D519F14B46008BB5D5 /* BaseTableContentView.m */,
 			);
@@ -1427,7 +1422,7 @@
 				D8FEB56019F1542B008BB5D5 /* SDWebImageDownloader.m in Sources */,
 				D8FEB4D819F14B46008BB5D5 /* BaseTableContentView.m in Sources */,
 				D829DCC11A48528500E6174B /* PosMessage.m in Sources */,
-				D829DCC71A4852EB00E6174B /* PairedDevice.m in Sources */,
+				D829DCC71A4852EB00E6174B /* ICMPProfile.m in Sources */,
 				D8FEB52819F15290008BB5D5 /* AKSegmentedControl.m in Sources */,
 				D8FEB49619EFFC59008BB5D5 /* STBMessagingViewController.m in Sources */,
 				D8EDD3671A2A2F4A008E60CB /* DeviceProfileInfoCell.m in Sources */,
@@ -1454,7 +1449,6 @@
 				D8FEB56419F1542B008BB5D5 /* UIButton+WebCache.m in Sources */,
 				D829DCA41A484A6A00E6174B /* FMDatabaseQueue.m in Sources */,
 				D84D292719FEACD600288FE0 /* UIImage-Extensions.m in Sources */,
-				D829DCBF1A48528500E6174B /* ICMPProfile.m in Sources */,
 				D84D292119FEACD600288FE0 /* GateWayManager.m in Sources */,
 				D8EDD32A1A24F309008E60CB /* AFURLSessionManager.m in Sources */,
 				D8D595211A48629F00D1047A /* PairedDeviceInfoCell.m in Sources */,

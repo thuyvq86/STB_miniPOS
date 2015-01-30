@@ -8,7 +8,7 @@
 
 #import "STBPairedDeviceListViewController.h"
 #import "PairedDeviceInfoCell.h"
-#import "PairedDevice.h"
+#import "ICMPProfile.h"
 
 @interface STBPairedDeviceListViewController ()
 
@@ -23,7 +23,7 @@
     // Do any additional setup after loading the view.
     [self setupUI];
     
-    self.pairedDevices = [PairedDevice getAll];
+    self.pairedDevices = [ICMPProfile getAll];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,7 +66,7 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
-    PairedDevice *device = [self.pairedDevices objectAtIndex:indexPath.row];
+    ICMPProfile *device = [self.pairedDevices objectAtIndex:indexPath.row];
     [cell setPairedDevice:device];
     
     return cell;
@@ -86,25 +86,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    PairedDevice *device = [self.pairedDevices objectAtIndex:indexPath.row];
+    ICMPProfile *device = [self.pairedDevices objectAtIndex:indexPath.row];
     [self showAlertWithPairedDeviceInfo:device];
 }
 
 #pragma mark - Device Info
 
-- (void)showAlertWithPairedDeviceInfo:(PairedDevice *)pairedDevice{
+- (void)showAlertWithPairedDeviceInfo:(ICMPProfile *)pairedDevice{
     
-    NSString *title = [NSString stringWithFormat:@"%@-%@", pairedDevice.name, pairedDevice.serialNumber];
-    NSString *msg = pairedDevice.desc;
+    NSString *title = [pairedDevice displayableName];
+    NSString *desc = [pairedDevice descriptionOfProfile];
     
-    [UIAlertView alertViewWithTitle:title message:msg cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Reset"] onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+    [UIAlertView alertViewWithTitle:title message:desc cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Reset"] onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
         if (buttonIndex == 1){
             [self resetProfile:pairedDevice];
         }
     } onCancel:nil];
 }
 
-- (void)resetProfile:(PairedDevice *)pairedDevice {
+- (void)resetProfile:(ICMPProfile *)pairedDevice {
     DLog();
     
     //delete from database

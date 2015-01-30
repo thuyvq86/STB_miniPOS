@@ -265,7 +265,7 @@ static CTFontRef CTFontCreateFromUIFont(UIFont *font)
 
 
 -(void)drawText:(NSString *)text {
-    NSLog(@"%s [Text: %@][Font: %@][xScale: %d, yScale: %d]", __FUNCTION__, text, self.textFont, self.textXScaling, self.textYScaling);
+    NSLog(@"%s [Text: %@][Font: %@][xScale: %ld, yScale: %d]", __FUNCTION__, text, self.textFont, (long)self.textXScaling, self.textYScaling);
     
     [self invalidateAttributedString];
     
@@ -303,7 +303,7 @@ static CTFontRef CTFontCreateFromUIFont(UIFont *font)
 //This function draws an attributed string into a bitmap graphics context
 //Note that text drawn using CTFramesetterCreateFrame is not reversed. This means that there is no need to scanle the graphics context by a negative factor in the Y direction as in drawText
 -(void)drawTextAdvanced:(NSString *)text {
-    NSLog(@"%s [Text: %@][Font: %@][xScale: %d, yScale: %d][Bold: %@]", __FUNCTION__, text, self.textFont, self.textXScaling, self.textYScaling, ((self.textInBold == YES) ? @"YES" : @"NO"));
+    NSLog(@"%s [Text: %@][Font: %@][xScale: %ld, yScale: %d][Bold: %@]", __FUNCTION__, text, self.textFont, (long)self.textXScaling, self.textYScaling, ((self.textInBold == YES) ? @"YES" : @"NO"));
     
     if (self.graphicContext == NULL) {
         NSLog(@"%s Invalid Graphics Context", __FUNCTION__);

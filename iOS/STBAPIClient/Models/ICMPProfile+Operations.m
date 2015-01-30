@@ -10,7 +10,7 @@
 
 @implementation ICMPProfile (Operations)
 
-- (AFHTTPRequestOperation *)getProfileWithCompletionBlock:(void (^)(id responseObject, NSError *error))completionBlock noInternet:(void (^)(void))noInternet
+- (AFHTTPRequestOperation *)getProfileWithCompletionBlock:(void (^)(id JSON, NSError *error))completionBlock noInternet:(void (^)(void))noInternet
 {
     STBAPIClient *apiClient = [STBAPIClient sharedClient];
     if (![apiClient isInternetReachable]){
@@ -32,17 +32,20 @@
     NSString *path = kApiPath;
     
     return [apiClient POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@", responseObject);
+        //DLog(@"%@", responseObject);
         NSString *responseCode = [responseObject objectForKey:kParameterRespCode];
         if ([responseCode isEqualToString:@"00"]){
             NSString *base64Encoded = [responseObject objectForKey:@"Data"];
             NSDictionary *JSON = [STBAPIClient JSONDictionaryFromBase64EncodedString:base64Encoded];
-            if (JSON && [JSON allKeys].count > 0)
+            DLog(@"%@", JSON);
+            
+            if (JSON && [JSON allKeys].count > 0){
                 [self updateFromDictionary:JSON];
+            }
 
             //success
             if (completionBlock) {
-                completionBlock(responseObject, nil);
+                completionBlock(JSON, nil);
             }
         }
         else{

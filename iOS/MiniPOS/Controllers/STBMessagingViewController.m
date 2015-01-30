@@ -426,6 +426,17 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     [_tableView reloadData];
 }
 
+- (UIImage *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a bitmap context.
+    UIGraphicsBeginImageContextWithOptions(newSize, YES, [UIScreen mainScreen].scale);
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 #pragma mark - Helpers
 
 - (void)updateISMPState:(BOOL)available{

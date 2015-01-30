@@ -14,7 +14,7 @@
 #import "DeviceProfileInfoCell.h"
 //Models
 #import "ICMPProfile+Operations.h"
-#import "PairedDevice.h"
+#import "ICMPProfile.h"
 
 @interface STBCenterViewController ()<ICISMPDeviceDelegate, SettingsViewDelegate>
 
@@ -105,6 +105,26 @@
 #pragma mark - Load content
 
 - (void)loadContent{
+    self.connectedAccessories = [NSMutableArray array];
+
+    NSArray *pairedDevices = [ICMPProfile getAll];
+    [_connectedAccessories addObjectsFromArray:pairedDevices];
+    
+    if ([ICISMPDevice isAvailable]) {
+        ICMPProfile *availableInfo = [ICMPProfile getBySerialNumber:[ICISMPDevice serialNumber]];
+        if (!availableInfo) {
+            availableInfo = [[ICMPProfile alloc] initWithICISMPDevice];
+            availableInfo.lastModifiedDate = [NSDate date];
+            [availableInfo insertOrUpdate];
+            
+            //add new device into first
+            [_connectedAccessories insertObject:availableInfo atIndex:0];
+        }
+    }
+    
+    [_tableView reloadData];
+    
+    /*
     ICMPProfile *profile = nil;
     NSArray *pairedDevices = nil;
     if ([ICISMPDevice isAvailable])
@@ -112,12 +132,14 @@
     
     self.connectedAccessories = [NSMutableArray array];
     for (EAAccessory *acc in pairedDevices){
-        profile = [[ICMPProfile alloc] initWithAccessory:acc];
+        profile = [[ICMPProfile alloc] init];
+        profile.serialId = acc.serialNumber;
+        
         [_connectedAccessories addObject:profile];
     }
     
 #if TARGET_IPHONE_SIMULATOR
-    profile = [[ICMPProfile alloc] initWithAccessory:nil];
+    profile = [[ICMPProfile alloc] init];
     profile.serialId = @"20138884";
     [_connectedAccessories addObject:profile];
     
@@ -129,40 +151,7 @@
         [UIAppDelegate insertOrUpdatePairedDevice];
     
     [_tableView reloadData];
-}
-
-#pragma mark - Get Profile from STB server
-
-- (void)getProfile:(ICMPProfile *)profile{
-    _requestSendCount++;
-    
-    [SVProgressHUD showWithStatus:@"Getting profile..." maskType:SVProgressHUDMaskTypeBlack];
-    
-    [profile getProfileWithCompletionBlock:^(id responseObject, NSError *error) {
-        if (responseObject) {
-            DLog(@"success:\n%@", responseObject);
-            //continue with the next request
-            _requestSendCount = 0;
-            [_tableView reloadData];
-            
-            //go to messaging view
-            [self showMessagingView:profile];
-            
-            //dismiss hud
-            [SVProgressHUD dismiss];
-        }
-        else{
-            DLog(@"failure:\n%@", error);
-            //send request again if less than third times
-            if (_requestSendCount < 3)
-                [self getProfile:profile];
-            else
-                [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@", error]];
-        }
-    } noInternet:^{
-        _requestSendCount = 3;
-        [SVProgressHUD showErrorWithStatus:@"Device is not connected to the internet!"];
-    }];
+    */
 }
 
 #pragma mark Table view data source
@@ -243,10 +232,12 @@
 
 - (void)didSelectRow:(NSInteger)row{
     ICMPProfile *profile = [_connectedAccessories objectAtIndex:row];
-    if (!profile.merchantId)
-        [self getProfile:profile];
-    else
-        [self showMessagingView:profile];
+    [self getProfile:profile];
+    
+//    if (!profile.merchantId)
+//        [self getProfile:profile];
+//    else
+//        [self showMessagingView:profile];
 }
 
 - (void)showMessagingView:(ICMPProfile *)profile{
@@ -255,6 +246,56 @@
     messagingViewController.profile = profile;
     
     [self.navigationController pushViewController:messagingViewController animated:YES];
+}
+
+#pragma mark - Get Profile from STB server
+
+- (void)getProfile:(ICMPProfile *)profile{
+    _requestSendCount++;
+    
+    [SVProgressHUD showWithStatus:@"Getting profile..." maskType:SVProgressHUDMaskTypeBlack];
+    
+    [profile getProfileWithCompletionBlock:^(id JSON, NSError *error) {
+        if (JSON) {
+            DLog(@"success:\n%@", JSON);
+            //continue with the next request
+            _requestSendCount = 0;
+            
+            [self loadContent];
+            [_tableView reloadData];
+            
+            //dismiss hud
+            [SVProgressHUD dismiss];
+            
+            //show info
+            [self showAlertWithPairedDeviceInfo:profile];
+        }
+        else{
+            DLog(@"failure:\n%@", error);
+            //send request again if less than third times
+            if (_requestSendCount < 3)
+                [self getProfile:profile];
+            else{
+                [SVProgressHUD dismiss];
+                [UIAlertView alertViewWithTitle:@"System Message" message:@"Invalid profile!" cancelButtonTitle:@"OK"];
+            }
+        }
+    } noInternet:^{
+        _requestSendCount = 3;
+        [SVProgressHUD showErrorWithStatus:@"Please enable Wrireless to continue."];
+    }];
+}
+
+- (void)showAlertWithPairedDeviceInfo:(ICMPProfile *)pairedDevice{
+    
+    NSString *title = [pairedDevice displayableName];
+    NSString *desc = [pairedDevice descriptionOfProfile];
+    
+    [UIAlertView alertViewWithTitle:title message:desc cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+    } onCancel:^{
+        //go to messaging view
+        [self showMessagingView:pairedDevice];
+    }];
 }
 
 #pragma mark - Bluetooth check
@@ -311,7 +352,8 @@
     if (_connectedAccessories && [_connectedAccessories count] > 0)
         profile = [_connectedAccessories objectAtIndex:0];
     
-    [self showSettingsView:profile.accessory];
+//    [self showSettingsView:profile.accessory];
+    [self showSettingsView:nil];
 }
 
 - (void)showSettingsView:(EAAccessory *)pairedDevice{
@@ -320,7 +362,7 @@
     UINavigationController *settingsNavigationController = [storyBoard instantiateViewControllerWithIdentifier:@"settingsNavigationController"];
     STBSettingsViewController *settingsViewController = settingsNavigationController.viewControllers[0];
     settingsViewController.delegate = self;
-    settingsViewController.pairedDevice = pairedDevice;
+//    settingsViewController.pairedDevice = pairedDevice;
     
     //[self presentViewController:settingsNavigationController animated:YES completion:nil];
     [self parentView:self presentViewController:settingsNavigationController animated:YES completion:nil];

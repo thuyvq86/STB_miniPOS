@@ -221,9 +221,10 @@ typedef enum{
         [properties addObject:@[@(TextTypeNormal), self.cardName, @""]];
         [properties addObject:@[@(TextTypeNormal), @"EXPIRY DATE", self.formattedCardExpiredDate]];
         [properties addObject:@[@(TextTypeNormal), @"", @""]]; //break line
-
-        [properties addObject:@[@(TextTypeNormal), @"REF No", self.receiptNo]];
-        [properties addObject:@[@(TextTypeNormal), @"APP CODE", self.appCode]];
+        if(self.receiptNo)
+            [properties addObject:@[@(TextTypeNormal), @"REF No", self.receiptNo]];
+        if(self.appCode)
+            [properties addObject:@[@(TextTypeNormal), @"APP CODE", self.appCode]];
         
         [properties addObject:@[@(TextTypeNormal), @"", @"------------------"]]; //break line
         

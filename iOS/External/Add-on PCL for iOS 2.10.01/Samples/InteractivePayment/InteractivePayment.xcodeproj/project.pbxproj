@@ -743,8 +743,8 @@
 		9A0EBDDC148FF1D700BE8F89 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Toan Nguyen (682JPYH6H5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Toan Nguyen (682JPYH6H5)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ExternalLibs\"",
@@ -756,7 +756,7 @@
 				INFOPLIST_FILE = "Resources/App/InteractivePayment-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c05fa1b7-a6de-4003-bf33-e20dbdfb1bd5";
+				PROVISIONING_PROFILE = "c598312d-e54f-4488-a3bd-fc8a94dfff83";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -765,8 +765,8 @@
 		9A0EBDDD148FF1D700BE8F89 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nam Nguyen Thi (5H9M5739AH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nam Nguyen Thi (5H9M5739AH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Toan Nguyen (682JPYH6H5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Toan Nguyen (682JPYH6H5)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ExternalLibs\"",
@@ -778,7 +778,7 @@
 				INFOPLIST_FILE = "Resources/App/InteractivePayment-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c05fa1b7-a6de-4003-bf33-e20dbdfb1bd5";
+				PROVISIONING_PROFILE = "c598312d-e54f-4488-a3bd-fc8a94dfff83";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -821,8 +821,8 @@
 		9A26136B149241F50083AEF8 /* In-House */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Toan Nguyen (682JPYH6H5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Toan Nguyen (682JPYH6H5)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ExternalLibs\"",
@@ -834,7 +834,7 @@
 				INFOPLIST_FILE = "Resources/App/InteractivePayment-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c05fa1b7-a6de-4003-bf33-e20dbdfb1bd5";
+				PROVISIONING_PROFILE = "c598312d-e54f-4488-a3bd-fc8a94dfff83";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

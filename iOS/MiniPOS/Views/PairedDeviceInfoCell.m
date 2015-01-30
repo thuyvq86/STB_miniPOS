@@ -72,13 +72,13 @@
     [lineImage drawInRect:CGRectMake(kLeftPadding, offset , width, 1.0f)];
 }
 
-- (void)setPairedDevice:(PairedDevice *)pairedDevice{
+- (void)setPairedDevice:(ICMPProfile *)pairedDevice{
     _pairedDevice = pairedDevice;
     
-    self.textLabel.text = [NSString stringWithFormat:@"%@-%@", _pairedDevice.name, _pairedDevice.serialNumber];
+    self.textLabel.text = [_pairedDevice displayableName];
     
     //Active
-    if ([_pairedDevice.serialNumber isEqualToString:[ICISMPDevice serialNumber]]){
+    if ([_pairedDevice.serialId isEqualToString:[ICISMPDevice serialNumber]]){
         self.detailTextLabel.text = @"Active";
     }
     else{

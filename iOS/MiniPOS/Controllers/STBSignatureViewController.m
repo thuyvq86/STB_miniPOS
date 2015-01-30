@@ -40,6 +40,7 @@
     CGRect frame = CGRectSetPos(_scrollView.frame, 0, 0);
 	self.signatureView = [[ICSignatureView alloc] initWithFrame:frame];
     [_signatureView setUserInteractionEnabled:YES];
+    [_signatureView setBlackBackground:NO];
 	[_scrollView addSubview:_signatureView];
 	[_scrollView setScrollEnabled:NO];
     
@@ -62,12 +63,27 @@
 
 - (IBAction)buttonDoneTouch:(id)sender {
     UIImage *signature = [_signatureView getSignatureDataAtBoundingBox];
-    [delegate signatureWithImage:signature email:_txtEmail.text];
+    UIImage *scaledImage = [self imageWithImage:signature scaledToSize:CGSizeMake(200, 200)];
+    
+    [delegate signatureWithImage:scaledImage email:_txtEmail.text];
 }
 
 - (IBAction)buttonCancelTouch:(id)sender {
     DLog(@"Signature Capture Aborted");
     [delegate signatureWithImage:nil email:_txtEmail.text];
+}
+
+#pragma mark - Helpers
+
+- (UIImage *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a bitmap context.
+    UIGraphicsBeginImageContextWithOptions(newSize, YES, image.scale);
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+    
 }
 
 @end

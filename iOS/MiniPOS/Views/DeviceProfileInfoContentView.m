@@ -42,7 +42,7 @@
     CGFloat width    = CGRectGetWidth(rect) - 2*kLeftPadding;
     NSInteger offset = kTopPadding;
     
-    NSString *text = [[self class] connectedAccessoryString:self.profile];
+    NSString *text = [_profile displayableName];
     
     //set text color
     [[UIColor whiteColor] set];
@@ -61,7 +61,7 @@
     UIFont *normalFont = [theme fontForHeader]; //normal
     UIImage *lineImage = [theme separatorLine];
     
-    NSString *text = [self connectedAccessoryString:aProfile];
+    NSString *text = [aProfile displayableName];
     
     NSInteger height = 0;
     CGFloat width = parentWidth - 2*kLeftPadding;
@@ -74,41 +74,9 @@
     return height;
 }
 
-+ (NSString *)connectedAccessoryString:(ICMPProfile *)aProfile{
-#if TARGET_IPHONE_SIMULATOR
-    return [NSString stringWithFormat:@"iCMP-%@", aProfile.serialId];
-#endif
-    
-    EAAccessory *connectedAccessory = aProfile.accessory;
-    if (!connectedAccessory)
-        return nil;
-    
-    NSArray *protocolStrings = [connectedAccessory protocolStrings];
-    NSString *info = [NSString stringWithFormat:
-                     @"Connected: %@\nConnection ID: %lu\nName: %@\nManufacturer: %@\nModel Number: %@\nSerial: %@\nFirmware Reveision: %@\nHardware Revision: %@\nProtocols:\n%@",
-                     connectedAccessory.connected ? @"Yes" : @"No",
-                     (unsigned long)connectedAccessory.connectionID,
-                     connectedAccessory.name,
-                     connectedAccessory.manufacturer,
-                     connectedAccessory.modelNumber,
-                     connectedAccessory.serialNumber,
-                     connectedAccessory.firmwareRevision,
-                     connectedAccessory.hardwareRevision,
-                      [protocolStrings componentsJoinedByString:@"\n"]
-                     ];
-    DLog(@"%@", info);
-    
-    NSString *name = [NSString stringWithFormat:@"%@-%@", connectedAccessory.name, connectedAccessory.serialNumber];
-    
-    return name;
-}
-
 - (void)setProfile:(ICMPProfile *)profile{
-    if (_profile != profile) {
-        _profile = profile;
-        
-        [self setNeedsDisplay];
-    }
+    _profile = profile;
+    [self setNeedsDisplay];
 }
 
 @end

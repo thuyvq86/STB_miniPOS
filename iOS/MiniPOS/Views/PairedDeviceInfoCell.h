@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PairedDevice.h"
+#import "ICMPProfile.h"
 
 @interface PairedDeviceInfoCell : UITableViewCell
 
-@property (nonatomic, strong) PairedDevice *pairedDevice;
+@property (nonatomic, strong) ICMPProfile *pairedDevice;
 
 @end

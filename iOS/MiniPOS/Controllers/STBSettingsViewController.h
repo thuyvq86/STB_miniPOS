@@ -20,6 +20,5 @@
     __weak IBOutlet UITableView *_tableView;
 }
 @property (nonatomic, unsafe_unretained) id<SettingsViewDelegate> delegate;
-@property (nonatomic, strong) EAAccessory *pairedDevice;
 
 @end

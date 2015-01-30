@@ -188,7 +188,7 @@ static StandalonePaymentManager * g_sharedStandalonePaymentManager = nil;
 }
 
 
--(void)requireCreditPayment:(NSNumber *)amount extendedData:(NSData *)extraData {
+- (void)requireCreditPayment:(NSNumber *)amount extendedData:(NSData *)extraData {
     NSLog(@"%s", __FUNCTION__);
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -308,10 +308,10 @@ static StandalonePaymentManager * g_sharedStandalonePaymentManager = nil;
                                 
                                 //Check if the returned request reference matches the one used for the current transaction
                                 if (returnedRequestReference == self.requestReference) {
-                                    NSLog(@"%s Returned Request ID [%d] is valid", __FUNCTION__, returnedRequestReference);
+                                    NSLog(@"%s Returned Request ID [%ld] is valid", __FUNCTION__, (long)returnedRequestReference);
                                 } else {
                                     error = @"The returned transaction ID does not match the one used for the transaction";
-                                    NSLog(@"%s %@ [Current ID: %d, Returned ID: %d]", __FUNCTION__, error, self.requestReference, returnedRequestReference);
+                                    NSLog(@"%s %@ [Current ID: %ld, Returned ID: %d]", __FUNCTION__, error, (long)self.requestReference, returnedRequestReference);
                                     [result setObject:error forKey:@"error"];
                                 }
                                 

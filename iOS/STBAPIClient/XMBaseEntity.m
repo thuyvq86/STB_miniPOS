@@ -103,8 +103,8 @@
             self.isFromDb = YES;
             long long lastId = [db lastInsertRowId];
             self.id = (int)lastId;
-            NSCache *aCache = [entityClass sharedCache];
-            [aCache setObject:self forKey:[NSNumber numberWithInteger:self.id]];
+//            NSCache *aCache = [entityClass sharedCache];
+//            [aCache setObject:self forKey:[NSNumber numberWithInteger:self.id]];
         }
         else {
             NSError *error = [db lastError];
@@ -140,8 +140,8 @@
         isSuccess = [db executeUpdate:queryString];
         if(isSuccess) {
             self.isFromDb = NO;
-            NSCache *aCache = [entityClass sharedCache];
-            [aCache removeObjectForKey:[NSNumber numberWithInteger:self.id]];
+//            NSCache *aCache = [entityClass sharedCache];
+//            [aCache removeObjectForKey:[NSNumber numberWithInteger:self.id]];
         }
         else {
             NSError *error = [db lastError];

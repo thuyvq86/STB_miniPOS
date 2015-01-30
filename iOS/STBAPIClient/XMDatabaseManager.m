@@ -111,10 +111,15 @@ static NSString *kDatabasePathExtension = @"db";
     }
     else {
         // check if update required, if so, replace db
-        NSInteger currrentVersion = [[NSUserDefaults standardUserDefaults] integerForKey:toPath];
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        NSString *storedKey = [NSString stringWithFormat:@"user_version_%@", [[toPath lastPathComponent] stringByDeletingPathExtension]];
+        
+        NSInteger currrentVersion = [defaults integerForKey:storedKey];
         
         // get new version
         NSInteger newVersion = [self detectNewVersion:fromPath];
+        
+        //DLog(@"storedKey: %@ currrentVersion: %i newVersion: %i", storedKey, currrentVersion, newVersion);
         
         if(newVersion > currrentVersion) {
             // there's a newer version
@@ -134,8 +139,8 @@ static NSString *kDatabasePathExtension = @"db";
                     NSError *error = nil;
                     success = [fileManager copyItemAtPath:fromPath toPath:toPath error:&error];
                     if(success) {
-                        [[NSUserDefaults standardUserDefaults] setInteger:newVersion forKey:toPath];
-                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        [defaults setInteger:newVersion forKey:storedKey];
+                        [defaults synchronize];
                     }
                 }
             }

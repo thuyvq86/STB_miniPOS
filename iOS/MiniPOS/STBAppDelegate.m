@@ -9,7 +9,7 @@
 #import "STBAppDelegate.h"
 #import "STBCenterViewController.h"
 #import "AFNetworkActivityLogger.h"
-#import "PairedDevice.h"
+#import "ICMPProfile.h"
 
 @interface STBAppDelegate()<CBCentralManagerDelegate>
 
@@ -96,11 +96,11 @@
     //post notification
     [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
     
-    if (self.apiClient && [ICISMPDevice isAvailable]) {
-        //save paired device
-        if ([ICISMPDevice isAvailable])
-            [self insertOrUpdatePairedDevice];
-    }
+//    if (self.apiClient && [ICISMPDevice isAvailable]) {
+//        //save paired device
+//        if ([ICISMPDevice isAvailable])
+//            [self insertOrUpdatePairedDevice];
+//    }
     
     //Open/Close the communication channel when entering/leaving sleep mode
     [[iSMPControlManager sharedISMPControlManager] start];
@@ -180,40 +180,21 @@
 #pragma mark - Save paired device
 
 - (void)insertOrUpdatePairedDevice{
-    PairedDevice *deviceInfo = [PairedDevice getBySerialNumber:[ICISMPDevice serialNumber]];
+    ICMPProfile *deviceInfo = [ICMPProfile getBySerialNumber:[ICISMPDevice serialNumber]];
     if (!deviceInfo){
-        deviceInfo = [[PairedDevice alloc] init];
+        deviceInfo = [[ICMPProfile alloc] initWithICISMPDevice];
+        deviceInfo.lastModifiedDate = [NSDate date];
+        [deviceInfo insertOrUpdate];
     }
-    deviceInfo.serialNumber = [ICISMPDevice serialNumber];
-    deviceInfo.name = [ICISMPDevice name];
-    deviceInfo.desc = [NSString stringWithFormat:
-                       @"Name: %@\nModel Number: %@\nSerial Id: %@\nFirmware Reveision: %@\nHardware Revision: %@",
-                       [ICISMPDevice name],
-                       [ICISMPDevice modelNumber],
-                       [ICISMPDevice serialNumber],
-                       [ICISMPDevice firmwareRevision],
-                       [ICISMPDevice hardwareRevision]
-                       ];
-    deviceInfo.lastModifiedDate = [NSDate date];
-    
-    [deviceInfo insertOrUpdate];
 }
 
 - (void)insertOrUpdateTestDevice:(NSString *)name serialNumber:(NSString *)serialNumber{
-    PairedDevice *deviceInfo = [PairedDevice getBySerialNumber:serialNumber];
+    ICMPProfile *deviceInfo = [ICMPProfile getBySerialNumber:serialNumber];
     if (!deviceInfo){
-        deviceInfo = [[PairedDevice alloc] init];
+        deviceInfo = [[ICMPProfile alloc] init];
     }
-    deviceInfo.serialNumber = serialNumber;
-    deviceInfo.name = name;
-    deviceInfo.desc = [NSString stringWithFormat:
-                       @"Name: %@\nModel Number: %@\nSerial Id: %@\nFirmware Reveision: %@\nHardware Revision: %@",
-                       name,
-                       nil,
-                       serialNumber,
-                       nil,
-                       nil
-                       ];
+    deviceInfo.serialId = serialNumber;
+    deviceInfo.merchantName = name;
     deviceInfo.lastModifiedDate = [NSDate date];
     
     [deviceInfo insertOrUpdate];

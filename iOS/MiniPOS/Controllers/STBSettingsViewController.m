@@ -13,7 +13,7 @@
 #import "AppInfoController.h"
 #import "STBPairedDeviceListViewController.h"
 //Models
-#import "PairedDevice.h"
+#import "ICMPProfile.h"
 
 @interface STBSettingsViewController ()
 
@@ -24,14 +24,13 @@
 @implementation STBSettingsViewController
 
 @synthesize delegate;
-@synthesize pairedDevice = _pairedDevice;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupUI];
     
-    self.countPaireDevices = [PairedDevice getCount];
+    self.countPaireDevices = [ICMPProfile getCount];
 }
 
 - (void)didReceiveMemoryWarning {

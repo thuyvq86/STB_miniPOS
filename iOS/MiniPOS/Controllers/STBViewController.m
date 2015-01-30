@@ -121,11 +121,10 @@
             NSString *appVer = [AppUtils appVersion];
             if (![appVer isEqualToString:version] && isForcedUpdate) {
                 [UIAlertView alertViewWithTitle:@"System Message" message:@"A new version of Mini-Pos is available. Please update to new version." cancelButtonTitle:@"Update" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
-                    
+                } onCancel:^{
                     NSString *iTunesLink = iTunesDownloadURL;
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
-                    
-                } onCancel:nil];
+                }];
             }
             else{
                 [_activityIndicatorView stopAnimating];
