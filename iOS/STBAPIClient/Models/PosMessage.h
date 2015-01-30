@@ -58,10 +58,10 @@ typedef enum{
 @property (nonatomic, strong) NSString *inputCardType;
 @property (nonatomic, strong) NSString *cardExpiredDate; // format: MM/YY
 
-@property (nonatomic) CGFloat moneyTotal;
+@property (nonatomic, strong) NSString *moneyTotal;
 @property (nonatomic, strong) NSString *moneyUnit;
-@property (nonatomic) CGFloat moneyBaseAmount;
-@property (nonatomic) CGFloat moneyTip;
+@property (nonatomic, strong) NSString *moneyBaseAmount;
+@property (nonatomic, strong) NSString *moneyTip;
 
 @property (nonatomic, strong) NSDate *dateTime;
 

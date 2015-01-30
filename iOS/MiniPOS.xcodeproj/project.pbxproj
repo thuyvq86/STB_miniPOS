@@ -544,10 +544,10 @@
 				D829DCC61A4852EB00E6174B /* ICMPProfile.m */,
 				D829DCB21A48528500E6174B /* ICMPProfile+Operations.h */,
 				D829DCB31A48528500E6174B /* ICMPProfile+Operations.m */,
-				D829DCB61A48528500E6174B /* PosMessage+Operations.h */,
-				D829DCB71A48528500E6174B /* PosMessage+Operations.m */,
 				D829DCB81A48528500E6174B /* PosMessage.h */,
 				D829DCB91A48528500E6174B /* PosMessage.m */,
+				D829DCB61A48528500E6174B /* PosMessage+Operations.h */,
+				D829DCB71A48528500E6174B /* PosMessage+Operations.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";

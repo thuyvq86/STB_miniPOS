@@ -95,10 +95,10 @@ typedef enum{
         self.receiptNo = [STBDataFormatter toNilIfNull:dict propertyName:Field(RECEIPT_NO)];
         self.batchNumber = [STBDataFormatter toNilIfNull:dict propertyName:Field(BATCH_NUMBER)];
         
-        self.moneyTotal = [[STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_TOTAL)] floatValue];
+        self.moneyTotal = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_TOTAL)];
         self.moneyUnit = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_UNIT)];
-        self.moneyBaseAmount = [[STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_BASE_AMOUNT)] floatValue];
-        self.moneyTip = [[STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_TIP)] floatValue];
+        self.moneyBaseAmount = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_BASE_AMOUNT)];
+        self.moneyTip = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_TIP)];
         
         NSString *dateString = [STBDataFormatter toNilIfNull:dict propertyName:Field(TRANSACTION_DATE_TIME)];
         self.dateTime = [self dateTime:dateString];
@@ -181,11 +181,6 @@ typedef enum{
     return [dateFormatter stringFromDate:self.dateTime];
 }
 
-- (NSString *)formattedMoneyTotal{
-    NSNumberFormatter *formatter = [STBDataFormatter sharedProvider].priceFormatter;
-    return [formatter stringFromNumber:[NSNumber numberWithFloat:self.moneyTotal]];
-}
-
 - (NSString *)formattedMoneyUnit{
     if ([self.moneyUnit isEqualToString:@"704"])
         return @"VND";
@@ -193,14 +188,48 @@ typedef enum{
     return @"USD";
 }
 
+- (NSString *)formattedMoneyTotal{
+    return [self formattedAmount:self.moneyTotal currency:self.moneyUnit];
+}
+
 - (NSString *)formattedMoneyBaseAmount{
-    NSNumberFormatter *formatter = [STBDataFormatter sharedProvider].priceFormatter;
-    return [formatter stringFromNumber:[NSNumber numberWithFloat:self.moneyBaseAmount]];
+    return [self formattedAmount:self.moneyBaseAmount currency:self.moneyUnit];
 }
 
 - (NSString *)formattedMoneyTip{
-    NSNumberFormatter *formatter = [STBDataFormatter sharedProvider].priceFormatter;
-    return [formatter stringFromNumber:[NSNumber numberWithFloat:self.moneyTip]];
+    return [self formattedAmount:self.moneyTip currency:self.moneyUnit];
+}
+
+- (NSString *)formattedAmount:(NSString *)amount currency:(NSString *)currency{
+    float total = 0;
+    NSString *formattedAmount = nil;
+    NSNumberFormatter *formatter = [self priceFormatterWithCurrency:currency];
+    
+    NSString *sRound   = [amount substringToIndex:amount.length - 2];
+    NSString *sDecimal = [amount substringFromIndex:10];
+    
+    if ([currency isEqualToString:@"704"]){ //VND
+        total = [sRound floatValue];
+    }
+    else{
+        total = [sRound floatValue] + [sDecimal floatValue] * 0.01;
+    }
+    
+    formattedAmount = [formatter stringFromNumber:[NSNumber numberWithFloat:total]];
+    
+    return formattedAmount;
+}
+
+- (NSNumberFormatter *)priceFormatterWithCurrency:(NSString *)currency{
+    NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    
+    if ([currency isEqualToString:@"704"])
+        formatter.currencyCode = @"VND";
+    else
+        formatter.currencyCode = @"USD";
+    
+    return formatter;
 }
 
 #pragma mark - Helpers
@@ -228,9 +257,9 @@ typedef enum{
         
         [properties addObject:@[@(TextTypeNormal), @"", @"------------------"]]; //break line
         
-        if (self.moneyBaseAmount > 0)
+        if ([self.moneyBaseAmount floatValue] > 0)
             [properties addObject:@[@(TextTypeNormal), @"BASE", self.formattedMoneyBaseAmount]];
-        if (self.moneyTip > 0)
+        if ([self.moneyTip floatValue] > 0)
             [properties addObject:@[@(TextTypeNormal), @"TIP", self.formattedMoneyTip]];
         
         [properties addObject:@[@(TextTypeBold), [NSString stringWithFormat:@"TOTAL (%@)", self.formattedMoneyUnit], [NSString stringWithFormat:@"%@", self.formattedMoneyTotal]]];
