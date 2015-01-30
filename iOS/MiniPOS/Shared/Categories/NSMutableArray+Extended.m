@@ -18,13 +18,13 @@
     id movingObject = [self objectAtIndex:fromIndex];
     
     if (fromIndex < toIndex){
-        for (int i = fromIndex; i <= toIndex; i++){
+        for (NSInteger i = fromIndex; i <= toIndex; i++){
             [self replaceObjectAtIndex:i withObject:(i == toIndex) ? movingObject : [self objectAtIndex:i + 1]];
         }
     } else {
         id cObject;
         id prevObject;
-        for (int i = toIndex; i <= fromIndex; i++){
+        for (NSInteger i = toIndex; i <= fromIndex; i++){
             cObject = [self objectAtIndex:i];
             [self replaceObjectAtIndex:i withObject:(i == toIndex) ? movingObject : prevObject];
             prevObject = cObject;

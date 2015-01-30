@@ -14,6 +14,33 @@ static VoidBlock _cancelBlock;
 
 @implementation UIAlertView (Block)
 
+- (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id )delegate cancelButtonTitle:(NSString *)cancelButtonTitle dismissesWhenAppGoesToBackground:(BOOL)dismissesWhenAppGoesToBackground{
+    self = [self initWithTitle:title message:message delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+    if (self) {
+        if (dismissesWhenAppGoesToBackground)
+            [self setupDismissesWhenAppGoesToBackground];
+    }
+    
+    return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)setupDismissesWhenAppGoesToBackground{
+    if ([[UIDevice currentDevice].systemVersion intValue] >= 4) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    }
+}
+
+- (void)applicationDidEnterBackground:(id) sender {
+    // We should not be here when entering back to foreground state
+    [self dismissWithClickedButtonIndex:[self cancelButtonIndex] animated:NO];
+}
+
+#pragma mark - Utilities
+
 + (UIAlertView *)alertViewWithTitle:(NSString *)title
                    message:(NSString *)message
          cancelButtonTitle:(NSString *)cancelButtonTitle
@@ -24,15 +51,12 @@ static VoidBlock _cancelBlock;
     if ([self visibleAlertView])
         return nil;
     
-    _dismissBlock  = [dismissed copy];
+    _dismissBlock = [dismissed copy];
     _cancelBlock  = [cancelled copy];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:cancelButtonTitle
-                                          otherButtonTitles:nil];
+    UIAlertView *alert = nil;
     
+    alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:cancelButtonTitle dismissesWhenAppGoesToBackground:YES];
     alert.delegate = weakObject(alert);
     
     for (NSString *buttonTitle in otherButtons) {
@@ -63,7 +87,7 @@ static VoidBlock _cancelBlock;
                                                     message:message
                                                    delegate:nil
                                           cancelButtonTitle:cancelButtonTitle
-                                          otherButtonTitles:nil];
+                           dismissesWhenAppGoesToBackground:YES];
     [alert show];
 
     return alert;
