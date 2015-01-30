@@ -92,6 +92,25 @@ public class POSMessage implements Serializable {
 		return getValue(ValueType.CARD_NAME);
 	}
 
+	private boolean isVND() {
+		return TextUtils.equals(getValue(ValueType.RECEIPT_UNIT), "704");
+	}
+
+	private boolean isUSD() {
+		return TextUtils.equals(getValue(ValueType.RECEIPT_UNIT), "804");
+	}
+
+	private String formatMoney(float amount) {
+		if (isVND()) {
+			amount = (int) (amount / 100);
+		} else {
+			amount = amount / 100;
+		}
+
+		NumberFormat formatter = NumberFormat.getInstance();
+		return formatter.format(amount);
+	}
+
 	public String getCardNumber() {
 		String number = getValue(ValueType.CARD_NUMBER);
 		return String.format("%s %sXX XXXX %s", number.substring(0, 4),
@@ -100,8 +119,7 @@ public class POSMessage implements Serializable {
 
 	public String getTotal() {
 		Float amount = Float.parseFloat(getValue(ValueType.TOTAL_AMOUNT));
-		NumberFormat formatter = NumberFormat.getInstance();
-		return formatter.format(amount);
+		return formatMoney(amount);
 	}
 
 	public Date getTime() {
@@ -148,7 +166,11 @@ public class POSMessage implements Serializable {
 	}
 
 	public String getUnit() {
-		return getValue(ValueType.RECEIPT_UNIT);
+		if (isUSD()) {
+			return "USD";
+		} else {
+			return "VND";
+		}
 	}
 
 	public boolean hasTip() {
@@ -158,13 +180,11 @@ public class POSMessage implements Serializable {
 
 	public String getTipAmount() {
 		Float amount = Float.parseFloat(getValue(ValueType.TIP_AMOUNT));
-		NumberFormat formatter = NumberFormat.getInstance();
-		return formatter.format(amount);
+		return formatMoney(amount);
 	}
 
 	public String getBaseAmount() {
 		Float amount = Float.parseFloat(getValue(ValueType.BASE_AMOUNT));
-		NumberFormat formatter = NumberFormat.getInstance();
-		return formatter.format(amount);
+		return formatMoney(amount);
 	}
 }
