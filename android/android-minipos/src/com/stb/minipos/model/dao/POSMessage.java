@@ -100,15 +100,14 @@ public class POSMessage implements Serializable {
 		return TextUtils.equals(getValue(ValueType.RECEIPT_UNIT), "804");
 	}
 
-	private String formatMoney(float amount) {
+	private String formatMoney(long amount) {
+		NumberFormat formatter = NumberFormat.getInstance();
 		if (isVND()) {
-			amount = (int) (amount / 100);
+			return formatter.format(amount / 100);
 		} else {
-			amount = amount / 100;
+			return formatter.format(amount / 100.0);
 		}
 
-		NumberFormat formatter = NumberFormat.getInstance();
-		return formatter.format(amount);
 	}
 
 	public String getCardNumber() {
@@ -118,7 +117,7 @@ public class POSMessage implements Serializable {
 	}
 
 	public String getTotal() {
-		Float amount = Float.parseFloat(getValue(ValueType.TOTAL_AMOUNT));
+		long amount = Long.parseLong(getValue(ValueType.TOTAL_AMOUNT));
 		return formatMoney(amount);
 	}
 
@@ -179,12 +178,12 @@ public class POSMessage implements Serializable {
 	}
 
 	public String getTipAmount() {
-		Float amount = Float.parseFloat(getValue(ValueType.TIP_AMOUNT));
+		long amount = Long.parseLong(getValue(ValueType.TIP_AMOUNT));
 		return formatMoney(amount);
 	}
 
 	public String getBaseAmount() {
-		Float amount = Float.parseFloat(getValue(ValueType.BASE_AMOUNT));
+		long amount = Long.parseLong(getValue(ValueType.BASE_AMOUNT));
 		return formatMoney(amount);
 	}
 }
