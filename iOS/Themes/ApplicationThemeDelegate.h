@@ -33,9 +33,7 @@ typedef enum {
 typedef enum {
     MenuIconNone,
     MenuIconSearch,
-    MenuIconSavedSearches,
-    MenuIconFavorites,
-    MenuIconMyListings
+    MenuIconFavorites
 } MenuIconType;
 
 typedef enum {
@@ -63,7 +61,6 @@ typedef enum {
 
 - (UIColor *)mainColor;
 - (UIColor *)highlightColor;
-- (UIColor *)colorForTitleScreenLabel;
 - (UIColor *)secondaryColor;
 - (UIColor *)placeHolderColor;
 - (UIColor *)colorForLink;
@@ -96,9 +93,6 @@ typedef enum {
 
 - (UIFont *)italicFontForContent;
 - (UIFont *)smallItalicFontForContent;
-
-- (UIColor *)backgroundColorForView;
-- (UIImage *)backgroundImageForApp;
 
 - (UIImage *)imageForCheckboxForState:(UIControlState)state;
 

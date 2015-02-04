@@ -23,17 +23,7 @@
 }
 
 - (UIColor *)highlightColor{
-#if defined(AMAG)
-    return [UIColor colorWithRed:168.0/255.0 green:20.0/255.0 blue:29.0/255.0 alpha:1.0];
-#elif defined(ROC)
-    return [UIColor colorWithRed:0 green:149.0/255.0 blue:171.0/255.0 alpha:1.0];
-#else
     return [UIColor colorWithRed:255.0/255.0 green:117.0/255.0 blue:0.0/255.0 alpha:1.0];
-#endif
-}
-
-- (UIColor *)colorForTitleScreenLabel {
-    return [UIColor colorWithRed:68.0/255.0 green:68.0/255.0 blue:68.0/255.0 alpha:1.0];
 }
 
 #pragma mark - Common setup
@@ -144,14 +134,6 @@
 
 - (UIFont *)smallItalicFontForContent {
     return [UIFont italicSystemFontOfSize:12.0f];
-}
-
-- (UIColor *)backgroundColorForView {
-    return [UIColor colorWithPatternImage:[self backgroundImageForApp]];
-}
-
-- (UIImage *)backgroundImageForApp {
-    return [[UIImage imageNamed:@"MasterBackground"] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
 }
 
 - (UIImage *)imageForCheckboxForState:(UIControlState)state {

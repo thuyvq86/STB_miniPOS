@@ -65,11 +65,6 @@
 		D8EDD3321A24F309008E60CB /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD3211A24F309008E60CB /* UIWebView+AFNetworking.m */; };
 		D8EDD33C1A24F34E008E60CB /* STBAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD33B1A24F34E008E60CB /* STBAPIClient.m */; };
 		D8EDD3401A24FD3D008E60CB /* AFNetworkActivityLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD33F1A24FD3D008E60CB /* AFNetworkActivityLogger.m */; };
-		D8EDD34B1A29FE18008E60CB /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD34A1A29FE18008E60CB /* Default-736h@3x.png */; };
-		D8EDD3501A2A007D008E60CB /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD34C1A2A007D008E60CB /* Icon-57.png */; };
-		D8EDD3511A2A007D008E60CB /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD34D1A2A007D008E60CB /* Icon-114.png */; };
-		D8EDD3521A2A007D008E60CB /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD34E1A2A007D008E60CB /* Icon-120.png */; };
-		D8EDD3531A2A007D008E60CB /* Icon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD34F1A2A007D008E60CB /* Icon-180.png */; };
 		D8EDD3571A2A27AA008E60CB /* AppInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EDD3551A2A27AA008E60CB /* AppInfoController.m */; };
 		D8EDD35C1A2A29AB008E60CB /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD35A1A2A29AB008E60CB /* logo.png */; };
 		D8EDD35D1A2A29AB008E60CB /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EDD35B1A2A29AB008E60CB /* logo@2x.png */; };
@@ -142,16 +137,10 @@
 		D8FEB52919F15290008BB5D5 /* NSString+DrawText.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB50819F15290008BB5D5 /* NSString+DrawText.m */; };
 		D8FEB52A19F15290008BB5D5 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB50A19F15290008BB5D5 /* NSString+Size.m */; };
 		D8FEB52B19F15290008BB5D5 /* UILabel+MixFont.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB50C19F15290008BB5D5 /* UILabel+MixFont.m */; };
-		D8FEB52C19F15290008BB5D5 /* handsean.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB50F19F15290008BB5D5 /* handsean.ttf */; };
-		D8FEB52E19F15290008BB5D5 /* MasterBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51319F15290008BB5D5 /* MasterBackground.png */; };
-		D8FEB52F19F15290008BB5D5 /* MasterBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51419F15290008BB5D5 /* MasterBackground@2x.png */; };
 		D8FEB53419F15290008BB5D5 /* UIButtonSecondary.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51919F15290008BB5D5 /* UIButtonSecondary.png */; };
 		D8FEB53519F15290008BB5D5 /* UIButtonSecondary@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51A19F15290008BB5D5 /* UIButtonSecondary@2x.png */; };
 		D8FEB53619F15290008BB5D5 /* UIButtonSecondaryTouch.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51B19F15290008BB5D5 /* UIButtonSecondaryTouch.png */; };
 		D8FEB53719F15290008BB5D5 /* UIButtonSecondaryTouch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51C19F15290008BB5D5 /* UIButtonSecondaryTouch@2x.png */; };
-		D8FEB53819F15290008BB5D5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51E19F15290008BB5D5 /* Default-568h@2x.png */; };
-		D8FEB53919F15290008BB5D5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB51F19F15290008BB5D5 /* Default.png */; };
-		D8FEB53A19F15290008BB5D5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB52019F15290008BB5D5 /* Default@2x.png */; };
 		D8FEB56B19F15552008BB5D5 /* TransactionInfoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB56A19F15552008BB5D5 /* TransactionInfoContentView.m */; };
 		D8FEB56E19F15565008BB5D5 /* SignatureContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEB56D19F15565008BB5D5 /* SignatureContentView.m */; };
 		D8FEB57019F15985008BB5D5 /* message.json in Resources */ = {isa = PBXBuildFile; fileRef = D8FEB56F19F15985008BB5D5 /* message.json */; };
@@ -280,11 +269,6 @@
 		D8EDD33B1A24F34E008E60CB /* STBAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBAPIClient.m; sourceTree = "<group>"; };
 		D8EDD33E1A24FD3D008E60CB /* AFNetworkActivityLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityLogger.h; sourceTree = "<group>"; };
 		D8EDD33F1A24FD3D008E60CB /* AFNetworkActivityLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityLogger.m; sourceTree = "<group>"; };
-		D8EDD34A1A29FE18008E60CB /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
-		D8EDD34C1A2A007D008E60CB /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-57.png"; sourceTree = "<group>"; };
-		D8EDD34D1A2A007D008E60CB /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-114.png"; sourceTree = "<group>"; };
-		D8EDD34E1A2A007D008E60CB /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = "<group>"; };
-		D8EDD34F1A2A007D008E60CB /* Icon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-180.png"; sourceTree = "<group>"; };
 		D8EDD3541A2A27AA008E60CB /* AppInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfoController.h; sourceTree = "<group>"; };
 		D8EDD3551A2A27AA008E60CB /* AppInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppInfoController.m; sourceTree = "<group>"; };
 		D8EDD35A1A2A29AB008E60CB /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -411,16 +395,10 @@
 		D8FEB50A19F15290008BB5D5 /* NSString+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Size.m"; sourceTree = "<group>"; };
 		D8FEB50B19F15290008BB5D5 /* UILabel+MixFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+MixFont.h"; sourceTree = "<group>"; };
 		D8FEB50C19F15290008BB5D5 /* UILabel+MixFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+MixFont.m"; sourceTree = "<group>"; };
-		D8FEB50F19F15290008BB5D5 /* handsean.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = handsean.ttf; sourceTree = "<group>"; };
-		D8FEB51319F15290008BB5D5 /* MasterBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MasterBackground.png; sourceTree = "<group>"; };
-		D8FEB51419F15290008BB5D5 /* MasterBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MasterBackground@2x.png"; sourceTree = "<group>"; };
 		D8FEB51919F15290008BB5D5 /* UIButtonSecondary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonSecondary.png; sourceTree = "<group>"; };
 		D8FEB51A19F15290008BB5D5 /* UIButtonSecondary@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonSecondary@2x.png"; sourceTree = "<group>"; };
 		D8FEB51B19F15290008BB5D5 /* UIButtonSecondaryTouch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonSecondaryTouch.png; sourceTree = "<group>"; };
 		D8FEB51C19F15290008BB5D5 /* UIButtonSecondaryTouch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonSecondaryTouch@2x.png"; sourceTree = "<group>"; };
-		D8FEB51E19F15290008BB5D5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		D8FEB51F19F15290008BB5D5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		D8FEB52019F15290008BB5D5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D8FEB56919F15552008BB5D5 /* TransactionInfoContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionInfoContentView.h; sourceTree = "<group>"; };
 		D8FEB56A19F15552008BB5D5 /* TransactionInfoContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionInfoContentView.m; sourceTree = "<group>"; };
 		D8FEB56C19F15565008BB5D5 /* SignatureContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignatureContentView.h; sourceTree = "<group>"; };
@@ -705,8 +683,8 @@
 			children = (
 				D8EDD33A1A24F34E008E60CB /* STBAPIClient.h */,
 				D8EDD33B1A24F34E008E60CB /* STBAPIClient.m */,
-				D829DCC41A48529100E6174B /* DBKit */,
 				D829DCB11A48528500E6174B /* Models */,
+				D829DCC41A48529100E6174B /* DBKit */,
 			);
 			path = STBAPIClient;
 			sourceTree = SOURCE_ROOT;
@@ -1127,31 +1105,9 @@
 		D8FEB50D19F15290008BB5D5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D8FEB50E19F15290008BB5D5 /* Fonts */,
-				D8FEB51019F15290008BB5D5 /* Icons */,
 				D8FEB51219F15290008BB5D5 /* Images */,
-				D8FEB51D19F15290008BB5D5 /* LaunchImages */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		D8FEB50E19F15290008BB5D5 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				D8FEB50F19F15290008BB5D5 /* handsean.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
-		D8FEB51019F15290008BB5D5 /* Icons */ = {
-			isa = PBXGroup;
-			children = (
-				D8EDD34C1A2A007D008E60CB /* Icon-57.png */,
-				D8EDD34D1A2A007D008E60CB /* Icon-114.png */,
-				D8EDD34E1A2A007D008E60CB /* Icon-120.png */,
-				D8EDD34F1A2A007D008E60CB /* Icon-180.png */,
-			);
-			path = Icons;
 			sourceTree = "<group>";
 		};
 		D8FEB51219F15290008BB5D5 /* Images */ = {
@@ -1172,25 +1128,12 @@
 				D8EDD35B1A2A29AB008E60CB /* logo@2x.png */,
 				D8FEB58119F1A423008BB5D5 /* SeparatorLine.png */,
 				D8FEB58219F1A423008BB5D5 /* SeparatorLine@2x.png */,
-				D8FEB51319F15290008BB5D5 /* MasterBackground.png */,
-				D8FEB51419F15290008BB5D5 /* MasterBackground@2x.png */,
 				D8FEB51919F15290008BB5D5 /* UIButtonSecondary.png */,
 				D8FEB51A19F15290008BB5D5 /* UIButtonSecondary@2x.png */,
 				D8FEB51B19F15290008BB5D5 /* UIButtonSecondaryTouch.png */,
 				D8FEB51C19F15290008BB5D5 /* UIButtonSecondaryTouch@2x.png */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		D8FEB51D19F15290008BB5D5 /* LaunchImages */ = {
-			isa = PBXGroup;
-			children = (
-				D8FEB51F19F15290008BB5D5 /* Default.png */,
-				D8FEB52019F15290008BB5D5 /* Default@2x.png */,
-				D8FEB51E19F15290008BB5D5 /* Default-568h@2x.png */,
-				D8EDD34A1A29FE18008E60CB /* Default-736h@3x.png */,
-			);
-			path = LaunchImages;
 			sourceTree = "<group>";
 		};
 		D8FEB57419F16576008BB5D5 /* Messaging */ = {
@@ -1306,9 +1249,6 @@
 				D8FEB58419F1A423008BB5D5 /* SeparatorLine@2x.png in Resources */,
 				D8FEB57919F18B75008BB5D5 /* STBSignatureViewController.xib in Resources */,
 				D8FEB41E19EFF331008BB5D5 /* Main_iPad.storyboard in Resources */,
-				D8FEB52F19F15290008BB5D5 /* MasterBackground@2x.png in Resources */,
-				D8FEB52C19F15290008BB5D5 /* handsean.ttf in Resources */,
-				D8FEB53919F15290008BB5D5 /* Default.png in Resources */,
 				D8FEB42319EFF331008BB5D5 /* Images.xcassets in Resources */,
 				D8FEB53719F15290008BB5D5 /* UIButtonSecondaryTouch@2x.png in Resources */,
 				D8FEB53619F15290008BB5D5 /* UIButtonSecondaryTouch.png in Resources */,
@@ -1320,22 +1260,14 @@
 				D8FEB41219EFF331008BB5D5 /* InfoPlist.strings in Resources */,
 				D8FEB53419F15290008BB5D5 /* UIButtonSecondary.png in Resources */,
 				D8EDD35D1A2A29AB008E60CB /* logo@2x.png in Resources */,
-				D8FEB53819F15290008BB5D5 /* Default-568h@2x.png in Resources */,
 				D8B33FB61A7C057F00480E47 /* UIButtonBack@2x.png in Resources */,
-				D8EDD3521A2A007D008E60CB /* Icon-120.png in Resources */,
 				D8B33FC21A7C064600480E47 /* UIButtonModalCloseTouch@2x.png in Resources */,
-				D8FEB53A19F15290008BB5D5 /* Default@2x.png in Resources */,
 				D829DCB01A484B8E00E6174B /* SettingsStoryboard.storyboard in Resources */,
 				D8D5951D1A48583500D1047A /* userdata.db in Resources */,
-				D8FEB52E19F15290008BB5D5 /* MasterBackground.png in Resources */,
 				D8FEB53519F15290008BB5D5 /* UIButtonSecondary@2x.png in Resources */,
-				D8EDD3501A2A007D008E60CB /* Icon-57.png in Resources */,
 				D8B33FB81A7C057F00480E47 /* UIButtonBackTouch@2x.png in Resources */,
 				D8EDD3781A2B56B8008E60CB /* SVProgressHUD.bundle in Resources */,
 				D8B33FB71A7C057F00480E47 /* UIButtonBackTouch.png in Resources */,
-				D8EDD34B1A29FE18008E60CB /* Default-736h@3x.png in Resources */,
-				D8EDD3531A2A007D008E60CB /* Icon-180.png in Resources */,
-				D8EDD3511A2A007D008E60CB /* Icon-114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1587,6 +1519,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nam Nguyen Thi (5H9M5739AH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1617,6 +1551,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nam Nguyen Thi (5H9M5739AH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
