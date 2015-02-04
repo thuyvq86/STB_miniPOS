@@ -12,8 +12,6 @@
 #import <netinet/in.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 
-#import "SDImageCache.h"
-
 @implementation AppUtils
 
 /*
@@ -86,59 +84,6 @@
         return YES;
     }
     return NO;
-}
-
-#pragma mark - Images
-
-+ (UIImage *)imageForURLString:(NSString *)urlString{
-    UIImage *image = nil;
-    
-    if ([self isEmptyText:urlString])
-        return image;
-    
-    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    
-    //first, getting imge from the cache
-    image = [imageCache imageFromDiskCacheForKey:urlString];
-    
-    //if not found, download image on the sky
-    if (!image) {
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-        if (data && [data length] > 0){
-            image = [UIImage imageWithData:data];
-            //Store an image into memory and disk cache
-            [imageCache storeImage:image forKey:urlString];
-        }
-    }
-    
-    return image;
-}
-
-//to scale images with changing aspect ratio
-+ (CGSize)newImageSize:(CGSize)actualSize defaultSize:(CGSize)defaultSize{
-    float defaultWidth  = defaultSize.width;
-    float defaultHeight = defaultSize.height;
-    
-    float actualWidth  = actualSize.width;
-    float actualHeight = actualSize.height;
-    
-    float imgRatio = actualWidth / actualHeight;
-    float maxRatio = defaultWidth / defaultHeight;
-    
-    if(imgRatio != maxRatio){
-        if(imgRatio < maxRatio){
-            imgRatio = defaultHeight / actualHeight;
-            actualWidth  = imgRatio * actualWidth;
-            actualHeight = defaultHeight;
-        }
-        else{
-            imgRatio = defaultWidth / actualWidth;
-            actualHeight = imgRatio * actualHeight;
-            actualWidth  = defaultWidth;
-        }
-    }
-    
-    return CGSizeMake(floorf(actualWidth), floorf(actualHeight));
 }
 
 #pragma mark - NSFileManager

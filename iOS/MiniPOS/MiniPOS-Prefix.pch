@@ -102,14 +102,13 @@
 #import "iSMPControlManager.h"
 #import "PrinterManager.h"
 #import "StandalonePaymentManager.h"
-#import "ICSignatureView.h"
 #import "SettingsManager.h"
 #import "ICBitmapReceipt.h"
-#import "UIImage-Extensions.h"
+//#import "UIImage-Extensions.h"
 
 #import <CrashReporter/CrashReporter.h>
 #import "CrashReporterManager.h"
-#import "LogReporterManager.h"
+//#import "LogReporterManager.h"
 
 // Theming
 #import "FontManager.h"

@@ -1,9 +1,9 @@
 //
 //  XBDatabaseManager.h
-//  iOS-XMKit
+//  iOS-DBKit
 //
-//  Created by Lachat Patrick on 14.06.13.
-//  Copyright (c) 2013 Xmedia AG. All rights reserved.
+//  Created by Nam Nguyen on 11/26/14.
+//  Copyright (c) 2014 STB. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

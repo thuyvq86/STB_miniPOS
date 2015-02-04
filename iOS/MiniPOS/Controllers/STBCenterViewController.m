@@ -60,21 +60,12 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self updateFrameOfView];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-//    [self updateFrameOfView];
-    
-    if (UIAppDelegate.bluetoothEnabled)
-        [self loadContent];
-    else{
-        if (_firstLoad)
-            [self performSelector:@selector(isBluetoothPoweredOn) withObject:nil afterDelay:.1];
-        
-        [self performSelector:@selector(loadContent) withObject:nil afterDelay:.1];
-    }
+
+    [self loadContent];
     _firstLoad = NO;
 }
 
@@ -100,6 +91,18 @@
 - (void)setupUI{
     _topbarImageView.backgroundColor = [UIColor clearColor];
     [self setupPlainTableView:_tableView showScrollIndicator:NO hasBorder:NO hasSeparator:NO];
+    //[_tableView setBackgroundColor:[UIColor redColor]];
+}
+
+#pragma mark - ICDeviceDelegate
+
+- (void)accessoryDidConnect:(ICISMPDevice *)sender {
+    if (!self.connectedAccessories || [self.connectedAccessories count] == 0)
+        [self loadContent];
+}
+
+- (void)accessoryDidDisconnect:(ICISMPDevice *)sender {
+    [self loadContent];
 }
 
 #pragma mark - Load content
@@ -123,35 +126,6 @@
     }
     
     [_tableView reloadData];
-    
-    /*
-    ICMPProfile *profile = nil;
-    NSArray *pairedDevices = nil;
-    if ([ICISMPDevice isAvailable])
-        pairedDevices = [[EAAccessoryManager sharedAccessoryManager] connectedAccessories];
-    
-    self.connectedAccessories = [NSMutableArray array];
-    for (EAAccessory *acc in pairedDevices){
-        profile = [[ICMPProfile alloc] init];
-        profile.serialId = acc.serialNumber;
-        
-        [_connectedAccessories addObject:profile];
-    }
-    
-#if TARGET_IPHONE_SIMULATOR
-    profile = [[ICMPProfile alloc] init];
-    profile.serialId = @"20138884";
-    [_connectedAccessories addObject:profile];
-    
-    [UIAppDelegate insertOrUpdateTestDevice:@"iCMP" serialNumber:profile.serialId];
-#endif
-    
-    //save paired device
-    if ([ICISMPDevice isAvailable])
-        [UIAppDelegate insertOrUpdatePairedDevice];
-    
-    [_tableView reloadData];
-    */
 }
 
 #pragma mark Table view data source
@@ -233,11 +207,6 @@
 - (void)didSelectRow:(NSInteger)row{
     ICMPProfile *profile = [_connectedAccessories objectAtIndex:row];
     [self getProfile:profile];
-    
-//    if (!profile.merchantId)
-//        [self getProfile:profile];
-//    else
-//        [self showMessagingView:profile];
 }
 
 - (void)showMessagingView:(ICMPProfile *)profile{
@@ -281,7 +250,9 @@
         }
     } noInternet:^{
         _requestSendCount = 3;
-        [SVProgressHUD showErrorWithStatus:@"Please enable Wrireless to continue."];
+        
+        [SVProgressHUD dismiss];
+        [UIAlertView alertViewWithTitle:@"System Message" message:@"Please enable Wrireless to continue." cancelButtonTitle:@"OK"];
     }];
 }
 
@@ -301,71 +272,14 @@
     }];
 }
 
-#pragma mark - Bluetooth check
-
-- (BOOL)isBluetoothPoweredOn{
-    CBCentralManagerState state = [UIAppDelegate.bluetoothManager state];
-    if (state == CBCentralManagerStatePoweredOn)
-        return YES;
-    
-    NSString *message = nil;
-    switch(state)
-    {
-        case CBCentralManagerStateResetting:
-            message = @"The connection with the system service was momentarily lost, update imminent.";
-            break;
-        case CBCentralManagerStateUnsupported:
-            message = @"The platform doesn't support Bluetooth Low Energy.";
-            break;
-        case CBCentralManagerStateUnauthorized:
-            message = @"The app is not authorized to use Bluetooth Low Energy.";
-            break;
-        case CBCentralManagerStatePoweredOff:
-            message = @"Bluetooth is currently powered off.";
-            break;
-        case CBCentralManagerStatePoweredOn:
-            message = @"Bluetooth is currently powered on and available to use.";
-            break;
-        default:
-//            message = @"State unknown, update imminent.";
-            break;
-    }
-    
-    if (message)
-        [UIAlertView alertViewWithTitle:@"Bluetooth state" message:message cancelButtonTitle:@"Okay"];
-    
-    return NO;
-}
-
-#pragma mark - ICDeviceDelegate
-
-- (void)accessoryDidConnect:(ICISMPDevice *)sender {
-    if (!self.connectedAccessories || [self.connectedAccessories count] == 0)
-        [self loadContent];
-}
-
-- (void)accessoryDidDisconnect:(ICISMPDevice *)sender {
-    [self loadContent];
-}
-
 #pragma mark - User actions
 
 - (IBAction)buttonSettingsTouch:(id)sender {
-    ICMPProfile *profile = nil;
-    if (_connectedAccessories && [_connectedAccessories count] > 0)
-        profile = [_connectedAccessories objectAtIndex:0];
-    
-//    [self showSettingsView:profile.accessory];
-    [self showSettingsView:nil];
-}
-
-- (void)showSettingsView:(EAAccessory *)pairedDevice{
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"SettingsStoryboard" bundle:nil];
     
     UINavigationController *settingsNavigationController = [storyBoard instantiateViewControllerWithIdentifier:@"settingsNavigationController"];
     STBSettingsViewController *settingsViewController = settingsNavigationController.viewControllers[0];
     settingsViewController.delegate = self;
-//    settingsViewController.pairedDevice = pairedDevice;
     
     //[self presentViewController:settingsNavigationController animated:YES completion:nil];
     [self parentView:self presentViewController:settingsNavigationController animated:YES completion:nil];

@@ -7,6 +7,7 @@
 //
 
 #import "STBSignatureViewController.h"
+#import "UIImage-Extensions.h"
 
 @interface STBSignatureViewController(){
     ICSignatureView *_signatureView;
@@ -63,7 +64,7 @@
 
 - (IBAction)buttonDoneTouch:(id)sender {
     UIImage *signature = [_signatureView getSignatureDataAtBoundingBox];
-    UIImage *scaledImage = [self imageWithImage:signature scaledToSize:CGSizeMake(200, 200)];
+    UIImage *scaledImage = [signature imageByScalingToSize:CGSizeMake(300, 300)];
     
     [delegate signatureWithImage:scaledImage email:_txtEmail.text];
 }
@@ -71,19 +72,6 @@
 - (IBAction)buttonCancelTouch:(id)sender {
     DLog(@"Signature Capture Aborted");
     [delegate signatureWithImage:nil email:_txtEmail.text];
-}
-
-#pragma mark - Helpers
-
-- (UIImage *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
-{
-    // Create a bitmap context.
-    UIGraphicsBeginImageContextWithOptions(newSize, YES, image.scale);
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-    
 }
 
 @end

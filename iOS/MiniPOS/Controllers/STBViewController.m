@@ -13,9 +13,7 @@
 
 //bluetooth
 @property (nonatomic, retain) CBCentralManager *bluetoothManager;
-@property (nonatomic) BOOL bluetoothEnabled;
-
-//
+//is loading app
 @property (nonatomic) BOOL isLoading;
 
 //main view
@@ -24,6 +22,41 @@
 @end
 
 @implementation STBViewController
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
+    _isLoading = NO;
+
+    //check blutooth
+    [self detectBluetooth];
+    
+    //regist notifications
+    [self registNotifications];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    [self updateFrameOfView];
+    
+    [_activityIndicatorView startAnimating];
+    [_lblLoadingMessage setText:@"Checking Bluetooth and Wrireless..."];
+    [self performSelector:@selector(checkBluetoothAndNetWork) withObject:nil afterDelay:.2];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 #pragma mark - Bluetooth
 
@@ -39,12 +72,10 @@
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-    if ([central state] == CBCentralManagerStatePoweredOn) {
-        self.bluetoothEnabled = YES;
-    }
-    else {
-        self.bluetoothEnabled = NO;
-    }
+    if ([central state] == CBCentralManagerStatePoweredOn)
+        UIAppDelegate.bluetoothEnabled = YES;
+    else
+        UIAppDelegate.bluetoothEnabled = NO;
 }
 
 - (BOOL)isBluetoothPoweredOn{
@@ -148,6 +179,13 @@
     }];
 }
 
+#pragma mark - Notifications
+
+- (void)registNotifications{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForegroundNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
 - (void)appWillEnterForegroundNotification:(NSNotification *)notification{
     // Only called when app is returning from background
     if (!_isLoading){
@@ -160,41 +198,7 @@
     //
 }
 
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    _isLoading = NO;
-    
-	// Do any additional setup after loading the view, typically from a nib.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForegroundNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    
-    //check blutooth
-    [self detectBluetooth];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
-    [self updateFrameOfView];
-    
-    [_activityIndicatorView startAnimating];
-    [_lblLoadingMessage setText:@"Checking Bluetooth and Wrireless..."];
-    [self performSelector:@selector(checkBluetoothAndNetWork) withObject:nil afterDelay:.2];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - Main View
 
 - (void)addCenterView{
     if (_centerViewController && [_centerViewController.view superview])

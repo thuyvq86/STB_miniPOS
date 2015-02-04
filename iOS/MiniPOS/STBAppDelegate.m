@@ -96,12 +96,6 @@
     //post notification
     [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
     
-//    if (self.apiClient && [ICISMPDevice isAvailable]) {
-//        //save paired device
-//        if ([ICISMPDevice isAvailable])
-//            [self insertOrUpdatePairedDevice];
-//    }
-    
     //Open/Close the communication channel when entering/leaving sleep mode
     [[iSMPControlManager sharedISMPControlManager] start];
 }

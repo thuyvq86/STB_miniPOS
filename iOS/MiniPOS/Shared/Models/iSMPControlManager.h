@@ -10,7 +10,7 @@
 
 #import "PrinterManager.h"
 
-#define CALLBACK_DISPATCHER_DELEGATE_COUNT      5           //Max count of iSMPControlManager's delegates
+#define CALLBACK_DISPATCHER_DELEGATE_COUNT      50           //Max count of iSMPControlManager's delegates
 
 
 typedef enum  {

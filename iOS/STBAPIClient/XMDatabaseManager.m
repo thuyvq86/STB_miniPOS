@@ -1,16 +1,13 @@
 //
 //  XBDatabaseManager.m
-//  iOS-XBaseSDK
+//  iOS-DBKit
 //
-//  Created by Lachat Patrick on 14.06.13.
-//  Copyright (c) 2013 Xmedia AG. All rights reserved.
+//  Created by Nam Nguyen on 11/26/14.
+//  Copyright (c) 2014 STB. All rights reserved.
 //
 
 #import "XMDatabaseManager.h"
 #import "FMDatabase.h"
-
-//#define kMasterDataDatabaseName @"xbase.sqlite"
-//#define kUserDataDatabaseName @"userdata.sqlite"
 
 @interface XMDatabaseManager()
 
@@ -51,44 +48,60 @@ static NSString *kDatabasePathExtension = @"db";
 - (void)setupWithMasterDatabaseName:(NSString*)masterDatabaseName userDatabaseName:(NSString*)userDatabaseName textResourcesDatabaseName:(NSString*)textResourcesDatabaseName {
     NSString *documentsDir = [XMDatabaseManager applicationDocumentsDirectory];
     
-//    self.masterDatabaseName = [masterDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
-//    self.backupMasterDatabaseName = [[NSString stringWithFormat:@"backup_%@", masterDatabaseName] stringByAppendingPathExtension:kDatabasePathExtension];
-//    self.tempMasterDatabaseName = [[NSString stringWithFormat:@"temp_%@", masterDatabaseName] stringByAppendingPathExtension:kDatabasePathExtension];
-    self.userDatabaseName = [userDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
-//    self.textResourcesDatabaseName = [textResourcesDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
-//    
-//    self.masterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.masterDatabaseName];
-//    self.backupMasterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.backupMasterDatabaseName];
-//    self.tempMasterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.tempMasterDatabaseName];
-
-    self.userDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.userDatabaseName];
-//    self.textResourcesDatabasePath = [documentsDir stringByAppendingPathComponent:self.textResourcesDatabaseName];
+    if (textResourcesDatabaseName) {
+        self.textResourcesDatabaseName = [textResourcesDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
+        self.textResourcesDatabasePath = [documentsDir stringByAppendingPathComponent:self.textResourcesDatabaseName];
+        
+        [self createAndCheckDatabaseFromPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.textResourcesDatabaseName] toPath:self.textResourcesDatabasePath removeExisting:NO];
+    }
     
-//    [self createAndCheckDatabaseFromPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.masterDatabaseName] toPath:self.masterDataDatabasePath removeExisting:NO];
-    [self createAndCheckDatabaseFromPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.userDatabaseName] toPath:self.userDataDatabasePath removeExisting:NO];
-//    [self createAndCheckDatabaseFromPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.textResourcesDatabaseName] toPath:self.textResourcesDatabasePath removeExisting:NO];
+    if (masterDatabaseName) {
+        self.masterDatabaseName = [masterDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
+        self.backupMasterDatabaseName = [[NSString stringWithFormat:@"backup_%@", masterDatabaseName] stringByAppendingPathExtension:kDatabasePathExtension];
+        self.tempMasterDatabaseName = [[NSString stringWithFormat:@"temp_%@", masterDatabaseName] stringByAppendingPathExtension:kDatabasePathExtension];
+        
+        self.masterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.masterDatabaseName];
+        self.backupMasterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.backupMasterDatabaseName];
+        self.tempMasterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.tempMasterDatabaseName];
+        
+        [self createAndCheckDatabaseFromPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.masterDatabaseName] toPath:self.masterDataDatabasePath removeExisting:NO];
+    }
+    
+    if (userDatabaseName){
+        self.userDatabaseName = [userDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
+        self.userDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.userDatabaseName];
+        
+        [self createAndCheckDatabaseFromPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.userDatabaseName] toPath:self.userDataDatabasePath removeExisting:NO];
+    }
 }
 
 - (void)setupForUnitTestsWithMasterDatabaseName:(NSString*)masterDatabaseName userDatabaseName:(NSString*)userDatabaseName textResourcesDatabaseName:(NSString*)textResourcesDatabaseName {
     NSString *documentsDir = [XMDatabaseManager unitTestsDocumentsDirectory];
     
-    self.masterDatabaseName = [masterDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
-    self.backupMasterDatabaseName = [[NSString stringWithFormat:@"backup_%@", masterDatabaseName] stringByAppendingPathExtension:kDatabasePathExtension];
-    self.tempMasterDatabaseName = [[NSString stringWithFormat:@"temp_%@", masterDatabaseName] stringByAppendingPathExtension:kDatabasePathExtension];
-    self.userDatabaseName = [userDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
-    self.textResourcesDatabaseName = [textResourcesDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
+    if (textResourcesDatabaseName) {
+        self.textResourcesDatabaseName = [textResourcesDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
+        self.textResourcesDatabasePath = [documentsDir stringByAppendingPathComponent:self.textResourcesDatabaseName];
+        
+        [self createAndCheckDatabaseFromPath:[[NSBundle bundleForClass:[self class]] pathForResource:textResourcesDatabaseName ofType:kDatabasePathExtension] toPath:self.textResourcesDatabasePath removeExisting:YES];
+    }
     
-    self.masterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.masterDatabaseName];
-    self.backupMasterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.backupMasterDatabaseName];
-    self.tempMasterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.tempMasterDatabaseName];
-    self.userDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.userDatabaseName];
-    self.textResourcesDatabasePath = [documentsDir stringByAppendingPathComponent:self.textResourcesDatabaseName];
-    
-    [self createAndCheckDatabaseFromPath:[[NSBundle bundleForClass:[self class]] pathForResource:masterDatabaseName ofType:kDatabasePathExtension] toPath:self.masterDataDatabasePath removeExisting:YES];
-
-    [self createAndCheckDatabaseFromPath:[[NSBundle bundleForClass:[self class]] pathForResource:userDatabaseName ofType:kDatabasePathExtension] toPath:self.userDataDatabasePath removeExisting:YES];
-    [self createAndCheckDatabaseFromPath:[[NSBundle bundleForClass:[self class]] pathForResource:textResourcesDatabaseName ofType:kDatabasePathExtension] toPath:self.textResourcesDatabasePath removeExisting:YES];
-    
+    if (masterDatabaseName) {
+        self.masterDatabaseName = [masterDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
+        self.backupMasterDatabaseName = [[NSString stringWithFormat:@"backup_%@", masterDatabaseName] stringByAppendingPathExtension:kDatabasePathExtension];
+        self.tempMasterDatabaseName = [[NSString stringWithFormat:@"temp_%@", masterDatabaseName] stringByAppendingPathExtension:kDatabasePathExtension];
+        
+        self.masterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.masterDatabaseName];
+        self.backupMasterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.backupMasterDatabaseName];
+        self.tempMasterDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.tempMasterDatabaseName];
+        
+        [self createAndCheckDatabaseFromPath:[[NSBundle bundleForClass:[self class]] pathForResource:masterDatabaseName ofType:kDatabasePathExtension] toPath:self.masterDataDatabasePath removeExisting:YES];
+    }
+   
+    if (userDatabaseName) {
+        self.userDatabaseName = [userDatabaseName stringByAppendingPathExtension:kDatabasePathExtension];
+        self.userDataDatabasePath = [documentsDir stringByAppendingPathComponent:self.userDatabaseName];
+        [self createAndCheckDatabaseFromPath:[[NSBundle bundleForClass:[self class]] pathForResource:userDatabaseName ofType:kDatabasePathExtension] toPath:self.userDataDatabasePath removeExisting:YES];
+    }
 }
 
 - (BOOL)createAndCheckDatabaseFromPath:(NSString*)fromPath toPath:(NSString*)toPath removeExisting:(BOOL)removeExisting {

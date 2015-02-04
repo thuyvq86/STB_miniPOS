@@ -7,6 +7,7 @@
 //
 
 #import "iSMPControlManager.h"
+#import "ICSignatureView.h"
 
 #define DEFAULT_REFRESH_TIMEOUT     1           // 1 second is the timeout after which a refreshReceipt event is fired if no printing activity was noticed during this period
 
