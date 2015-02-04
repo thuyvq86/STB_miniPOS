@@ -198,7 +198,7 @@
     __block NSMutableArray *array = [[NSMutableArray alloc] init];
     id <XMBaseEntityProtocol> entityClass = (id <XMBaseEntityProtocol>) [self class];
     
-    FMResultSet *results = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ ORDER BY lastModifiedDate DESC", [entityClass tableName]]];
+    FMResultSet *results = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ GROUP BY serialId ORDER BY lastModifiedDate DESC", [entityClass tableName]]];
     while([results next])
     {
         NSCache *aCache = [entityClass sharedCache];
@@ -264,6 +264,21 @@
     }];
     
     return count;
+}
+
+#pragma mark - Delete
+
++ (BOOL)deleteDuplicatedData{
+    __block BOOL isSuccess = NO;
+    FMDatabaseQueue *queue = [XMDatabaseManager sharedDatabaseManager].userDataDataDatabaseQueue;
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        NSString *statement = @"DELETE FROM PairedDevices WHERE id NOT IN ( SELECT MIN(id) FROM PairedDevices GROUP BY serialId)";
+        isSuccess = [db executeUpdate:statement];
+        if(!isSuccess)
+            *rollback = YES;
+    }];
+    
+    return isSuccess;
 }
 
 @end

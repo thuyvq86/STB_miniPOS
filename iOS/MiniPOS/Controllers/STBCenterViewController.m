@@ -65,7 +65,9 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 
-    [self loadContent];
+    if (_firstLoad) {
+        [self loadContent];
+    }
     _firstLoad = NO;
 }
 
@@ -109,8 +111,12 @@
 
 - (void)loadContent{
     self.connectedAccessories = [NSMutableArray array];
-
-    NSArray *pairedDevices = [ICMPProfile getAll];
+    NSArray *pairedDevices = nil;
+    
+    //Get data from database
+    [ICMPProfile deleteDuplicatedData];
+    pairedDevices = [ICMPProfile getAll];
+    
     [_connectedAccessories addObjectsFromArray:pairedDevices];
     
     if ([ICISMPDevice isAvailable]) {

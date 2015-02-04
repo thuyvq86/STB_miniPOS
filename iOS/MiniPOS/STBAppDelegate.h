@@ -17,13 +17,6 @@
 @property (strong, nonatomic) STBBaseViewController *centerViewController;
 //the api client
 @property (strong, nonatomic, readonly) STBAPIClient *apiClient;
-//bluetooth
-@property (nonatomic, retain) CBCentralManager *bluetoothManager;
 @property (nonatomic) BOOL bluetoothEnabled;
-
-#pragma mark - Save paired device
-
-- (void)insertOrUpdatePairedDevice;
-- (void)insertOrUpdateTestDevice:(NSString *)name serialNumber:(NSString *)serialNumber;
 
 @end

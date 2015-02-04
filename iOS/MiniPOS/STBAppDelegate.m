@@ -37,25 +37,6 @@
     //Set app-wide shared cache
     [self configureCacheLimits];
     
-//    //check blutooth
-//    [self detectBluetooth];
-//    
-//    BOOL reachable = [AppUtils hasConnectivity];
-//    if (!reachable){
-//        [UIAlertView alertViewWithTitle:@"" message:@"Device is not connected to the internet." cancelButtonTitle:@"Close"];
-//        
-//        return NO;
-//    }
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
-        UIView *statusBarBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, 20)];
-        statusBarBackgroundView.backgroundColor = [UIColor blackColor];
-        statusBarBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth |  UIViewAutoresizingFlexibleHeight;
-        
-        [self.window addSubview:statusBarBackgroundView];
-    }
-    
     //Initialize iSMP services
     [GateWayManager sharedGateWayManager];
     [iSMPControlManager sharedISMPControlManager];
@@ -66,6 +47,15 @@
     [CrashReporterManager sharedCrashReporterManager];
     
     // Override point for customization after application launch.
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+        UIView *statusBarBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, 20)];
+        statusBarBackgroundView.backgroundColor = [UIColor blackColor];
+        statusBarBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth |  UIViewAutoresizingFlexibleHeight;
+        
+        [self.window addSubview:statusBarBackgroundView];
+    }
+    
     return YES;
 }
 							
@@ -147,51 +137,6 @@
 - (void)freeUpMemory{
     //removing all NSCachedURLResponse objects that it stores.
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-}
-
-#pragma mark - Bluetooth
-
-- (void)detectBluetooth
-{
-    if(!self.bluetoothManager)
-    {
-        // Put on main queue so we can call UIAlertView from delegate callbacks.
-        self.bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
-    }
-    //[self centralManagerDidUpdateState:self.bluetoothManager]; // Show initial state
-}
-
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central
-{
-    if ([central state] == CBCentralManagerStatePoweredOn) {
-        self.bluetoothEnabled = YES;
-    }
-    else {
-        self.bluetoothEnabled = NO;
-    }
-}
-
-#pragma mark - Save paired device
-
-- (void)insertOrUpdatePairedDevice{
-    ICMPProfile *deviceInfo = [ICMPProfile getBySerialNumber:[ICISMPDevice serialNumber]];
-    if (!deviceInfo){
-        deviceInfo = [[ICMPProfile alloc] initWithICISMPDevice];
-        deviceInfo.lastModifiedDate = [NSDate date];
-        [deviceInfo insertOrUpdate];
-    }
-}
-
-- (void)insertOrUpdateTestDevice:(NSString *)name serialNumber:(NSString *)serialNumber{
-    ICMPProfile *deviceInfo = [ICMPProfile getBySerialNumber:serialNumber];
-    if (!deviceInfo){
-        deviceInfo = [[ICMPProfile alloc] init];
-    }
-    deviceInfo.serialId = serialNumber;
-    deviceInfo.merchantName = name;
-    deviceInfo.lastModifiedDate = [NSDate date];
-    
-    [deviceInfo insertOrUpdate];
 }
 
 @end

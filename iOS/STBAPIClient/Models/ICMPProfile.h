@@ -28,4 +28,8 @@
 + (id)getBySerialNumber:(NSString *)serialNumber;
 + (NSInteger)getCount;
 
+#pragma mark - Delete
+
++ (BOOL)deleteDuplicatedData;
+
 @end
