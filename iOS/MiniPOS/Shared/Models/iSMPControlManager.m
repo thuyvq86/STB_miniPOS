@@ -137,12 +137,13 @@ static iSMPControlManager * g_sharedISMPControlManager = nil;
 }
 
 //Opening the ICAdministration channel should be done in background because it may take a lot of time
--(void)backgroundOpen {
+- (void)backgroundOpen {
     NSLog(@"%s", __FUNCTION__);
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
-    if (_control && [_control respondsToSelector:@selector(open)]) {
+    if ([ICISMPDevice isAvailable] &&
+        (_control && [_control respondsToSelector:@selector(open)])) {
         [_control open];
     }
     

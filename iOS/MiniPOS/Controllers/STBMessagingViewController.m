@@ -169,7 +169,7 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
 #pragma mark - UI
 
 - (void)setupUI{
-    _navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UIButtonBack"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonBackTouch:)];//[self barButtonItemWithTitle:@"Back" style:UIBarButtonItemStylePlain action:@selector(buttonBackTouch:)];
+    _navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UIButtonBack"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonBackTouch:)];
     _navItem.rightBarButtonItem = [self barButtonItemWithTitle:@"Send" style:UIBarButtonItemStyleDone action:@selector(buttonSendTouch:)];;
     
     if([_navigationBar respondsToSelector:@selector(setBarTintColor:)])
@@ -247,7 +247,7 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
         }
     } noInternet:^{
         _requestSendCount = 3;
-        [SVProgressHUD showErrorWithStatus:@"Device is not connected to the internet!"];
+        [SVProgressHUD showErrorWithStatus:@"Please enable Wrireless to continue."];
     }];
 }
 
@@ -256,7 +256,6 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     [SVProgressHUD dismiss];
     
     NSString *msg = [NSString stringWithFormat:@"%@", error];
-    //[SVProgressHUD showErrorWithStatus:msg];
     [UIAlertView alertViewWithTitle:@"" message:msg cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
     } onCancel:^{
         //do next process

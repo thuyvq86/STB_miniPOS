@@ -16,7 +16,7 @@
 @property (nonatomic) BOOL bluetoothEnabled;
 
 //
-@property (nonatomic) BOOL appFromBackground;
+@property (nonatomic) BOOL isLoading;
 
 //main view
 @property (strong, nonatomic) STBCenterViewController *centerViewController;
@@ -95,13 +95,24 @@
     else if (!reachable){
         message = @"Please enable Wrireless to continue.";
     }
+    
+    if (message){
+        [UIAlertView alertViewWithTitle:@"System Message" message:message cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+        } onCancel:^{
+            _isLoading = NO;
+        }];
+    }
     else{
         //check app update
         [self checkAppUpdate];
     }
-    
-    if (message)
-        [UIAlertView alertViewWithTitle:@"System Message" message:message cancelButtonTitle:@"OK"];
+}
+
+- (void)alertViewWithMessage:(NSString *)message{
+    [UIAlertView alertViewWithTitle:@"System Message" message:message cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+    } onCancel:^{
+        _isLoading = NO;
+    }];
 }
 
 #pragma mark - App Update
@@ -111,6 +122,8 @@
     STBAPIClient *apiClient = [STBAPIClient sharedClient];
     
     [apiClient getAppVersionWithCompletionBlock:^(id JSON, NSError *error) {
+        _isLoading = NO;
+        
         if (error) {
             DLog(@"%@", error);
         }
@@ -137,12 +150,14 @@
 
 - (void)appWillEnterForegroundNotification:(NSNotification *)notification{
     // Only called when app is returning from background
-    _appFromBackground = YES;
+    if (!_isLoading){
+        _isLoading = YES;
+        [self performSelector:@selector(checkBluetoothAndNetWork) withObject:nil afterDelay:.2];
+    }
 }
 
 - (void)appActive:(NSNotification *)notification{
-    if (_appFromBackground)
-        [self checkBluetoothAndNetWork];
+    //
 }
 
 #pragma mark - View lifecycle
@@ -151,7 +166,7 @@
 {
     [super viewDidLoad];
     
-    _appFromBackground = NO;
+    _isLoading = NO;
     
 	// Do any additional setup after loading the view, typically from a nib.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForegroundNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -172,7 +187,7 @@
     
     [_activityIndicatorView startAnimating];
     [_lblLoadingMessage setText:@"Checking Bluetooth and Wrireless..."];
-    [self performSelector:@selector(checkBluetoothAndNetWork) withObject:nil afterDelay:.1];
+    [self performSelector:@selector(checkBluetoothAndNetWork) withObject:nil afterDelay:.2];
 }
 
 - (void)didReceiveMemoryWarning
