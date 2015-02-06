@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D811C73D1A8485F7006C52E7 /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B33FC51A827F0800480E47 /* iSMP.framework */; };
 		D829DC941A4849B600E6174B /* STBPairedDeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DC931A4849B600E6174B /* STBPairedDeviceListViewController.m */; };
 		D829DCA11A484A6A00E6174B /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DC971A484A6A00E6174B /* FMDatabase.m */; };
 		D829DCA21A484A6A00E6174B /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DC991A484A6A00E6174B /* FMDatabaseAdditions.m */; };
@@ -444,6 +445,7 @@
 				D8FEB42A19EFF331008BB5D5 /* XCTest.framework in Frameworks */,
 				D8FEB42C19EFF331008BB5D5 /* UIKit.framework in Frameworks */,
 				D8FEB42B19EFF331008BB5D5 /* Foundation.framework in Frameworks */,
+				D811C73D1A8485F7006C52E7 /* iSMP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1521,7 +1523,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nam Nguyen Thi (5H9M5739AH)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: SAIGON THUONG TIN COMMERCIAL JOINT STOCK BANK (K69PP2SZ53)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/LibiSMP",
@@ -1539,7 +1541,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6041d215-3d15-447c-8aee-d3f042f5359a";
+				PROVISIONING_PROFILE = "94f3e4d7-27af-45fa-9978-a6341efa9887";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
@@ -1553,7 +1555,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nam Nguyen Thi (5H9M5739AH)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: SAIGON THUONG TIN COMMERCIAL JOINT STOCK BANK (K69PP2SZ53)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/LibiSMP",
@@ -1571,7 +1573,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6041d215-3d15-447c-8aee-d3f042f5359a";
+				PROVISIONING_PROFILE = "94f3e4d7-27af-45fa-9978-a6341efa9887";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
@@ -1588,6 +1590,7 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(PROJECT_DIR)/External/LibiSMP_v4.01",
+					"$(PROJECT_DIR)/External/LibiSMP",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MiniPOS/MiniPOS-Prefix.pch";
@@ -1611,6 +1614,7 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(PROJECT_DIR)/External/LibiSMP_v4.01",
+					"$(PROJECT_DIR)/External/LibiSMP",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MiniPOS/MiniPOS-Prefix.pch";
