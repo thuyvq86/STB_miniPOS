@@ -113,7 +113,10 @@
         }
         else{
             if (completionBlock) {
-                completionBlock(nil, [NSError errorWithDomain:responseCode code:[responseCode integerValue] userInfo:nil]);
+                NSError *error = nil;
+                if (responseCode)
+                    error = [NSError errorWithDomain:responseCode code:[responseCode integerValue] userInfo:nil];
+                completionBlock(nil, error);
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
