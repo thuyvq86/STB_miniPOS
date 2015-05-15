@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D811C73D1A8485F7006C52E7 /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B33FC51A827F0800480E47 /* iSMP.framework */; };
+		379020E91B061A0A005C84E2 /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 379020E81B061A0A005C84E2 /* iSMP.framework */; };
 		D829DC941A4849B600E6174B /* STBPairedDeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DC931A4849B600E6174B /* STBPairedDeviceListViewController.m */; };
 		D829DCA11A484A6A00E6174B /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DC971A484A6A00E6174B /* FMDatabase.m */; };
 		D829DCA21A484A6A00E6174B /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D829DC991A484A6A00E6174B /* FMDatabaseAdditions.m */; };
@@ -41,7 +41,6 @@
 		D8B33FC11A7C064600480E47 /* UIButtonModalCloseTouch.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B33FBC1A7C064600480E47 /* UIButtonModalCloseTouch.png */; };
 		D8B33FC21A7C064600480E47 /* UIButtonModalCloseTouch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B33FBD1A7C064600480E47 /* UIButtonModalCloseTouch@2x.png */; };
 		D8B33FC61A827F0800480E47 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B33FC41A827F0800480E47 /* CrashReporter.framework */; };
-		D8B33FC71A827F0800480E47 /* iSMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B33FC51A827F0800480E47 /* iSMP.framework */; };
 		D8C5C83719FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */; };
 		D8D5951D1A48583500D1047A /* userdata.db in Resources */ = {isa = PBXBuildFile; fileRef = D8D5951C1A48583500D1047A /* userdata.db */; };
 		D8D595211A48629F00D1047A /* PairedDeviceInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D595201A48629F00D1047A /* PairedDeviceInfoCell.m */; };
@@ -165,6 +164,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		379020E81B061A0A005C84E2 /* iSMP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iSMP.framework; sourceTree = "<group>"; };
 		D829DC921A4849B600E6174B /* STBPairedDeviceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBPairedDeviceListViewController.h; sourceTree = "<group>"; };
 		D829DC931A4849B600E6174B /* STBPairedDeviceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBPairedDeviceListViewController.m; sourceTree = "<group>"; };
 		D829DC961A484A6A00E6174B /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -220,7 +220,6 @@
 		D8B33FBC1A7C064600480E47 /* UIButtonModalCloseTouch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonModalCloseTouch.png; sourceTree = "<group>"; };
 		D8B33FBD1A7C064600480E47 /* UIButtonModalCloseTouch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonModalCloseTouch@2x.png"; sourceTree = "<group>"; };
 		D8B33FC41A827F0800480E47 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
-		D8B33FC51A827F0800480E47 /* iSMP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iSMP.framework; sourceTree = "<group>"; };
 		D8C5C83519FFDB750048E4F0 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
 		D8C5C83619FFDB750048E4F0 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
 		D8D5951C1A48583500D1047A /* userdata.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = userdata.db; sourceTree = "<group>"; };
@@ -426,7 +425,7 @@
 				D829DCAE1A484B3A00E6174B /* libsqlite3.dylib in Frameworks */,
 				D8FEB4A319EFFD14008BB5D5 /* CFNetwork.framework in Frameworks */,
 				D8FEB4A119EFFD0E008BB5D5 /* Security.framework in Frameworks */,
-				D8B33FC71A827F0800480E47 /* iSMP.framework in Frameworks */,
+				379020E91B061A0A005C84E2 /* iSMP.framework in Frameworks */,
 				D8FEB49F19EFFD09008BB5D5 /* SystemConfiguration.framework in Frameworks */,
 				D8FEB40A19EFF331008BB5D5 /* CoreGraphics.framework in Frameworks */,
 				D8FEB49D19EFFCEE008BB5D5 /* MessageUI.framework in Frameworks */,
@@ -445,7 +444,6 @@
 				D8FEB42A19EFF331008BB5D5 /* XCTest.framework in Frameworks */,
 				D8FEB42C19EFF331008BB5D5 /* UIKit.framework in Frameworks */,
 				D8FEB42B19EFF331008BB5D5 /* Foundation.framework in Frameworks */,
-				D811C73D1A8485F7006C52E7 /* iSMP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,13 +562,13 @@
 			name = Messaging;
 			sourceTree = "<group>";
 		};
-		D8B33FC31A827F0800480E47 /* LibiSMP-5.11 */ = {
+		D8B33FC31A827F0800480E47 /* LibiSMP-5.12 */ = {
 			isa = PBXGroup;
 			children = (
+				379020E81B061A0A005C84E2 /* iSMP.framework */,
 				D8B33FC41A827F0800480E47 /* CrashReporter.framework */,
-				D8B33FC51A827F0800480E47 /* iSMP.framework */,
 			);
-			name = "LibiSMP-5.11";
+			name = "LibiSMP-5.12";
 			path = LibiSMP;
 			sourceTree = "<group>";
 		};
@@ -889,7 +887,7 @@
 		D8FEB44319EFF632008BB5D5 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				D8B33FC31A827F0800480E47 /* LibiSMP-5.11 */,
+				D8B33FC31A827F0800480E47 /* LibiSMP-5.12 */,
 				D829DC951A484A6A00E6174B /* fmdb */,
 				D8EDD3721A2B56B8008E60CB /* SVProgressHUD */,
 				D8EDD33D1A24FD3D008E60CB /* AFNetworkActivityLogger */,
@@ -1523,7 +1521,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: SAIGON THUONG TIN COMMERCIAL JOINT STOCK BANK (K69PP2SZ53)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/LibiSMP",
@@ -1541,7 +1539,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "94f3e4d7-27af-45fa-9978-a6341efa9887";
+				PROVISIONING_PROFILE = "ad05f953-0c67-463c-b9fa-8b08626932b5";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
@@ -1555,7 +1553,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: SAIGON THUONG TIN COMMERCIAL JOINT STOCK BANK (K69PP2SZ53)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/LibiSMP",
@@ -1573,7 +1571,7 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "94f3e4d7-27af-45fa-9978-a6341efa9887";
+				PROVISIONING_PROFILE = "ad05f953-0c67-463c-b9fa-8b08626932b5";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
