@@ -35,6 +35,8 @@
 
 -(void)addiOSToTerminalBridgeLocalOnPort:(NSInteger)port;
 
+-(iSMPResult)setKeepAliveDelay:(int)keepAliveDelay Interval:(int)keepAliveInterVal andCount:(int)keepAliveCount;
+
 @end
 
 @protocol ICPPPDelegate

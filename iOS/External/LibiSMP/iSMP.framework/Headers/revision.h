@@ -10,8 +10,8 @@
 #ifndef __REVISION_H_
 #define __REVISION_H_
 
-// ICISPMSvnVersion : 4214M
-// ICISPMVersion    : iSMP v5.11
+// ICISPMSvnVersion : 4451:4488M
+// ICISPMVersion    : iSMP v5.12
 
 extern NSString * ICISMPSvnVersion;
 extern NSString * ICISMPVersion;
