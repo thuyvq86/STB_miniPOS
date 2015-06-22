@@ -22,12 +22,13 @@
     //data
     NSString *base64EncodedSignature = [self base64EncodedSignature];
     NSDictionary *dataDict = @{
-                               kParameterMerchantID: profile.merchantId,
+                               kParameterMerchantID: self.merchantId,   //profile.merchantId, // Nicolas: get merchantId from iCMP
                                kParameterTerminalID: self.terminalId,
                                kParameterSerialID: profile.serialId,
                                kParameterCustomerEmail: self.email ? self.email : @"",
                                kParameterCustomerSignature: base64EncodedSignature ? base64EncodedSignature : @"",
-                               kParameterTransactionData: self.message
+                               kParameterTransactionData: self.message,
+                               kParameterCustomerDescription: self.customerDescription ? self.customerDescription : @""   // Nicolas: require field from host
                                };
     
     NSString *jsonDataString = [STBAPIClient jsonStringFromDictionary:dataDict];
@@ -35,7 +36,7 @@
     //request body
     NSDictionary *parameters = @{
                                  kParameterData: jsonDataString ? jsonDataString : @"",
-                                 kParameterMerchantID: @"MiniPOS",
+                                 kParameterMerchantID: @"mobilePOS",
                                  kParameterFunctionName: kFunctionNameBillReceiver,
                                  kParameterRefNumber: @"",
                                  kParameterSignature: @"",
@@ -45,7 +46,11 @@
     
     //send request
     return [apiClient POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //NSLog(@"%@", responseObject);
+// Nicolas {
+#ifdef DEBUG
+        NSLog(@"%@", responseObject);
+#endif
+// Nicolas }
         NSString *responseCode = [responseObject objectForKey:kParameterRespCode];
         if ([responseCode isEqualToString:@"00"]){
             //success

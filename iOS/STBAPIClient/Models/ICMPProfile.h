@@ -28,6 +28,9 @@
 + (id)getBySerialNumber:(NSString *)serialNumber;
 + (NSInteger)getCount;
 
+- (BOOL)deleteBySerialNumber:(NSString *)serialNumber; // Nicolas
+
+
 #pragma mark - Delete
 
 + (BOOL)deleteDuplicatedData;

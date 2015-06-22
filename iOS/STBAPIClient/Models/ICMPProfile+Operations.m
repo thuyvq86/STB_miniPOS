@@ -23,7 +23,7 @@
     NSString *jsonDataString = [STBAPIClient jsonStringFromDictionary:dataDict];
     
     NSDictionary *parameters = @{kParameterData: jsonDataString ? jsonDataString : @"",
-                                 kParameterMerchantID: @"MiniPOS",
+                                 kParameterMerchantID: @"mobilePOS",
                                  kParameterFunctionName: kFunctionNameProfileGetter,
                                  kParameterRefNumber: @"",
                                  kParameterSignature: @"",
@@ -32,7 +32,7 @@
     NSString *path = kApiPath;
     
     return [apiClient POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //DLog(@"%@", responseObject);
+        DLog(@"%@", responseObject);
         NSString *responseCode = [responseObject objectForKey:kParameterRespCode];
         if ([responseCode isEqualToString:@"00"]){
             NSString *base64Encoded = [responseObject objectForKey:@"Data"];

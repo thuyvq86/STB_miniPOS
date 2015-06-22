@@ -38,30 +38,32 @@
  F82: diễn giải mã trả về
 */
 typedef enum{
-    FUNCTION_INDEX     = 1, // function index
+    FUNCTION_INDEX      = 1, // function index
     
-    TRANSACTION_STATUS = 39, // detect a transaction success or not
-    TRANSACTION_TYPE   = 79, // sell, void
+    TRANSACTION_STATUS  = 39, // detect a transaction success or not
+    TRANSACTION_TYPE    = 79, // sell, void
     
-    CARD_NUMBER        = 2, // card number
-    CARD_TYPE          = 65, // card type
-    CARD_NAME          = 66, // card name
-    INPUT_CARD_TYPE    = 67, // input card type
-    CARD_EXPIRED_DATE  = 14,  // Card Expired date
+    CARD_NUMBER         = 2, // card number
+    CARD_TYPE           = 65, // card type
+    CARD_NAME           = 66, // card name
+    INPUT_CARD_TYPE     = 67, // input card type
+    CARD_EXPIRED_DATE   = 14,  // Card Expired date
     
-    MONEY_TOTAL = 4, // Total money
-    MONEY_UNIT = 49, // Unit of money
-    MONEY_TIP = 54, // Tip
-    MONEY_BASE_AMOUNT = 68, // Tip
+    MONEY_TOTAL         = 4, // Total money
+    MONEY_UNIT          = 49, // Unit of money
+    MONEY_TIP           = 54, // Tip
+    MONEY_BASE_AMOUNT   = 68, // Tip
     
-    TERMINAL_ID        = 41, // Terminal Id
+    TERMINAL_ID         = 41, // Terminal Id
     MERCHAINT_ID        = 42, // Merchant ID
-    APPROVE_CODE = 38, // App code
+    APPROVE_CODE        = 38, // App code
     
-    BATCH_NUMBER       = 60, // Batch number
-    RECEIPT_NO         = 62, // Receipt No.
+    BATCH_NUMBER        = 60, // Batch number
+    RECEIPT_NO          = 62, // Receipt No.
     
-    TRANSACTION_DATE_TIME = 12 // Date time
+    TRANSACTION_DATE_TIME = 12, // Date time
+    
+    REFNO               = 37 // Nicolas
     
 } ValueType;
 
@@ -81,31 +83,34 @@ typedef enum{
         NSString *parsedMsg = [aMessage stringByRemovingNewLinesAndWhitespace];
         NSDictionary *dict = [NSDictionary dictionaryFromPosMessage:parsedMsg];
         
-        self.functionIndex = [[STBDataFormatter toNilIfNull:dict propertyName:Field(FUNCTION_INDEX)] intValue];
+        self.functionIndex      = [[STBDataFormatter toNilIfNull:dict propertyName:Field(FUNCTION_INDEX)] intValue];
         
-        self.transactionStatus = [STBDataFormatter toNilIfNull:dict propertyName:Field(TRANSACTION_STATUS)];
-        self.transactionType = [STBDataFormatter toNilIfNull:dict propertyName:Field(TRANSACTION_TYPE)];
+        self.transactionStatus  = [STBDataFormatter toNilIfNull:dict propertyName:Field(TRANSACTION_STATUS)];
+        self.transactionType    = [STBDataFormatter toNilIfNull:dict propertyName:Field(TRANSACTION_TYPE)];
         
-        self.cardNumber = [STBDataFormatter toNilIfNull:dict propertyName:Field(CARD_NUMBER)];
-        self.cardType = [STBDataFormatter toNilIfNull:dict propertyName:Field(CARD_TYPE)];
-        self.inputCardType = [STBDataFormatter toNilIfNull:dict propertyName:Field(INPUT_CARD_TYPE)];
-        self.cardName = [[STBDataFormatter toNilIfNull:dict propertyName:Field(CARD_NAME)] stringByRemovingNewLinesAndWhitespace];
-        self.cardExpiredDate = [STBDataFormatter toNilIfNull:dict propertyName:Field(CARD_EXPIRED_DATE)];
+        self.cardNumber         = [STBDataFormatter toNilIfNull:dict propertyName:Field(CARD_NUMBER)];
+        self.cardType           = [STBDataFormatter toNilIfNull:dict propertyName:Field(CARD_TYPE)];
+        self.inputCardType      = [STBDataFormatter toNilIfNull:dict propertyName:Field(INPUT_CARD_TYPE)];
+        self.cardName           = [[STBDataFormatter toNilIfNull:dict propertyName:Field(CARD_NAME)] stringByRemovingNewLinesAndWhitespace];
+        self.cardExpiredDate    = [STBDataFormatter toNilIfNull:dict propertyName:Field(CARD_EXPIRED_DATE)];
         
-        self.receiptNo = [STBDataFormatter toNilIfNull:dict propertyName:Field(RECEIPT_NO)];
-        self.batchNumber = [STBDataFormatter toNilIfNull:dict propertyName:Field(BATCH_NUMBER)];
+        self.receiptNo          = [STBDataFormatter toNilIfNull:dict propertyName:Field(RECEIPT_NO)];
+        self.refno              = [STBDataFormatter toNilIfNull:dict propertyName:Field(REFNO)];
         
-        self.moneyTotal = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_TOTAL)];
-        self.moneyUnit = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_UNIT)];
-        self.moneyBaseAmount = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_BASE_AMOUNT)];
-        self.moneyTip = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_TIP)];
+        self.batchNumber        = [STBDataFormatter toNilIfNull:dict propertyName:Field(BATCH_NUMBER)];
         
-        NSString *dateString = [STBDataFormatter toNilIfNull:dict propertyName:Field(TRANSACTION_DATE_TIME)];
-        self.dateTime = [self dateTime:dateString];
+        self.moneyTotal         = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_TOTAL)];
+        self.moneyUnit          = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_UNIT)];
+        self.moneyBaseAmount    = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_BASE_AMOUNT)];
+        self.moneyTip           = [STBDataFormatter toNilIfNull:dict propertyName:Field(MONEY_TIP)];
+
         
-        self.terminalId = [STBDataFormatter toNilIfNull:dict propertyName:Field(TERMINAL_ID)];
-        self.merchantId = [STBDataFormatter toNilIfNull:dict propertyName:Field(MERCHAINT_ID)];
-        self.appCode = [STBDataFormatter toNilIfNull:dict propertyName:Field(APPROVE_CODE)];
+        NSString *dateString    = [STBDataFormatter toNilIfNull:dict propertyName:Field(TRANSACTION_DATE_TIME)];
+        self.dateTime           = [self dateTime:dateString];
+        
+        self.terminalId         = [STBDataFormatter toNilIfNull:dict propertyName:Field(TERMINAL_ID)];
+        self.merchantId         = [STBDataFormatter toNilIfNull:dict propertyName:Field(MERCHAINT_ID)];
+        self.appCode            = [STBDataFormatter toNilIfNull:dict propertyName:Field(APPROVE_CODE)];
     }
     
     return self;
@@ -203,7 +208,7 @@ typedef enum{
 - (NSString *)formattedAmount:(NSString *)amount currency:(NSString *)currency{
     float total = 0;
     NSString *formattedAmount = nil;
-    NSNumberFormatter *formatter = [self priceFormatterWithCurrency:currency];
+    NSNumberFormatter *formatter = [self priceFormatterWithCurrency:currency withsymbol:NO];
     
     NSString *sRound   = [amount substringToIndex:amount.length - 2];
     NSString *sDecimal = [amount substringFromIndex:10];
@@ -232,6 +237,21 @@ typedef enum{
     return formatter;
 }
 
+// Nicolas {
+- (NSNumberFormatter *)priceFormatterWithCurrency:(NSString *)currency withsymbol:(BOOL)withsymbol{
+    NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = withsymbol ? NSNumberFormatterCurrencyStyle : NSNumberFormatterDecimalStyle;
+    
+    if ([currency isEqualToString:@"704"])
+        formatter.currencyCode = @"VND";
+    else
+        formatter.currencyCode = @"USD";
+    
+    return formatter;
+}
+// Nicolas }
+
+
 #pragma mark - Helpers
 
 - (NSArray *)displayableProperties {
@@ -240,29 +260,43 @@ typedef enum{
         
         NSString *_merchant = [NSString stringWithFormat:@"MID : %@", self.merchantId];
         NSString *_terminal = [NSString stringWithFormat:@"TID : %@", self.terminalId];
+        
+        // Nicolas {
+        NSString *BatchNo = [NSString stringWithFormat:@"BATCH : %@", self.batchNumber];
+        NSString *RecieptNo = [NSString stringWithFormat:@"RECEIPT : %@", self.receiptNo];
+        // Nicolas }
 
         [properties addObject:@[@(TextTypeNormal), _merchant, _terminal]];
 //        [properties addObject:@[@(TextTypeNormal), @"TID", self.terminalId]];
-        [properties addObject:@[@(TextTypeNormal), @"DATE / TIME", self.formattedDateTime]];
-        [properties addObject:@[@(TextTypeNormal), @"", @""]]; //break line
+        [properties addObject:@[@(TextTypeNormal), @"DATE / TIME : ", self.formattedDateTime]];
+        // Nicolas {
+        [properties addObject:@[@(TextTypeNormal), BatchNo, RecieptNo]];
+        // Nicolas }
+        //[properties addObject:@[@(TextTypeNormal), @"", @""]]; //break line
         
         [properties addObject:@[@(TextTypeBold), [NSString stringWithFormat:@"%@ (%@)", self.cardType, self.inputCardType], self.formattedCardNumber]];
         [properties addObject:@[@(TextTypeNormal), self.cardName, @""]];
-        [properties addObject:@[@(TextTypeNormal), @"EXPIRY DATE", self.formattedCardExpiredDate]];
-        [properties addObject:@[@(TextTypeNormal), @"", @""]]; //break line
+        [properties addObject:@[@(TextTypeNormal), @"EXPIRY DATE : ", self.formattedCardExpiredDate]];
+        //[properties addObject:@[@(TextTypeNormal), @"", @""]]; //break line
+        /*
         if(self.receiptNo)
             [properties addObject:@[@(TextTypeNormal), @"REF No", self.receiptNo]];
+        */
+        [properties addObject:@[@(TextTypeNormal), @"REF No : ", self.refno? self.refno : @""]];
+        
         if(self.appCode)
-            [properties addObject:@[@(TextTypeNormal), @"APP CODE", self.appCode]];
+            [properties addObject:@[@(TextTypeNormal), @"APP CODE : ", self.appCode]];
         
         [properties addObject:@[@(TextTypeNormal), @"", @"------------------"]]; //break line
         
         if ([self.moneyBaseAmount floatValue] > 0)
-            [properties addObject:@[@(TextTypeNormal), @"BASE", self.formattedMoneyBaseAmount]];
+            [properties addObject:@[@(TextTypeNormal), @"BASE : ", self.formattedMoneyBaseAmount]];
         if ([self.moneyTip floatValue] > 0)
-            [properties addObject:@[@(TextTypeNormal), @"TIP", self.formattedMoneyTip]];
+            [properties addObject:@[@(TextTypeNormal), @"TIP : ", self.formattedMoneyTip]];
         
-        [properties addObject:@[@(TextTypeBold), [NSString stringWithFormat:@"TOTAL (%@)", self.formattedMoneyUnit], [NSString stringWithFormat:@"%@", self.formattedMoneyTotal]]];
+        // Nicolas
+        //[properties addObject:@[@(TextTypeBold), [NSString stringWithFormat:@"TOTAL (%@)", self.formattedMoneyUnit], [NSString stringWithFormat:@"%@", self.formattedMoneyTotal]]];
+        [properties addObject:@[@(TextTypeBold), [NSString stringWithFormat:@"TOTAL (%@)", self.formattedMoneyUnit], [NSString stringWithFormat:@"%@%@", self.functionIndex == FunctionIndexVoid ? @"-":@"", self.formattedMoneyTotal]]];
         
         self.presentedProperties = properties;
     }

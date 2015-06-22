@@ -26,6 +26,8 @@
 //Capture Signature
 @property (nonatomic) BOOL shouldCaptureSignature;
 
+@property (nonatomic) BOOL shouldCaptureDescription; // Nicolas
+
 //
 @property (nonatomic) NSInteger requestSendCount;
 
@@ -42,6 +44,7 @@
 
 static NSString *const kTransactionInfoCell = @"TransactionInfoCell";
 static NSString *const kSignatureCell       = @"SignatureCell";
+static NSString *const kDescriptionCell     = @"DescriptionCell";  // Nicolas
 static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
 
 #pragma mark - Testing
@@ -137,11 +140,26 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     NSString *request = [self.posMessageQueue dequeue];
     if (request)
         self.posMessage = [[PosMessage alloc] initWithMessage:request];
+    
+    //self.displayableArray = [self displayableArrayWithPosMessage:_posMessage];
+    
+    // Nicolas {
+    
+    if (_posMessage && ![self.posMessage isSuccess])
+    {
+        //_posMessage = nil;
+        [self pop];
+    }
+    
+    // Nicolas }
     self.displayableArray = [self displayableArrayWithPosMessage:_posMessage];
     
+    
     //update table view
+    
     [_tableView reloadData];
     _navItem.rightBarButtonItem.enabled = (self.posMessage) ? YES : NO;
+    _navItem.rightBarButtonItem.title = (self.posMessage) ? @"Done" : @""; // Nicolas
     
     //show sign view automatically
 //    if (self.posMessage && [self.posMessage shouldRequireSignature]){
@@ -156,8 +174,13 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     
     if (aPosMessage) {
         [array addObject:kTransactionInfoCell];
-        if ([aPosMessage shouldRequireSignature])
+        
+        if ([aPosMessage shouldRequireSignature]) {
+            // Nicolas {
+            [array addObject:kDescriptionCell];
+            // Nicolas }
             [array addObject:kSignatureCell];
+        }
     }
     else{
         [array addObject:kMessageFromPOSCell];
@@ -170,7 +193,9 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
 
 - (void)setupUI{
     _navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UIButtonBack"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonBackTouch:)];
-    _navItem.rightBarButtonItem = [self barButtonItemWithTitle:@"Send" style:UIBarButtonItemStyleDone action:@selector(buttonSendTouch:)];;
+    // Nicolas
+    //_navItem.rightBarButtonItem = [self barButtonItemWithTitle:@"Send" style:UIBarButtonItemStyleDone action:@selector(buttonSendTouch:)];;
+    _navItem.rightBarButtonItem = [self barButtonItemWithTitle:@"Done" style:UIBarButtonItemStyleDone action:@selector(buttonSendTouch:)];;
     
     if([_navigationBar respondsToSelector:@selector(setBarTintColor:)])
         [_navigationBar setBarTintColor:PRIMARY_BACKGROUND_COLOR];
@@ -247,7 +272,7 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
         }
     } noInternet:^{
         _requestSendCount = 3;
-        [SVProgressHUD showErrorWithStatus:@"Please enable Wrireless to continue."];
+        [SVProgressHUD showErrorWithStatus:@"Please enable Wireless to continue."];
     }];
 }
 
@@ -296,6 +321,9 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
+#ifdef DEBUG
+    NSLog(@"Table Rows %lu", (unsigned long)_displayableArray.count);
+#endif
     if (_displayableArray && [_displayableArray count] > 0)
         return [_displayableArray count];
     
@@ -314,6 +342,22 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     else if ([cellKey isEqualToString:kSignatureCell]) {
         cell = [self tableView:tableView signatureCellAtIndexPath:indexPath];
     }
+    // Nicolas {
+    else if ([cellKey isEqualToString:kDescriptionCell]) {
+        NSLog(@"cell 4 Description here: %ld", (long)indexPath.row);
+        NSString *CellIdentifier = kDescriptionCell;
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    
+        cell.textLabel.text = [NSString stringWithFormat:@"DESCRIPTION: %@", _posMessage.customerDescription ? [_posMessage customerDescription] : @"_________"];
+
+    }
+    // Nicolas }
     else{
         NSString *CellIdentifier = kMessageFromPOSCell;
         
@@ -327,9 +371,9 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
         cell.textLabel.textColor = [UIColor whiteColor];
         
         BOOL available = [self.iSMPControl getISMPState];
-        cell.textLabel.text = available ? @"Waiting for the transaction..." : @"";
+        cell.textLabel.text = available ? @"Please do transactions..." : @"";
 #if TARGET_IPHONE_SIMULATOR
-        cell.textLabel.text = @"Waiting for the transaction...";
+        cell.textLabel.text = @"Please do transactions...";
 #endif
     }
     
@@ -377,7 +421,7 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     else if ([cellKey isEqualToString:kSignatureCell]) {
         height = [SignatureCell heightForPosMessage:_posMessage parentWidth:width];
     }
-    else{
+    else {
         height = tableView.rowHeight;
     }
     
@@ -389,6 +433,42 @@ static NSString *const kMessageFromPOSCell  = @"MessageFromPOSCell";
     if ([cellKey isEqualToString:kSignatureCell]) {
         [self doSignatureCapture];
     }
+    // Nicolas {
+    else if ([cellKey isEqualToString:kDescriptionCell]) {
+        NSLog(@"Touch on Description");
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Description"
+                                                     message:@""
+                                                    delegate:self
+                                           cancelButtonTitle:@"Cancel"
+                                           otherButtonTitles:@"OK", nil];
+        av.alertViewStyle = UIAlertViewStylePlainTextInput;
+        av.delegate = self;
+        av.tag = [indexPath row];
+        [av textFieldAtIndex:0].text = (_posMessage.customerDescription) ? [_posMessage customerDescription] : @"" ;
+        [av textFieldAtIndex:0].placeholder = (_posMessage.customerDescription) ? @"" : @"Write down description for the bill";
+        
+        [av show];
+    }
+    // Nicolas }
+}
+
+#pragma mark - Description
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"ButtonIndex > %ld", (long)buttonIndex);
+    NSString *title  = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:@"OK"]) {
+        NSString *descriptioField = [[alertView textFieldAtIndex:0] text];
+        NSLog(@"Bill Description: %@", descriptioField);
+    
+        _posMessage.customerDescription = descriptioField;
+        [_tableView reloadData];
+    }
+    /*
+    else if ([title isEqualToString:@"Clear"]) {
+        [[alertView textFieldAtIndex:0] setText:@""];
+        //[alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
+    }
+     */
 }
 
 #pragma mark - Signature Capture

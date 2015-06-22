@@ -21,4 +21,5 @@
 @property (nonatomic, assign) iSMPControlManager *iSMPControl;
 @property (nonatomic, assign) StandalonePaymentManager*paymentManager;
 @property (nonatomic, strong) ICMPProfile *profile;
+
 @end

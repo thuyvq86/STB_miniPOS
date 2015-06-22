@@ -90,7 +90,7 @@
     //request body
     NSDictionary *parameters = @{
                                  kParameterData: @"",
-                                 kParameterMerchantID: @"MiniPOS",
+                                 kParameterMerchantID: @"mobilePOS",
                                  kParameterFunctionName: kFunctionNameVersionGetter,
                                  kParameterRefNumber: @"",
                                  kParameterSignature: @"",

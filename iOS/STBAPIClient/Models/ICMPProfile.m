@@ -26,6 +26,7 @@
 - (NSString *)descriptionOfProfile{
     NSString *desc = nil;
     
+    /* Nicolas mark {
     desc = [NSString stringWithFormat:
             @"Merchant Id: %@\nMerchant name: %@\nPhone serial Id: %@\nTerminal Id: %@",
             self.merchantId,
@@ -33,6 +34,9 @@
             self.phoneSerialId,
             self.terminalId
             ];
+    Nicolas } */
+    
+    desc = [NSString stringWithFormat:@"Merchant name: %@\nSerial: %@", self.merchantName, self.serialId];
     
     return desc;
 }
@@ -51,18 +55,61 @@
     __block BOOL success = NO;
     __block ICMPProfile *instance = self;
     
-    instance.merchantId = [[dict objectForKey:@"MerchantID"] stringByRemovingNewLinesAndWhitespace];
-    instance.merchantName = [[dict objectForKey:@"MerchantName"] stringByRemovingNewLinesAndWhitespace];
-    instance.phoneSerialId = [[dict objectForKey:@"PhoneSerialID"] stringByRemovingNewLinesAndWhitespace];
-    instance.terminalId = [[dict objectForKey:@"TerminalID"] stringByRemovingNewLinesAndWhitespace];
+    /* Nicolas mark {
+     
+     instance.merchantId = [[dict objectForKey:@"MerchantID"] stringByRemovingNewLinesAndWhitespace];
+     instance.terminalId = [[dict objectForKey:@"TerminalID"] stringByRemovingNewLinesAndWhitespace];
+     
+     // Nicolas {
+     NSError *jsonError = nil;
+     NSArray *ItemsArray = nil;
+     NSString *Items = [[dict objectForKey:@"Items"] stringByRemovingNewLinesAndWhitespace];
+     NSData *ItemsData = [Items dataUsingEncoding:NSUTF8StringEncoding];
+     
+     instance.merchantId = [[[ItemsArray objectAtIndex:0] objectForKey:@"MerchantId"] stringByRemovingNewLinesAndWhitespace];
+     instance.terminalId = [[[ItemsArray objectAtIndex:0] objectForKey:@"TerminalID"] stringByRemovingNewLinesAndWhitespace];
+     // Nicolas }
+     instance.merchantName = [[dict objectForKey:@"MerchantName"] stringByRemovingNewLinesAndWhitespace];
+     instance.phoneSerialId = [[dict objectForKey:@"PhoneSerialID"] stringByRemovingNewLinesAndWhitespace];
+     
+     
+     [[ICMPProfile dbQueue] inDatabase:^(FMDatabase *db) {
+     success = [instance insertOrUpdateInDb:db];
+     if (success)
+     [[ICMPProfile sharedCache] setObject:self forKey:instance.serialId];
+     }];
+     
+     return success;
+     
+     // Nicolas mark } */
     
-    [[ICMPProfile dbQueue] inDatabase:^(FMDatabase *db) {
-        success = [instance insertOrUpdateInDb:db];
-        if (success)
-            [[ICMPProfile sharedCache] setObject:self forKey:instance.serialId];
-    }];
+    // Nicolas {
+    NSError *jsonError = nil;
+    NSArray *ItemsArray = nil;
+    NSString *Items = [[dict objectForKey:@"Items"] stringByRemovingNewLinesAndWhitespace];
+    NSData *ItemsData = [Items dataUsingEncoding:NSUTF8StringEncoding];
+    
+    ItemsArray = (NSArray *)[NSJSONSerialization JSONObjectWithData:ItemsData options:0 error:&jsonError];
+    
+    for (NSDictionary *profileDict in ItemsArray) {
+        instance.merchantId = [[profileDict objectForKey:@"MerchantID"] stringByRemovingNewLinesAndWhitespace];
+        instance.terminalId = [[profileDict objectForKey:@"TerminalID"] stringByRemovingNewLinesAndWhitespace];
+
+        instance.merchantName = [[dict objectForKey:@"MerchantName"] stringByRemovingNewLinesAndWhitespace];
+        instance.phoneSerialId = [[dict objectForKey:@"PhoneSerialID"] stringByRemovingNewLinesAndWhitespace];
+        
+        [[ICMPProfile dbQueue] inDatabase:^(FMDatabase *db) {
+            success = [instance insertOrUpdateInDb:db];
+            if (success) {
+                [[ICMPProfile sharedCache] setObject:self forKey:instance.serialId];
+            }
+        }];
+    }
     
     return success;
+    
+    // Nicolas }
+
 }
 
 - (BOOL)resetProfile{
@@ -74,11 +121,21 @@
     instance.phoneSerialId = nil;
     instance.terminalId = nil;
     
+    /*
     [[ICMPProfile dbQueue] inDatabase:^(FMDatabase *db) {
         success = [instance insertOrUpdateInDb:db];
         if (success)
             [[ICMPProfile sharedCache] setObject:self forKey:instance.serialId];
     }];
+    */
+    
+    [[ICMPProfile dbQueue] inDatabase:^(FMDatabase *db) {
+        success = [instance deleteBySerialNumber:instance.serialId];
+        if (success) {
+            self.isFromDb = NO;
+        }
+    }];
+    
     
     return success;
 }
@@ -225,7 +282,7 @@
         NSDictionary *parameters = [self parametersForInsertOrUpdate];
         isSuccess =[db executeUpdate:queryString withParameterDictionary:parameters];
         if(isSuccess && [self isNew]) {
-            self.isFromDb = YES;
+            //self.isFromDb = YES;
             long long lastId = [db lastInsertRowId];
             self.id = (int)lastId;
             
@@ -238,14 +295,19 @@
         }
     }
     else {
+        // Nicolas: tam thoi ko chay
         NSString *queryString = [NSString stringWithFormat:@"UPDATE %@ SET %@", [entityClass tableName], [entityClass sqlFormatStringForUpdate]];
         NSArray *arguments = [self argumentsForUpdate];
+        self.isFromDb = NO;
         
         isSuccess = [db executeUpdate:queryString withArgumentsInArray:arguments];
         if(!isSuccess) {
             NSError *error = [db lastError];
             NSLog(@"Last error: %@", error);
         }
+        //
+        // Nicolas: tam thoi khong update -- get profile --> delete all terminal & Add new
+        //isSuccess = YES;
     }
     return isSuccess;
 }
@@ -272,7 +334,10 @@
     __block BOOL isSuccess = NO;
     FMDatabaseQueue *queue = [XMDatabaseManager sharedDatabaseManager].userDataDataDatabaseQueue;
     [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        NSString *statement = @"DELETE FROM PairedDevices WHERE id NOT IN ( SELECT MIN(id) FROM PairedDevices GROUP BY serialId)";
+        /* Nicolas: Support multi terminal 4 ICMP --> group by serialId, TerminalId
+        // NSString *statement = @"DELETE FROM PairedDevices WHERE id NOT IN ( SELECT MIN(id) FROM PairedDevices GROUP BY serialId)";
+        */
+        NSString *statement = @"DELETE FROM PairedDevices WHERE id NOT IN ( SELECT MIN(id) FROM PairedDevices GROUP BY serialId, terminalId ) ";
         isSuccess = [db executeUpdate:statement];
         if(!isSuccess)
             *rollback = YES;
@@ -281,4 +346,30 @@
     return isSuccess;
 }
 
+// Nicolas {
+- (BOOL)deleteBySerialNumber:(NSString *)serialNumber{
+    //__block ICMPProfile *instance = nil;
+    __block BOOL susscess = NO;
+    [[[self class] dbQueue] inDatabase:^(FMDatabase *db) {
+        susscess = [self deleteBySerialNumber:serialNumber inDb:db];
+    }];
+    
+    return susscess;
+}
+
+- (BOOL)deleteBySerialNumber:(NSString *)serialNumber inDb:(FMDatabase*)db{
+    __block BOOL isSuccess = NO;
+    FMDatabaseQueue *queue = [XMDatabaseManager sharedDatabaseManager].userDataDataDatabaseQueue;
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        id <XMBaseEntityProtocol> entityClass = (id <XMBaseEntityProtocol>) [self class];
+        NSString *statement = [NSString stringWithFormat:@"DELETE FROM %@ WHERE serialId = '%@'", [entityClass tableName], serialNumber];
+        isSuccess = [db executeUpdate:statement];
+        if (!isSuccess) {
+            *rollback = YES;
+        }
+    }];
+    return isSuccess;
+}
+
+// Nicolas }
 @end

@@ -64,7 +64,9 @@
 
 - (IBAction)buttonDoneTouch:(id)sender {
     UIImage *signature = [_signatureView getSignatureDataAtBoundingBox];
-    UIImage *scaledImage = [signature imageByScalingToSize:CGSizeMake(300, 300)];
+    // Nicolas:
+    //UIImage *scaledImage = [signature imageByScalingToSize:CGSizeMake(300, 300)];
+    UIImage *scaledImage = [signature imageByScalingProportionallyToSize:CGSizeMake(250, 150)];
     
     [delegate signatureWithImage:scaledImage email:_txtEmail.text];
 }
@@ -73,5 +75,6 @@
     DLog(@"Signature Capture Aborted");
     [delegate signatureWithImage:nil email:_txtEmail.text];
 }
+
 
 @end

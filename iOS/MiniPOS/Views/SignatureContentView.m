@@ -59,10 +59,17 @@
     else
         offset += kLinePadding;
     
+    /** Nicolas {
     //Card name
     NSString *cardName = _posMessage.cardName;
     [cardName drawInRect:CGRectMake(kLeftPadding, offset, width, kTitleHeight) withFont:textFont lineBreakMode:NSLineBreakByTruncatingTail];
     offset += kTitleHeight + kLinePadding/2.0;
+    Nicolas } **/
+    
+    /* Nicolas {
+    // Description
+    [@"DESCRIPTION -------------" drawInRect:CGRectMake(kLeftPadding, offset, width, kTitleHeight) withFont:textFont lineBreakMode:NSLineBreakByTruncatingTail];
+    // Nicolas }*/
 }
 
 + (CGFloat)heightForPosMessage:(PosMessage*)aPosMessage parentWidth:(CGFloat)parentWidth{
@@ -82,8 +89,15 @@
     else
         height += kLinePadding;
     
+    /** Nicolas {
     //card name
     height += kTitleHeight + kLinePadding;
+    Nicolas **/
+    
+    // Nicolas {
+    // Description
+    height += kTitleHeight + kLinePadding;
+    // Nicolas }
     
     return height;
 }

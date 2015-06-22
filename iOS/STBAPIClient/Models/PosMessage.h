@@ -52,6 +52,8 @@ typedef enum{
 @property (nonatomic, strong) NSString *receiptNo;
 @property (nonatomic, strong) NSString *batchNumber;
 
+@property (nonatomic, strong) NSString *refno; // Nicolas
+
 @property (nonatomic, strong) NSString *cardType;
 @property (nonatomic, strong) NSString *cardName;
 @property (nonatomic, strong) NSString *cardNumber;
@@ -72,6 +74,8 @@ typedef enum{
 @property (nonatomic, strong) NSString *email;
 
 @property (nonatomic, strong) NSString *merchantId;
+
+@property (nonatomic, strong) NSString *customerDescription; // Nicolas
 
 @property (nonatomic, strong) id presentedProperties;
 

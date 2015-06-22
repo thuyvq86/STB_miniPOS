@@ -10,7 +10,7 @@
 
 /** Server **/
 #define kSTBAPIBaseURLPrimary @"https://113.164.14.65:9444/"
-#define kApiPath @"api"
+#define kApiPath @"iapi"
 
 /** Functions **/
 #define kFunctionNameBillReceiver  @"ICMPBillReceiver"
@@ -18,18 +18,19 @@
 #define kFunctionNameVersionGetter @"ICMPVersionGetter"
 
 /** Parameters **/
-#define kParameterData              @"Data"
-#define kParameterMerchantID        @"MerchantID"
-#define kParameterTerminalID        @"TerminalID"
-#define kParameterSerialID          @"SerialID"
-#define kParameterFunctionName      @"FunctionName"
-#define kParameterRefNumber         @"RefNumber"
-#define kParameterRespCode          @"RespCode"
-#define kParameterSignature         @"Signature"
-#define kParameterToken             @"Token"
-#define kParameterCustomerEmail     @"CustomerEmail"
-#define kParameterCustomerSignature @"CustomerSignature"
-#define kParameterTransactionData   @"TransactionData"
+#define kParameterData                  @"Data"
+#define kParameterMerchantID            @"MerchantID"
+#define kParameterTerminalID            @"TerminalID"
+#define kParameterSerialID              @"SerialID"
+#define kParameterFunctionName          @"FunctionName"
+#define kParameterRefNumber             @"RefNumber"
+#define kParameterRespCode              @"ResponseCode"         // Nicolas: RespCode --> ResponseCode
+#define kParameterSignature             @"Signature"
+#define kParameterToken                 @"Token"
+#define kParameterCustomerEmail         @"CustomerEmail"
+#define kParameterCustomerSignature     @"CustomerSignature"
+#define kParameterTransactionData       @"TransactionData"
+#define kParameterCustomerDescription   @"CustomerDescription"  // Nicolas: require field from host
 
 @interface STBAPIClient : AFHTTPRequestOperationManager
 

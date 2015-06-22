@@ -119,6 +119,20 @@
     
     [_connectedAccessories addObjectsFromArray:pairedDevices];
     
+    // Nicolas {
+    /*
+    if (![ICISMPDevice isAvailable]) {
+        NSLog(@"PairedDevices > %lu", (unsigned long)pairedDevices.count);
+        NSString *message = @"Devices not availabe or Idle. Please open/active the devices";
+        [UIAlertView alertViewWithTitle:@"System Message" message:message cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+        } onCancel:^{
+            
+        }];
+    }
+    else
+     */
+    // Nicolas }
+    
     if ([ICISMPDevice isAvailable]) {
         ICMPProfile *availableInfo = [ICMPProfile getBySerialNumber:[ICISMPDevice serialNumber]];
         if (!availableInfo) {
@@ -129,7 +143,18 @@
             //add new device into first
             [_connectedAccessories insertObject:availableInfo atIndex:0];
         }
+        
+        else if ((pairedDevices.count == 0) && availableInfo)
+        {
+            availableInfo = [[ICMPProfile alloc] initWithICISMPDevice];
+            availableInfo.lastModifiedDate = [NSDate date];
+            //add new device into first
+            [_connectedAccessories insertObject:availableInfo atIndex:0];
+            [availableInfo insertOrUpdate];
+        }
+        
     }
+
     
     [_tableView reloadData];
 }
@@ -206,8 +231,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {    
-    if (_connectedAccessories && [_connectedAccessories count] > 0)
+    if (_connectedAccessories && [_connectedAccessories count] > 0) {
+        if (![ICISMPDevice isAvailable]) {
+            NSString *message = @"Devices not availabe or Idle. Please open/active the devices";
+            [UIAlertView alertViewWithTitle:@"System Message" message:message cancelButtonTitle:@"OK" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
+            } onCancel:^{
+                
+            }];
+        } else {
         [self didSelectRow:indexPath.row];
+        }
+    }
 }
 
 - (void)didSelectRow:(NSInteger)row{
@@ -258,7 +292,7 @@
         _requestSendCount = 3;
         
         [SVProgressHUD dismiss];
-        [UIAlertView alertViewWithTitle:@"System Message" message:@"Please enable Wrireless to continue." cancelButtonTitle:@"OK"];
+        [UIAlertView alertViewWithTitle:@"System Message" message:@"Please enable Wireless to continue." cancelButtonTitle:@"OK"];
     }];
 }
 

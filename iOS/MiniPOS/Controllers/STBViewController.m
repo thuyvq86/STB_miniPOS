@@ -48,7 +48,7 @@
     [self updateFrameOfView];
     
     [_activityIndicatorView startAnimating];
-    [_lblLoadingMessage setText:@"Checking Bluetooth and Wrireless..."];
+    [_lblLoadingMessage setText:@"Checking Bluetooth and Wireless..."];
     [self performSelector:@selector(checkBluetoothAndNetWork) withObject:nil afterDelay:.2];
 }
 
@@ -118,13 +118,13 @@
     
     NSString *message = nil;
     if (!isBluetoothPoweredOn && !reachable) {
-        message = @"Please enable Bluetooth and Wrireless to continue.";
+        message = @"Please enable Bluetooth and Wireless to continue.";
     }
     else if (!isBluetoothPoweredOn){
         message = @"Please enable Bluetooth to continue.";
     }
     else if (!reachable){
-        message = @"Please enable Wrireless to continue.";
+        message = @"Please enable Wireless to continue.";
     }
     
     if (message){
@@ -163,7 +163,10 @@
             NSString *version = [JSON objectForKey:@"Version"];
             BOOL isForcedUpdate = [[JSON objectForKey:@"IsForcedUpdate"] boolValue];
             NSString *appVer = [AppUtils appVersion];
-            if (![appVer isEqualToString:version] && isForcedUpdate) {
+            // Nicolas {
+            //if (![appVer isEqualToString:version] && isForcedUpdate) {
+            if (([appVer intValue] < [version intValue]) && isForcedUpdate) {
+            // Nicolas }
                 [UIAlertView alertViewWithTitle:@"System Message" message:@"A new version of Mini-Pos is available. Please update to new version." cancelButtonTitle:@"Update" otherButtonTitles:nil onDismiss:^(NSInteger buttonIndex, NSString *buttonTitle) {
                 } onCancel:^{
                     NSString *iTunesLink = iTunesDownloadURL;
